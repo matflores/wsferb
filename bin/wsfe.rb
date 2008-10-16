@@ -1,5 +1,5 @@
 #
-# wsfe.rb: Web Service Facturación Electrónica AFIP
+# wsfe.rb: Web Services Facturación Electrónica AFIP
 # Copyright (C) 2008 Matiás Alejandro Flores <mflores@atlanware.com>
 #
 require 'getoptlong'
@@ -7,6 +7,7 @@ require File.dirname(__FILE__) + '/../lib/wsaaClient.rb'
 require File.dirname(__FILE__) + '/../lib/wsfeClient.rb'
 #require 'wsaaClient'
 #require 'wsfeClient'
+require File.dirname(__FILE__) + '/../lib/runner/option_parser.rb'
 
 module Kernel
   def silence_warnings
