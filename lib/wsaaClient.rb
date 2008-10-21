@@ -1,8 +1,6 @@
 require 'time'
 require 'openssl'
 require 'soap/wsdlDriver'
-#require File.dirname(__FILE__) + '/wsaaTicket.rb'
-$: << File.expand_path(File.dirname(__FILE__))
 require 'wsaaTicket'
 
 module WSAA

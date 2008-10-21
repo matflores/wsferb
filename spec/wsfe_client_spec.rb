@@ -1,5 +1,6 @@
-require File.dirname(__FILE__) + '/../lib/wsaaClient.rb'
-require File.dirname(__FILE__) + '/../lib/wsfeClient.rb'
+require File.dirname(__FILE__) + '/spec_helper.rb' 
+require 'wsaaClient'
+require 'wsfeClient'
 
 describe "WSFE client" do 
 

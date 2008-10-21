@@ -1,9 +1,10 @@
-require File.dirname(__FILE__) + '/../lib/wsaaClient.rb'
+require File.dirname(__FILE__) + '/spec_helper.rb' 
+require 'wsaaClient'
 
 describe "WSAA client" do 
   it "should return a valid ticket for wsfe" do
-    cert_file = File.dirname(__FILE__) + "/CUIT_20238883890.crt"
-    key_file = File.dirname(__FILE__) + "/CUIT_20238883890.key"
+    cert_file = File.dirname(__FILE__) + "/../private/20238883890.crt"
+    key_file = File.dirname(__FILE__) + "/../private/20238883890.key"
     ticket = WSAA::Client.requestTicket(20238883890, 'wsfe', cert_file, key_file)
     ticket.should be_valid
   end
