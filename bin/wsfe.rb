@@ -3,11 +3,12 @@
 # Copyright (C) 2008 Matiás Alejandro Flores <mflores@atlanware.com>
 #
 require 'getoptlong'
+$: << File.expand_path(File.dirname(__FILE__) + "/../lib")
 require File.dirname(__FILE__) + '/../lib/wsaaClient.rb'
 require File.dirname(__FILE__) + '/../lib/wsfeClient.rb'
 #require 'wsaaClient'
 #require 'wsfeClient'
-require File.dirname(__FILE__) + '/../lib/runner/option_parser.rb'
+require File.dirname(__FILE__) + '/../lib/runner.rb'
 
 module Kernel
   def silence_warnings
@@ -22,6 +23,8 @@ class WsfeClientApp
 
 # ver http://www.ruby-doc.org/core/classes/GetoptLong.html
 #
+  include WSFE::Runner
+
   OptSet = [
     ['--cuit'     ,'-c', GetoptLong::REQUIRED_ARGUMENT],
     ['--ticket'   ,'-t', GetoptLong::REQUIRED_ARGUMENT],
@@ -33,28 +36,6 @@ class WsfeClientApp
     ['--info'     ,'-i', GetoptLong::NO_ARGUMENT]
   ]
 
-  Info_aut = <<__EOT__
-  --cuit cuit     cuit del contribuyente (requerido)
-  --ticket ticket ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-__EOT__
-  Info_out = <<__EOT__
-  --out, -o archivo guarda la respuesta en el archivo indicado (opcional)
-__EOT__
-  Info_fEDummy = "\nModo de uso: wsfe [opciones] FEDummy\n\nOpciones:\n#{Info_out}\n"
-
-  def info(servicio, parametros, opciones)
-    puts "\nModo de uso: wsfe [opciones] #{servicio}\n\nOpciones:\n" + opciones.join("\n")
-  end
-
   def initialize
     WSFE::Client.disable_ssl
     WSAA::Client.disable_ssl
@@ -63,176 +44,27 @@ __EOT__
     end
   end
 
-  def parse_options
-    parser = WSFE::OptionParser.new
-    parser.order!(ARGV)
-    parser.options
-  end
-  
   def run
-    options = parse_options
+    #WSFE::Runner::FEDummyRunner.run(ARGV)
+    #options = parse_options
     #servicio = ARGV.shift
 
-    servicio, cuit, opt = parse_opt(GetoptLong.new(*OptSet))
-    if ARGV.length < 1
-      usage_exit
-    end
-    servicio = ARGV.shift
+    #servicio, cuit, opt = parse_opt(GetoptLong.new(*OptSet))
+    #if ARGV.length < 1
+    #  usage_exit
+    #end
+    servicio = ARGV[0]
     case servicio
-      when 'FEAutRequest'             : WSFE::FEAutRequest.run
-      when 'FEUltNroRequest'          : fEUltNroRequest(cuit, opt)
-      when 'FERecuperaQTYRequest'     : fERecuperaQTYRequest(cuit, opt)
-      when 'FERecuperaLastCMPRequest' : fERecuperaLastCMPRequest(cuit, opt)
-      when 'FEConsultaCAERequest'     : fEConsultaCAERequest(cuid, opt)
-      when 'FEDummy'                  : fEDummy(opt)
+      when 'FEAutRequest'             : FEAutRequest.run(ARGV)
+      when 'FEUltNroRequest'          : FEUltNroRequest.run(ARGV)
+      when 'FERecuperaQTYRequest'     : FERecuperaQTYRequest.run(ARGV)
+      when 'FERecuperaLastCMPRequest' : FERecuperaLastCMPRequest.run(ARGV)
+      when 'FEConsultaCAERequest'     : FEConsultaCAERequest.run(ARGV)
+      when 'FEDummy'                  : FEDummy.run(ARGV)
       else
         usage_exit
     end
     0
-  end
-
-  def usage_exit
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] <servicio> [argumentos]
-
-  servicio: uno de los servicios soportados por el WSFE de AFIP.
-
-    Valores posibles:
-      - FEDummy
-      - FEAutRequest
-      - FEUltNroRequest
-      - FERecuperaQTYRequest
-      - FERecuperaLastCMPRequest
-      - FEConsultaCAERequest
-
-Las opciones y argumentos requeridos varian segun el servicio. Escriba wsfe --info <servicio> para obtener mas informacion acerca de un servicio especifico.
-
-__EOU__
-    exit 1
-  end
-
-  def info_FEDummy
-    info("FEDummy","",[Info_aut,Info_out])
-#    puts Info_fEDummy
-  end
-
-  def info_FEUltNroRequest
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] FEUltNroRequest 
-  -c, --cuit CUIT cuit del contribuyente (requerido)
-  -o, --out ARCHIVO guarda la respuesta en el archivo indicado (opcional)
-  -t ticket       ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-
-__EOU__
-  end
-
-  def info_FERecuperaQTYRequest
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] FERecuperaQTYRequest 
-  --cuit cuit     cuit del contribuyente (requerido)
-  -s archivo      guarda la respuesta en el archivo indicado (opcional)
-  -t ticket       ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-
-__EOU__
-  end
- 
-  def info_FERecuperaLastCMPRequest
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] FERecuperaLastCMPRequest <tipo-cbte> <punto-vta>
-  --cuit cuit     cuit del contribuyente (requerido)
-  --ticket ticket ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-  
-  <tipo-cbte>     tipo de comprobante (ver tabla AFIP)
-  <punto-vta>     punto de venta
-
-__EOU__
-  end
- 
-  def info_FEConsultaCAERequest
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] FEConsultaCAERequest <cae> <cuit-emisor> <tipo-cbte> <punto-vta> <nro-cbte> <total> <fecha>
-  --cuit cuit     cuit del contribuyente (requerido)
-  --ticket ticket ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-  --out archivo   guarda la respuesta en el archivo indicado (opcional)
-  
-  <cae>           CAE a verificar
-  <cuit-emisor>   cuit emisor del comprobante
-  <tipo-cbte>     tipo de comprobante (ver tabla AFIP)
-  <punto-vta>     punto de venta
-  <nro-cbte>      nro de comprobante
-  <total>         importe total de la operacion o lote
-  <fecha>         fecha del comprobante (AAAAMMDD)
-
-__EOU__
-  end
- 
-  def info_FEAutRequest
-    puts <<__EOU__
-
-Modo de uso: wsfe [opciones] FEAutRequest <lote> <salida>
-  --cuit cuit     cuit del contribuyente (requerido)
-  --ticket ticket ubicacion del ticket de acceso. Si existe y el ticket
-                  aun es valido, se utilizara el ticket de acceso. En 
-                  caso contrario, se solicitara un nuevo ticket y se
-                  almacenara en la ubicacion especificada.
-                  Valor por defecto: ./<cuit>.xml
-  --cert cert     ubicacion del certificado digital provisto por AFIP
-                  Valor por defecto: ./<cuit>.crt
-  --key key       ubicacion de la clave privada que se utilizara para
-                  firmar las solicitudes
-                  Valor por defecto: ./<cuit>.key
-  --xml xml       guarda el xml devuelto por AFIP en el archivo indicado, 
-                  antes de procesarlo (opcional)
-  --servicios     indica que lo que se esta facturando corresponde a 
-                  prestacion de servicios (opcional)
-  
-  <lote>          ubicacion del archivo con el lote a facturar 
-                  (ver formato RECE AFIP)
-  <salida>        ubicacion del archivo en el que se almacenaran los
-                  resultados de la operacion (ver formato RECE)
-
-__EOU__
   end
 
   def parse_opt(getoptlong)
