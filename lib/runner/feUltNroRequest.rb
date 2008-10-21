@@ -3,9 +3,8 @@ module WSFE
     class FEUltNroRequest < Base
       def main
         info_exit unless @options.cuit
-        info_exit unless @options.out
         ticket = obtieneTicket
-        WSFE::Client.recuperaUltNroTransaccion(ticket).save(@options.out)
+        WSFE::Client.recuperaUltNroTransaccion(ticket)
       end
 
       def parse_options

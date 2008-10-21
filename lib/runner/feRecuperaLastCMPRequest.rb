@@ -3,11 +3,10 @@ module WSFE
     class FERecuperaLastCMPRequest < Base
       def main
         info_exit unless @options.cuit
-        info_exit unless @options.out
         info_exit unless @punto_vta
         info_exit unless @tipo_cbte
         ticket = obtieneTicket
-        WSFE::Client.recuperaUltNroCbte(ticket, @punto_vta, @tipo_cbte).save(@options.out)
+        WSFE::Client.recuperaUltNroCbte(ticket, @punto_vta, @tipo_cbte)
       end
 
       def load_options(argv)

@@ -3,10 +3,9 @@ module WSFE
     class FEConsultaCAERequest < Base
       def main
         info_exit unless @options.cuit
-        info_exit unless @options.out
         info_exit unless @cae && @cuit_emisor && @tipo_cbte && @punto_vta && @nro_cbte && @total && @fecha
         ticket = obtieneTicket
-        WSFE::Client.verificaCAE(ticket, @cae, @cuit_emisor, @punto_vta, @tipo_cbte, @nro_cbte, @total, @fecha).save(@options.out)
+        WSFE::Client.verificaCAE(ticket, @cae, @cuit_emisor, @punto_vta, @tipo_cbte, @nro_cbte, @total, @fecha)
       end
 
       def load_options(argv)

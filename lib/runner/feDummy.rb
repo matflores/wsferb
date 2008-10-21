@@ -2,12 +2,7 @@ module WSFE
   module Runner
     class FEDummy < Base
       def main
-        r = WSFE::Client.test
-        if @options.out && !@options.out.empty?
-          File.open(@options.out, 'w') { |f| f.puts(r) }
-        else
-          puts r
-        end
+        WSFE::Client.test
       end
 
       def parse_options

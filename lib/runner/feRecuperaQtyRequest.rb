@@ -4,9 +4,8 @@ module WSFE
       
       def main
         info_exit unless @options.cuit
-        info_exit unless @options.out
         ticket = obtieneTicket
-        WSFE::Client.recuperaMaxQty(ticket).save(@options.out)
+        WSFE::Client.recuperaMaxQty(ticket)
       end
 
       def parse_options

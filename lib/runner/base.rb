@@ -38,7 +38,12 @@ module WSFE
 
       def run(argv)
         load_options(argv)
-        main
+        r = main
+        if @options.out 
+          File.open(@options.out, 'w') { |f| f.puts(r) } 
+        else
+          puts r
+        end
       end
 
       def load_options(argv)

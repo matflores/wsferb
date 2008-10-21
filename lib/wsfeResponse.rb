@@ -20,13 +20,12 @@ class Response
     @errMsg = errMsg
   end
 
+  def to_s
+    ["[Respuesta]", "valor=#{value}", "errCode=#{errCode}", "errMsg=#{errMsg}"].join("\n")
+  end
+
   def save(file)
-    out = File.new(file, 'w')
-    out.write "[Respuesta]\n"
-    out.write "valor=#{value}\n"
-    out.write "errCode=#{errCode}\n"
-    out.write "errMsg=#{errMsg}\n"
-    out.close
+    File.open(file, 'w') { |f| f.puts(self) }
   end
 end
 
