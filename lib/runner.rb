@@ -1,5 +1,4 @@
 require 'runner/options'
-require 'runner/option_parser'
 require 'runner/base'
 require 'runner/feDummy'
 require 'runner/feAutRequest'

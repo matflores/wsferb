@@ -17,7 +17,7 @@ module WSFE
       NAME   = "wsfe"
       URL    = "mflores@atlanware.com"  
     
-      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturación Electrónica AFIP\nCopyright (C) 2008 Matías Alejandro Flores <mflores@atlanware.com>"
+      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturación Electrónica AFIP"
     end
   end
 end

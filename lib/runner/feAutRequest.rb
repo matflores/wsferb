@@ -24,12 +24,27 @@ module WSFE
         parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
         parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
         parse_common_options
-#  
-#  <lote>          ubicacion del archivo con el lote a facturar 
-#                  (ver formato RECE AFIP)
-#  <salida>        ubicacion del archivo en el que se almacenaran los
-#                  resultados de la operacion (ver formato RECE)
-#
+      end
+
+      def descripcion
+<<__EOD__
+     lote                            Ubicación del archivo con el lote a facturar 
+                                     (ver formato RECE AFIP)
+     salida                          Ubicación del archivo en el que se almacenarán 
+                                     los resultados de la operación 
+                                     (ver formato RECE AFIP)
+     
+Retorna la información de la factura/lote de ingreso agregándole el CAE otorgado. Ante cualquier anomalía se incluyen también los códigos de error correspondientes.
+
+Ejemplos:
+
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --xml cae_lote1.xml
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --test
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --xml cae_lote1.xml --test
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --servicios
+
+__EOD__
       end
     end
   end

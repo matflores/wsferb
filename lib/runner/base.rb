@@ -1,3 +1,5 @@
+require 'optparse'
+require 'version'
 require 'wsfeClient.rb'
 
 module WSFE
@@ -40,7 +42,7 @@ module WSFE
       end
 
       def load_options(argv)
-        OptionParser.new { |p| @parser = p ; parse_options }
+        ::OptionParser.new { |p| @parser = p ; parse_options }
         #@options = parser.order!(argv)
         begin
           parser.parse!(argv)
@@ -53,9 +55,6 @@ module WSFE
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] <servicio>"
-        parser.separator ""
-        parse_common_options
       end
 
       def parse_authentication_options
@@ -78,12 +77,12 @@ module WSFE
       end
 
       def info_exit
-        puts parser
+        puts parser, "\n", descripcion
         exit 1
       end      
 
       def error_exit(msg)
-        puts parser, "\n", msg
+        puts parser, "\n", descripcion, "\n", msg
         exit 1
       end
 
@@ -96,6 +95,9 @@ module WSFE
         ticket
       end
       
+      def descripcion
+      end
+
       def self.run(argv)
         new.run(argv)
       end

@@ -25,6 +25,21 @@ module WSFE
 #  <tipo-cbte>     tipo de comprobante (ver tabla AFIP)
 #  <punto-vta>     punto de venta
       end
+
+      def descripcion
+<<__EOD__
+     tipo-cbte                       Tipo de comprobante (ver tabla AFIP)
+     punto-vta                       Punto de venta
+
+Retorna el último número otorgado para el cuit, tipo de comprobante y punto de venta especificados. En caso de no poseer ningún comprobante autorizado se devuelve un 0.
+
+Ejemplos:
+
+wsfe FERecuperaLastCMPRequest 01 0001 --cuit 20123456780
+wsfe FERecuperaLastCMPRequest 01 0001 --cuit 20123456780 --test
+wsfe FERecuperaLastCMPRequest 01 0001 --cuit 20123456780 --test --out ./resultado.ini
+__EOD__
+      end
     end
   end
 end

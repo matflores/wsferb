@@ -26,13 +26,26 @@ module WSFE
         parser.separator ""
         parse_authentication_options
         parse_common_options
-#  <cae>           CAE a verificar
-#  <cuit-emisor>   cuit emisor del comprobante
-#  <tipo-cbte>     tipo de comprobante (ver tabla AFIP)
-#  <punto-vta>     punto de venta
-#  <nro-cbte>      nro de comprobante
-#  <total>         importe total de la operacion o lote
-#  <fecha>         fecha del comprobante (AAAAMMDD)
+      end
+
+      def descripcion
+<<__EOD__
+     cae                             CAE a verificar
+     cuit-emisor                     CUIT emisor del comprobante
+     tipo-cbte                       Tipo de comprobante (ver tabla AFIP)
+     punto-vta                       Punto de venta
+     nro-cbte                        Número de comrobante
+     total                           Importe total de la operación o lote
+     fecha                           Fecha del comprobante (AAAAMMDD)
+
+Verifica la validez de un CAE. Recibe el cuit emisor, el tipo y número de comprobante, el punto de venta, el importe total de la operación, la fecha de comprobante y el CAE a verificar, y retorna 1 si el CAE indicado es válido, o 0 en caso contrario.
+
+Ejemplos:
+
+wsfe FEConsultaCAERequest 20111111110 01 0001 12345678 1210 123456789012345 20081001 --cuit 20123456780
+wsfe FEConsultaCAERequest 20111111110 01 0001 12345678 1210 123456789012345 20081001 --cuit 20123456780 --test
+wsfe FEConsultaCAERequest 20111111110 01 0001 12345678 1210 123456789012345 20081001 --cuit 20123456780 --test --out ./resultado.ini
+__EOD__
       end
     end
   end
