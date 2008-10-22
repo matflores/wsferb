@@ -47,7 +47,6 @@ module WSFE
 
       def load_options(argv)
         ::OptionParser.new { |p| @parser = p ; parse_options }
-        #@options = parser.order!(argv)
         begin
           parser.parse!(argv)
         rescue OptionParser::InvalidOption => e

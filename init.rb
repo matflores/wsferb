@@ -4,7 +4,6 @@
 #
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
-require 'wsaa'
 require 'wsfe'
 
 module Kernel
