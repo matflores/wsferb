@@ -39,13 +39,13 @@ module AFIP
 
     def self.create_rpc_driver
       begin
-        @@driver ||= SOAP::WSDLDriverFactory.new(self::WSDL).create_rpc_driver
-        @@driver.endpoint_url = test_mode_enabled? ? self::TEST_URL : self::PROD_URL
-        @@driver.options['protocol.http.ssl_config.verify_mode'] = OpenSSL::SSL::VERIFY_NONE if ssl_enabled?
+        driver = SOAP::WSDLDriverFactory.new(self::WSDL).create_rpc_driver
+        driver.endpoint_url = test_mode_enabled? ? self::TEST_URL : self::PROD_URL
+        driver.options['protocol.http.ssl_config.verify_mode'] = OpenSSL::SSL::VERIFY_NONE if ssl_enabled?
       rescue
-        @@driver = nil
+        driver = nil
       end
-      @@driver
+      driver
     end
 
   end

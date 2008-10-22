@@ -16,10 +16,8 @@ module WSAA
     def self.requestTicket(cuit, service, cert_file, key_file)
       request = generate_request_for(service)
       signed = sign_request(request, cert_file, key_file)
+      driver = create_rpc_driver
       begin
-        driver = SOAP::WSDLDriverFactory.new(WSDL).create_rpc_driver
-        driver.endpoint_url = test_mode_enabled? ? self::TEST_URL : self::PROD_URL
-        driver.options['protocol.http.ssl_config.verify_mode'] = OpenSSL::SSL::VERIFY_NONE if ssl_enabled?
         r = driver.loginCms(:in0 => signed)
         ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
       rescue
