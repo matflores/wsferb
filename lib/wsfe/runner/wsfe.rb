@@ -27,9 +27,29 @@ module WSFE
       end
 
       def info_exit
-        puts parser, "\n", descripcion
+        puts descripcion
         exit 1
       end      
+      
+      def descripcion
+<<__EOD__
+Modo de uso: wsfe [opciones] <servicio> [argumentos]
+
+     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
+                                     Valores posibles:
+                                       - FEDummy
+                                       - FEAutRequest
+                                       - FEUltNroRequest
+                                       - FERecuperaQTYRequest
+                                       - FERecuperaLastCMPRequest
+                                       - FEConsultaCAERequest
+
+                                     La sintaxis de las opciones y argumentos requeridos 
+                                     dependen del servicio a utilizar.
+                                     Escriba wsfe <servicio> --info para obtener mayor
+                                     informacion acerca de un servicio en particular.
+__EOD__
+      end
     end
   end
 end

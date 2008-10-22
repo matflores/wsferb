@@ -5,15 +5,7 @@
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
 require 'wsfe'
-
-module Kernel
-  def silence_warnings
-    old_verbose, $VERBOSE = $VERBOSE, nil
-    yield
-  ensure
-    $VERBOSE = old_verbose
-  end
-end
+require 'silence'
 
 silence_warnings do
   WSFE::Runner::Wsfe.run(ARGV)
