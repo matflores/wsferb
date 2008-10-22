@@ -1,6 +1,5 @@
 require 'optparse'
-require 'version'
-require 'wsfeClient.rb'
+require 'wsfe'
 
 module WSFE
   module Runner
@@ -94,7 +93,7 @@ module WSFE
       def obtieneTicket
         cert_file = @options.cert
         key_file = @options.key
-        ticket = WSAA::Ticket.load(cuit, @options.ticket) if @options.ticket
+        ticket = WSAA::Ticket.load(@options.cuit, @options.ticket) if @options.ticket
         ticket = WSAA::Client.requestTicket(@options.cuit, 'wsfe', cert_file, key_file) if ticket.nil? || ticket.invalid?
         ticket.save(@options.ticket) if ticket && ticket.valid? && @options.ticket
         ticket

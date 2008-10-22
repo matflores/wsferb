@@ -1,8 +1,6 @@
 require 'time'
 require 'soap/wsdlDriver'
-$: << File.expand_path(File.dirname(__FILE__))
-require 'wsaaTicket'
-require 'wsfeResponse'
+require 'wsaa'
 
 module WSFE
 

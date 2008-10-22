@@ -4,9 +4,8 @@
 #
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
-require 'wsaaClient'
-require 'wsfeClient'
-require 'runner'
+require 'wsaa'
+require 'wsfe'
 
 module Kernel
   def silence_warnings

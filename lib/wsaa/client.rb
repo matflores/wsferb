@@ -1,7 +1,7 @@
 require 'time'
 require 'openssl'
 require 'soap/wsdlDriver'
-require 'wsaaTicket'
+require 'wsaa/ticket'
 
 module WSAA
 
