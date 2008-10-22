@@ -9,13 +9,17 @@ class Client
   include OpenSSL
 
   WSDL = File.dirname(__FILE__) + '/wsaa.wsdl'
-  @@ssl_enabled = true
+  PROD_URL = 'https://wsaa.afip.gov.ar/ws/services/LoginCms'
+  TEST_URL = 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms'
+  @@ssl_enabled = false
+  @@test_mode_enabled = false
 
   def self.requestTicket(cuit, service, cert_file, key_file)
     request = generate_request_for(service)
     signed = sign_request(request, cert_file, key_file)
     begin
       driver = SOAP::WSDLDriverFactory.new(WSDL).create_rpc_driver
+      driver.endpoint_url = test_mode_enabled? ? self::TEST_URL : self::PROD_URL
       driver.options['protocol.http.ssl_config.verify_mode'] = OpenSSL::SSL::VERIFY_NONE if ssl_enabled?
       r = driver.loginCms(:in0 => signed)
       ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
@@ -35,6 +39,18 @@ class Client
 
   def self.ssl_enabled?
     @@ssl_enabled
+  end
+
+  def self.enable_test_mode
+    @@test_mode_enabled = true
+  end
+
+  def self.disable_test_mode
+    @@test_mode_enabled = false
+  end
+
+  def self.test_mode_enabled?
+    @@test_mode_enabled
   end
 
 private

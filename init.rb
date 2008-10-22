@@ -21,8 +21,6 @@ class WsfeClientApp
   include WSFE::Runner
 
   def initialize
-    WSFE::Client.disable_ssl
-    WSAA::Client.disable_ssl
     silence_warnings do
       run
     end

@@ -70,7 +70,7 @@ module WSFE
 
       def parse_common_options
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
-        parser.on_tail(*OPTIONS[:test])    { @options.test = true }
+        parser.on_tail(*OPTIONS[:test])    { WSFE::Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
       end

@@ -7,7 +7,10 @@ module WSFE
 class Client
 
   WSDL = File.dirname(__FILE__) + '/wsfe.wsdl'
-  @@ssl_enabled = true
+  PROD_URL = 'https://servicios1.afip.gov.ar/wsfe/service.asmx'
+  TEST_URL = 'https://wswhomo.afip.gov.ar/wsfe/service.asmx'
+  @@ssl_enabled = false
+  @@test_mode_enabled = false
 
   def self.factura_lote(ticket, id, cuit, esServicios, lote, salida=nil, xml_file=nil)
     return ticket_missing if ticket.nil?
@@ -98,6 +101,18 @@ class Client
     @@ssl_enabled
   end
 
+  def self.enable_test_mode
+    @@test_mode_enabled = true
+  end
+
+  def self.disable_test_mode
+    @@test_mode_enabled = false
+  end
+
+  def self.test_mode_enabled?
+    @@test_mode_enabled
+  end
+
   def self.read_items_from_file(cuit, esServicios, lote)
     items = []
     lines = File.readlines(lote)
@@ -136,7 +151,8 @@ private
 
   def self.create_rpc_driver
     begin
-      @@driver ||= SOAP::WSDLDriverFactory.new(WSDL).create_rpc_driver
+      @@driver ||= SOAP::WSDLDriverFactory.new(self::WSDL).create_rpc_driver
+      @@driver.endpoint_url = test_mode_enabled? ? self::TEST_URL : self::PROD_URL
       @@driver.options['protocol.http.ssl_config.verify_mode'] = OpenSSL::SSL::VERIFY_NONE if ssl_enabled?
     rescue
       @@driver = nil
