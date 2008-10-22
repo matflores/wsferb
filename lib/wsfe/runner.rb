@@ -4,6 +4,7 @@
 #
 require 'wsfe/runner/options'
 require 'wsfe/runner/base'
+require 'wsfe/runner/wsfe'
 require 'wsfe/runner/feDummy'
 require 'wsfe/runner/feAutRequest'
 require 'wsfe/runner/feUltNroRequest'

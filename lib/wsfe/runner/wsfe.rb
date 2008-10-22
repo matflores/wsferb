@@ -1,0 +1,35 @@
+module WSFE
+  module Runner
+    class Wsfe < Base
+      def run(argv)
+        args = argv.dup
+        load_options(argv)
+        servicio = argv.shift 
+        case servicio
+          when 'FEAutRequest'             : FEAutRequest.run(args)
+          when 'FEUltNroRequest'          : FEUltNroRequest.run(args)
+          when 'FERecuperaQTYRequest'     : FERecuperaQTYRequest.run(args)
+          when 'FERecuperaLastCMPRequest' : FERecuperaLastCMPRequest.run(args)
+          when 'FEConsultaCAERequest'     : FEConsultaCAERequest.run(args)
+          when 'FEDummy'                  : FEDummy.run(args)
+          else                            ; info_exit
+        end
+        WSFE::Client.test
+      end
+
+      def parse_options
+        parser.banner = "Modo de uso: wsfe [opciones] <servicio> [argumentos]"
+        parser.separator ""
+        parse_authentication_options
+        parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
+        parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
+        parse_common_options
+      end
+
+      def info_exit
+        puts parser, "\n", descripcion
+        exit 1
+      end      
+    end
+  end
+end

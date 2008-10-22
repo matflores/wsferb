@@ -15,38 +15,8 @@ module Kernel
   end
 end
 
-class WsfeClientApp
-
-  include WSFE::Runner
-
-  def initialize
-    silence_warnings do
-      run
-    end
-  end
-
-  def run
-    #WSFE::Runner::FEDummyRunner.run(ARGV)
-    #options = parse_options
-    #servicio = ARGV.shift
-
-    #servicio, cuit, opt = parse_opt(GetoptLong.new(*OptSet))
-    #if ARGV.length < 1
-    #  usage_exit
-    #end
-    servicio = ARGV[0]
-    case servicio
-      when 'FEAutRequest'             : FEAutRequest.run(ARGV)
-      when 'FEUltNroRequest'          : FEUltNroRequest.run(ARGV)
-      when 'FERecuperaQTYRequest'     : FERecuperaQTYRequest.run(ARGV)
-      when 'FERecuperaLastCMPRequest' : FERecuperaLastCMPRequest.run(ARGV)
-      when 'FEConsultaCAERequest'     : FEConsultaCAERequest.run(ARGV)
-      when 'FEDummy'                  : FEDummy.run(ARGV)
-      else
-        usage_exit
-    end
-    0
-  end
+silence_warnings do
+  WSFE::Runner::Wsfe.run(ARGV)
 end
 
-WsfeClientApp.new
+exit 0
