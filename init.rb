@@ -1,5 +1,5 @@
 #
-# Web Services Facturación Electrónica AFIP
+# Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008 Matiás Alejandro Flores <mflores@atlanware.com>
 #
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")

@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 module WSFE
   module Runner
     class FERecuperaQTYRequest < Base
@@ -17,7 +21,7 @@ module WSFE
       
       def descripcion
 <<__EOD__
-Retorna la cantidad máxima de registros a incluir en el detalle del servicio facturador (FEAutRequest).
+Retorna la cantidad maxima de registros a incluir en el detalle del servicio facturador (FEAutRequest).
 
 Ejemplos:
 

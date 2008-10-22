@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 module WSFE
   module Runner
     class Options

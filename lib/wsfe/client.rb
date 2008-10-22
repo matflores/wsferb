@@ -1,6 +1,9 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 require 'time'
 require 'soap/wsdlDriver'
-require 'afip'
 require 'wsaa'
 
 module WSFE

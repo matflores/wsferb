@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 module WSFE
   module Runner
     class FEAutRequest < Base
@@ -28,13 +32,13 @@ module WSFE
 
       def descripcion
 <<__EOD__
-     lote                            Ubicación del archivo con el lote a facturar 
+     lote                            Ubicacion del archivo con el lote a facturar 
                                      (ver formato RECE AFIP)
-     salida                          Ubicación del archivo en el que se almacenarán 
-                                     los resultados de la operación 
+     salida                          Ubicacion del archivo en el que se almacenaran 
+                                     los resultados de la operacion 
                                      (ver formato RECE AFIP)
      
-Retorna la información de la factura/lote de ingreso agregándole el CAE otorgado. Ante cualquier anomalía se incluyen también los códigos de error correspondientes.
+Retorna la informacion de la factura/lote de ingreso agregandole el CAE otorgado. Ante cualquier anomalia se incluyen tambien los codigos de error correspondientes.
 
 Ejemplos:
 

@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 module WSFE
   module Runner
     class FERecuperaLastCMPRequest < Base
@@ -21,8 +25,6 @@ module WSFE
         parser.separator ""
         parse_authentication_options
         parse_common_options
-#  <tipo-cbte>     tipo de comprobante (ver tabla AFIP)
-#  <punto-vta>     punto de venta
       end
 
       def descripcion
@@ -30,7 +32,7 @@ module WSFE
      tipo-cbte                       Tipo de comprobante (ver tabla AFIP)
      punto-vta                       Punto de venta
 
-Retorna el último número otorgado para el cuit, tipo de comprobante y punto de venta especificados. En caso de no poseer ningún comprobante autorizado se devuelve un 0.
+Retorna el ultimo numero otorgado para el cuit, tipo de comprobante y punto de venta especificados. En caso de no poseer ningun comprobante autorizado se devuelve un 0.
 
 Ejemplos:
 

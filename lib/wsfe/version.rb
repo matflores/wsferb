@@ -1,6 +1,6 @@
 #
-# Web Services Facturación Electrónica AFIP
-# Copyright (C) 2008 Matiás Alejandro Flores <mflores@atlanware.com>
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
 #
 module WSFE
   module VERSION
@@ -17,7 +17,7 @@ module WSFE
       NAME   = "wsfe"
       URL    = "mflores@atlanware.com"  
     
-      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturación Electrónica AFIP"
+      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturacion Electronica AFIP"
     end
   end
 end

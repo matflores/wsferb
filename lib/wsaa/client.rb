@@ -1,7 +1,10 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 require 'time'
 require 'openssl'
 require 'soap/wsdlDriver'
-require 'afip'
 
 module WSAA
 
@@ -49,9 +52,9 @@ module WSAA
 
     def self.sign_request(request, cert_file, key_file)
       signed = PKCS7::sign(load_cert(cert_file), load_key(key_file), request, [], 0)
-      # separar lìneas
+      # separar lineas
       lines = signed.to_s.split("\n")
-      # eliminar primera y ùltima lìnea
+      # eliminar primera y ultima linea
       lines.shift
       lines.pop
       # y volver a juntarlas

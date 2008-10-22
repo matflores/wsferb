@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 require 'soap/wsdlDriver'
 
 module AFIP

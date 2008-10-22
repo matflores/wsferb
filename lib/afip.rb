@@ -1,6 +1,6 @@
 #
-# Web Services Facturación Electrónica AFIP
-# Copyright (C) 2008 Matiás Alejandro Flores <mflores@atlanware.com>
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'afip/client'
 

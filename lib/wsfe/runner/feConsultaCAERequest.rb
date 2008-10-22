@@ -1,3 +1,7 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 module WSFE
   module Runner
     class FEConsultaCAERequest < Base
@@ -33,11 +37,11 @@ module WSFE
      cuit-emisor                     CUIT emisor del comprobante
      tipo-cbte                       Tipo de comprobante (ver tabla AFIP)
      punto-vta                       Punto de venta
-     nro-cbte                        Número de comrobante
-     total                           Importe total de la operación o lote
+     nro-cbte                        Numero de comrobante
+     total                           Importe total de la operacion o lote
      fecha                           Fecha del comprobante (AAAAMMDD)
 
-Verifica la validez de un CAE. Recibe el cuit emisor, el tipo y número de comprobante, el punto de venta, el importe total de la operación, la fecha de comprobante y el CAE a verificar, y retorna 1 si el CAE indicado es válido, o 0 en caso contrario.
+Verifica la validez de un CAE. Recibe el cuit emisor, el tipo y numero de comprobante, el punto de venta, el importe total de la operacion, la fecha de comprobante y el CAE a verificar, y retorna 1 si el CAE indicado es valido, o 0 en caso contrario.
 
 Ejemplos:
 

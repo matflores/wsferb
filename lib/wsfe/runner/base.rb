@@ -1,5 +1,8 @@
+#
+# Web Services Facturacion Electronica AFIP
+# Copyright (C) 2008 Matias Alejandro Flores <mflores@atlanware.com>
+#
 require 'optparse'
-require 'wsfe'
 
 module WSFE
   module Runner
@@ -7,25 +10,25 @@ module WSFE
 
       OPTIONS = {
         :cuit      => ["-c", "--cuit CUIT",    "Cuit del contribuyente."],
-        :ticket    => ["-t", "--ticket TICKET","Ubicación del ticket de acceso. Si existe y",
-                                               "el ticket aún es válido, se utilizará para",
-                                               "la comunicación con el WSFE. En caso contrario",
-                                               "se solicitará un nuevo ticket y se almacenará",
-                                               "en la ubicación especificada.",
+        :ticket    => ["-t", "--ticket TICKET","Ubicacion del ticket de acceso. Si existe y",
+                                               "el ticket aun es valido, se utilizara para",
+                                               "la comunicacion con el WSFE. En caso contrario",
+                                               "se solicitara un nuevo ticket y se almacenara",
+                                               "en la ubicacion especificada.",
                                                "Valor por defecto: ./<cuit>.xml"],
-        :cert      => ["-r", "--cert CERT",    "Ubicación del certificado digital provisto por AFIP.",
+        :cert      => ["-r", "--cert CERT",    "Ubicacion del certificado digital provisto por AFIP.",
                                                "Valor por defecto: ./<cuit>.crt"],
-        :key       => ["-k", "--key KEY",      "Ubicación de la clave privada que se utilizará para",
+        :key       => ["-k", "--key KEY",      "Ubicacion de la clave privada que se utilizara para",
                                                "firmar las solicitudes.",
                                                "Valor por defecto: ./<cuit>.key"],
         :out       => ["-o", "--out PATH",     "Guarda la respuesta en el archivo indicado (opcional)"],
         :xml       => ["-x", "--xml PATH",     "Guarda el xml devuelto por AFIP en el archivo indicado,",
                                                "antes de procesarlo (opcional)."],
-        :servicios => ["-s", "--servicios",    "Indica que lo que se está facturando corresponde",
-                                               "a prestación de servicios (opcional)."],
+        :servicios => ["-s", "--servicios",    "Indica que lo que se esta facturando corresponde",
+                                               "a prestacion de servicios (opcional)."],
         :test      => ["-e", "--test",         "Ejecuta el servicio en el entorno de pruebas de AFIP."],
-        :info      => ["-i", "--info",         "Muestra información de ayuda acerca para el servicio especificado."],
-        :version   => ["-v", "--version",      "Informa la versión actual del script."]
+        :info      => ["-i", "--info",         "Muestra informacion de ayuda acerca del servicio especificado."],
+        :version   => ["-v", "--version",      "Informa la version actual del script."]
       }
 
       attr_reader :options, :parser
@@ -46,7 +49,7 @@ module WSFE
       end
 
       def load_options(argv)
-        ::OptionParser.new { |p| @parser = p ; parse_options }
+        OptionParser.new { |p| @parser = p ; parse_options }
         begin
           parser.parse!(argv)
         rescue OptionParser::InvalidOption => e
