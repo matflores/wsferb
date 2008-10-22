@@ -50,7 +50,7 @@ module WSFE
         begin
           parser.parse!(argv)
         rescue OptionParser::InvalidOption => e
-          error_exit(e)
+          info_exit(e)
         end
       end
 
@@ -79,15 +79,11 @@ module WSFE
         exit 1
       end
 
-      def info_exit
-        puts parser, "\n", descripcion
+      def info_exit(msg=nil)
+        puts parser, "\n", descripcion, "\n"
+        puts msg unless msg.nil?
         exit 1
       end      
-
-      def error_exit(msg)
-        puts parser, "\n", descripcion, "\n", msg
-        exit 1
-      end
 
       def obtieneTicket
         cert_file = @options.cert
