@@ -17,16 +17,17 @@ module WSFE
       def load_options(argv)
         super
         info_exit if argv.size < 3
-        @lote = argv[1].dup
-        @salida = argv[2].dup
+        #@lote = RUBYSCRIPT2EXE.userdir(argv[1])
+        @lote = argv[1]
+        #@salida = RUBYSCRIPT2EXE.userdir(argv[2])
+        @salida = argv[2]
       end
 
       def parse_options
         parser.banner = "Modo de uso: wsfe [opciones] FEAutRequest <lote> <salida>"
         parser.separator ""
         parse_authentication_options
-        parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
-        parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
+        parse_other_options
         parse_common_options
       end
 

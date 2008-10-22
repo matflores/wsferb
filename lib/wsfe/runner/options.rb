@@ -5,7 +5,7 @@
 module WSFE
   module Runner
     class Options
-      attr_accessor :cuit, :ticket, :cert, :key, :out, :xml, :servicios
+      attr_accessor :cuit, :ticket, :cert, :key, :out, :xml, :id, :servicios
         
       def cuit=(cuit)
         @cuit = cuit

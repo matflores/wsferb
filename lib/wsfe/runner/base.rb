@@ -24,6 +24,7 @@ module WSFE
         :out       => ["-o", "--out PATH",     "Guarda la respuesta en el archivo indicado (opcional)"],
         :xml       => ["-x", "--xml PATH",     "Guarda el xml devuelto por AFIP en el archivo indicado,",
                                                "antes de procesarlo (opcional)."],
+        :id        => ["-d", "--id ID",        "Numero identificador de la transaccion."],
         :servicios => ["-s", "--servicios",    "Indica que lo que se esta facturando corresponde",
                                                "a prestacion de servicios (opcional)."],
         :test      => ["-e", "--test",         "Ejecuta el servicio en el entorno de pruebas de AFIP."],
@@ -53,8 +54,13 @@ module WSFE
         begin
           parser.parse!(argv)
         rescue OptionParser::InvalidOption => e
-          info_exit(e)
+          info_exit
         end
+        @options.ticket = RUBYSCRIPT2EXE.userdir(@options.ticket) if @options.ticket
+        @options.cert = RUBYSCRIPT2EXE.userdir(@options.cert) if @options.cert
+        @options.key = RUBYSCRIPT2EXE.userdir(@options.key) if @options.key
+        @options.out = RUBYSCRIPT2EXE.userdir(@options.out) if @options.out
+        @options.xml = RUBYSCRIPT2EXE.userdir(@options.xml) if @options.xml
       end
 
       def main
@@ -75,6 +81,12 @@ module WSFE
         parser.on_tail(*OPTIONS[:test])    { WSFE::Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
+      end
+
+      def parse_other_options
+        parser.on(*OPTIONS[:id])        { |id| @options.id = id }
+        parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
+        parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
       end
 
       def version_exit

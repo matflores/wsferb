@@ -6,6 +6,7 @@ $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
 require 'wsfe'
 require 'silence'
+require 'rubyscript2exe'
 
 silence_warnings do
   WSFE::Runner::Wsfe.run(ARGV)

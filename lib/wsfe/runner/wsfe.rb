@@ -25,8 +25,7 @@ module WSFE
         parser.banner = "Modo de uso: wsfe [opciones] <servicio> [argumentos]"
         parser.separator ""
         parse_authentication_options
-        parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
-        parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
+        parse_other_options
         parse_common_options
       end
 
