@@ -6,7 +6,7 @@ module WSFE
   module Runner
     class FEUltNroRequest < Base
       def main
-        info_exit unless @options.cuit
+        error("CUIT no informado") unless @options.cuit
         ticket = obtieneTicket
         WSFE::Client.recuperaUltNroTransaccion(ticket)
       end

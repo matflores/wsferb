@@ -5,9 +5,8 @@
 module WSFE
   module Runner
     class FERecuperaQTYRequest < Base
-      
       def main
-        info_exit unless @options.cuit
+        error("CUIT no informado") unless @options.cuit
         ticket = obtieneTicket
         WSFE::Client.recuperaMaxQty(ticket)
       end

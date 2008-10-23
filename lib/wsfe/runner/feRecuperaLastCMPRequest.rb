@@ -6,18 +6,18 @@ module WSFE
   module Runner
     class FERecuperaLastCMPRequest < Base
       def main
-        info_exit unless @options.cuit
-        info_exit unless @punto_vta
-        info_exit unless @tipo_cbte
+        error("CUIT no informado") unless @options.cuit
+        error("Tipo de comprobante no informado") unless @tipo_cbte
+        error("Punto de venta no informado") unless @punto_vta
         ticket = obtieneTicket
         WSFE::Client.recuperaUltNroCbte(ticket, @punto_vta, @tipo_cbte)
       end
 
       def load_options(argv)
         super
-        info_exit if argv.size < 3
-        @tipo_cbte = argv[1].dup
-        @punto_vta = argv[2].dup
+        argv.shift
+        @tipo_cbte = argv.shift
+        @punto_vta = argv.shift
       end
 
       def parse_options

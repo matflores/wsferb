@@ -6,21 +6,19 @@ module WSFE
   module Runner
     class FEAutRequest < Base
       def main
-        info_exit unless @options.cuit
-        info_exit unless @options.id
-        info_exit unless @lote
-        info_exit unless @salida
+        error("CUIT no informado") unless @options.cuit
+        error("Identificador de la transaccion no informado") unless @options.id
+        error("Ubicacion del lote a facturar no informada") unless @lote
+        error("Ubicacion del archivo de salida no informada") unless @salida
         ticket = obtieneTicket
         WSFE::Client.factura_lote(ticket, @options.id, @options.cuit, @options.servicios, @lote, @salida, @options.xml)
       end
 
       def load_options(argv)
         super
-        info_exit if argv.size < 3
-        #@lote = RUBYSCRIPT2EXE.userdir(argv[1])
-        @lote = argv[1]
-        #@salida = RUBYSCRIPT2EXE.userdir(argv[2])
-        @salida = argv[2]
+        argv.shift
+        @lote = RUBYSCRIPT2EXE.userdir(argv.shift)
+        @salida = RUBYSCRIPT2EXE.userdir(argv.shift)
       end
 
       def parse_options

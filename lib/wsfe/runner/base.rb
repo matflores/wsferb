@@ -94,11 +94,18 @@ module WSFE
         exit 1
       end
 
-      def info_exit(msg=nil)
+      def info_exit
         puts parser, "\n", descripcion, "\n"
-        puts msg unless msg.nil?
         exit 1
       end      
+
+      def error_exit(msg=nil)
+        puts parser, "\n", descripcion, "\n"
+        puts "Error: #{msg}" unless msg.nil?
+        exit 1
+      end
+
+      alias_method :error, :error_exit
 
       def obtieneTicket
         cert_file = @options.cert

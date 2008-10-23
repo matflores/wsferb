@@ -6,22 +6,28 @@ module WSFE
   module Runner
     class FEConsultaCAERequest < Base
       def main
-        info_exit unless @options.cuit
-        info_exit unless @cae && @cuit_emisor && @tipo_cbte && @punto_vta && @nro_cbte && @total && @fecha
+        error("CUIT no informado") unless @options.cuit
+        error("CAE a validar no informado") unless @cae
+        error("CUIT emisor no informado") unless @cuit_emisor
+        error("Tipo de comprobante no informado") unless @tipo_cbte
+        error("Punto de venta no informado") unless @punto_vta
+        error("Numero de comprobante no informado") unless @nro_cbte
+        error("Importe total no informado") unless @total
+        error("Fecha no informada") unless @fecha
         ticket = obtieneTicket
         WSFE::Client.verificaCAE(ticket, @cae, @cuit_emisor, @punto_vta, @tipo_cbte, @nro_cbte, @total, @fecha)
       end
 
       def load_options(argv)
         super
-        info_exit if argv.size < 8
-        @cae = argv[1].dup
-        @cuit_emisor = argv[2].dup
-        @tipo_cbte = argv[3].dup
-        @punto_vta = argv[4].dup
-        @nro_cbte = argv[5].dup
-        @total = argv[6].dup
-        @fecha = argv[7].dup
+        argv.shift
+        @cae = argv.shift
+        @cuit_emisor = argv.shift
+        @tipo_cbte = argv.shift
+        @punto_vta = argv.shift
+        @nro_cbte = argv.shift
+        @total = argv.shift
+        @fecha = argv.shift
       end
 
       def parse_options
