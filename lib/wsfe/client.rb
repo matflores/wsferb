@@ -36,7 +36,7 @@ module WSFE
         end
         out.close
       end
-      return r
+      return WSFE::Response.new(r, :fEAutRequestResult, :nil)
     end
 
     def self.factura_items(ticket, id, esServicios, items, xml_file=nil)
@@ -46,7 +46,9 @@ module WSFE
         wiredump = ''
         driver.wiredump_dev = wiredump
       end
-      r = driver.fEAutRequest(ticket.to_arg.merge({ :Fer => { :Fecr => { :id => id, :cantidadreg => items.size, :presta_serv => (esServicios ? 1 : 0)}, :Fedr => items }}))
+      cabecera = { :id => id, :cantidadreg => items.size, :presta_serv => (esServicios ? 1 : 0)}
+      detalle = { :FEDetalleRequest => items } 
+      r = driver.fEAutRequest(ticket.to_arg.merge({ :Fer => { :Fecr => cabecera, :Fedr => detalle }}))
       if xml_file
         xml_response = []
         response_found = false
@@ -55,6 +57,7 @@ module WSFE
         xml_response.shift
         File.open(xml_file, 'w') { |f| f.write xml_response.join("\n") }
       end
+      return r
     end
 
     def self.recuperaMaxQty(ticket)
