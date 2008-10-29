@@ -16,7 +16,7 @@ module WSFE
           when 'FERecuperaLastCMPRequest' : FERecuperaLastCMPRequest.run(args)
           when 'FEConsultaCAERequest'     : FEConsultaCAERequest.run(args)
           when 'FEDummy'                  : FEDummy.run(args)
-          else                            ; info_exit
+          else                            ; usage_exit
         end
         WSFE::Client.test
       end
@@ -30,6 +30,12 @@ module WSFE
       end
 
       def info_exit
+        # anulo el info_exit por default sin hacer nada
+        # el runner que corresponda llamara a su propio
+        # info_exit 
+      end      
+
+      def usage_exit
         puts descripcion
         exit 1
       end      
