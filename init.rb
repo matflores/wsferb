@@ -20,6 +20,8 @@ if RUBYSCRIPT2EXE.is_compiled?
       FileUtils.remove_dir(folder_to_del, true) 
     end
   end
+  $stderr.reopen(RUBYSCRIPT2EXE.userdir + "/wsfe.log","w")
+  $stderr.sync = true
 end
 
 silence_warnings do
