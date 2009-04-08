@@ -5,13 +5,13 @@
 module WSFE
   module Runner
     class Options
-      attr_accessor :cuit, :ticket, :cert, :key, :out, :xml, :id, :servicios
+      attr_accessor :cuit, :ticket, :cert, :key, :out, :log, :id, :servicios
         
       def cuit=(cuit)
         @cuit = cuit
         @cert ||= "./#{@cuit}.crt"
         @key ||= "./#{@cuit}.key"
-        @xml ||= "./#{@cuit}.xml"
+        @log ||= "./#{@cuit}.log"
       end
     end
   end

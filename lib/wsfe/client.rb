@@ -14,10 +14,10 @@ module WSFE
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfe/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfe/service.asmx'
 
-    def self.factura_lote(ticket, id, cuit, esServicios, lote, salida=nil, xml_file=nil)
+    def self.factura_lote(ticket, id, cuit, esServicios, lote, salida=nil, log_file=nil)
       return ticket_missing if ticket.nil?
       items = read_items_from_file(cuit, esServicios, lote)
-      r = self.factura_items(ticket, id, esServicios, items, xml_file)
+      r = self.factura_items(ticket, id, esServicios, items, log_file)
       unless salida.nil?
         out = File.open(salida, 'w')
         if r.respond_to?(:fEAutRequestResult) && r.fEAutRequestResult.respond_to?(:fecResp) && r.fEAutRequestResult.respond_to?(:fedResp) && r.fEAutRequestResult.fedResp.respond_to?(:fEDetalleResponse)
@@ -30,32 +30,27 @@ module WSFE
               formato = "4%08d%02d%04d%08d%08d%02d%011d%015d%015d%015d%015d%015d%015dR%-14s%-8s%-11s%08d%08d%08d\n" 
             end
             out.write formato % [ d.fecha_cbte, d.tipo_cbte, d.punto_vta, d.cbt_desde, d.cbt_hasta, d.tipo_doc, d.nro_doc, 
-                                  d.imp_total, d.imp_tot_conc, d.imp_neto, d.impto_liq, d.impto_liq_rni, d.imp_op_ex,
+                                  (d.imp_total.to_f*100).to_i, (d.imp_tot_conc.to_f*100).to_i, (d.imp_neto.to_f*100).to_i, (d.impto_liq.to_f*100).to_i, (d.impto_liq_rni.to_f*100).to_i, (d.imp_op_ex.to_f*100).to_i,
                                   d.cae, d.fecha_vto, d.motivo, d.fecha_serv_desde, d.fecha_serv_hasta, d.fecha_venc_pago ]
           end
         end
         out.close
       end
-      return WSFE::Response.new(r, :fEAutRequestResult, :nil)
+      return WSFE::Response.new(r, :fEAutRequestResult, id)
     end
 
-    def self.factura_items(ticket, id, esServicios, items, xml_file=nil)
+    def self.factura_items(ticket, id, esServicios, items, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
-      if xml_file
+      if log_file
         wiredump = ''
         driver.wiredump_dev = wiredump
       end
       cabecera = { :id => id, :cantidadreg => items.size, :presta_serv => (esServicios ? 1 : 0)}
       detalle = { :FEDetalleRequest => items } 
       r = driver.fEAutRequest(ticket.to_arg.merge({ :Fer => { :Fecr => cabecera, :Fedr => detalle }}))
-      if xml_file
-        xml_response = []
-        response_found = false
-        lines = wiredump.split("\n")
-        lines.each { |l| response_found ? xml_response << l : if l == '= Response' then response_found = true end }
-        xml_response.shift
-        File.open(xml_file, 'w') { |f| f.write xml_response.join("\n") }
+      if log_file
+        File.open(log_file, 'w') { |f| f.write wiredump }
       end
       return r
     end
@@ -100,7 +95,10 @@ module WSFE
       lines.each do |line|
         fields = line.unpack('A1A8A2A1A4A8A8A3A2A11A30A15A15A15A15A15A15A15A15A15A15A8A8A8A6A1A1A14A8A8')
         unless esServicios
-          fields[21] = fields[22] = fields[23] = '00000000'
+	        hoy = Time.now
+	        vto = Time.local(hoy.year, hoy.month == 12 ? 1 : hoy.month + 1, hoy.day)
+          fields[21] = fields[22] = hoy.strftime("%Y%m%d")
+          fields[23] = vto.strftime("%Y%m%d")
         end
         items << {
                    :tipo_doc         => fields[8],
@@ -109,12 +107,12 @@ module WSFE
                    :punto_vta        => fields[4],
                    :cbt_desde        => fields[5],
                    :cbt_hasta        => fields[6],
-                   :imp_total        => fields[11],
-                   :imp_tot_conc     => fields[12],
-                   :imp_neto         => fields[13],
-                   :impto_liq        => fields[14],
-                   :impto_liq_rni    => fields[15],
-                   :imp_op_ex        => fields[16],
+                   :imp_total        => fields[11].to_i / 100.0,
+                   :imp_tot_conc     => fields[12].to_i / 100.0,
+                   :imp_neto         => fields[13].to_i / 100.0,
+                   :impto_liq        => fields[14].to_i / 100.0,
+                   :impto_liq_rni    => fields[15].to_i / 100.0,
+                   :imp_op_ex        => fields[16].to_i / 100.0,
                    :fecha_cbte       => fields[1],
                    :fecha_serv_desde => fields[21],
                    :fecha_serv_hasta => fields[22],

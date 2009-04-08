@@ -22,8 +22,8 @@ module WSFE
                                                "firmar las solicitudes.",
                                                "Valor por defecto: ./<cuit>.key"],
         :out       => ["-o", "--out PATH",     "Guarda la respuesta en el archivo indicado (opcional)"],
-        :xml       => ["-x", "--xml PATH",     "Guarda el xml devuelto por AFIP en el archivo indicado,",
-                                               "antes de procesarlo (opcional)."],
+        :log       => ["-l", "--log PATH",     "Guarda un log de la transaccion en el archivo indicado,",
+                                               "incluyendo el xml devuelto por AFIP (opcional)."],
         :id        => ["-d", "--id ID",        "Numero identificador de la transaccion."],
         :servicios => ["-s", "--servicios",    "Indica que lo que se esta facturando corresponde",
                                                "a prestacion de servicios (opcional)."],
@@ -60,7 +60,7 @@ module WSFE
         @options.cert = RUBYSCRIPT2EXE.userdir(@options.cert) if @options.cert
         @options.key = RUBYSCRIPT2EXE.userdir(@options.key) if @options.key
         @options.out = RUBYSCRIPT2EXE.userdir(@options.out) if @options.out
-        @options.xml = RUBYSCRIPT2EXE.userdir(@options.xml) if @options.xml
+        @options.log = RUBYSCRIPT2EXE.userdir(@options.log) if @options.log
       end
 
       def main
@@ -85,7 +85,7 @@ module WSFE
 
       def parse_other_options
         parser.on(*OPTIONS[:id])        { |id| @options.id = id }
-        parser.on(*OPTIONS[:xml])       { |xml| @options.xml = xml }
+        parser.on(*OPTIONS[:log])       { |log| @options.log = log }
         parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
       end
 

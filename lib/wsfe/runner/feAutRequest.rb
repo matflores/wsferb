@@ -11,7 +11,7 @@ module WSFE
         error("Ubicacion del lote a facturar no informada") unless @lote
         error("Ubicacion del archivo de salida no informada") unless @salida
         ticket = obtieneTicket
-        WSFE::Client.factura_lote(ticket, @options.id, @options.cuit, @options.servicios, @lote, @salida, @options.xml)
+        WSFE::Client.factura_lote(ticket, @options.id, @options.cuit, @options.servicios, @lote, @salida, @options.log)
       end
 
       def load_options(argv)
@@ -42,9 +42,9 @@ Retorna la informacion de la factura/lote de ingreso agregandole el CAE otorgado
 Ejemplos:
 
 wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234
-wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --xml cae_lote1.xml
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --log cae_lote1.log
 wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --test
-wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --xml cae_lote1.xml --test
+wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --log cae_lote1.log --test
 wsfe FEAutRequest lote1.txt cae_lote_1.txt --cuit 20123456780 --id 1234 --servicios
 
 __EOD__

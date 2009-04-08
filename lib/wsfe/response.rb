@@ -10,7 +10,7 @@ module WSFE
     def initialize(soap_response, result, fieldname)
       result = soap_response.respond_to?(result) ? soap_response.send(result) : nil
       if result
-        value = result.respond_to?(fieldname) ? result.send(fieldname) : 0
+        value = result.respond_to?(fieldname) ? result.send(fieldname) : fieldname
         value = value.respond_to?(:value) ? value.value.to_i : value.to_i
         errCode = result.rError.percode.to_i
         errMsg = result.rError.perrmsg

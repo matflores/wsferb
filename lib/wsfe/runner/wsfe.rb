@@ -30,9 +30,6 @@ module WSFE
       end
 
       def info_exit
-        # anulo el info_exit por default sin hacer nada
-        # el runner que corresponda llamara a su propio
-        # info_exit 
       end      
 
       def usage_exit
