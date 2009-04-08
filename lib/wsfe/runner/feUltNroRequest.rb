@@ -8,7 +8,7 @@ module WSFE
       def main
         error("CUIT no informado") unless @options.cuit
         ticket = obtieneTicket
-        WSFE::Client.recuperaUltNroTransaccion(ticket)
+        WSFE::Client.recuperaUltNroTransaccion(ticket, @options.log)
       end
 
       def parse_options

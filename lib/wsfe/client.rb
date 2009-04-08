@@ -42,50 +42,55 @@ module WSFE
     def self.factura_items(ticket, id, esServicios, items, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
-      if log_file
-        wiredump = ''
-        driver.wiredump_dev = wiredump
-      end
+      prepare_log(log_file, driver)
       cabecera = { :id => id, :cantidadreg => items.size, :presta_serv => (esServicios ? 1 : 0)}
       detalle = { :FEDetalleRequest => items } 
       r = driver.fEAutRequest(ticket.to_arg.merge({ :Fer => { :Fecr => cabecera, :Fedr => detalle }}))
-      if log_file
-        File.open(log_file, 'w') { |f| f.write wiredump }
-      end
+      write_log
       return r
     end
 
-    def self.recuperaMaxQty(ticket)
+    def self.recuperaMaxQty(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
+      prepare_log(log_file, driver)
       r = driver.fERecuperaQTYRequest(ticket.to_arg)
+      write_log
       return WSFE::Response.new(r, :fERecuperaQTYRequestResult, :qty)
     end
 
-    def self.recuperaUltNroTransaccion(ticket)
+    def self.recuperaUltNroTransaccion(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
+      prepare_log(log_file, driver)
       r = driver.fEUltNroRequest(ticket.to_arg)
+      write_log
       return WSFE::Response.new(r, :fEUltNroRequestResult, :nro)
     end
 
-    def self.recuperaUltNroCbte(ticket, puntoVta, tipoCbte)
+    def self.recuperaUltNroCbte(ticket, puntoVta, tipoCbte, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
+      prepare_log(log_file, driver)
       r = driver.fERecuperaLastCMPRequest(ticket.to_arg.merge({ :argTCMP => { :PtoVta => puntoVta, :TipoCbte => tipoCbte }}))
+      write_log
       return WSFE::Response.new(r, :fERecuperaLastCMPRequestResult, :cbte_nro)
     end
 
-    def self.test
+    def self.test(log_file=nil)
       driver = create_rpc_driver
+      prepare_log(log_file, driver)
       r = driver.fEDummy(nil)
+      write_log
       "authserver=#{r.fEDummyResult.authserver}; appserver=#{r.fEDummyResult.appserver}; dbserver=#{r.fEDummyResult.dbserver};"
     end
 
-    def self.verificaCAE(ticket, cae, cuit, puntoVta, tipoCbte, nroCbte, importe, fecha)
+    def self.verificaCAE(ticket, cae, cuit, puntoVta, tipoCbte, nroCbte, importe, fecha, log_file=nil)
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
+      prepare_log(log_file, driver)
       r = driver.fEConsultaCAERequest(ticket.to_arg.merge({ :argCAERequest => { :cuit_emisor => cuit, :tipo_cbte => tipoCbte, :punto_vta => puntoVta, :cbt_nro => nroCbte, :imp_total => importe, :cae => cae, :fecha_cbte => fecha }}))
+      write_log
       return WSFE::Response.new(r, :fEConsultaCAERequestResult, :resultado)
     end
 
@@ -120,6 +125,20 @@ module WSFE
                  } if fields[0] == '1'
       end
       items
+    end
+
+    def self.prepare_log(log_file, driver)
+      @@log_file = log_file
+      @@wiredump = ''
+      if @@log_file
+        driver.wiredump_dev = @@wiredump
+      end
+    end
+
+    def self.write_log
+      if @@log_file
+        File.open(@@log_file, 'w') { |f| f.write @@wiredump }
+      end
     end
 
     def self.ticket_missing

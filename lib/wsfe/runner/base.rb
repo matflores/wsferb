@@ -78,6 +78,7 @@ module WSFE
 
       def parse_common_options
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
+        parser.on(*OPTIONS[:log])          { |log| @options.log = log }
         parser.on_tail(*OPTIONS[:test])    { WSFE::Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
@@ -85,7 +86,6 @@ module WSFE
 
       def parse_other_options
         parser.on(*OPTIONS[:id])        { |id| @options.id = id }
-        parser.on(*OPTIONS[:log])       { |log| @options.log = log }
         parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
       end
 

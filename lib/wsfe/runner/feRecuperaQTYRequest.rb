@@ -8,7 +8,7 @@ module WSFE
       def main
         error("CUIT no informado") unless @options.cuit
         ticket = obtieneTicket
-        WSFE::Client.recuperaMaxQty(ticket)
+        WSFE::Client.recuperaMaxQty(ticket, @options.log)
       end
 
       def parse_options

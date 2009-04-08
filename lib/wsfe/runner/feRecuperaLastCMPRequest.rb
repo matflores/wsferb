@@ -10,7 +10,7 @@ module WSFE
         error("Tipo de comprobante no informado") unless @tipo_cbte
         error("Punto de venta no informado") unless @punto_vta
         ticket = obtieneTicket
-        WSFE::Client.recuperaUltNroCbte(ticket, @punto_vta, @tipo_cbte)
+        WSFE::Client.recuperaUltNroCbte(ticket, @punto_vta, @tipo_cbte, @options.log)
       end
 
       def load_options(argv)

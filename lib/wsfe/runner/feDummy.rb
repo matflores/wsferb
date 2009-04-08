@@ -6,7 +6,7 @@ module WSFE
   module Runner
     class FEDummy < Base
       def main
-        WSFE::Client.test
+        WSFE::Client.test(@options.log)
       end
 
       def parse_options

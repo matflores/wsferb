@@ -15,7 +15,7 @@ module WSFE
         error("Importe total no informado") unless @total
         error("Fecha no informada") unless @fecha
         ticket = obtieneTicket
-        WSFE::Client.verificaCAE(ticket, @cae, @cuit_emisor, @punto_vta, @tipo_cbte, @nro_cbte, @total, @fecha)
+        WSFE::Client.verificaCAE(ticket, @cae, @cuit_emisor, @punto_vta, @tipo_cbte, @nro_cbte, @total, @fecha, @options.log)
       end
 
       def load_options(argv)
