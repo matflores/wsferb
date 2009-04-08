@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../lib/wsaaTicket.rb'
+require File.dirname(__FILE__) + '/spec_helper.rb' 
 
 Defaults = { :cuit => 20238883890, 
              :token => 'token', 
