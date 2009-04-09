@@ -8,23 +8,23 @@ end
 
 desc 'Build wsfe.exe'
 task :build => :compile do
-  system("ruby build/rubyscript2exe.rb ./build/wsfe.rb ./build/wsfe.exe")
+  system("cd build ; ruby rubyscript2exe.rb wsfe.rb")
 end
 
 desc 'Run Tar2RubyScript utility, compiling all source files into one single ruby script'
 task :compile do
-  system("ruby build/tar2rubyscript.rb ./src/ ./build/wsfe.rb")
+  system("cd build ; ruby tar2rubyscript.rb ../src/ wsfe.rb")
 end
 
 namespace :zip do
   desc 'Zip wsfe.exe'
   task :exe do
-    system("7z u ./build/wsfe.zip ./build/wsfe.exe")
+    system("cd build ; 7z u wsfe.zip wsfe.exe")
   end
 
   desc 'Zip wsfe source files'
   task :source do
-    system("7z u ./build/wsfe-sources.zip ./src/")
+    system("cd build ; 7z u wsfe-sources.zip ../src/")
   end
 
   desc 'Zip wsfe.exe and source files'
