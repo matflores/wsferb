@@ -8,23 +8,23 @@ end
 
 desc 'Build wsfe.exe'
 task :build => :compile do
-  system("cd build ; ruby rubyscript2exe.rb wsfe.rb")
+  system("cd build && ruby rubyscript2exe.rb wsfe.rb")
 end
 
 desc 'Run Tar2RubyScript utility, compiling all source files into one single ruby script'
 task :compile do
-  system("cd build ; ruby tar2rubyscript.rb ../src/ wsfe.rb")
+  system("cd build && ruby tar2rubyscript.rb ../src/ wsfe.rb")
 end
 
 namespace :zip do
   desc 'Zip wsfe.exe'
   task :exe do
-    system("cd build ; 7z u wsfe.zip wsfe.exe")
+    system("cd build && 7z u wsfe.zip wsfe.exe")
   end
 
   desc 'Zip wsfe source files'
   task :source do
-    system("cd build ; 7z u wsfe-sources.zip ../src/")
+    system("cd build && 7z u wsfe-sources.zip ../src/")
   end
 
   desc 'Zip wsfe.exe and source files'
@@ -33,5 +33,5 @@ end
 
 desc 'Upload'
 task :upload do
-  system("curl ftp://ftp.atlanware.com/ -u wsfe@atlanware.com:wsfeafip -T ./build/wsfe.zip ./build/wsfe-sources.zip")
+  system("cd build && curl ftp://ftp.atlanware.com/ -u wsfe@atlanware.com:wsfeafip -T ./wsfe.zip ./wsfe-sources.zip")
 end
