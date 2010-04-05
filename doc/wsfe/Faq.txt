@@ -1,0 +1,41 @@
+P:¿Si en el lote enviado se incluye facturación de producto/s y servicio/s cúal debe ser el contendido del campo 'presta_serv'?
+R:Debe venir en 0.
+
+
+P:Estoy enviando distintos request y obtengo siempre la misma respuesta del método Facturador (FEAutRequest): ¿Qué puede estar pasando?
+R:Estas repetiendo el campo "Fer->Fecr->id".
+En el siguiente link vas a encontrar un documento que te va a servir para solucionar inconvenientes de este tipo:
+http://wswhomo.afip.gov.ar/fiscaldocs/wsfe/WSFE-GuiaAdicionalParaElProgramador.pdf
+
+
+P:¿Cuál es el tiempo que tengo para enviar la solicitud de autorización de comprobantes con respecto a la fecha del comprobante?
+R:Su transferencia electrónica a esta Administración no podrá exceder los 5 días corridos de dicha fecha.
+Cuando se trate de prestaciones de servicios dicha transferencia podrá efectuarse dentro de los 10 días corridos anteriores o posteriores a la fecha consignada en el comprobante.
+
+
+P:¿Cómo doy de alta los puntos de venta?
+R:En el entorno de testing no hace falta dar de alta los puntos de venta.
+En el entorno de producción se realiza desde el portal de AFIP a través del servicio "Regimenes de facturacion y registracion (REAR/RECE/RFI)".
+
+
+P:¿Existe algún servicio con clave fiscal para verificar la validez de los comrpobantes emitidos?
+R:Para facturas y documentos equivalentes clase "A" y "B" mayores o iguales a $ 1.000 existe el servicio "Verificación de validez de comprobantes emitidos", requiere clave fiscal de nivel 2 o superior.
+Para facturas y documentos equivalentes clase "B" menores a $1.000 puede consultar el siguiente link: http://www.afip.gov.ar/genericos/consultacae/default.aspx (no requiere clave fiscal).
+
+
+P:¿Es posible anular un comprobante en el WSFE?
+R: No es posible.
+
+
+P:¿Para la obtención de los CAE para comprobantes tipo C (monotributista) hay que tener alguna consideración especial?
+R:Para comprobantes de Clase C no se puede usar WS. Se hacen ON-LINE con el  servicio RCEL.
+
+
+P: ¿El método FEUltNroRequest devuelve el último ID en orden cronológico o el último de la secuencia de IDs, o sea, el mayor?
+R: Devuelve el máximo valor de ese campo en nuestra base de datos, no el último cronológicamente.
+
+
+P: WSFE me devuelve <motivo>11</motivo> indicando un error de correlatividad, pero el nro de comprobante para el cual estoy solicitando CAE es correlativo
+al ultimo aprobado, a que se debe este error?
+R: El error 11 puede deberse tambien a que la fecha del comprobante para el cual esta solicitando CAE es anterior a la de ultimo aprobado, o sea, error
+de correlatividad de fecha de comprobante, no de la numeracion del mismo.

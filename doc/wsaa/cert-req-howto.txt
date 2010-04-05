@@ -1,0 +1,58 @@
+Básicamente, necesita usar el utilitario OpenSSL.
+Si tiene acceso a un servidor Unix/Linux, seguramente, ya lo tiene instalado.
+Si sólo tiene acceso a equipos Windows, puede bajar openSSL de:
+http://www.slproweb.com/products/Win32OpenSSL.html
+
+Los pasos a seguir son los siguientes:
+
+- Genere su clave privada (private key) ejecutando desde la línea de comando:
+
+  openssl genrsa -out privada 1024
+
+  Haga un backup de su clave privada para evitar futuros inconvenientes. Tenga
+  en cuenta que la va a necesitar una vez que obtenga su certificado X.509, el
+  cual no le va a servir de mucho si Ud. no dispone de la clave privada que le
+  corresponde.
+
+- Genere su CSR (Certificate Signing Request) ejecutando desde la línea de 
+  comando:
+  
+  openssl req -new -key privada -subj "/C=AR/O=[empresa]/CN=[nombre]/serialNumber=CUIT [nro_cuit]" -out pedido
+  
+  Reemplace:
+    [empresa] por el nombre de su empresa.
+    [nombre] por su nombre o server hostname.
+    [nro_cuit] por la CUIT sin guiones de la empresa o programador.
+
+- Una vez que haya generado correctamente su CSR, puede usarlo para obtener su
+  certificado digital X.509. 
+  Para el caso del entorno de Testing, envíelo por e-mail a 
+  webservices@afip.gov.ar aclarando a qué WS "de negocio" (por ej.: "wsfe", 
+  "wsseg", etc.) pretende acceder usando este certificado. El certificado le 
+  será devuelto por e-mail.
+  Para el caso del entorno de Producción, Ud. podrá obtener su certificado
+  interactivamente usando la opción "Adminitración de Certificados Digitales"
+  del menú de trámites con Clave Fiscal en nuestro portal www.afip.gov.ar. Para
+  más datos, ver el siguiente documento:
+
+  http://wswhomo.afip.gov.ar/fiscaldocs/WSAA/WSAA%20-%20Procedimiento%20obtencion%20y%20asociacion%20de%20certificados%20-%20090323.pdf
+
+- Segun la tecnologia que elija utilizar para llevar a cabo el desarrollo
+  puede llegar a necesitar el certificado en formato pkcs12 (certificado x509 +
+  clave privada). Por ejemplo, con el cliente en .NET contribuido.
+  Para generarlo debe ejecutar desde la línea de comando:
+
+     openssl pkcs12 -export -inkey privada -in certificado.crt -out alias.p12
+
+  IMPORTANTE
+  En algunos equipos Windows al invocar al WSAA para obtener su ticket de acceso
+  puede llegar a obtener el siguiente mensaje de error:
+
+     "La contraseña de red especificada no es válida".
+
+  Este error tiene que ver con el problema de que Windows parece no entender
+  que el pkcs#12 generado con openssl no tiene password.
+  La solución es importar el certificado al repositorio de Windows (Control 
+  panel/Internet Options/Contents/Certificates).
+  Luego volver a exportarlo asegurandose de no ponerle password.
+  Tener en cuenta que debe tildar la opción "Marcar esta clave como exportable".

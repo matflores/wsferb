@@ -1,0 +1,29 @@
+2. Códigos de tipo de documento
+
+80 - CUIT
+86 - CUIL
+87 - CDI
+89 - LE
+90 - LC
+91 - CI extranjera
+92 - en trámite
+93 - Acta nacimiento
+95 - CI Bs. As. RNP
+96 - DNI
+94 - Pasaporte
+00 - CI Policía Federal
+01 - CI Buenos Aires
+07 - CI Mendoza
+08 - CI La Rioja
+09 - CI Salta
+10 - CI San Juan
+11 - CI San Luis
+12 - CI Santa Fe
+13 - CI Santiago del Estero
+14 - CI Tucumán
+16 - CI Chaco
+17 - CI Chubut
+18 - CI Formosa
+19 - CI Misiones
+20 - CI Neuquén
+

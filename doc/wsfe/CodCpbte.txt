@@ -1,0 +1,20 @@
+Tabla de comprobantes
+
+Código Descripción
+1 Facturas A
+2 Notas de Débito A
+3 Notas de Crédito A
+4 Recibos A
+5 Notas de Venta al contado A
+6 Facturas B
+7 Notas de Débito B
+8 Notas de Crédito B
+9 Recibos B
+10 Notas de Venta al contado B
+39 Otros comprobantes A que cumplan con la R.G. N° 3419
+40 Otros comprobantes B que cumplan con la R.G. N° 3419
+60 Cuenta de Venta y Líquido producto A
+61 Cuenta de Venta y Líquido producto B
+63 Liquidación A
+64 Liquidación B
+

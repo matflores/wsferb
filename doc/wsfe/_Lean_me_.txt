@@ -1,0 +1,7 @@
+Carpeta WSFEDOCS
+
+Esta carpeta contiene las últimas versiones estables y de dominio público 
+de la documentación y ejemplos del Web Service de Factura Electrónica (WSFE). 
+
+***IMPORTANTE*** TODO EL MATERIAL PUEDE SER MODIFICADO
+Y/O BORRADO SIN PREVIO AVISO.
