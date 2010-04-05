@@ -12,10 +12,10 @@ module WSAA
 
     def initialize(fields={})
       @cuit = fields[:cuit] if fields[:cuit]
-      @token = fields[:token] if fields[:token]
-      @sign = fields[:sign] if fields[:sign]
-      @source = fields[:source] if fields[:source]
-      @destination = fields[:destination] if fields[:destination]
+      @token = fields[:token].to_s if fields[:token]
+      @sign = fields[:sign].to_s if fields[:sign]
+      @source = fields[:source].to_s if fields[:source]
+      @destination = fields[:destination].to_s if fields[:destination]
       @generationTime = fields[:generationTime] if fields[:generationTime]
       @expirationTime = fields[:expirationTime] if fields[:expirationTime]
     end

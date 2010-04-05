@@ -1,4 +1,4 @@
-spec/TA.xml
+test/TA.xml
 build/wsfe.rb
 build/wsfe.exe
 build/*.zip

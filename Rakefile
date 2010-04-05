@@ -1,9 +1,18 @@
-desc 'Run all specs (default)'
-task :default => :spec
+require "rake/testtask"
 
-desc 'Run all specs'
-task :spec do 
-  system("spec spec")
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.pattern = "test/**/test*.rb"
+end
+
+task :default => :test
+
+namespace :test do
+  Rake::TestTask.new do |t|
+    t.name = :unit
+    t.libs << "test"
+    t.pattern = "test/unit/test*.rb"
+  end
 end
 
 desc 'Build wsfe.exe'
