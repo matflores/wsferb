@@ -2,7 +2,7 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
-module WSFE
+module WSFEX
   module VERSION
     unless defined? MAJOR
       MAJOR  = 1
@@ -14,7 +14,7 @@ module WSFE
       TAG = "REL_#{[MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join('_')}".upcase.gsub(/\.|-/, '_')
       FULL_VERSION = "#{[MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join('.')}"
 
-      NAME   = "wsfe"
+      NAME   = "wsfex"
       URL    = "mflores@atlanware.com"  
     
       DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturacion Electronica AFIP"

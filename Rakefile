@@ -13,6 +13,11 @@ namespace :test do
     t.libs << "test"
     t.pattern = "test/unit/test*.rb"
   end
+  Rake::TestTask.new do |t|
+    t.name = :integration
+    t.libs << "test"
+    t.pattern = "test/integration/test*.rb"
+  end
 end
 
 desc 'Build wsfe.exe'

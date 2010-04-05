@@ -1,6 +1,10 @@
 require 'test_helper'
 
-Protest.describe "WSFE client" do 
+Protest.describe "WSFE client" do
+  it "can test if all systems are ok" do
+    assert_equal "authserver=OK; appserver=OK; dbserver=OK;", WSFE::Client.test
+  end
+
   describe "given a valid ticket" do
     before do
       cert_file = File.dirname(__FILE__) + "/../credentials/20238883890.crt"
