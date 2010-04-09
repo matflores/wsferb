@@ -9,5 +9,5 @@ require 'wsfex/version'
 require 'wsfex/runner'
 
 module WSFEX
-  SERVICES = %w(FEXDummy)
+  SERVICES = %w(FEXDummy FEXGetLastId)
 end

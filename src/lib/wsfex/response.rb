@@ -12,8 +12,8 @@ module WSFEX
       if result
         value = result.respond_to?(fieldname) ? result.send(fieldname) : fieldname
         value = value.respond_to?(:value) ? value.value.to_i : value.to_i
-        errCode = result.rError.percode.to_i
-        errMsg = result.rError.perrmsg
+        errCode = result.fEXErr.errCode.to_i
+        errMsg = result.fEXErr.errMsg
       else
         value = 0
         errCode = -1

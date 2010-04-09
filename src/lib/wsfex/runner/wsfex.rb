@@ -11,7 +11,7 @@ module WSFEX
         servicio = argv.shift 
         case servicio
           when 'FEXAutRequest'             : FEXAutRequest.run(args)
-          when 'FEXUltNroRequest'          : FEXUltNroRequest.run(args)
+          when 'FEXGetLastId'              : FEXGetLastId.run(args)
           when 'FEXRecuperaQTYRequest'     : FEXRecuperaQTYRequest.run(args)
           when 'FEXRecuperaLastCMPRequest' : FEXRecuperaLastCMPRequest.run(args)
           when 'FEXConsultaCAERequest'     : FEXConsultaCAERequest.run(args)

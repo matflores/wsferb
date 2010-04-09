@@ -14,6 +14,15 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
+    def self.getLastId(ticket, log_file=nil)
+      return ticket_missing if ticket.nil?
+      driver = create_rpc_driver
+      prepare_log(log_file, driver)
+      r = driver.fEXGetLast_ID(ticket.to_arg)
+      write_log
+      return WSFEX::Response.new(r, :fEXGetLast_IDResult, :id)
+    end
+
     def self.test(log_file=nil)
       driver = create_rpc_driver
       prepare_log(log_file, driver)

@@ -6,11 +6,7 @@ require 'wsfex/runner/options'
 require 'wsfex/runner/base'
 require 'wsfex/runner/wsfex'
 require 'wsfex/runner/fexDummy'
-#require 'wsfe/runner/feAutRequest'
-#require 'wsfe/runner/feUltNroRequest'
-#require 'wsfe/runner/feRecuperaQTYRequest'
-#require 'wsfe/runner/feRecuperaLastCMPRequest'
-#require 'wsfe/runner/feConsultaCAERequest'
+require 'wsfex/runner/fexGetLastId'
 
 module WSFEX
   module Runner
