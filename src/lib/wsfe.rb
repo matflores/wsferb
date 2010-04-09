@@ -9,5 +9,10 @@ require 'wsfe/version'
 require 'wsfe/runner'
 
 module WSFE
-  SERVICES = %w(FEAutRequest FEUltNroRequest FERecuperaQTYRequest FERecuperaLastCMPRequest FEConsultaCAERequest FEDummy)
+  SERVICES = %w(FEAutRequest
+                FEUltNroRequest
+                FERecuperaQTYRequest
+                FERecuperaLastCMPRequest
+                FEConsultaCAERequest
+                FEDummy)
 end

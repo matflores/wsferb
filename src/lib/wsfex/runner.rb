@@ -7,6 +7,7 @@ require 'wsfex/runner/base'
 require 'wsfex/runner/wsfex'
 require 'wsfex/runner/fexDummy'
 require 'wsfex/runner/fexGetLastId'
+require 'wsfex/runner/fexGetParamDstPais'
 
 module WSFEX
   module Runner

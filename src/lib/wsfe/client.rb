@@ -45,7 +45,7 @@ module WSFE
       prepare_log(log_file, driver)
       cabecera = { :id => id, :cantidadreg => items.size, :presta_serv => (esServicios ? 1 : 0)}
       detalle = { :FEDetalleRequest => items } 
-      r = driver.fEAutRequest(ticket.to_arg.merge({ :Fer => { :Fecr => cabecera, :Fedr => detalle }}))
+      r = driver.fEAutRequest(ticket_to_arg(ticket).merge({ :Fer => { :Fecr => cabecera, :Fedr => detalle }}))
       write_log
       return r
     end
@@ -54,7 +54,7 @@ module WSFE
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
       prepare_log(log_file, driver)
-      r = driver.fERecuperaQTYRequest(ticket.to_arg)
+      r = driver.fERecuperaQTYRequest(ticket_to_arg(ticket))
       write_log
       return WSFE::Response.new(r, :fERecuperaQTYRequestResult, :qty)
     end
@@ -63,7 +63,7 @@ module WSFE
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
       prepare_log(log_file, driver)
-      r = driver.fEUltNroRequest(ticket.to_arg)
+      r = driver.fEUltNroRequest(ticket_to_arg(ticket))
       write_log
       return WSFE::Response.new(r, :fEUltNroRequestResult, :nro)
     end
@@ -72,7 +72,7 @@ module WSFE
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
       prepare_log(log_file, driver)
-      r = driver.fERecuperaLastCMPRequest(ticket.to_arg.merge({ :argTCMP => { :PtoVta => puntoVta, :TipoCbte => tipoCbte }}))
+      r = driver.fERecuperaLastCMPRequest(ticket_to_arg(ticket).merge({ :argTCMP => { :PtoVta => puntoVta, :TipoCbte => tipoCbte }}))
       write_log
       return WSFE::Response.new(r, :fERecuperaLastCMPRequestResult, :cbte_nro)
     end
@@ -89,7 +89,7 @@ module WSFE
       return ticket_missing if ticket.nil?
       driver = create_rpc_driver
       prepare_log(log_file, driver)
-      r = driver.fEConsultaCAERequest(ticket.to_arg.merge({ :argCAERequest => { :cuit_emisor => cuit, :tipo_cbte => tipoCbte, :punto_vta => puntoVta, :cbt_nro => nroCbte, :imp_total => importe, :cae => cae, :fecha_cbte => fecha }}))
+      r = driver.fEConsultaCAERequest(ticket_to_arg(ticket).merge({ :argCAERequest => { :cuit_emisor => cuit, :tipo_cbte => tipoCbte, :punto_vta => puntoVta, :cbt_nro => nroCbte, :imp_total => importe, :cae => cae, :fecha_cbte => fecha }}))
       write_log
       return WSFE::Response.new(r, :fEConsultaCAERequestResult, :resultado)
     end
@@ -145,6 +145,9 @@ module WSFE
       WSFE::Response.new(nil, :nil, nil)
     end
 
+    def self.ticket_to_arg(ticket)
+      return { :argAuth => { :Token => ticket.token, :Sign => ticket.sign, :cuit => ticket.cuit } }
+    end
   end
 
 end

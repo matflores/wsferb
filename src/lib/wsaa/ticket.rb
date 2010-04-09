@@ -32,10 +32,6 @@ module WSAA
       @expirationTime && @expirationTime < Time.now
     end
 
-    def to_arg
-      return { :argAuth => { :Token => token, :Sign => sign, :cuit => cuit } }
-    end
-
     def to_xml
       "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + 
       "<loginTicketResponse version=\"1\">\n" +

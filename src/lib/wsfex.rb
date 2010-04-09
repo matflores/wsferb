@@ -9,5 +9,20 @@ require 'wsfex/version'
 require 'wsfex/runner'
 
 module WSFEX
-  SERVICES = %w(FEXDummy FEXGetLastId)
+  SERVICES = %w(FEXDummy
+                FEXAuthorize
+                FEXGetCmp
+                FEXGetLastId
+                FEXGetLastCmp
+                FEXGetParamMon
+                FEXGetParamTipoCbte
+                FEXGetParamTipoExpo
+                FEXGetParamUMed
+                FEXGetParamIdiomas
+                FEXGetParamDstPais
+                FEXGetParamDstCuit
+                FEXGetParamIncoterms
+                FEXGetParamCtz
+                FEXGetParamPtoVenta
+                FEXCheckPermiso)
 end
