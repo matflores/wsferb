@@ -5,6 +5,7 @@
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
 require 'lib/wsfe'
+require 'lib/wsfex'
 require 'silence'
 require 'rubyscript2exe'
 
@@ -25,7 +26,11 @@ if RUBYSCRIPT2EXE.is_compiled?
 end
 
 silence_warnings do
-  WSFE::Runner::Wsfe.run(ARGV)
+  if WSFEX::SERVICES.include?(ARGV[0])
+    WSFEX::Runner::Wsfex.run(ARGV)
+  else
+    WSFE::Runner::Wsfe.run(ARGV)
+  end
 end
 
 exit 0

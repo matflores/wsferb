@@ -9,4 +9,5 @@ require 'wsfex/version'
 require 'wsfex/runner'
 
 module WSFEX
+  SERVICES = %w(FEXDummy)
 end

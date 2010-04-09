@@ -2,10 +2,10 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
-#require 'wsfe/runner/options'
-#require 'wsfe/runner/base'
-#require 'wsfe/runner/wsfe'
-#require 'wsfe/runner/feDummy'
+require 'wsfex/runner/options'
+require 'wsfex/runner/base'
+require 'wsfex/runner/wsfex'
+require 'wsfex/runner/fexDummy'
 #require 'wsfe/runner/feAutRequest'
 #require 'wsfe/runner/feUltNroRequest'
 #require 'wsfe/runner/feRecuperaQTYRequest'
