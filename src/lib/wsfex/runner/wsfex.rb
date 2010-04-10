@@ -10,13 +10,19 @@ module WSFEX
         load_options(argv)
         servicio = argv.shift 
         case servicio
-          when 'FEXAutRequest'             : FEXAutRequest.run(args)
-          when 'FEXGetLastId'              : FEXGetLastId.run(args)
-          when 'FEXGetParamDstPais'        : FEXGetParamDstPais.run(args)
-          when 'FEXRecuperaQTYRequest'     : FEXRecuperaQTYRequest.run(args)
-          when 'FEXRecuperaLastCMPRequest' : FEXRecuperaLastCMPRequest.run(args)
-          when 'FEXConsultaCAERequest'     : FEXConsultaCAERequest.run(args)
           when 'FEXDummy'                  : FEXDummy.run(args)
+          when 'FEXGetLastCmp'             : FEXGetLastCmp.run(args)
+          when 'FEXGetLastId'              : FEXGetLastId.run(args)
+          when 'FEXGetParamCtz'            : FEXGetParamCtz.run(args)
+          when 'FEXGetParamDstCuit'        : FEXGetParamDstCuit.run(args)
+          when 'FEXGetParamDstPais'        : FEXGetParamDstPais.run(args)
+          when 'FEXGetParamIncoterms'      : FEXGetParamIncoterms.run(args)
+          when 'FEXGetParamIdiomas'        : FEXGetParamIdiomas.run(args)
+          when 'FEXGetParamMon'            : FEXGetParamMon.run(args)
+          when 'FEXGetParamPtoVenta'       : FEXGetParamPtoVenta.run(args)
+          when 'FEXGetParamTipoCbte'       : FEXGetParamTipoCbte.run(args)
+          when 'FEXGetParamTipoExpo'       : FEXGetParamTipoExpo.run(args)
+          when 'FEXGetParamUMed'           : FEXGetParamUMed.run(args)
           else                             ; usage_exit
         end
         WSFEX::Client.test

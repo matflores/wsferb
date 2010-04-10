@@ -6,8 +6,18 @@ require 'wsfex/runner/options'
 require 'wsfex/runner/base'
 require 'wsfex/runner/wsfex'
 require 'wsfex/runner/fexDummy'
+require 'wsfex/runner/fexGetLastCmp'
 require 'wsfex/runner/fexGetLastId'
+require 'wsfex/runner/fexGetParamCtz'
+require 'wsfex/runner/fexGetParamDstCuit'
 require 'wsfex/runner/fexGetParamDstPais'
+require 'wsfex/runner/fexGetParamIncoterms'
+require 'wsfex/runner/fexGetParamIdiomas'
+require 'wsfex/runner/fexGetParamMon'
+require 'wsfex/runner/fexGetParamPtoVenta'
+require 'wsfex/runner/fexGetParamTipoCbte'
+require 'wsfex/runner/fexGetParamTipoExpo'
+require 'wsfex/runner/fexGetParamUMed'
 
 module WSFEX
   module Runner

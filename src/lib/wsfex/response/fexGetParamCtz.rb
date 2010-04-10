@@ -3,7 +3,7 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 module WSFEX
-  class Response::GetParamDstPais < Response::GetParam
+  class Response::GetParamCtz < Response::GetParam
     def format_record(record)
       "%-3s%-250s" % [ record.dST_Codigo, record.dST_Ds ]
     end

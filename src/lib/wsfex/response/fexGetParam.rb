@@ -4,15 +4,16 @@
 #
 module WSFEX
   class Response::GetParam < Response
-    def parse_result(result, fieldname)
-      container = result.respond_to?(:fEXResultGet) ? result.send(:fEXResultGet) : result
+    def parse_result(result, fieldname, container)
+      container ||= :fEXResultGet
+      value_container = result.respond_to?(container) ? result.send(container) : result
 
       value   = 'n/d'
       errCode = result.fEXErr.errCode.to_i
       errMsg  = result.fEXErr.errMsg
 
       if errCode == 0
-        formatted_records = format_records(container)
+        formatted_records = format_records(value_container)
         value = formatted_records.join("\n")
       end
 

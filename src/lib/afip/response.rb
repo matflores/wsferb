@@ -6,16 +6,16 @@ module AFIP
   class Response
     attr_accessor :value, :errCode, :errMsg
 
-    def initialize(soap_response='', result=:nil, fieldname=:nil)
+    def initialize(soap_response='', result=:nil, fieldname=:nil, container=nil)
       result = soap_response.respond_to?(result) ? soap_response.send(result) : nil
       if result
-        @value, @errCode, @errMsg = parse_result(result, fieldname)
+        @value, @errCode, @errMsg = parse_result(result, fieldname, container)
       else
         @value, @errCode, @errMsg = [0, -1, '']
       end
     end
 
-    def parse_result(result, fieldname)
+    def parse_result(result, fieldname, container)
       return 0, -1, ''
     end
 
