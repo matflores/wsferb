@@ -39,7 +39,7 @@ module AFIP
       @@test_mode_enabled
     end
 
-  private
+  protected
 
     def self.create_rpc_driver
       begin
@@ -50,6 +50,29 @@ module AFIP
         driver = nil
       end
       driver
+    end
+
+    def self.with_driver(options={})
+      log_file = options[:log]
+      driver = create_rpc_driver
+      prepare_log(log_file, driver)
+      response = yield driver
+      write_log
+      response
+    end
+
+    def self.prepare_log(log_file, driver)
+      @@log_file = log_file
+      @@wiredump = ''
+      if @@log_file
+        driver.wiredump_dev = @@wiredump
+      end
+    end
+
+    def self.write_log
+      if @@log_file
+        File.open(@@log_file, 'w') { |f| f.write @@wiredump }
+      end
     end
 
   end
