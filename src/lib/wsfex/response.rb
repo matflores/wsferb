@@ -15,4 +15,5 @@ module WSFEX
   end
 end
 
+require 'wsfex/response/fexGetParam'
 require 'wsfex/response/fexGetParamDstPais'
