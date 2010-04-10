@@ -7,10 +7,10 @@ module WSFEX
   class Response
     attr_accessor :value, :errCode, :errMsg
 
-    def initialize(soap_response, result, container, fieldname)
+    def initialize(soap_response, result, fieldname)
       result = soap_response.respond_to?(result) ? soap_response.send(result) : nil
       if result
-        container = result.respond_to?(container) ? result.send(container) : container
+        container = result.respond_to?(:fEXResultGet) ? result.send(:fEXResultGet) : nil
         value = container.respond_to?(fieldname) ? container.send(fieldname) : fieldname
         value = value.respond_to?(:value) ? value.value.to_i : value.to_i
         errCode = result.fEXErr.errCode.to_i
