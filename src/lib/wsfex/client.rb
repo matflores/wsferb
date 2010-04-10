@@ -27,7 +27,7 @@ module WSFEX
       response = with_driver(:log => log_file) do |driver|
         driver.fEXGetPARAM_DST_pais(ticket_to_arg(ticket))
       end
-      return WSFEX::Response.new(response, :fEXGetPARAM_DST_paisResult, :nil)
+      return WSFEX::Response::GetParamDstPais.new(response, :fEXGetPARAM_DST_paisResult, :nil)
     end
 
     def self.test(log_file=nil)
