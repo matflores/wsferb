@@ -33,9 +33,9 @@ Retorna la ultima cotizacion de la base de datos aduanera para la moneda especif
 
 Ejemplos:
 
-wsfe FEGetParamCtz DOL --cuit 20123456780
-wsfe FEGetParamCtz 060 --cuit 20123456780 --test
-wsfe FEGetParamCtz 011 0001 --cuit 20123456780 --test --out ./resultado.ini
+wsfe FEXGetParamCtz DOL --cuit 20123456780
+wsfe FEXGetParamCtz 060 --cuit 20123456780 --test
+wsfe FEXGetParamCtz 011 0001 --cuit 20123456780 --test --out ./resultado.ini
 __EOD__
       end
     end
