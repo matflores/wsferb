@@ -4,13 +4,14 @@
 #
 module WSFEX
   module Runner
-    class FEXGetLastCmp < Base
+    class FEXGetCmp < Base
       def main
         error("CUIT no informado") unless @options.cuit
         error("Tipo de comprobante no informado") unless @tipo_cbte
         error("Punto de venta no informado") unless @punto_vta
+        error("Nro de comprobante no informado") unless @nro_cbte
         ticket = obtieneTicket
-        WSFEX::Client.getLastCmp(ticket, @tipo_cbte, @punto_vta, @options.log)
+        WSFEX::Client.getCmp(ticket, @tipo_cbte, @punto_vta, @nro_cbte, @options.log)
       end
 
       def load_options(argv)
@@ -18,10 +19,11 @@ module WSFEX
         argv.shift
         @tipo_cbte = argv.shift
         @punto_vta = argv.shift
+        @nro_cbte  = argv.shift
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetLastCmp <tipo-cbte> <punto-vta>"
+        parser.banner = "Modo de uso: wsfe [opciones] FEXGetCmp <tipo-cbte> <punto-vta> <nro-cbte>"
         parser.separator ""
         parse_authentication_options
         parse_common_options
@@ -31,14 +33,14 @@ module WSFEX
 <<__EOD__
      tipo-cbte                       Tipo de comprobante (ver FEXGetParamTipoCbte)
      punto-vta                       Punto de venta (ver FEXGetParamPtoVenta)
+     nro-cbte                        Nro de comprobante
 
-Retorna el ultimo numero otorgado para el cuit, tipo de comprobante y punto de venta especificados. En caso de no poseer ningun comprobante autorizado se devuelve un 0.
+Retorna los detalles de un comprobante ya enviado y autorizado.
 
 Ejemplos:
 
-wsfe FEXGetLastCmp 19 0001 --cuit 20123456780
-wsfe FEXGetLastCmp 19 0001 --cuit 20123456780 --test
-wsfe FEXGetLastCmp 19 0001 --cuit 20123456780 --test --out ./resultado.ini
+wsfe FEXGetCmp 19 0001 1234 --cuit 20123456780
+wsfe FEXGetCmp 19 0001 1234 --cuit 20123456780 --test
 __EOD__
       end
     end
