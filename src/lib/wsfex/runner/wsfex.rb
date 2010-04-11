@@ -10,7 +10,9 @@ module WSFEX
         load_options(argv)
         servicio = argv.shift 
         case servicio
+          when 'FEXCheckPermiso'           : FEXCheckPermiso.run(args)
           when 'FEXDummy'                  : FEXDummy.run(args)
+          when 'FEXGetCmp'                 : FEXGetCmp.run(args)
           when 'FEXGetLastCmp'             : FEXGetLastCmp.run(args)
           when 'FEXGetLastId'              : FEXGetLastId.run(args)
           when 'FEXGetParamCtz'            : FEXGetParamCtz.run(args)

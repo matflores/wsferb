@@ -3,6 +3,7 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'afip'
+require 'wsfex/fex'
 require 'wsfex/client'
 require 'wsfex/response'
 require 'wsfex/version'

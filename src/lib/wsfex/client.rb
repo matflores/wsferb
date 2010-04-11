@@ -14,17 +14,33 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
-    def self.getLastCmp(ticket, puntoVta, tipoCbte, log_file=nil)
+    def self.checkPermiso(ticket, permiso, pais, log_file=nil)
+      return ticket_missing if ticket.nil?
+      response = with_driver(:log => log_file) do |driver|
+        driver.fEXCheck_Permiso(ticket_to_arg(ticket).merge({ :ID_Permiso => permiso.dup, :Dst_merc => pais.dup }))
+      end
+      return WSFEX::Response.new(response, :fEXCheck_PermisoResult, :status)
+    end
+
+    def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, log_file=nil)
+      return ticket_missing if ticket.nil?
+      response = with_driver(:log => log_file) do |driver|
+        driver.fEXGetCMP(ticket_to_arg(ticket).merge({ :Cmp => { :Tipo_cbte => tipoCbte.dup, :Punto_vta => puntoVta.dup, :Cbte_nro => nroCbte.dup }}))
+      end
+      return WSFEX::Response.new(response, :fEXGetCMPResult, :cbte_nro, :fEXResult_LastCMP)
+    end
+
+    def self.getLastCmp(ticket, tipoCbte, puntoVta, log_file=nil)
       return ticket_missing if ticket.nil?
       response = with_driver(:log => log_file) do |driver|
 
-        argu = { :Auth => { :Token     => ticket.token.dup,
+        args = { :Auth => { :Token     => ticket.token.dup,
                             :Sign      => ticket.sign.dup,
                             :Cuit      => ticket.cuit.dup,
                             :Pto_venta => puntoVta.dup,
                             :Tipo_cbte => tipoCbte.dup } }
 
-        driver.fEXGetLast_CMP(argu.dup)
+        driver.fEXGetLast_CMP(args)
       end
       return WSFEX::Response.new(response, :fEXGetLast_CMPResult, :cbte_nro, :fEXResult_LastCMP)
     end
