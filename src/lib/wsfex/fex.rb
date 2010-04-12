@@ -8,7 +8,7 @@ module WSFEX
     attr_accessor :id_cbte, :tipo_cbte, :nro_cbte, :punto_vta, :fecha_cbte, :tipo_expo, :tiene_permiso,
                   :pais, :cuit_pais, :id_impositivo, :cliente, :domicilio, :moneda, :cotizacion, :total,
                   :forma_pago, :idioma, :incoterms, :incoterms_info, :obs, :obs_comerciales,
-                  :cae, :fecha_cae, :fecha_vto_cae, :resultado, :motivos, :permisos, :comprobantes, :items
+                  :cae, :fecha_cae, :fecha_vto_cae, :resultado, :permisos, :comprobantes, :items
 
     def initialize
       @permisos     = []
@@ -22,7 +22,7 @@ module WSFEX
         lines.each do |line|
           case line.chars.first
           when '1'
-            fields = line.unpack('A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A40A1000A1000')
+            fields = line.unpack('A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A1000A1000')
             fex.id_cbte          = fields[1].to_i
             fex.tipo_cbte        = fields[2].to_i
             fex.punto_vta        = fields[3].to_i
@@ -46,26 +46,25 @@ module WSFEX
             fex.fecha_cae        = fields[21]
             fex.fecha_vto_cae    = fields[22]
             fex.resultado        = fields[23]
-            fex.motivos          = fields[24]
-            fex.obs              = fields[25]
-            fex.obs_comerciales  = fields[26]
+            fex.obs              = fields[24]
+            fex.obs_comerciales  = fields[25]
           when '2'
             fields = line.unpack('A1A16A3')
-            fex.permisos << { :Permiso => { :Id_permiso => fields[1],
-                                            :Dst_merc   => fields[2].to_i } }
+            fex.permisos << { :Id_permiso => fields[1],
+                              :Dst_merc   => fields[2].to_i }
           when '3'
             fields = line.unpack('A1A2A4A8')
-            fex.comprobantes << { :Cmp_asoc => { :Cbte_tipo      => fields[1].to_i,
-                                                 :Cbte_punto_vta => fields[2].to_i,
-                                                 :Cbte_nro       => fields[3].to_i } }
+            fex.comprobantes << { :Cbte_tipo      => fields[1].to_i,
+                                  :Cbte_punto_vta => fields[2].to_i,
+                                  :Cbte_nro       => fields[3].to_i }
           when '4'
             fields = line.unpack('A1A30A4000A12A2A12A14')
-            fex.items << { :Item => { :Pro_codigo     => fields[1],
-                                      :Pro_ds         => fields[2],
-                                      :Pro_qty        => fields[3].to_i / 100,
-                                      :Pro_umed       => fields[4].to_i,
-                                      :Pro_precio_uni => fields[5].to_i / 1000,
-                                      :Pro_total_item => fields[6].to_i / 1000 } }
+            fex.items << { :Pro_codigo     => fields[1],
+                           :Pro_ds         => fields[2],
+                           :Pro_qty        => fields[3].to_i / 100,
+                           :Pro_umed       => fields[4].to_i,
+                           :Pro_precio_uni => fields[5].to_i / 1000,
+                           :Pro_total_item => fields[6].to_i / 1000 }
           end
         end
       end
@@ -96,44 +95,43 @@ module WSFEX
         fex.fecha_cae        = hash[:Fecha_cbte_cae]
         fex.fecha_vto_cae    = hash[:Fecha_venc_cae]
         fex.resultado        = hash[:Resultado]
-        fex.motivos          = hash[:Motivos_Obs]
         fex.obs              = hash[:Obs]
         fex.obs_comerciales  = hash[:Obs_comerciales]
-        fex.permisos         = hash[:Permisos] if hash.has_key?(:Permisos)
-        fex.comprobantes     = hash[:Cmps_asoc] if hash.has_key?(:Cmps_asoc)
-        fex.items            = hash[:Items] if hash.has_key?(:Items)
+        fex.permisos         = hash[:Permisos][:Permiso] if hash.has_key?(:Permisos)
+        fex.comprobantes     = hash[:Cmps_asoc][:Cmp_asoc] if hash.has_key?(:Cmps_asoc)
+        fex.items            = hash[:Items][:Item] if hash.has_key?(:Items)
       end
     end
 
     def to_file(filename)
       File.open(filename, 'w') do |file|
-        formato = "1%015d%02d%04d%08d%-8s%1s%1s%03d%011d%-50s%-200s%-300s%3s%011d%015d%-50s%1s%-3s%-20s%-14s%-8s%-8s%1s%-40s%-1000s%-1000s\n"
+        formato = "1%015d%02d%04d%08d%-8s%1s%1s%03d%011d%-50s%-200s%-300s%3s%011d%015d%-50s%1s%-3s%-20s%-14s%-8s%-8s%1s%-1000s%-1000s\n"
         file.write formato % [ id_cbte, tipo_cbte, punto_vta, nro_cbte, fecha_cbte, tipo_expo, tiene_permiso,
                                pais, cuit_pais, id_impositivo, cliente, domicilio, moneda,
                                (cotizacion.to_f*1000000), (total.to_f*100), forma_pago, idioma, incoterms, 
-                               incoterms_info, cae, fecha_cae, fecha_vto_cae, resultado, motivos, obs, obs_comerciales ]
+                               incoterms_info, cae, fecha_cae, fecha_vto_cae, resultado, obs, obs_comerciales ]
 
         formato = "2%-16s%03d\n"
         permisos.each do |permiso|
-          file.write formato % [ permiso[:Permiso][:Id_permiso], 
-                                 permiso[:Permiso][:Dst_merc].to_i ]
+          file.write formato % [ permiso[:Id_permiso], 
+                                 permiso[:Dst_merc].to_i ]
         end
 
         formato = "3%02d%04d%08d\n"
         comprobantes.each do |comprobante|
-          file.write formato % [ comprobante[:Cmp_asoc][:Cbte_tipo].to_i, 
-                                 comprobante[:Cmp_asoc][:Cbte_punto_vta].to_i,
-                                 comprobante[:Cmp_asoc][:Cbte_nro].to_i ]
+          file.write formato % [ comprobante[:Cbte_tipo].to_i, 
+                                 comprobante[:Cbte_punto_vta].to_i,
+                                 comprobante[:Cbte_nro].to_i ]
         end
 
         formato = "4%-30s%-4000s%012d%02d%012d%014d\n"
         items.each do |item|
-          file.write formato % [ item[:Item][:Pro_codigo], 
-                                 item[:Item][:Pro_ds],
-                                 (item[:Item][:Pro_qty].to_f * 100),
-                                 item[:Item][:Pro_umed].to_i,
-                                 (item[:Item][:Pro_precio_uni].to_f * 1000),
-                                 (item[:Item][:Pro_total_item].to_f * 1000) ]
+          file.write formato % [ item[:Pro_codigo], 
+                                 item[:Pro_ds],
+                                 (item[:Pro_qty].to_f * 100),
+                                 item[:Pro_umed].to_i,
+                                 (item[:Pro_precio_uni].to_f * 1000),
+                                 (item[:Pro_total_item].to_f * 1000) ]
         end
       end
     end
@@ -162,15 +160,14 @@ module WSFEX
                     :Obs_comerciales   => obs_comerciales
                   }
 
-      cbte_data.merge!({ :Permisos     => permisos     }) unless permisos.empty?
-      cbte_data.merge!({ :Cmps_asoc    => comprobantes }) unless comprobantes.empty?
-      cbte_data.merge!({ :Items        => items        }) unless items.empty?
+      cbte_data.merge!({ :Permisos     => { :Permiso  => permisos     }}) unless permisos.empty?
+      cbte_data.merge!({ :Cmps_asoc    => { :Cmp_asoc => comprobantes }}) unless comprobantes.empty?
+      cbte_data.merge!({ :Items        => { :Item     => items        }}) unless items.empty?
 
       cae_data =  { :Cae               => cae,
                     :Fecha_cbte_cae    => fecha_cae,
                     :Fecha_venc_cae    => fecha_vto_cae,
-                    :Resultado         => resultado,
-                    :Motivos_Obs       => motivos
+                    :Resultado         => resultado
                   }
 
       include_cae ? cbte_data.merge(cae_data) : cbte_data

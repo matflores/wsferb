@@ -83,7 +83,7 @@ module WSFE
     def self.verificaCAE(ticket, cae, cuit, puntoVta, tipoCbte, nroCbte, importe, fecha, log_file=nil)
       return ticket_missing if ticket.nil?
       response = with_driver(:log => log_file) do |driver|
-        driver.fEConsultaCAERequest(ticket_to_arg(ticket).merge({ :argCAERequest => { :cuit_emisor => cuit, :tipo_cbte => tipoCbte, :punto_vta => puntoVta, :cbt_nro => nroCbte, :imp_total => importe, :cae => cae, :fecha_cbte => fecha }}))
+        driver.fEConsultaCAERequest(ticket_to_arg(ticket).merge({ :argCAERequest => { :cuit_emisor => cuit.dup, :tipo_cbte => tipoCbte.dup, :punto_vta => puntoVta.dup, :cbt_nro => nroCbte.dup, :imp_total => importe.dup, :cae => cae.dup, :fecha_cbte => fecha.dup }}))
       end
       return WSFE::Response.new(response, :fEConsultaCAERequestResult, :resultado)
     end
