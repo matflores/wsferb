@@ -14,6 +14,22 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
+    def self.authorize(ticket, entrada, salida, log_file=nil)
+      puts "authorize"
+      puts "nil" if ticket.nil?
+      return ticket_missing if ticket.nil?
+      puts "**********************"
+      puts entrada
+      puts "**********************"
+      fex = WSFEX::Fex.from_file(entrada)
+        puts "****************************"
+        puts fex.to_hash.inspect
+      response = with_driver(:log => log_file) do |driver|
+        driver.fEXAuthorize(ticket_to_arg(ticket).merge({ :Cmp => fex.to_hash.dup }))
+      end
+      return WSFEX::Response.new(response, :fEXGetCMPResult, :cbte_nro, :fEXResult_LastCMP)
+    end
+
     def self.checkPermiso(ticket, permiso, pais, log_file=nil)
       return ticket_missing if ticket.nil?
       response = with_driver(:log => log_file) do |driver|

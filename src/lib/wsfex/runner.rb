@@ -5,6 +5,7 @@
 require 'wsfex/runner/options'
 require 'wsfex/runner/base'
 require 'wsfex/runner/wsfex'
+require 'wsfex/runner/fexAuthorize'
 require 'wsfex/runner/fexCheckPermiso'
 require 'wsfex/runner/fexDummy'
 require 'wsfex/runner/fexGetCmp'
