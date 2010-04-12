@@ -55,32 +55,32 @@ module WSFEX
 
     def self.from_hash(hash)
       new.tap do |fex|
-        fex.id_cbte          = hash[:id_cbte]
-        fex.tipo_cbte        = hash[:tipo_cbte]
-        fex.punto_vta        = hash[:punto_vta]
-        fex.nro_cbte         = hash[:nro_cbte]
-        fex.fecha_cbte       = hash[:fecha_cbte]
-        fex.tipo_expo        = hash[:tipo_expo]
-        fex.tiene_permiso    = hash[:tiene_permiso]
-        fex.pais             = hash[:pais]
-        fex.cuit_pais        = hash[:cuit_pais]
-        fex.id_impositivo    = hash[:id_impositivo]
-        fex.cliente          = hash[:cliente]
-        fex.domicilio        = hash[:domicilio]
-        fex.moneda           = hash[:moneda]
-        fex.cotizacion       = hash[:cotizacion]
-        fex.total            = hash[:total]
-        fex.forma_pago       = hash[:forma_pago]
-        fex.idioma           = hash[:idioma]
-        fex.incoterms        = hash[:incoterms]
-        fex.incoterms_info   = hash[:incoterms_info]
-        fex.cae              = hash[:cae]
-        fex.fecha_cae        = hash[:fecha_cae]
-        fex.fecha_vto_cae    = hash[:fecha_vto_cae]
-        fex.resultado        = hash[:resultado]
-        fex.motivos          = hash[:motivos]
-        fex.obs              = hash[:obs]
-        fex.obs_comerciales  = hash[:obs_comerciales]
+        fex.id_cbte          = hash[:Id]
+        fex.tipo_cbte        = hash[:Tipo_cbte]
+        fex.punto_vta        = hash[:Punto_vta]
+        fex.nro_cbte         = hash[:Cbte_nro]
+        fex.fecha_cbte       = hash[:Fecha_cbte]
+        fex.tipo_expo        = hash[:Tipo_expo]
+        fex.tiene_permiso    = hash[:Permiso_existente]
+        fex.pais             = hash[:Dst_cmp]
+        fex.cuit_pais        = hash[:Cuit_pais_cliente]
+        fex.id_impositivo    = hash[:Id_impositivo]
+        fex.cliente          = hash[:Cliente]
+        fex.domicilio        = hash[:Domicilio_cliente]
+        fex.moneda           = hash[:Moneda_Id]
+        fex.cotizacion       = hash[:Moneda_ctz]
+        fex.total            = hash[:Imp_total]
+        fex.forma_pago       = hash[:Forma_pago]
+        fex.idioma           = hash[:Idioma_cbte]
+        fex.incoterms        = hash[:Incoterms]
+        fex.incoterms_info   = hash[:Incoterms_Ds]
+        fex.cae              = hash[:Cae]
+        fex.fecha_cae        = hash[:Fecha_cbte_cae]
+        fex.fecha_vto_cae    = hash[:Fecha_venc_cae]
+        fex.resultado        = hash[:Resultado]
+        fex.motivos          = hash[:Motivos_Obs]
+        fex.obs              = hash[:Obs]
+        fex.obs_comerciales  = hash[:Obs_comerciales]
       end
     end
 
@@ -94,34 +94,38 @@ module WSFEX
       end
     end
 
-    def to_hash
-      { :id_cbte          => id_cbte,
-        :tipo_cbte        => tipo_cbte,
-        :punto_vta        => punto_vta,
-        :nro_cbte         => nro_cbte,
-        :fecha_cbte       => fecha_cbte,
-        :tipo_expo        => tipo_expo,
-        :tiene_permiso    => tiene_permiso,
-        :pais             => pais,
-        :cuit_pais        => cuit_pais,
-        :id_impositivo    => id_impositivo,
-        :cliente          => cliente,
-        :domicilio        => domicilio,
-        :moneda           => moneda,
-        :cotizacion       => cotizacion,
-        :total            => total,
-        :forma_pago       => forma_pago,
-        :idioma           => idioma,
-        :incoterms        => incoterms,
-        :incoterms_info   => incoterms_info,
-        :obs              => obs,
-        :obs_comerciales  => obs_comerciales,
-        :cae              => cae,
-        :fecha_cae        => fecha_cae,
-        :fecha_vto_cae    => fecha_vto_cae,
-        :resultado        => resultado,
-        :motivos          => motivos
-    }
+    def to_hash(include_cae = true)
+      cbte_data = { :Id                => id_cbte,
+                    :Tipo_cbte         => tipo_cbte,
+                    :Punto_vta         => punto_vta,
+                    :Cbte_nro          => nro_cbte,
+                    :Fecha_cbte        => fecha_cbte,
+                    :Tipo_expo         => tipo_expo,
+                    :Permiso_existente => tiene_permiso,
+                    :Dst_cmp           => pais,
+                    :Cuit_pais_cliente => cuit_pais,
+                    :Id_impositivo     => id_impositivo,
+                    :Cliente           => cliente,
+                    :Domicilio_cliente => domicilio,
+                    :Moneda_Id         => moneda,
+                    :Moneda_ctz        => cotizacion,
+                    :Imp_total         => total,
+                    :Forma_pago        => forma_pago,
+                    :Idioma_cbte       => idioma,
+                    :Incoterms         => incoterms,
+                    :Incoterms_Ds      => incoterms_info,
+                    :Obs               => obs,
+                    :Obs_comerciales   => obs_comerciales
+                  }
+
+      cae_data =  { :Cae               => cae,
+                    :Fecha_cbte_cae    => fecha_cae,
+                    :Fecha_venc_cae    => fecha_vto_cae,
+                    :Resultado         => resultado,
+                    :Motivos_Obs       => motivos
+                  }
+
+      include_cae ? cbte_data.merge(cae_data) : cbte_data
     end
   end
 end

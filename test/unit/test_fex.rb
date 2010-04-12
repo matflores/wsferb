@@ -2,7 +2,7 @@ require 'test_helper'
 
 Protest.describe "A FEX invoice" do
   it "can be imported from a hash" do
-    fex = WSFEX::Fex.from_hash(FACTURA)
+    fex = WSFEX::Fex.from_hash(FACTURA_CON_CAE)
 
     assert_equal 1234567890                  , fex.id_cbte
     assert_equal 19                          , fex.tipo_cbte
@@ -61,7 +61,8 @@ Protest.describe "A FEX invoice" do
     fex.obs             = 'Observaciones'
     fex.obs_comerciales = 'Observaciones Comerciales'
 
-    assert_equal FACTURA, fex.to_hash
+    assert_equal FACTURA_CON_CAE, fex.to_hash(true)
+    assert_equal FACTURA_SIN_CAE, fex.to_hash(false)
   end
 
   it "can be imported from a text file" do
@@ -110,33 +111,57 @@ end
 #HOY = Time.now
 #VTO = Time.local(HOY.year, HOY.month == 12 ? 1 : HOY.month + 1, HOY.day)
 
-FACTURA = {
-      :id_cbte          => 1234567890,
-      :tipo_cbte        => 19,
-      :punto_vta        => 0001,
-      :nro_cbte         => 1234,
-      :fecha_cbte       => '20100301',
-      :tipo_expo        => 1,
-      :tiene_permiso    => 'S',
-      :pais             => 310,
-      :cuit_pais        => 12345678901,
-      :id_impositivo    => '1234567890',
-      :cliente          => 'Kung Fu',
-      :domicilio        => '123 St',
-      :moneda           => 'DOL',
-      :cotizacion       => 3.80,
-      :total            => 1000,
-      :forma_pago       => 'Contado',
-      :idioma           => 1,
-      :incoterms        => 'INC',
-      :incoterms_info   => 'Incoterms',
-      :obs              => 'Observaciones',
-      :obs_comerciales  => 'Observaciones Comerciales',
-      :cae              => '12345678901234',
-      :fecha_cae        => '20100301',
-      :fecha_vto_cae    => '20100331',
-      :resultado        => 'S',
-      :motivos          => 'Motivos'
+FACTURA_CON_CAE = {
+      :Id                => 1234567890,
+      :Fecha_cbte        => '20100301',
+      :Tipo_cbte         => 19,
+      :Punto_vta         => 0001,
+      :Cbte_nro          => 1234,
+      :Tipo_expo         => 1,
+      :Permiso_existente => 'S',
+      :Dst_cmp           => 310,
+      :Cliente           => 'Kung Fu',
+      :Cuit_pais_cliente => 12345678901,
+      :Domicilio_cliente => '123 St',
+      :Id_impositivo     => '1234567890',
+      :Moneda_Id         => 'DOL',
+      :Moneda_ctz        => 3.80,
+      :Obs_comerciales   => 'Observaciones Comerciales',
+      :Imp_total         => 1000,
+      :Obs               => 'Observaciones',
+      :Forma_pago        => 'Contado',
+      :Incoterms         => 'INC',
+      :Incoterms_Ds      => 'Incoterms',
+      :Idioma_cbte       => 1,
+      :Cae               => '12345678901234',
+      :Fecha_cbte_cae    => '20100301',
+      :Fecha_venc_cae    => '20100331',
+      :Resultado         => 'S',
+      :Motivos_Obs       => 'Motivos'
+    }
+
+FACTURA_SIN_CAE = {
+      :Id                => 1234567890,
+      :Fecha_cbte        => '20100301',
+      :Tipo_cbte         => 19,
+      :Punto_vta         => 0001,
+      :Cbte_nro          => 1234,
+      :Tipo_expo         => 1,
+      :Permiso_existente => 'S',
+      :Dst_cmp           => 310,
+      :Cliente           => 'Kung Fu',
+      :Cuit_pais_cliente => 12345678901,
+      :Domicilio_cliente => '123 St',
+      :Id_impositivo     => '1234567890',
+      :Moneda_Id         => 'DOL',
+      :Moneda_ctz        => 3.80,
+      :Obs_comerciales   => 'Observaciones Comerciales',
+      :Imp_total         => 1000,
+      :Obs               => 'Observaciones',
+      :Forma_pago        => 'Contado',
+      :Incoterms         => 'INC',
+      :Incoterms_Ds      => 'Incoterms',
+      :Idioma_cbte       => 1
     }
 #      :permisos         => [ { :id_permiso => '1234567890123456', :pais => 310 },
 #                             { :id_permiso => '1234567890ABCDEF', :pais => 320 } ],
