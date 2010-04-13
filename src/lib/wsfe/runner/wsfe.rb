@@ -49,6 +49,22 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
                                        - FERecuperaQTYRequest
                                        - FERecuperaLastCMPRequest
                                        - FEConsultaCAERequest
+                                       - FEXAuthorize
+                                       - FEXCheckPermiso
+                                       - FEXDummy
+                                       - FEXGetCmp
+                                       - FEXGetLastCmp
+                                       - FEXGetLastId
+                                       - FEXGetParamCtz
+                                       - FEXGetParamDstCuit
+                                       - FEXGetParamDstPais
+                                       - FEXGetParamIncoterms
+                                       - FEXGetParamIdiomas
+                                       - FEXGetParamMon
+                                       - FEXGetParamPtoVenta
+                                       - FEXGetParamTipoCbte
+                                       - FEXGetParamTipoExpo
+                                       - FEXGetParamUMed
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
