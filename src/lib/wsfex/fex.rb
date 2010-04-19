@@ -3,6 +3,12 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 
+class SOAP::Mapping::Object
+  def to_s ; ''  ; end
+  def to_i ; 0   ; end
+  def to_f ; 0.0 ; end
+end
+
 module WSFEX
   class Fex
     attr_accessor :id_cbte, :tipo_cbte, :nro_cbte, :punto_vta, :fecha_cbte, :tipo_expo, :tiene_permiso,
@@ -106,14 +112,16 @@ module WSFEX
     def to_file(filename)
       File.open(filename, 'w') do |file|
         formato = "1%015d%02d%04d%08d%-8s%1s%1s%03d%011d%-50s%-200s%-300s%3s%011d%015d%-50s%1s%-3s%-20s%-14s%-8s%-8s%1s%-1000s%-1000s\n"
-        file.write formato % [ id_cbte, tipo_cbte, punto_vta, nro_cbte, fecha_cbte, tipo_expo, tiene_permiso,
-                               pais, cuit_pais, id_impositivo, cliente, domicilio, moneda,
-                               (cotizacion.to_f*1000000), (total.to_f*100), forma_pago, idioma, incoterms, 
-                               incoterms_info, cae, fecha_cae, fecha_vto_cae, resultado, obs, obs_comerciales ]
+        file.write formato % [ id_cbte.to_s, tipo_cbte.to_s, punto_vta.to_s, nro_cbte.to_s, fecha_cbte.to_s,
+                               tipo_expo.to_s, tiene_permiso.to_s, pais.to_s, cuit_pais.to_s, id_impositivo.to_s,
+                               cliente.to_s, domicilio.to_s, moneda.to_s, (cotizacion.to_f*1000000),
+                               (total.to_f*100), forma_pago.to_s, idioma.to_s, incoterms.to_s,
+                               incoterms_info.to_s, cae.to_s, fecha_cae.to_s, fecha_vto_cae.to_s,
+                               resultado.to_s, obs.to_s, obs_comerciales.to_s ]
 
         formato = "2%-16s%03d\n"
         permisos.each do |permiso|
-          file.write formato % [ permiso[:Id_permiso], 
+          file.write formato % [ permiso[:Id_permiso].to_s, 
                                  permiso[:Dst_merc].to_i ]
         end
 
@@ -126,8 +134,8 @@ module WSFEX
 
         formato = "4%-30s%-4000s%012d%02d%012d%014d\n"
         items.each do |item|
-          file.write formato % [ item[:Pro_codigo], 
-                                 item[:Pro_ds],
+          file.write formato % [ item[:Pro_codigo].to_s,
+                                 item[:Pro_ds].to_s,
                                  (item[:Pro_qty].to_f * 100),
                                  item[:Pro_umed].to_i,
                                  (item[:Pro_precio_uni].to_f * 1000),
