@@ -180,5 +180,10 @@ module WSFEX
 
       include_cae ? cbte_data.merge(cae_data) : cbte_data
     end
+
+    def tap
+      yield self
+      self
+    end unless Fex.respond_to?(:tap)
   end
 end
