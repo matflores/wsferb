@@ -26,7 +26,7 @@ module WSFEX
       new.tap do |fex|
         lines = File.readlines(filename)
         lines.each do |line|
-          case line.chars.first
+          case line.split(//).first
           when '1'
             fields = line.unpack('A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A1000A1000')
             fex.id_cbte          = fields[1].to_i
