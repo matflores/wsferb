@@ -67,10 +67,10 @@ module WSFEX
             fields = line.unpack('A1A30A4000A12A2A12A14')
             fex.items << { :Pro_codigo     => fields[1],
                            :Pro_ds         => fields[2],
-                           :Pro_qty        => fields[3].to_i / 100,
+                           :Pro_qty        => fields[3].to_i / 100.0,
                            :Pro_umed       => fields[4].to_i,
-                           :Pro_precio_uni => fields[5].to_i / 1000,
-                           :Pro_total_item => fields[6].to_i / 1000 }
+                           :Pro_precio_uni => fields[5].to_i / 1000.0,
+                           :Pro_total_item => fields[6].to_i / 1000.0 }
           end
         end
       end
