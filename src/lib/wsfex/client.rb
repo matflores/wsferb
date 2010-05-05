@@ -35,7 +35,7 @@ module WSFEX
         fex.to_file(salida)
       end
 
-      return WSFEX::Response.new(response, :fEXAuthorizeResult, :cae, :fEXResult_Auth)
+      return WSFEX::Response.new(response, :fEXAuthorizeResult, :cae, :fEXResultAuth)
     end
 
     def self.checkPermiso(ticket, permiso, pais, log_file=nil)
