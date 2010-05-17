@@ -37,10 +37,10 @@ Protest.describe "A FEX invoice" do
     assert_equal 310                         , fex.permisos[1][:Dst_merc]
 
     assert_equal 2                           , fex.comprobantes.size
-    assert_equal 19                          , fex.comprobantes[0][:Cbte_tipo]
+    assert_equal 19                          , fex.comprobantes[0][:CBte_tipo]
     assert_equal 0001                        , fex.comprobantes[0][:Cbte_punto_vta]
     assert_equal 1230                        , fex.comprobantes[0][:Cbte_nro]
-    assert_equal 21                          , fex.comprobantes[1][:Cbte_tipo]
+    assert_equal 21                          , fex.comprobantes[1][:CBte_tipo]
     assert_equal 0001                        , fex.comprobantes[1][:Cbte_punto_vta]
     assert_equal 1231                        , fex.comprobantes[1][:Cbte_nro]
 
@@ -89,8 +89,8 @@ Protest.describe "A FEX invoice" do
     fex.permisos << { :Id_permiso => '1234567890123456', :Dst_merc => 310 }
     fex.permisos << { :Id_permiso => '1234567890ABCDEF', :Dst_merc => 310 }
 
-    fex.comprobantes << { :Cbte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 }
-    fex.comprobantes << { :Cbte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 }
+    fex.comprobantes << { :CBte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 }
+    fex.comprobantes << { :CBte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 }
 
     fex.items << { :Pro_codigo => '12345', :Pro_ds => 'Item 1', :Pro_qty => 100, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 1000.0 }
     fex.items << { :Pro_codigo => '54321', :Pro_ds => 'Item 2', :Pro_qty => 200, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 2000.0 }
@@ -135,10 +135,10 @@ Protest.describe "A FEX invoice" do
     assert_equal 310                         , fex.permisos[1][:Dst_merc]
 
     assert_equal 2                           , fex.comprobantes.size
-    assert_equal 19                          , fex.comprobantes[0][:Cbte_tipo]
+    assert_equal 19                          , fex.comprobantes[0][:CBte_tipo]
     assert_equal 0001                        , fex.comprobantes[0][:Cbte_punto_vta]
     assert_equal 1230                        , fex.comprobantes[0][:Cbte_nro]
-    assert_equal 21                          , fex.comprobantes[1][:Cbte_tipo]
+    assert_equal 21                          , fex.comprobantes[1][:CBte_tipo]
     assert_equal 0001                        , fex.comprobantes[1][:Cbte_punto_vta]
     assert_equal 1231                        , fex.comprobantes[1][:Cbte_nro]
 
@@ -195,8 +195,8 @@ FACTURA_CON_CAE = {
       :Resultado         => 'S',
       :Permisos          => { :Permiso  => [ { :Id_permiso => '1234567890123456', :Dst_merc => 310 },
                                              { :Id_permiso => '1234567890ABCDEF', :Dst_merc => 310 } ] },
-      :Cmps_asoc         => { :Cmp_asoc => [ { :Cbte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 },
-                                             { :Cbte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 } ] },
+      :Cmps_asoc         => { :Cmp_asoc => [ { :CBte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 },
+                                             { :CBte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 } ] },
       :Items             => { :Item     => [ { :Pro_codigo => '12345', :Pro_ds => 'Item 1', :Pro_qty => 100, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 1000.0 },
                                              { :Pro_codigo => '54321', :Pro_ds => 'Item 2', :Pro_qty => 200, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 2000.0 } ] }
     }
@@ -225,8 +225,8 @@ FACTURA_SIN_CAE = {
       :Idioma_cbte       => 1,
       :Permisos          => { :Permiso  => [ { :Id_permiso => '1234567890123456', :Dst_merc => 310 },
                                              { :Id_permiso => '1234567890ABCDEF', :Dst_merc => 310 } ] },
-      :Cmps_asoc         => { :Cmp_asoc => [ { :Cbte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 },
-                                             { :Cbte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 } ] },
+      :Cmps_asoc         => { :Cmp_asoc => [ { :CBte_tipo => 19, :Cbte_punto_vta => 0001, :Cbte_nro => 1230 },
+                                             { :CBte_tipo => 21, :Cbte_punto_vta => 0001, :Cbte_nro => 1231 } ] },
       :Items             => { :Item     => [ { :Pro_codigo => '12345', :Pro_ds => 'Item 1', :Pro_qty => 100, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 1000.0 },
                                              { :Pro_codigo => '54321', :Pro_ds => 'Item 2', :Pro_qty => 200, :Pro_umed => 01, :Pro_precio_uni => 10.0, :Pro_total_item => 2000.0 } ] }
     }

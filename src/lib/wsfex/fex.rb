@@ -60,7 +60,7 @@ module WSFEX
                               :Dst_merc   => fields[2].to_i }
           when '3'
             fields = line.unpack('A1A2A4A8')
-            fex.comprobantes << { :Cbte_tipo      => fields[1].to_i,
+            fex.comprobantes << { :CBte_tipo      => fields[1].to_i,
                                   :Cbte_punto_vta => fields[2].to_i,
                                   :Cbte_nro       => fields[3].to_i }
           when '4'
@@ -127,7 +127,7 @@ module WSFEX
 
         formato = "3%02d%04d%08d\n"
         comprobantes.each do |comprobante|
-          file.write formato % [ comprobante[:Cbte_tipo].to_i, 
+          file.write formato % [ comprobante[:CBte_tipo].to_i, 
                                  comprobante[:Cbte_punto_vta].to_i,
                                  comprobante[:Cbte_nro].to_i ]
         end
