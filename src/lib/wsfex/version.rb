@@ -7,7 +7,7 @@ module WSFEX
     unless defined? MAJOR
       MAJOR  = 1
       MINOR  = 1
-      TINY   = 0
+      TINY   = 5
       RELEASE_CANDIDATE = nil
 
       STRING = [MAJOR, MINOR, TINY].join('.')
