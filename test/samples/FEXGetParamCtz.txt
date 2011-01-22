@@ -1,0 +1,4 @@
+[Respuesta]
+valor=3.983
+errCode=0
+errMsg=OK

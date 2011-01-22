@@ -1,0 +1,1 @@
+authserver=OK; appserver=OK; dbserver=OK;
