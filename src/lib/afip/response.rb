@@ -26,5 +26,13 @@ module AFIP
     def to_s
       ["[Respuesta]", "valor=#{value}", "errCode=#{errCode}", "errMsg=#{errMsg}"].join("\n")
     end
+
+    def self.parse(s)
+      new.tap do |response|
+        if s =~ /\[Respuesta\]\nvalor=(.*)\nerrCode=(.*)\nerrMsg=(.*)/
+          response.value, response.errCode, response.errMsg = $1, $2, $3
+        end
+      end
+    end
   end
 end
