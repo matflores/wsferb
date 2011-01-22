@@ -1,4 +1,5 @@
 test/TA.xml
+test/output
 build/wsfe.rb
 build/wsfe.exe
 build/*.zip
