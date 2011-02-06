@@ -2,7 +2,7 @@ require "rake/testtask"
 
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.pattern = "test/**/test*.rb"
+  t.pattern = "test/**/*_test.rb"
 end
 
 task :default => :test
@@ -11,12 +11,12 @@ namespace :test do
   Rake::TestTask.new do |t|
     t.name = :unit
     t.libs << "test"
-    t.pattern = "test/unit/test*.rb"
+    t.pattern = "test/unit/*_test.rb"
   end
   Rake::TestTask.new do |t|
     t.name = :integration
     t.libs << "test"
-    t.pattern = "test/integration/test*.rb"
+    t.pattern = "test/integration/*_test.rb"
   end
 end
 
