@@ -22,19 +22,32 @@ Protest.describe "WSFEX" do
   test_method :FEXGetParamIncoterms
   test_method :FEXGetParamPtoVenta
 
-  test :FEXGetLastId do
-    execute :FEXGetLastId
-    assert_value :FEXGetLastId, 1, 10000000000
-  end
-
   test :FEXGetParamCtz do
     execute :FEXGetParamCtz, "DOL"
     assert_value :FEXGetParamCtz, 3.5, 4.5
   end
 
+  test :FEXGetLastCmp do
+    execute :FEXGetLastCmp, "19", "0001"
+    assert_value :FEXGetLastCmp, 1, 1000
+  end
+
+  test :FEXGetLastId do
+    execute :FEXGetLastId
+    assert_value :FEXGetLastId, 1, 10000000000
+  end
+
   test :FEXCheckPermiso do
     execute :FEXCheckPermiso, "11111 310"
     assert_value :FEXCheckPermiso, "OK"
+  end
+
+  describe "FEXAuthorize" do
+    before do
+
+    end
+    it "success" do
+    end
   end
 
   def execute(method, arguments = nil, send_credentials = true)
