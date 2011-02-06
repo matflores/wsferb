@@ -1,3 +1,4 @@
+*.log
 test/TA.xml
 test/output
 build/wsfe.rb
