@@ -1,17 +1,16 @@
 require 'test_helper'
 
 class Protest::TestCase
-  def self.test_method(method, arguments = nil, send_credentials = true)
+  def self.test_method(method, arguments = nil)
     test method do
-      execute method, arguments, send_credentials
+      execute method, arguments
       check_output method
     end
   end
 end
 
 Protest.describe "WSFEX" do
-  test_method :FEXDummy, '', false
-
+  test_method :FEXDummy
   test_method :FEXGetParamMon
   test_method :FEXGetParamTipoCbte
   test_method :FEXGetParamTipoExpo
@@ -28,7 +27,7 @@ Protest.describe "WSFEX" do
   end
 
   test :FEXGetLastCmp do
-    execute :FEXGetLastCmp, "19", "0001"
+    execute :FEXGetLastCmp, "19 0001"
     assert_value :FEXGetLastCmp, 1, 1000
   end
 
@@ -50,8 +49,8 @@ Protest.describe "WSFEX" do
     end
   end
 
-  def execute(method, arguments = nil, send_credentials = true)
-    `wsfe #{method} #{arguments} #{credentials if send_credentials} --test > test/output/#{method}.txt`
+  def execute(method, arguments = nil)
+    `wsfe #{method} #{arguments} #{credentials} --test > test/output/#{method}.txt`
   end
 
   def credentials

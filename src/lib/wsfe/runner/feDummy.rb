@@ -12,6 +12,7 @@ module WSFE
       def parse_options
         parser.banner = "Modo de uso: wsfe [opciones] FEDummy"
         parser.separator ""
+        parse_authentication_options
         parse_common_options
       end
     end

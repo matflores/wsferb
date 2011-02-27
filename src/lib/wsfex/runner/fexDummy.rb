@@ -12,6 +12,7 @@ module WSFEX
       def parse_options
         parser.banner = "Modo de uso: wsfe [opciones] FEXDummy"
         parser.separator ""
+        parse_authentication_options
         parse_common_options
       end
     end
