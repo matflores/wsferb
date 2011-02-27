@@ -1,8 +1,12 @@
 #!/usr/bin/env ruby
 
-SOURCE_DIR = File.expand_path(File.dirname(__FILE__) + "/../src")
+require 'pathname'
 
-$: << SOURCE_DIR
-$: << SOURCE_DIR + "/lib"
+bin = File.dirname(Pathname.new(__FILE__).realpath)
+src = File.expand_path(File.join(bin, '..', 'src'))
+lib = File.join(src, 'lib')
+
+$:.unshift(src)
+$:.unshift(lib)
 
 load 'init.rb'
