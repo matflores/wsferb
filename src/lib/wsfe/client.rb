@@ -68,7 +68,7 @@ module WSFE
     def self.recuperaUltNroCbte(ticket, puntoVta, tipoCbte, log_file=nil)
       return ticket_missing if ticket.nil?
       response = with_driver(:log => log_file) do |driver|
-        driver.fERecuperaLastCMPRequest(ticket_to_arg(ticket).merge({ :argTCMP => { :PtoVta => puntoVta, :TipoCbte => tipoCbte }}))
+        driver.fERecuperaLastCMPRequest(ticket_to_arg(ticket).merge({ :argTCMP => { :PtoVta => puntoVta.dup, :TipoCbte => tipoCbte.dup }}))
       end
       return WSFE::Response.new(response, :fERecuperaLastCMPRequestResult, :cbte_nro)
     end
