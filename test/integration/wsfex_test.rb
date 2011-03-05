@@ -50,7 +50,7 @@ Protest.describe "WSFEX" do
   end
 
   def execute(method, arguments = nil)
-    `wsfe #{method} #{arguments} #{credentials} --test > test/output/#{method}.txt`
+    `wsfex #{method} #{arguments} #{credentials} --test > test/output/#{method}.txt`
   end
 
   def credentials
