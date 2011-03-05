@@ -1,13 +1,4 @@
-require 'test_helper'
-
-class Protest::TestCase
-  def self.test_method(method, arguments = nil)
-    test method do
-      execute method, arguments
-      check_output method
-    end
-  end
-end
+require "test_helper"
 
 Protest.describe "WSFEX" do
   test_method :FEXDummy
@@ -39,50 +30,5 @@ Protest.describe "WSFEX" do
   test :FEXCheckPermiso do
     execute :FEXCheckPermiso, "11111 310"
     assert_value :FEXCheckPermiso, "OK"
-  end
-
-  describe "FEXAuthorize" do
-    before do
-
-    end
-    it "success" do
-    end
-  end
-
-  def execute(method, arguments = nil)
-    `wsfex #{method} #{arguments} #{credentials} --test > test/output/#{method}.txt`
-  end
-
-  def credentials
-    "--cuit 20238883890 --cert test/credentials/20238883890.crt --key test/credentials/20238883890.key"
-  end
-
-  def check_output(method)
-    sample_file = expand_path("samples/#{method}.txt")
-    output_file = expand_path("output/#{method}.txt")
-
-    assert_equal '', `diff #{sample_file} #{output_file}`
-    assert $?.success?, 'diff failed'
-  end
-
-  def expand_path(filename)
-    File.join(File.dirname(__FILE__), '..', filename)
-  end
-
-  def assert_value(method, min, max = nil)
-    max ||= min
-
-    output = File.read(expand_path("output/#{method}.txt"))
-    response = AFIP::Response.parse(output)
-
-    if numeric?(response.value)
-      assert response.value.to_f >= min && response.value.to_f <= max, "wrong value (#{response.value})"
-    else
-      assert response.value == min, "wrong value (#{response.value})"
-    end
-  end
-
-  def numeric?(value)
-    true if Float(value) rescue false
   end
 end
