@@ -1,6 +1,7 @@
 *.log
 test/TA.xml
 test/output
+test/tmp
 build/wsfe.rb
 build/wsfe.exe
 build/*.zip
