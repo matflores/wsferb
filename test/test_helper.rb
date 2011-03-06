@@ -25,8 +25,8 @@ class Protest::TestCase
     end
   end
 
-  def execute(method, arguments = nil)
-    `wsfe #{method} #{arguments} #{credentials} --test > test/output/#{method}.txt`
+  def execute(method, arguments = nil, credentials = credentials)
+    `#{script} #{method} #{arguments} #{credentials} --ticket test/tmp/ticket.xml --test > test/output/#{method}.txt`
   end
 
   def credentials
@@ -51,22 +51,34 @@ class Protest::TestCase
     response = parseResponse(method)
 
     if numeric?(response.value)
-      assert response.value.to_f >= min && response.value.to_f <= max, "wrong value (#{response.value})"
+      assert response.value.to_f >= min && response.value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{response.value}]"
     else
-      assert response.value == min, "wrong value (#{response.value})"
+      assert response.value == min, "expected [#{min}] but was [#{response.value}]"
     end
+  end
+
+  def assert_error(method, code, message)
+    assert_error_code(method, code)
+    assert_error_message(method, message)
   end
 
   def assert_error_code(method, value)
     response = parseResponse(method)
 
-    assert response.errCode.to_s == value.to_s, "wrong value (#{response.errCode})"
+    assert response.errCode.to_s == value.to_s, "expected [#{value}] but was [#{response.errCode}]"
   end
 
   def assert_error_message(method, value)
     response = parseResponse(method)
 
-    assert response.errMsg.to_s == value.to_s, "wrong value (#{response.errMsg})"
+    case value
+    when Regexp
+      match = response.errMsg.to_s =~ value
+    else
+      match = response.errMsg.to_s == value.to_s
+    end
+
+    assert match, "expected [#{value}] but was [#{response.errMsg}]"
   end
 
   def assert_success(method)
@@ -80,6 +92,10 @@ class Protest::TestCase
 
   def numeric?(value)
     true if Float(value) rescue false
+  end
+
+  def script
+    "wsfe"
   end
 end
 
