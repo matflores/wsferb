@@ -31,4 +31,8 @@ Protest.describe "WSFEX" do
     execute :FEXCheckPermiso, "11111 310"
     assert_value :FEXCheckPermiso, "OK"
   end
+
+  def script
+    "wsfex"
+  end
 end

@@ -23,11 +23,7 @@ Protest.describe "WSFE" do
     assert_value :FEConsultaCAERequest, 0
   end
 
-  describe "FEAutRequest" do
-    before do
-
-    end
-    it "success" do
-    end
+  def script
+    "wsfe"
   end
 end
