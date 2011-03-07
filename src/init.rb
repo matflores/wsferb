@@ -4,6 +4,7 @@
 #
 $: << File.expand_path(File.dirname(__FILE__) + "/lib")
 
+require 'rubygems'
 require 'lib/wsfe'
 require 'lib/wsfex'
 require 'silence'
