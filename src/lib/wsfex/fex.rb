@@ -3,11 +3,11 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 
-class SOAP::Mapping::Object
-  def to_s ; ''  ; end
-  def to_i ; 0   ; end
-  def to_f ; 0.0 ; end
-end
+#class SOAP::Mapping::Object
+#  def to_s ; ''  ; end
+#  def to_i ; 0   ; end
+#  def to_f ; 0.0 ; end
+#end
 
 module WSFEX
   class Fex

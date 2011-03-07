@@ -35,13 +35,15 @@ module WSAA
       begin
         client.wsdl.document = self::WSDL
         client.wsdl.endpoint = self::TEST_URL
-        response = client.request :login_cms do
+        response = client.request(:ns1, :login_cms) do
           soap.body = { :in0 => signed }
         end
         ticket = WSAA::Ticket.from_xml(cuit, response.to_hash[:login_cms_response][:login_cms_return])
       #  r = driver.loginCms(:in0 => signed)
       #  ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
-      rescue
+      rescue Exception => e
+        puts e.message
+        puts e.backtrace.join("\n")
         ticket = nil
       end
       ticket

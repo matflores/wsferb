@@ -34,7 +34,7 @@ module WSFEX
      salida                          Ubicacion del archivo en el que se almacenaran
                                      los resultados de la operacion
 
-Recibe la información del comprobante a autorizar y lo procesa, retornando el CAE asignado. Ante cualquier anomalia se incluyen tambien los codigos de error correspondientes.
+Recibe la informacion del comprobante a autorizar y lo procesa, retornando el CAE asignado. Ante cualquier anomalia se incluyen tambien los codigos de error correspondientes.
 
 Ejemplos:
 

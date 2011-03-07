@@ -287,10 +287,6 @@ module WSFEX
     end
 
     def self.test(log_file=nil)
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXDummy(nil)
-      end
-
       client = Savon::Client.new
       client.wsdl.document = self::WSDL
       client.wsdl.endpoint = self::TEST_URL

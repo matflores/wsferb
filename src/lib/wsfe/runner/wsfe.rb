@@ -10,13 +10,13 @@ module WSFE
         load_options(argv)
         servicio = argv.shift 
         case servicio
-          when 'FEAutRequest'             : FEAutRequest.run(args)
-          when 'FEUltNroRequest'          : FEUltNroRequest.run(args)
-          when 'FERecuperaQTYRequest'     : FERecuperaQTYRequest.run(args)
-          when 'FERecuperaLastCMPRequest' : FERecuperaLastCMPRequest.run(args)
-          when 'FEConsultaCAERequest'     : FEConsultaCAERequest.run(args)
-          when 'FEDummy'                  : FEDummy.run(args)
-          else                            ; usage_exit
+          when 'FEAutRequest'             then FEAutRequest.run(args)
+          when 'FEUltNroRequest'          then FEUltNroRequest.run(args)
+          when 'FERecuperaQTYRequest'     then FERecuperaQTYRequest.run(args)
+          when 'FERecuperaLastCMPRequest' then FERecuperaLastCMPRequest.run(args)
+          when 'FEConsultaCAERequest'     then FEConsultaCAERequest.run(args)
+          when 'FEDummy'                  then FEDummy.run(args)
+          else                            ;    usage_exit
         end
         WSFE::Client.test
       end
