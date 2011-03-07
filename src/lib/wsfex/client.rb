@@ -3,7 +3,6 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'time'
-require 'soap/wsdlDriver'
 require 'wsaa'
 
 Savon.configure do |config|
