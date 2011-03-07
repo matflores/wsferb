@@ -5,14 +5,14 @@
 module WSFEX
   class Response::GetParamIncoterms < Response::GetParam
     def format_record(record)
-      "%-3s%-250s%-8s%-8s" % [ record.inc_Id,
-                               record.inc_Ds,
-                               record.inc_vig_desde,
-                               record.inc_vig_hasta ]
+      "%-3s%-250s%-8s%-8s" % [ record[:inc_id],
+                               record[:inc_ds],
+                               record[:inc_vig_desde],
+                               record[:inc_vig_hasta] ]
     end
 
     def records(result)
-      result.clsFEXResponse_Inc rescue []
+      result[:cls_fex_response_inc] rescue []
     end
   end
 end

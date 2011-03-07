@@ -5,14 +5,14 @@
 module WSFEX
   class Response::GetParamMon < Response::GetParam
     def format_record(record)
-      "%-3s%-250s%-8s%-8s" % [ record.mon_Id,
-                               record.mon_Ds,
-                               record.mon_vig_desde,
-                               record.mon_vig_hasta ]
+      "%-3s%-250s%-8s%-8s" % [ record[:mon_id],
+                               record[:mon_ds],
+                               record[:mon_vig_desde],
+                               record[:mon_vig_hasta] ]
     end
 
     def records(result)
-      result.clsFEXResponse_Mon rescue []
+      result[:cls_fex_response_mon] rescue []
     end
   end
 end

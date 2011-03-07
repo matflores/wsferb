@@ -5,11 +5,11 @@
 module WSFEX
   class Response::GetParamDstCuit < Response::GetParam
     def format_record(record)
-      "%-11s%-250s" % [ record.dST_CUIT, record.dST_Ds ]
+      "%-11s%-250s" % [ record[:dst_cuit], record[:dst_ds] ]
     end
 
     def records(result)
-      result.clsFEXResponse_DST_cuit rescue []
+      result[:cls_fex_response_dst_cuit] rescue []
     end
   end
 end

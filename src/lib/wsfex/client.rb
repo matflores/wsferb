@@ -6,6 +6,18 @@ require 'time'
 require 'soap/wsdlDriver'
 require 'wsaa'
 
+Savon.configure do |config|
+  config.log = false            # disable logging
+ # config.log_level = :info      # changing the log level
+ # config.logger = Rails.logger  # using the Rails logger
+end
+
+#Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+
+HTTPI.log       = false     # disabling logging
+#HTTPI.logger    = MyLogger  # changing the logger
+#HTTPI.log_level = :info     # changing the log level
+
 module WSFEX
 
   class Client < AFIP::Client
@@ -40,204 +52,251 @@ module WSFEX
 
     def self.checkPermiso(ticket, permiso, pais, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXCheck_Permiso(ticket_to_arg(ticket).merge({ :ID_Permiso => permiso.dup, :Dst_merc => pais.dup }))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_check_permiso) do
+        soap.body = ticket_to_arg(ticket).merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
       end
-      return WSFEX::Response.new(response, :fEXCheck_PermisoResult, :status)
+      return WSFEX::Response.new(response, :fex_check_permiso_response, :fex_check_permiso_result, :status)
     end
 
     def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida, log_file=nil)
       return ticket_missing if ticket.nil?
 
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetCMP(ticket_to_arg(ticket).merge({ :Cmp => { :Tipo_cbte => tipoCbte.dup, :Punto_vta => puntoVta.dup, :Cbte_nro => nroCbte.dup }}))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_cmp) do
+        soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipoCbte.dup, "Punto_vta" => puntoVta.dup, "Cbte_nro" => nroCbte.dup }})
       end
+      return WSFEX::Response.new(response, :fex_check_permiso_response, :fex_check_permiso_result, :status)
 
-      errCode = response.fEXGetCMPResult.fEXErr.errCode.to_i rescue -1
+      response = response.to_hash
+      errCode = response[:fex_get_cmp_response][:fex_get_cmp_result][:fex_err][:err_code].to_i rescue -1
 
-      if errCode == 0 && response.respond_to?(:fEXGetCMPResult) && response.fEXGetCMPResult.respond_to?(:fEXResultGet)
-        result = response.fEXGetCMPResult.fEXResultGet
+      if errCode == 0 && response.has_key?(:fex_get_cmp_response) && response[:fex_get_cmp_response][:fex_get_cmp_result]
+        result = response[:fex_get_cmp_response][:fex_get_cmp_result][:fex_result_get]
 
         fex                 = WSFEX::Fex.new
 
-        fex.id_cbte         = result.id
-        fex.tipo_cbte       = result.tipo_cbte
-        fex.punto_vta       = result.punto_vta
-        fex.nro_cbte        = result.cbte_nro
-        fex.fecha_cbte      = result.fecha_cbte
-        fex.tipo_expo       = result.tipo_expo
-        fex.tiene_permiso   = result.permiso_existente
-        fex.pais            = result.dst_cmp
-        fex.cuit_pais       = result.cuit_pais_cliente
-        fex.id_impositivo   = result.id_impositivo
-        fex.cliente         = result.cliente
-        fex.domicilio       = result.domicilio_cliente
-        fex.moneda          = result.moneda_Id
-        fex.cotizacion      = result.moneda_ctz
-        fex.total           = result.imp_total
-        fex.forma_pago      = result.forma_pago
-        fex.idioma          = result.idioma_cbte
-        fex.incoterms       = result.incoterms
-        fex.incoterms_info  = result.incoterms_Ds
-        fex.cae             = result.cae
-        fex.fecha_cae       = result.fecha_cbte
-        fex.fecha_vto_cae   = result.fch_venc_Cae
-        fex.resultado       = result.resultado
-        fex.obs             = result.obs
-        fex.obs_comerciales = result.obs_comerciales
+        fex.id_cbte         = result[:id]
+        fex.tipo_cbte       = result[:tipo_cbte]
+        fex.punto_vta       = result[:punto_vta]
+        fex.nro_cbte        = result[:cbte_nro]
+        fex.fecha_cbte      = result[:fecha_cbte]
+        fex.tipo_expo       = result[:tipo_expo]
+        fex.tiene_permiso   = result[:permiso_existente]
+        fex.pais            = result[:dst_cmp]
+        fex.cuit_pais       = result[:cuit_pais_cliente]
+        fex.id_impositivo   = result[:id_impositivo]
+        fex.cliente         = result[:cliente]
+        fex.domicilio       = result[:domicilio_cliente]
+        fex.moneda          = result[:moneda_id]
+        fex.cotizacion      = result[:moneda_ctz]
+        fex.total           = result[:imp_total]
+        fex.forma_pago      = result[:forma_pago]
+        fex.idioma          = result[:idioma_cbte]
+        fex.incoterms       = result[:incoterms]
+        fex.incoterms_info  = result[:incoterms_ds]
+        fex.cae             = result[:cae]
+        fex.fecha_cae       = result[:fecha_cbte]
+        fex.fecha_vto_cae   = result[:fch_venc_cae]
+        fex.resultado       = result[:resultado]
+        fex.obs             = result[:obs]
+        fex.obs_comerciales = result[:obs_comerciales]
 
-        result.permisos.permiso.each do |permiso|
-          if permiso.respond_to?(:id_permiso) &&
-             permiso.respond_to?(:dst_merc)
+        result[:permisos][:permiso].each do |permiso|
+          if permiso.has_key?(:id_permiso) &&
+             permiso.has_key?(:dst_merc)
 
-            fex.permisos << { :Id_permiso => permiso.id_permiso,
-                              :Dst_merc   => permiso.dst_merc }
+            fex.permisos << { :id_permiso => permiso[:id_permiso],
+                              :dst_merc   => permiso[:dst_merc] }
 
           end
-        end if result.respond_to?(:permisos)
+        end if result.has_key?(:permisos)
 
-        result.cmps_asoc.cmp_asoc.each do |comprobante|
-          if comprobante.respond_to?(:cbte_tipo)      &&
-             comprobante.respond_to?(:cbte_punto_vta) &&
-             comprobante.respond_to?(:cbte_nro)
+        result[:cmps_asoc][:cmp_asoc].each do |comprobante|
+          if comprobante.has_key?(:cbte_tipo)      &&
+             comprobante.has_key?(:cbte_punto_vta) &&
+             comprobante.has_key?(:cbte_nro)
 
-            fex.comprobantes << { :Cbte_tipo      => comprobante.cbte_tipo,
-                                  :Cbte_punto_vta => comprobante.cbte_punto_vta,
-                                  :Cbte_nro       => comprobante.cbte_nro }
+            fex.comprobantes << { :cbte_tipo      => comprobante[:cbte_tipo],
+                                  :cbte_punto_vta => comprobante[:cbte_punto_vta],
+                                  :cbte_nro       => comprobante[:cbte_nro] }
           end
-        end if result.respond_to?(:cmps_asoc)
+        end if result.has_key?(:cmps_asoc)
 
-        result.items.item.each do |item|
-          if item.respond_to?(:pro_codigo)     &&
-             item.respond_to?(:pro_ds)         &&
-             item.respond_to?(:pro_qty)        &&
-             item.respond_to?(:pro_umed)       &&
-             item.respond_to?(:pro_precio_uni) &&
-             item.respond_to?(:pro_total_item)
+        result[:items][:item].each do |item|
+          if item.has_key?(:pro_codigo)     &&
+             item.has_key?(:pro_ds)         &&
+             item.has_key?(:pro_qty)        &&
+             item.has_key?(:pro_umed)       &&
+             item.has_key?(:pro_precio_uni) &&
+             item.has_key?(:pro_total_item)
 
-            fex.items << { :Pro_codigo      => item.pro_codigo,
-                           :Pro_ds          => item.pro_ds,
-                           :Pro_qty         => item.pro_qty,
-                           :Pro_umed        => item.pro_umed,
-                           :Pro_precio_uni  => item.pro_precio_uni,
-                           :Pro_total_item  => item.pro_total_item }
+            fex.items << { :pro_codigo      => item[:pro_codigo],
+                           :pro_ds          => item[:pro_ds],
+                           :pro_qty         => item[:pro_qty],
+                           :pro_umed        => item[:pro_umed],
+                           :pro_precio_uni  => item[:pro_precio_uni],
+                           :pro_total_item  => item[:pro_total_item] }
           end
-        end if result.respond_to?(:items)
+        end if result.has_key?(:items)
 
         fex.to_file(salida)
       end
 
-      return WSFEX::Response.new(response, :fEXGetCMPResult, :cae)
+      return WSFEX::Response.new(response, :fex_get_cmp_response, :fex_get_cmp_result, :cae)
     end
 
     def self.getLastCmp(ticket, tipoCbte, puntoVta, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-
-        args = { :Auth => { :Token     => ticket.token.dup,
-                            :Sign      => ticket.sign.dup,
-                            :Cuit      => ticket.cuit.dup,
-                            :Pto_venta => puntoVta.dup,
-                            :Tipo_cbte => tipoCbte.dup } }
-
-        driver.fEXGetLast_CMP(args)
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_last_cmp) do
+        soap.body = { "Auth" => { "Token"     => ticket.token.dup,
+                                  "Sign"      => ticket.sign.dup,
+                                  "Cuit"      => ticket.cuit.dup,
+                                  "Pto_venta" => puntoVta.dup,
+                                  "Tipo_cbte" => tipoCbte.dup } }
       end
-      return WSFEX::Response.new(response, :fEXGetLast_CMPResult, :cbte_nro, :fEXResult_LastCMP)
+      return WSFEX::Response.new(response, :fex_get_last_cmp_response, :fex_get_last_cmp_result, :cbte_nro, :fex_result_last_cmp)
     end
 
     def self.getLastId(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetLast_ID(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_last_id) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response.new(response, :fEXGetLast_IDResult, :id)
+      return WSFEX::Response.new(response, :fex_get_last_id_response, :fex_get_last_id_result, :id)
     end
 
     def self.getParamCtz(ticket, moneda, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_Ctz(ticket_to_arg(ticket).merge({ :Mon_id => moneda }))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_ctz) do
+        soap.body = ticket_to_arg(ticket).merge({ :mon_id => moneda })
       end
-      return WSFEX::Response.new(response, :fEXGetPARAM_CtzResult, :mon_ctz)
+      return WSFEX::Response.new(response, :fex_get_param_ctz_response, :fex_get_param_ctz_result, :mon_ctz)
     end
 
     def self.getParamDstCuit(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_DST_CUIT(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_dst_cuit) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamDstCuit.new(response, :fEXGetPARAM_DST_CUITResult, :nil)
+      return WSFEX::Response::GetParamDstCuit.new(response, :fex_get_param_dst_cuit_response, :fex_get_param_dst_cuit_result)
     end
 
     def self.getParamDstPais(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_DST_pais(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_dst_pais) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamDstPais.new(response, :fEXGetPARAM_DST_paisResult, :nil)
+      return WSFEX::Response::GetParamDstPais.new(response, :fex_get_param_dst_pais_response, :fex_get_param_dst_pais_result)
     end
 
     def self.getParamIdiomas(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_Idiomas(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_idiomas) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamIdiomas.new(response, :fEXGetPARAM_IdiomasResult, :nil)
+      return WSFEX::Response::GetParamIdiomas.new(response, :fex_get_param_idiomas_response, :fex_get_param_idiomas_result)
     end
 
     def self.getParamIncoterms(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_Incoterms(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_incoterms) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamIncoterms.new(response, :fEXGetPARAM_IncotermsResult, :nil)
+      return WSFEX::Response::GetParamIncoterms.new(response, :fex_get_param_incoterms_response, :fex_get_param_incoterms_result)
     end
 
     def self.getParamMon(ticket, log_file=nil)
-      return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_MON(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_mon) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamMon.new(response, :fEXGetPARAM_MONResult, :nil)
+      return WSFEX::Response::GetParamMon.new(response, :fex_get_param_mon_response, :fex_get_param_mon_result)
     end
 
     def self.getParamPtoVenta(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_PtoVenta(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_pto_venta) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamPtoVenta.new(response, :fEXGetPARAM_PtoVentaResult, :nil)
+      return WSFEX::Response::GetParamPtoVenta.new(response, :fex_get_param_pto_venta_response, :fex_get_param_pto_venta_result)
     end
 
     def self.getParamTipoCbte(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_Tipo_Cbte(ticket_to_arg(ticket))
+
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_tipo_cbte) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamTipoCbte.new(response, :fEXGetPARAM_Tipo_CbteResult, :nil)
+      return WSFEX::Response::GetParamTipoCbte.new(response, :fex_get_param_tipo_cbte_response, :fex_get_param_tipo_cbte_result)
     end
 
     def self.getParamTipoExpo(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_Tipo_Expo(ticket_to_arg(ticket))
+
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_tipo_expo) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamTipoExpo.new(response, :fEXGetPARAM_Tipo_ExpoResult, :nil)
+      return WSFEX::Response::GetParamTipoExpo.new(response, :fex_get_param_tipo_expo_response, :fex_get_param_tipo_expo_result)
     end
 
     def self.getParamUMed(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXGetPARAM_UMed(ticket_to_arg(ticket))
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:n1, :fex_get_param_u_med) do
+        soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamUMed.new(response, :fEXGetPARAM_UMedResult, :nil)
+      return WSFEX::Response::GetParamUMed.new(response, :fex_get_param_u_med_response, :fex_get_param_u_med_result)
     end
 
     def self.test(log_file=nil)
       response = with_driver(:log => log_file) do |driver|
         driver.fEXDummy(nil)
       end
-      "authserver=#{response.fEXDummyResult.authServer}; appserver=#{response.fEXDummyResult.appServer}; dbserver=#{response.fEXDummyResult.dbServer};"
+
+      client = Savon::Client.new
+      client.wsdl.document = self::WSDL
+      client.wsdl.endpoint = self::TEST_URL
+      response = client.request(:fex_dummy)
+      "authserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]};"
     end
 
     def self.ticket_missing
@@ -245,7 +304,7 @@ module WSFEX
     end
 
     def self.ticket_to_arg(ticket)
-      return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :Cuit => ticket.cuit } }
+      return { "Auth" => { "Token" => ticket.token, "Sign" => ticket.sign, "Cuit" => ticket.cuit } }
     end
   end
 

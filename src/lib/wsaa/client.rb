@@ -4,7 +4,19 @@
 #
 require 'time'
 require 'openssl'
-require 'soap/wsdlDriver'
+require 'savon'
+
+Savon.configure do |config|
+  config.log = false            # disable logging
+ # config.log_level = :info      # changing the log level
+ # config.logger = Rails.logger  # using the Rails logger
+end
+
+Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+
+HTTPI.log       = false     # disabling logging
+#HTTPI.logger    = MyLogger  # changing the logger
+#HTTPI.log_level = :info     # changing the log level
 
 module WSAA
 
@@ -19,10 +31,16 @@ module WSAA
     def self.requestTicket(cuit, service, cert_file, key_file)
       request = generate_request_for(service)
       signed = sign_request(request, cert_file, key_file)
-      driver = create_rpc_driver
+      client = Savon::Client.new
       begin
-        r = driver.loginCms(:in0 => signed)
-        ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
+        client.wsdl.document = self::WSDL
+        client.wsdl.endpoint = self::TEST_URL
+        response = client.request :login_cms do
+          soap.body = { :in0 => signed }
+        end
+        ticket = WSAA::Ticket.from_xml(cuit, response.to_hash[:login_cms_response][:login_cms_return])
+      #  r = driver.loginCms(:in0 => signed)
+      #  ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
       rescue
         ticket = nil
       end

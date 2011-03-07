@@ -5,11 +5,11 @@
 module WSFEX
   class Response::GetParamDstPais < Response::GetParam
     def format_record(record)
-      "%-3s%-250s" % [ record.dST_Codigo, record.dST_Ds ]
+      "%-3s%-250s" % [ record[:dst_codigo], record[:dst_ds] ]
     end
 
     def records(result)
-      result.clsFEXResponse_DST_pais rescue []
+      result[:cls_fex_response_dst_pais] rescue []
     end
   end
 end
