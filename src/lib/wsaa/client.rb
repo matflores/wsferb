@@ -2,17 +2,20 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'time'
-require 'openssl'
-require 'savon'
+require "time"
+require "openssl"
+require "savon"
+require "silence"
 
 Savon.configure do |config|
-  config.log = false            # disable logging
- # config.log_level = :info      # changing the log level
+  config.log = true            # disable logging
+ #  config.log_level = :info      # changing the log level
  # config.logger = Rails.logger  # using the Rails logger
 end
 
-Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+silence_warnings do
+  Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
+end
 
 HTTPI.log       = false     # disabling logging
 #HTTPI.logger    = MyLogger  # changing the logger
@@ -31,16 +34,11 @@ module WSAA
     def self.requestTicket(cuit, service, cert_file, key_file)
       request = generate_request_for(service)
       signed = sign_request(request, cert_file, key_file)
-      client = Savon::Client.new
       begin
-        client.wsdl.document = self::WSDL
-        client.wsdl.endpoint = self::TEST_URL
         response = client.request(:ns1, :login_cms) do
           soap.body = { :in0 => signed }
         end
         ticket = WSAA::Ticket.from_xml(cuit, response.to_hash[:login_cms_response][:login_cms_return])
-      #  r = driver.loginCms(:in0 => signed)
-      #  ticket = WSAA::Ticket.from_xml(cuit, r.loginCmsReturn) 
       rescue Exception => e
         puts e.message
         puts e.backtrace.join("\n")
@@ -49,7 +47,14 @@ module WSAA
       ticket
     end
 
-  private
+    def self.client
+      @client ||= Savon::Client.new do |wsdl, http|
+        wsdl.document = self::WSDL
+        wsdl.endpoint = self::TEST_URL
+      end
+    end
+
+    private
 
     def self.generate_request_for(service)
       t = Time.now
@@ -88,7 +93,5 @@ module WSAA
     def self.load_key(key_file)
       PKey::RSA.new(File.read(key_file))
     end
-
   end
-
 end

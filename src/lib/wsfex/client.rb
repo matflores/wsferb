@@ -2,16 +2,14 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'time'
-require 'wsaa'
+require "time"
+require "wsaa"
 
 Savon.configure do |config|
-  config.log = false            # disable logging
+  config.log = true            # disable logging
  # config.log_level = :info      # changing the log level
  # config.logger = Rails.logger  # using the Rails logger
 end
-
-#Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
 
 HTTPI.log       = false     # disabling logging
 #HTTPI.logger    = MyLogger  # changing the logger
@@ -29,43 +27,39 @@ module WSFEX
       return ticket_missing if ticket.nil?
 
       fex = WSFEX::Fex.from_file(entrada)
-      response = with_driver(:log => log_file) do |driver|
-        driver.fEXAuthorize(ticket_to_arg(ticket).merge({ :Cmp => fex.to_hash.dup }))
+
+      response = client.request(:n1, :fex_authorize) do
+        soap.body = ticket_to_arg(ticket).merge({ "Cmp" => fex.to_hash.dup })
       end
 
-      errCode = response.fEXAuthorizeResult.fEXErr.errCode.to_i rescue -1
+      WSFEX::Response::FEXAuthorize.new(response).tap do |response|
+        puts "*************"
+        puts response.response.inspect
+        puts "*************"
+        if response.success?
+          fex.cae           = response.info[:cae]
+          fex.fecha_cae     = response.info[:fch_cbte]
+          fex.fecha_vto_cae = response.info[:fch_venc_cae]
+          fex.resultado     = response.info[:resultado]
 
-      if errCode == 0 && response.respond_to?(:fEXAuthorizeResult) && response.fEXAuthorizeResult.respond_to?(:fEXResultAuth)
-        result = response.fEXAuthorizeResult.fEXResultAuth
-
-        fex.cae             = result.cae
-        fex.fecha_cae       = result.fch_cbte
-        fex.fecha_vto_cae   = result.fch_venc_Cae
-        fex.resultado       = result.resultado
-
-        fex.to_file(salida)
+          fex.to_file(salida)
+        end
       end
-
-      return WSFEX::Response.new(response, :fEXAuthorizeResult, :cae, :fEXResultAuth)
     end
 
     def self.checkPermiso(ticket, permiso, pais, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_check_permiso) do
         soap.body = ticket_to_arg(ticket).merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
       end
-      return WSFEX::Response.new(response, :fex_check_permiso_response, :fex_check_permiso_result, :status)
+
+      return WSFEX::Response::FEXCheckPermiso.new(response)
     end
 
     def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida, log_file=nil)
       return ticket_missing if ticket.nil?
 
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
       response = client.request(:n1, :fex_get_cmp) do
         soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipoCbte.dup, "Punto_vta" => puntoVta.dup, "Cbte_nro" => nroCbte.dup }})
       end
@@ -151,9 +145,7 @@ module WSFEX
 
     def self.getLastCmp(ticket, tipoCbte, puntoVta, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_last_cmp) do
         soap.body = { "Auth" => { "Token"     => ticket.token.dup,
                                   "Sign"      => ticket.sign.dup,
@@ -161,135 +153,121 @@ module WSFEX
                                   "Pto_venta" => puntoVta.dup,
                                   "Tipo_cbte" => tipoCbte.dup } }
       end
-      return WSFEX::Response.new(response, :fex_get_last_cmp_response, :fex_get_last_cmp_result, :cbte_nro, :fex_result_last_cmp)
+
+      return WSFEX::Response::FEXGetLastCmp.new(response)
     end
 
     def self.getLastId(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_last_id) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response.new(response, :fex_get_last_id_response, :fex_get_last_id_result, :id)
+
+      return WSFEX::Response::FEXGetLastId.new(response)
     end
 
     def self.getParamCtz(ticket, moneda, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_ctz) do
         soap.body = ticket_to_arg(ticket).merge({ :mon_id => moneda })
       end
-      return WSFEX::Response.new(response, :fex_get_param_ctz_response, :fex_get_param_ctz_result, :mon_ctz)
+
+      return WSFEX::Response::FEXGetParamCtz.new(response)
     end
 
     def self.getParamDstCuit(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_dst_cuit) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamDstCuit.new(response, :fex_get_param_dst_cuit_response, :fex_get_param_dst_cuit_result)
+
+      return WSFEX::Response::FEXGetParamDstCuit.new(response)
     end
 
     def self.getParamDstPais(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_dst_pais) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamDstPais.new(response, :fex_get_param_dst_pais_response, :fex_get_param_dst_pais_result)
+
+      return WSFEX::Response::FEXGetParamDstPais.new(response)
     end
 
     def self.getParamIdiomas(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_idiomas) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamIdiomas.new(response, :fex_get_param_idiomas_response, :fex_get_param_idiomas_result)
+
+      return WSFEX::Response::FEXGetParamIdiomas.new(response)
     end
 
     def self.getParamIncoterms(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_incoterms) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamIncoterms.new(response, :fex_get_param_incoterms_response, :fex_get_param_incoterms_result)
+
+      return WSFEX::Response::FEXGetParamIncoterms.new(response)
     end
 
     def self.getParamMon(ticket, log_file=nil)
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+      return ticket_missing if ticket.nil?
+
       response = client.request(:n1, :fex_get_param_mon) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamMon.new(response, :fex_get_param_mon_response, :fex_get_param_mon_result)
+
+      return WSFEX::Response::FEXGetParamMon.new(response)
     end
 
     def self.getParamPtoVenta(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_pto_venta) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamPtoVenta.new(response, :fex_get_param_pto_venta_response, :fex_get_param_pto_venta_result)
+
+      return WSFEX::Response::FEXGetParamPtoVenta.new(response)
     end
 
     def self.getParamTipoCbte(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
 
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
       response = client.request(:n1, :fex_get_param_tipo_cbte) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamTipoCbte.new(response, :fex_get_param_tipo_cbte_response, :fex_get_param_tipo_cbte_result)
+
+      return WSFEX::Response::FEXGetParamTipoCbte.new(response)
     end
 
     def self.getParamTipoExpo(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
 
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
       response = client.request(:n1, :fex_get_param_tipo_expo) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamTipoExpo.new(response, :fex_get_param_tipo_expo_response, :fex_get_param_tipo_expo_result)
+
+      return WSFEX::Response::FEXGetParamTipoExpo.new(response)
     end
 
     def self.getParamUMed(ticket, log_file=nil)
       return ticket_missing if ticket.nil?
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
+
       response = client.request(:n1, :fex_get_param_u_med) do
         soap.body = ticket_to_arg(ticket)
       end
-      return WSFEX::Response::GetParamUMed.new(response, :fex_get_param_u_med_response, :fex_get_param_u_med_result)
+
+      return WSFEX::Response::FEXGetParamUMed.new(response)
     end
 
     def self.test(log_file=nil)
-      client = Savon::Client.new
-      client.wsdl.document = self::WSDL
-      client.wsdl.endpoint = self::TEST_URL
       response = client.request(:fex_dummy)
       "authserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]};"
     end
@@ -301,6 +279,12 @@ module WSFEX
     def self.ticket_to_arg(ticket)
       return { "Auth" => { "Token" => ticket.token, "Sign" => ticket.sign, "Cuit" => ticket.cuit } }
     end
-  end
 
+    def self.client
+      @client ||= Savon::Client.new do |wsdl, http|
+        wsdl.document = WSFEX::Client::WSDL
+        wsdl.endpoint = WSFEX::Client::TEST_URL
+      end
+    end
+  end
 end
