@@ -48,7 +48,7 @@ class Protest::TestCase
   def assert_value(method, min, max = nil)
     max ||= min
 
-    response = parseResponse(method)
+    response = parse_response(method)
 
     if numeric?(response.value)
       assert response.value.to_f >= min && response.value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{response.value}]"
@@ -63,29 +63,29 @@ class Protest::TestCase
   end
 
   def assert_error_code(method, value)
-    response = parseResponse(method)
+    response = parse_response(method)
 
-    assert response.errCode.to_s == value.to_s, "expected [#{value}] but was [#{response.errCode}]"
+    assert response.err_code.to_s == value.to_s, "expected [#{value}] but was [#{response.err_code}]"
   end
 
   def assert_error_message(method, value)
-    response = parseResponse(method)
+    response = parse_response(method)
 
     case value
     when Regexp
-      match = response.errMsg.to_s =~ value
+      match = response.err_msg.to_s =~ value
     else
-      match = response.errMsg.to_s == value.to_s
+      match = response.err_msg.to_s == value.to_s
     end
 
-    assert match, "expected [#{value}] but was [#{response.errMsg}]"
+    assert match, "expected [#{value}] but was [#{response.err_msg}]"
   end
 
   def assert_success(method)
     assert_error_code(method, 0)
   end
 
-  def parseResponse(method)
+  def parse_response(method)
     output = File.read(expand_path("output/#{method}.txt"))
     AFIP::Response.parse(output)
   end

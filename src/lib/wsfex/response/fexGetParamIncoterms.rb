@@ -3,7 +3,7 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 module WSFEX
-  class Response::GetParamIncoterms < Response::GetParam
+  class Response::FEXGetParamIncoterms < Response::FEXGetParam
     def format_record(record)
       "%-3s%-250s%-8s%-8s" % [ record[:inc_id],
                                record[:inc_ds],
@@ -11,8 +11,12 @@ module WSFEX
                                record[:inc_vig_hasta] ]
     end
 
-    def records(result)
-      result[:cls_fex_response_inc] rescue []
+    def records
+      @records ||= result[:fex_result_get][:cls_fex_response_inc] rescue []
+    end
+
+    def result
+      @result ||= response[:fex_get_param_incoterms_response][:fex_get_param_incoterms_result] rescue []
     end
   end
 end

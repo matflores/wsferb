@@ -3,7 +3,7 @@
 # Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
 #
 module WSFEX
-  class Response::GetParamTipoExpo < Response::GetParam
+  class Response::FEXGetParamTipoExpo < Response::FEXGetParam
     def format_record(record)
       "%02d%-250s%-8s%-8s" % [ record[:tex_id],
                                record[:tex_ds],
@@ -11,8 +11,12 @@ module WSFEX
                                record[:tex_vig_hasta] ]
     end
 
-    def records(result)
-      result[:cls_fex_response_tex] rescue []
+    def records
+      @records ||= result[:fex_result_get][:cls_fex_response_tex] rescue []
+    end
+
+    def result
+      @result ||= response[:fex_get_param_tipo_expo_response][:fex_get_param_tipo_expo_result] rescue []
     end
   end
 end
