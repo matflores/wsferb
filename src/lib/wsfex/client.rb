@@ -5,16 +5,6 @@
 require "time"
 require "wsaa"
 
-Savon.configure do |config|
-  config.log = false            # disable logging
- # config.log_level = :info      # changing the log level
- # config.logger = Rails.logger  # using the Rails logger
-end
-
-HTTPI.log       = false     # disabling logging
-#HTTPI.logger    = MyLogger  # changing the logger
-#HTTPI.log_level = :info     # changing the log level
-
 module WSFEX
 
   class Client < AFIP::Client
@@ -23,7 +13,7 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
-    def self.authorize(ticket, entrada, salida, log_file=nil)
+    def self.authorize(ticket, entrada, salida)
       return ticket_missing if ticket.nil?
 
       fex = Fex.from_file(entrada)
@@ -44,7 +34,7 @@ module WSFEX
       end
     end
 
-    def self.checkPermiso(ticket, permiso, pais, log_file=nil)
+    def self.checkPermiso(ticket, permiso, pais)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_check_permiso) do
@@ -54,7 +44,7 @@ module WSFEX
       return Response::FEXCheckPermiso.new(response)
     end
 
-    def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida, log_file=nil)
+    def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_cmp) do
@@ -133,7 +123,7 @@ module WSFEX
       end
     end
 
-    def self.getLastCmp(ticket, tipoCbte, puntoVta, log_file=nil)
+    def self.getLastCmp(ticket, tipoCbte, puntoVta)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_last_cmp) do
@@ -147,7 +137,7 @@ module WSFEX
       return Response::FEXGetLastCmp.new(response)
     end
 
-    def self.getLastId(ticket, log_file=nil)
+    def self.getLastId(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_last_id) do
@@ -157,7 +147,7 @@ module WSFEX
       return Response::FEXGetLastId.new(response)
     end
 
-    def self.getParamCtz(ticket, moneda, log_file=nil)
+    def self.getParamCtz(ticket, moneda)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_ctz) do
@@ -167,7 +157,7 @@ module WSFEX
       return Response::FEXGetParamCtz.new(response)
     end
 
-    def self.getParamDstCuit(ticket, log_file=nil)
+    def self.getParamDstCuit(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_dst_cuit) do
@@ -177,7 +167,7 @@ module WSFEX
       return Response::FEXGetParamDstCuit.new(response)
     end
 
-    def self.getParamDstPais(ticket, log_file=nil)
+    def self.getParamDstPais(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_dst_pais) do
@@ -187,7 +177,7 @@ module WSFEX
       return Response::FEXGetParamDstPais.new(response)
     end
 
-    def self.getParamIdiomas(ticket, log_file=nil)
+    def self.getParamIdiomas(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_idiomas) do
@@ -197,7 +187,7 @@ module WSFEX
       return Response::FEXGetParamIdiomas.new(response)
     end
 
-    def self.getParamIncoterms(ticket, log_file=nil)
+    def self.getParamIncoterms(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_incoterms) do
@@ -207,7 +197,7 @@ module WSFEX
       return Response::FEXGetParamIncoterms.new(response)
     end
 
-    def self.getParamMon(ticket, log_file=nil)
+    def self.getParamMon(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_mon) do
@@ -217,7 +207,7 @@ module WSFEX
       return Response::FEXGetParamMon.new(response)
     end
 
-    def self.getParamPtoVenta(ticket, log_file=nil)
+    def self.getParamPtoVenta(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_pto_venta) do
@@ -227,7 +217,7 @@ module WSFEX
       return Response::FEXGetParamPtoVenta.new(response)
     end
 
-    def self.getParamTipoCbte(ticket, log_file=nil)
+    def self.getParamTipoCbte(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_tipo_cbte) do
@@ -237,7 +227,7 @@ module WSFEX
       return Response::FEXGetParamTipoCbte.new(response)
     end
 
-    def self.getParamTipoExpo(ticket, log_file=nil)
+    def self.getParamTipoExpo(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_tipo_expo) do
@@ -247,7 +237,7 @@ module WSFEX
       return Response::FEXGetParamTipoExpo.new(response)
     end
 
-    def self.getParamUMed(ticket, log_file=nil)
+    def self.getParamUMed(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_u_med) do
@@ -257,7 +247,7 @@ module WSFEX
       return Response::FEXGetParamUMed.new(response)
     end
 
-    def self.test(log_file=nil)
+    def self.fex_dummy
       response = client.request(:fex_dummy)
       "authserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]};"
     end
