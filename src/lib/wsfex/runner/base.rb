@@ -41,7 +41,11 @@ module WSFEX
 
       def run(argv)
         load_options(argv)
-        r = main
+        begin
+          r = main
+        rescue RuntimeError => e
+          puts e.message
+        end
         if @options.out 
           File.open(@options.out, 'w') { |f| f.puts(r) } 
         else
@@ -72,8 +76,10 @@ module WSFEX
       end
 
       def parse_common_options
+        Savon.log = false
+
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
-        parser.on(*OPTIONS[:log])          { |log| @options.log = log }
+        parser.on(*OPTIONS[:log])          { |log| Savon.log, Savon.logger = true, Logger.new(log) }
         parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
@@ -102,7 +108,7 @@ module WSFEX
 
       alias_method :error, :error_exit
 
-      def obtieneTicket
+      def ticket
         cert_file = @options.cert
         key_file = @options.key
         ticket = WSAA::Ticket.load(@options.cuit, @options.ticket) if @options.ticket
