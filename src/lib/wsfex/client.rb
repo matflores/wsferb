@@ -272,8 +272,8 @@ module WSFEX
 
     def self.client
       @client ||= Savon::Client.new do |wsdl, http|
-        wsdl.document = Client::WSDL
-        wsdl.endpoint = Client::TEST_URL
+        wsdl.document = WSDL
+        wsdl.endpoint = test_mode_enabled? ? TEST_URL : PROD_URL
       end
     end
   end
