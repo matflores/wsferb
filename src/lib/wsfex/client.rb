@@ -11,7 +11,7 @@ module WSFEX
 
   class Client < AFIP::Client
 
-    WSDL = File.dirname(__FILE__) + '/wsfex.wsdl'
+    WSDL = File.join(File.dirname(__FILE__), '/wsfex.wsdl')
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 

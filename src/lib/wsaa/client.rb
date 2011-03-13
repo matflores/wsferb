@@ -13,7 +13,7 @@ module WSAA
 
     include OpenSSL
 
-    WSDL = File.dirname(__FILE__) + '/wsaa.wsdl'
+    WSDL = File.join(File.dirname(__FILE__), '/wsaa.wsdl')
     PROD_URL = 'https://wsaa.afip.gov.ar/ws/services/LoginCms'
     TEST_URL = 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms'
 
