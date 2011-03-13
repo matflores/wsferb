@@ -36,7 +36,7 @@ module WSFEX
 
       def initialize
         super
-        @options = WSFEX::Runner::Options.new
+        @options = Options.new
       end
 
       def run(argv)
@@ -56,11 +56,6 @@ module WSFEX
         rescue OptionParser::InvalidOption => e
           info_exit
         end
-        @options.ticket = RUBYSCRIPT2EXE.userdir(@options.ticket) if @options.ticket
-        @options.cert = RUBYSCRIPT2EXE.userdir(@options.cert) if @options.cert
-        @options.key = RUBYSCRIPT2EXE.userdir(@options.key) if @options.key
-        @options.out = RUBYSCRIPT2EXE.userdir(@options.out) if @options.out
-        @options.log = RUBYSCRIPT2EXE.userdir(@options.log) if @options.log
       end
 
       def main
@@ -79,7 +74,7 @@ module WSFEX
       def parse_common_options
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
         parser.on(*OPTIONS[:log])          { |log| @options.log = log }
-        parser.on_tail(*OPTIONS[:test])    { WSFEX::Client.enable_test_mode ; WSAA::Client.enable_test_mode }
+        parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
       end
@@ -90,7 +85,7 @@ module WSFEX
       end
 
       def version_exit
-        puts WSFEX::VERSION::DESCRIPTION
+        puts VERSION::DESCRIPTION
         exit 1
       end
 
