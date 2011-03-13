@@ -31,7 +31,7 @@ module WSFEX
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] <servicio> [argumentos]"
+        parser.banner = "Modo de uso: wsfex [opciones] <servicio> [argumentos]"
         parser.separator ""
         parse_authentication_options
         parse_other_options
@@ -48,16 +48,10 @@ module WSFEX
       
       def descripcion
 <<__EOD__
-Modo de uso: wsfe [opciones] <servicio> [argumentos]
+Modo de uso: wsfex [opciones] <servicio> [argumentos]
 
-     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
+     servicio                        Uno de los servicios provistos por el WSFEX de AFIP.
                                      Valores posibles:
-                                       - FEDummy
-                                       - FEAutRequest
-                                       - FEUltNroRequest
-                                       - FERecuperaQTYRequest
-                                       - FERecuperaLastCMPRequest
-                                       - FEConsultaCAERequest
                                        - FEXAuthorize
                                        - FEXCheckPermiso
                                        - FEXDummy
@@ -77,7 +71,7 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
-                                     Escriba wsfe <servicio> --info para obtener mayor
+                                     Escriba wsfex <servicio> --info para obtener mayor
                                      informacion acerca de un servicio en particular.
 __EOD__
       end
