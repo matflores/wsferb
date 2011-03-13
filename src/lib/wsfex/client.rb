@@ -6,7 +6,7 @@ require "time"
 require "wsaa"
 
 Savon.configure do |config|
-  config.log = true            # disable logging
+  config.log = false            # disable logging
  # config.log_level = :info      # changing the log level
  # config.logger = Rails.logger  # using the Rails logger
 end
@@ -14,6 +14,35 @@ end
 HTTPI.log       = false     # disabling logging
 #HTTPI.logger    = MyLogger  # changing the logger
 #HTTPI.log_level = :info     # changing the log level
+
+class Hash
+  def stringify_keys
+    h = {}
+    each do |k, v|
+      h[normalize_key(k)] = normalize_value(v)
+    end
+    h
+  end
+
+  def normalize_key(key)
+    k = key.to_s
+    if k[":"] == nil
+      k = "n1:#{k}"
+    end
+    k
+  end
+
+  def normalize_value(value)
+    case value
+    when Array
+      value.map { |e| normalize_value(e) }
+    when Hash
+      value.stringify_keys
+    else
+      value
+    end
+  end
+end
 
 module WSFEX
 
@@ -29,13 +58,10 @@ module WSFEX
       fex = WSFEX::Fex.from_file(entrada)
 
       response = client.request(:n1, :fex_authorize) do
-        soap.body = ticket_to_arg(ticket).merge({ "Cmp" => fex.to_hash.dup })
+        soap.body = ticket_to_arg(ticket).merge({ :Cmp => fex.to_hash.stringify_keys })
       end
 
       WSFEX::Response::FEXAuthorize.new(response).tap do |response|
-        puts "*************"
-        puts response.response.inspect
-        puts "*************"
         if response.success?
           fex.cae           = response.info[:cae]
           fex.fecha_cae     = response.info[:fch_cbte]
@@ -63,84 +89,77 @@ module WSFEX
       response = client.request(:n1, :fex_get_cmp) do
         soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipoCbte.dup, "Punto_vta" => puntoVta.dup, "Cbte_nro" => nroCbte.dup }})
       end
-      return WSFEX::Response.new(response, :fex_check_permiso_response, :fex_check_permiso_result, :status)
 
-      response = response.to_hash
-      errCode = response[:fex_get_cmp_response][:fex_get_cmp_result][:fex_err][:err_code].to_i rescue -1
+      WSFEX::Response::FEXGetCmp.new(response).tap do |response|
+        if response.success?
+          fex                 = WSFEX::Fex.new
+          fex.id_cbte         = response.info[:id]
+          fex.tipo_cbte       = response.info[:tipo_cbte]
+          fex.punto_vta       = response.info[:punto_vta]
+          fex.nro_cbte        = response.info[:cbte_nro]
+          fex.fecha_cbte      = response.info[:fecha_cbte]
+          fex.tipo_expo       = response.info[:tipo_expo]
+          fex.tiene_permiso   = response.info[:permiso_existente]
+          fex.pais            = response.info[:dst_cmp]
+          fex.cuit_pais       = response.info[:cuit_pais_cliente]
+          fex.id_impositivo   = response.info[:id_impositivo]
+          fex.cliente         = response.info[:cliente]
+          fex.domicilio       = response.info[:domicilio_cliente]
+          fex.moneda          = response.info[:moneda_id]
+          fex.cotizacion      = response.info[:moneda_ctz]
+          fex.total           = response.info[:imp_total]
+          fex.forma_pago      = response.info[:forma_pago]
+          fex.idioma          = response.info[:idioma_cbte]
+          fex.incoterms       = response.info[:incoterms]
+          fex.incoterms_info  = response.info[:incoterms_ds]
+          fex.cae             = response.info[:cae]
+          fex.fecha_cae       = response.info[:fecha_cbte]
+          fex.fecha_vto_cae   = response.info[:fch_venc_cae]
+          fex.resultado       = response.info[:resultado]
+          fex.obs             = response.info[:obs]
+          fex.obs_comerciales = response.info[:obs_comerciales]
 
-      if errCode == 0 && response.has_key?(:fex_get_cmp_response) && response[:fex_get_cmp_response][:fex_get_cmp_result]
-        result = response[:fex_get_cmp_response][:fex_get_cmp_result][:fex_result_get]
+          response.info[:permisos][:permiso].each do |permiso|
+            if permiso.has_key?(:id_permiso) &&
+               permiso.has_key?(:dst_merc)
 
-        fex                 = WSFEX::Fex.new
+              fex.permisos << { :id_permiso => permiso[:id_permiso],
+                                :dst_merc   => permiso[:dst_merc] }
 
-        fex.id_cbte         = result[:id]
-        fex.tipo_cbte       = result[:tipo_cbte]
-        fex.punto_vta       = result[:punto_vta]
-        fex.nro_cbte        = result[:cbte_nro]
-        fex.fecha_cbte      = result[:fecha_cbte]
-        fex.tipo_expo       = result[:tipo_expo]
-        fex.tiene_permiso   = result[:permiso_existente]
-        fex.pais            = result[:dst_cmp]
-        fex.cuit_pais       = result[:cuit_pais_cliente]
-        fex.id_impositivo   = result[:id_impositivo]
-        fex.cliente         = result[:cliente]
-        fex.domicilio       = result[:domicilio_cliente]
-        fex.moneda          = result[:moneda_id]
-        fex.cotizacion      = result[:moneda_ctz]
-        fex.total           = result[:imp_total]
-        fex.forma_pago      = result[:forma_pago]
-        fex.idioma          = result[:idioma_cbte]
-        fex.incoterms       = result[:incoterms]
-        fex.incoterms_info  = result[:incoterms_ds]
-        fex.cae             = result[:cae]
-        fex.fecha_cae       = result[:fecha_cbte]
-        fex.fecha_vto_cae   = result[:fch_venc_cae]
-        fex.resultado       = result[:resultado]
-        fex.obs             = result[:obs]
-        fex.obs_comerciales = result[:obs_comerciales]
+            end
+          end if response.info.has_key?(:permisos)
 
-        result[:permisos][:permiso].each do |permiso|
-          if permiso.has_key?(:id_permiso) &&
-             permiso.has_key?(:dst_merc)
+          response.info[:cmps_asoc][:cmp_asoc].each do |comprobante|
+            if comprobante.has_key?(:cbte_tipo)      &&
+               comprobante.has_key?(:cbte_punto_vta) &&
+               comprobante.has_key?(:cbte_nro)
 
-            fex.permisos << { :id_permiso => permiso[:id_permiso],
-                              :dst_merc   => permiso[:dst_merc] }
+              fex.comprobantes << { :cbte_tipo      => comprobante[:cbte_tipo],
+                                    :cbte_punto_vta => comprobante[:cbte_punto_vta],
+                                    :cbte_nro       => comprobante[:cbte_nro] }
+            end
+          end if response.info.has_key?(:cmps_asoc)
 
-          end
-        end if result.has_key?(:permisos)
+          response.info[:items][:item].each do |item|
+            if item.has_key?(:pro_codigo)     &&
+               item.has_key?(:pro_ds)         &&
+               item.has_key?(:pro_qty)        &&
+               item.has_key?(:pro_umed)       &&
+               item.has_key?(:pro_precio_uni) &&
+               item.has_key?(:pro_total_item)
 
-        result[:cmps_asoc][:cmp_asoc].each do |comprobante|
-          if comprobante.has_key?(:cbte_tipo)      &&
-             comprobante.has_key?(:cbte_punto_vta) &&
-             comprobante.has_key?(:cbte_nro)
+              fex.items << { :pro_codigo      => item[:pro_codigo],
+                             :pro_ds          => item[:pro_ds],
+                             :pro_qty         => item[:pro_qty],
+                             :pro_umed        => item[:pro_umed],
+                             :pro_precio_uni  => item[:pro_precio_uni],
+                             :pro_total_item  => item[:pro_total_item] }
+            end
+          end if response.info.has_key?(:items)
 
-            fex.comprobantes << { :cbte_tipo      => comprobante[:cbte_tipo],
-                                  :cbte_punto_vta => comprobante[:cbte_punto_vta],
-                                  :cbte_nro       => comprobante[:cbte_nro] }
-          end
-        end if result.has_key?(:cmps_asoc)
-
-        result[:items][:item].each do |item|
-          if item.has_key?(:pro_codigo)     &&
-             item.has_key?(:pro_ds)         &&
-             item.has_key?(:pro_qty)        &&
-             item.has_key?(:pro_umed)       &&
-             item.has_key?(:pro_precio_uni) &&
-             item.has_key?(:pro_total_item)
-
-            fex.items << { :pro_codigo      => item[:pro_codigo],
-                           :pro_ds          => item[:pro_ds],
-                           :pro_qty         => item[:pro_qty],
-                           :pro_umed        => item[:pro_umed],
-                           :pro_precio_uni  => item[:pro_precio_uni],
-                           :pro_total_item  => item[:pro_total_item] }
-          end
-        end if result.has_key?(:items)
-
-        fex.to_file(salida)
+          fex.to_file(salida)
+        end
       end
-
-      return WSFEX::Response.new(response, :fex_get_cmp_response, :fex_get_cmp_result, :cae)
     end
 
     def self.getLastCmp(ticket, tipoCbte, puntoVta, log_file=nil)
@@ -277,7 +296,7 @@ module WSFEX
     end
 
     def self.ticket_to_arg(ticket)
-      return { "Auth" => { "Token" => ticket.token, "Sign" => ticket.sign, "Cuit" => ticket.cuit } }
+      return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :Cuit => ticket.cuit } }
     end
 
     def self.client
