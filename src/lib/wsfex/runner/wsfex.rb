@@ -8,26 +8,13 @@ module WSFEX
       def run(argv)
         args = argv.dup
         load_options(argv)
-        servicio = argv.shift 
-        case servicio
-          when 'FEXAuthorize'              then FEXAuthorize.run(args)
-          when 'FEXCheckPermiso'           then FEXCheckPermiso.run(args)
-          when 'FEXDummy'                  then FEXDummy.run(args)
-          when 'FEXGetCmp'                 then FEXGetCmp.run(args)
-          when 'FEXGetLastCmp'             then FEXGetLastCmp.run(args)
-          when 'FEXGetLastId'              then FEXGetLastId.run(args)
-          when 'FEXGetParamCtz'            then FEXGetParamCtz.run(args)
-          when 'FEXGetParamDstCuit'        then FEXGetParamDstCuit.run(args)
-          when 'FEXGetParamDstPais'        then FEXGetParamDstPais.run(args)
-          when 'FEXGetParamIncoterms'      then FEXGetParamIncoterms.run(args)
-          when 'FEXGetParamIdiomas'        then FEXGetParamIdiomas.run(args)
-          when 'FEXGetParamMon'            then FEXGetParamMon.run(args)
-          when 'FEXGetParamPtoVenta'       then FEXGetParamPtoVenta.run(args)
-          when 'FEXGetParamTipoCbte'       then FEXGetParamTipoCbte.run(args)
-          when 'FEXGetParamTipoExpo'       then FEXGetParamTipoExpo.run(args)
-          when 'FEXGetParamUMed'           then FEXGetParamUMed.run(args)
-          else                             ; usage_exit
-        end
+        service = find_service(argv.shift)
+        service ? service.run(args) : usage_exit
+      end
+
+      def find_service(service_name)
+        service_name = WSFEX::Runner.constants.detect { |constant| constant =~ /#{service_name}/i }
+        service_name ? WSFEX::Runner.const_get(service_name) : nil
       end
 
       def parse_options
