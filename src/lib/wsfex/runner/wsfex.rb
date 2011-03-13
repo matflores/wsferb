@@ -28,7 +28,6 @@ module WSFEX
           when 'FEXGetParamUMed'           then FEXGetParamUMed.run(args)
           else                             ; usage_exit
         end
-        WSFEX::Client.test
       end
 
       def parse_options
