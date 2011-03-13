@@ -18,6 +18,7 @@ end
 
 require 'wsfex/response/fexAuthorize'
 require 'wsfex/response/fexCheckPermiso'
+require 'wsfex/response/fexGetCmp'
 require 'wsfex/response/fexGetLastCmp'
 require 'wsfex/response/fexGetLastId'
 require 'wsfex/response/fexGetParam'
