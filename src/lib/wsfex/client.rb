@@ -15,35 +15,6 @@ HTTPI.log       = false     # disabling logging
 #HTTPI.logger    = MyLogger  # changing the logger
 #HTTPI.log_level = :info     # changing the log level
 
-class Hash
-  def stringify_keys
-    h = {}
-    each do |k, v|
-      h[normalize_key(k)] = normalize_value(v)
-    end
-    h
-  end
-
-  def normalize_key(key)
-    k = key.to_s
-    if k[":"] == nil
-      k = "n1:#{k}"
-    end
-    k
-  end
-
-  def normalize_value(value)
-    case value
-    when Array
-      value.map { |e| normalize_value(e) }
-    when Hash
-      value.stringify_keys
-    else
-      value
-    end
-  end
-end
-
 module WSFEX
 
   class Client < AFIP::Client
