@@ -7,12 +7,6 @@ require "openssl"
 require "savon"
 require "silence"
 
-Savon.configure do |config|
-  config.log = true            # disable logging
- #  config.log_level = :info      # changing the log level
- # config.logger = Rails.logger  # using the Rails logger
-end
-
 silence_warnings do
   Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
 end
@@ -49,8 +43,8 @@ module WSAA
 
     def self.client
       @client ||= Savon::Client.new do |wsdl, http|
-        wsdl.document = self::WSDL
-        wsdl.endpoint = self::TEST_URL
+        wsdl.document = WSDL
+        wsdl.endpoint = test_mode_enabled ? TEST_URL : PROD_URL
       end
     end
 
