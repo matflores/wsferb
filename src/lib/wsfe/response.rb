@@ -4,12 +4,14 @@
 #
 module WSFE
   class Response < AFIP::Response
-    def parse_result(result, fieldname, container)
-      value = result.respond_to?(fieldname) ? result.send(fieldname) : fieldname
-      value = value.respond_to?(:value) ? value.value.to_i : value.to_i
-      errCode = result.rError.percode.to_i
-      errMsg = result.rError.perrmsg
-      return value, errCode, errMsg
+    attr_accessor :result
+
+    def err_code
+      @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
+    end
+
+    def err_msg
+      @err_msg ||= result[:fex_err][:err_msg] rescue "n/d"
     end
   end
 end

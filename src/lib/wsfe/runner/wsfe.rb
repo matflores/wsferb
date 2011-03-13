@@ -8,17 +8,13 @@ module WSFE
       def run(argv)
         args = argv.dup
         load_options(argv)
-        servicio = argv.shift 
-        case servicio
-          when 'FEAutRequest'             then FEAutRequest.run(args)
-          when 'FEUltNroRequest'          then FEUltNroRequest.run(args)
-          when 'FERecuperaQTYRequest'     then FERecuperaQTYRequest.run(args)
-          when 'FERecuperaLastCMPRequest' then FERecuperaLastCMPRequest.run(args)
-          when 'FEConsultaCAERequest'     then FEConsultaCAERequest.run(args)
-          when 'FEDummy'                  then FEDummy.run(args)
-          else                            ;    usage_exit
-        end
-        WSFE::Client.test
+        service = find_service(argv.shift)
+        service ? service.run(args) : usage_exit
+      end
+
+      def find_service(service_name)
+        service_name = WSFE::Runner.constants.detect { |constant| constant =~ /#{service_name}/i }
+        service_name ? WSFE::Runner.const_get(service_name) : nil
       end
 
       def parse_options
@@ -49,22 +45,6 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
                                        - FERecuperaQTYRequest
                                        - FERecuperaLastCMPRequest
                                        - FEConsultaCAERequest
-                                       - FEXAuthorize
-                                       - FEXCheckPermiso
-                                       - FEXDummy
-                                       - FEXGetCmp
-                                       - FEXGetLastCmp
-                                       - FEXGetLastId
-                                       - FEXGetParamCtz
-                                       - FEXGetParamDstCuit
-                                       - FEXGetParamDstPais
-                                       - FEXGetParamIncoterms
-                                       - FEXGetParamIdiomas
-                                       - FEXGetParamMon
-                                       - FEXGetParamPtoVenta
-                                       - FEXGetParamTipoCbte
-                                       - FEXGetParamTipoExpo
-                                       - FEXGetParamUMed
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.

@@ -36,12 +36,16 @@ module WSFE
 
       def initialize
         super
-        @options = WSFE::Runner::Options.new
+        @options = Options.new
       end
 
       def run(argv)
         load_options(argv)
-        r = main
+        begin
+          r = main
+        rescue RuntimeError => e
+          puts e.message
+        end
         if @options.out 
           File.open(@options.out, 'w') { |f| f.puts(r) } 
         else
@@ -56,11 +60,6 @@ module WSFE
         rescue OptionParser::InvalidOption => e
           info_exit
         end
-        @options.ticket = RUBYSCRIPT2EXE.userdir(@options.ticket) if @options.ticket
-        @options.cert = RUBYSCRIPT2EXE.userdir(@options.cert) if @options.cert
-        @options.key = RUBYSCRIPT2EXE.userdir(@options.key) if @options.key
-        @options.out = RUBYSCRIPT2EXE.userdir(@options.out) if @options.out
-        @options.log = RUBYSCRIPT2EXE.userdir(@options.log) if @options.log
       end
 
       def main
@@ -78,8 +77,8 @@ module WSFE
 
       def parse_common_options
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
-        parser.on(*OPTIONS[:log])          { |log| @options.log = log }
-        parser.on_tail(*OPTIONS[:test])    { WSFE::Client.enable_test_mode ; WSAA::Client.enable_test_mode }
+        parser.on(*OPTIONS[:log])          { |log| Savon.log, Savon.logger = true, Logger.new(log) }
+        parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:info])    { info_exit }
       end
@@ -90,7 +89,7 @@ module WSFE
       end
 
       def version_exit
-        puts WSFE::VERSION::DESCRIPTION
+        puts VERSION::DESCRIPTION
         exit 1
       end
 
@@ -107,7 +106,7 @@ module WSFE
 
       alias_method :error, :error_exit
 
-      def obtieneTicket
+      def ticket
         cert_file = @options.cert
         key_file = @options.key
         ticket = WSAA::Ticket.load(@options.cuit, @options.ticket) if @options.ticket

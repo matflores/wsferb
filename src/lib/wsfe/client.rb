@@ -2,16 +2,18 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'time'
-require 'wsaa'
+require "time"
+require "wsaa"
+require "savon"
+require "config"
 
 module WSFE
 
   class Client < AFIP::Client
 
-    WSDL = File.dirname(__FILE__) + '/wsfe.wsdl'
-    PROD_URL = 'https://servicios1.afip.gov.ar/wsfe/service.asmx'
-    TEST_URL = 'https://wswhomo.afip.gov.ar/wsfe/service.asmx'
+    WSDL = File.join(File.dirname(__FILE__), '/wsfev1.wsdl')
+    PROD_URL = 'https://servicios1.afip.gov.ar/wsfev1/service.asmx'
+    TEST_URL = 'https://wswhomo.afip.gov.ar/wsfev1/service.asmx'
 
     def self.factura_lote(ticket, id, cuit, esServicios, lote, salida=nil, log_file=nil)
       return ticket_missing if ticket.nil?
@@ -120,13 +122,24 @@ module WSFE
       items
     end
 
+    def self.fe_dummy
+      response = client.request(:fe_dummy)
+      "authserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]};"
+    end
+
     def self.ticket_missing
-      WSFE::Response.new(nil, :nil, nil)
+      Response.new(nil, :nil, nil)
     end
 
     def self.ticket_to_arg(ticket)
-      return { :argAuth => { :Token => ticket.token, :Sign => ticket.sign, :cuit => ticket.cuit } }
+      return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :cuit => ticket.cuit } }
+    end
+
+    def self.client
+      @client ||= Savon::Client.new do |wsdl, http|
+        wsdl.document = WSDL
+        wsdl.endpoint = test_mode_enabled? ? TEST_URL : PROD_URL
+      end
     end
   end
-
 end
