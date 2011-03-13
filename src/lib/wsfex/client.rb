@@ -26,13 +26,13 @@ module WSFEX
     def self.authorize(ticket, entrada, salida, log_file=nil)
       return ticket_missing if ticket.nil?
 
-      fex = WSFEX::Fex.from_file(entrada)
+      fex = Fex.from_file(entrada)
 
       response = client.request(:n1, :fex_authorize) do
         soap.body = ticket_to_arg(ticket).merge({ :Cmp => fex.to_hash.stringify_keys })
       end
 
-      WSFEX::Response::FEXAuthorize.new(response).tap do |response|
+      Response::FEXAuthorize.new(response).tap do |response|
         if response.success?
           fex.cae           = response.info[:cae]
           fex.fecha_cae     = response.info[:fch_cbte]
@@ -51,7 +51,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket).merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
       end
 
-      return WSFEX::Response::FEXCheckPermiso.new(response)
+      return Response::FEXCheckPermiso.new(response)
     end
 
     def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida, log_file=nil)
@@ -61,9 +61,9 @@ module WSFEX
         soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipoCbte.dup, "Punto_vta" => puntoVta.dup, "Cbte_nro" => nroCbte.dup }})
       end
 
-      WSFEX::Response::FEXGetCmp.new(response).tap do |response|
+      Response::FEXGetCmp.new(response).tap do |response|
         if response.success?
-          fex                 = WSFEX::Fex.new
+          fex                 = Fex.new
           fex.id_cbte         = response.info[:id]
           fex.tipo_cbte       = response.info[:tipo_cbte]
           fex.punto_vta       = response.info[:punto_vta]
@@ -144,7 +144,7 @@ module WSFEX
                                   "Tipo_cbte" => tipoCbte.dup } }
       end
 
-      return WSFEX::Response::FEXGetLastCmp.new(response)
+      return Response::FEXGetLastCmp.new(response)
     end
 
     def self.getLastId(ticket, log_file=nil)
@@ -154,7 +154,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetLastId.new(response)
+      return Response::FEXGetLastId.new(response)
     end
 
     def self.getParamCtz(ticket, moneda, log_file=nil)
@@ -164,7 +164,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket).merge({ :mon_id => moneda })
       end
 
-      return WSFEX::Response::FEXGetParamCtz.new(response)
+      return Response::FEXGetParamCtz.new(response)
     end
 
     def self.getParamDstCuit(ticket, log_file=nil)
@@ -174,7 +174,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamDstCuit.new(response)
+      return Response::FEXGetParamDstCuit.new(response)
     end
 
     def self.getParamDstPais(ticket, log_file=nil)
@@ -184,7 +184,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamDstPais.new(response)
+      return Response::FEXGetParamDstPais.new(response)
     end
 
     def self.getParamIdiomas(ticket, log_file=nil)
@@ -194,7 +194,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamIdiomas.new(response)
+      return Response::FEXGetParamIdiomas.new(response)
     end
 
     def self.getParamIncoterms(ticket, log_file=nil)
@@ -204,7 +204,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamIncoterms.new(response)
+      return Response::FEXGetParamIncoterms.new(response)
     end
 
     def self.getParamMon(ticket, log_file=nil)
@@ -214,7 +214,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamMon.new(response)
+      return Response::FEXGetParamMon.new(response)
     end
 
     def self.getParamPtoVenta(ticket, log_file=nil)
@@ -224,7 +224,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamPtoVenta.new(response)
+      return Response::FEXGetParamPtoVenta.new(response)
     end
 
     def self.getParamTipoCbte(ticket, log_file=nil)
@@ -234,7 +234,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamTipoCbte.new(response)
+      return Response::FEXGetParamTipoCbte.new(response)
     end
 
     def self.getParamTipoExpo(ticket, log_file=nil)
@@ -244,7 +244,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamTipoExpo.new(response)
+      return Response::FEXGetParamTipoExpo.new(response)
     end
 
     def self.getParamUMed(ticket, log_file=nil)
@@ -254,7 +254,7 @@ module WSFEX
         soap.body = ticket_to_arg(ticket)
       end
 
-      return WSFEX::Response::FEXGetParamUMed.new(response)
+      return Response::FEXGetParamUMed.new(response)
     end
 
     def self.test(log_file=nil)
@@ -263,7 +263,7 @@ module WSFEX
     end
 
     def self.ticket_missing
-      WSFEX::Response.new(nil, :nil, nil)
+      Response.new(nil, :nil, nil)
     end
 
     def self.ticket_to_arg(ticket)
@@ -272,8 +272,8 @@ module WSFEX
 
     def self.client
       @client ||= Savon::Client.new do |wsdl, http|
-        wsdl.document = WSFEX::Client::WSDL
-        wsdl.endpoint = WSFEX::Client::TEST_URL
+        wsdl.document = Client::WSDL
+        wsdl.endpoint = Client::TEST_URL
       end
     end
   end
