@@ -1,6 +1,6 @@
 #
 # Web Services Facturacion Electronica AFIP
-# Copyright (C) 2008-2010 Matias Alejandro Flores <mflores@atlanware.com>
+# Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'afip'
 require 'wsfex/fex'
