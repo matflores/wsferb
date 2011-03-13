@@ -154,8 +154,8 @@ FACTURA = {
   "Incoterms"         => 'DATDAT',
   "Incoterms_Ds"      => 'Incoterms',
   "Idioma_cbte"       => 1,
-  "Permisos"          => { "Permiso"  => [ { "n1:Id_permiso" => '1234567890123456', "n1:Dst_merc" => 310 },
-                                           { "n1:Id_permiso" => '1234567890ABCDEF', "n1:Dst_merc" => 310 } ] },
-  "Items"             => { "Item"     => [ { "n1:Pro_codigo" => '12345', "n1:Pro_ds" => 'Item 1', "n1:Pro_qty" => 100, "n1:Pro_umed" => 01, "n1:Pro_precio_uni" => 10.0, "n1:Pro_total_item" => 1000.0 },
-                                           { "n1:Pro_codigo" => '54321', "n1:Pro_ds" => 'Item 2', "n1:Pro_qty" => 200, "n1:Pro_umed" => 01, "n1:Pro_precio_uni" => 10.0, "n1:Pro_total_item" => 2000.0 } ] }
+  "Permisos"          => { "Permiso"  => [ { "Id_permiso" => '1234567890123456', "Dst_merc" => 310 },
+                                           { "Id_permiso" => '1234567890ABCDEF', "Dst_merc" => 310 } ] },
+  "Items"             => { "Item"     => [ { "Pro_codigo" => '12345', "Pro_ds" => 'Item 1', "Pro_qty" => 100, "Pro_umed" => 01, "Pro_precio_uni" => 10.0, "Pro_total_item" => 1000.0 },
+                                           { "Pro_codigo" => '54321', "Pro_ds" => 'Item 2', "Pro_qty" => 200, "Pro_umed" => 01, "Pro_precio_uni" => 10.0, "Pro_total_item" => 2000.0 } ] }
 }
