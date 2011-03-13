@@ -4,6 +4,8 @@
 #
 require "time"
 require "wsaa"
+require "savon"
+require "config"
 
 module WSFEX
 

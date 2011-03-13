@@ -5,15 +5,7 @@
 require "time"
 require "openssl"
 require "savon"
-require "silence"
-
-silence_warnings do
-  Savon::SOAP::DateTimeRegexp = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}$/
-end
-
-HTTPI.log       = false     # disabling logging
-#HTTPI.logger    = MyLogger  # changing the logger
-#HTTPI.log_level = :info     # changing the log level
+require "config"
 
 module WSAA
 

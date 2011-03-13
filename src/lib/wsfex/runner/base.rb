@@ -76,8 +76,6 @@ module WSFEX
       end
 
       def parse_common_options
-        Savon.log = false
-
         parser.on(*OPTIONS[:out])          { |out| @options.out = out }
         parser.on(*OPTIONS[:log])          { |log| Savon.log, Savon.logger = true, Logger.new(log) }
         parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
