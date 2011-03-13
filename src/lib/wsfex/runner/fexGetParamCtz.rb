@@ -8,8 +8,7 @@ module WSFEX
       def main
         error("CUIT no informado") unless @options.cuit
         error("Codigo de moneda no informado") unless @moneda
-        ticket = obtieneTicket
-        WSFEX::Client.getParamCtz(ticket, @moneda, @options.log)
+        WSFEX::Client.getParamCtz(ticket, @moneda)
       end
 
       def load_options(argv)
@@ -19,7 +18,7 @@ module WSFEX
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetParamCtz <moneda>"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXGetParamCtz <moneda>"
         parser.separator ""
         parse_authentication_options
         parse_common_options
@@ -33,9 +32,9 @@ Retorna la ultima cotizacion de la base de datos aduanera para la moneda especif
 
 Ejemplos:
 
-wsfe FEXGetParamCtz DOL --cuit 20123456780
-wsfe FEXGetParamCtz 060 --cuit 20123456780 --test
-wsfe FEXGetParamCtz 011 0001 --cuit 20123456780 --test --out ./resultado.ini
+wsfex FEXGetParamCtz DOL --cuit 20123456780
+wsfex FEXGetParamCtz 060 --cuit 20123456780 --test
+wsfex FEXGetParamCtz 011 0001 --cuit 20123456780 --test --out ./resultado.ini
 __EOD__
       end
     end

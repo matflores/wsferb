@@ -9,8 +9,7 @@ module WSFEX
         error("CUIT no informado") unless @options.cuit
         error("Codigo de permiso de embarque no informado") unless @permiso
         error("Codigo de pais de destino no informado") unless @pais
-        ticket = obtieneTicket
-        WSFEX::Client.checkPermiso(ticket, @permiso, @pais, @options.log)
+        WSFEX::Client.checkPermiso(ticket, @permiso, @pais)
       end
 
       def load_options(argv)
@@ -21,7 +20,7 @@ module WSFEX
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXCheckPermiso <permiso> <destino>"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXCheckPermiso <permiso> <destino>"
         parser.separator ""
         parse_authentication_options
         parse_common_options
@@ -36,9 +35,9 @@ Verifica la existencia de un permiso de embarque. Devuelve OK si la informacion 
 
 Ejemplos:
 
-wsfe FEXCheckPermiso 11111 310 --cuit 20123456780
-wsfe FEXCheckPermiso 11111 310 --cuit 20123456780 --test
-wsfe FEXCheckPermiso 11111 310 --cuit 20123456780 --test --out ./resultado.ini
+wsfex FEXCheckPermiso 11111 310 --cuit 20123456780
+wsfex FEXCheckPermiso 11111 310 --cuit 20123456780 --test
+wsfex FEXCheckPermiso 11111 310 --cuit 20123456780 --test --out ./resultado.ini
 __EOD__
       end
     end

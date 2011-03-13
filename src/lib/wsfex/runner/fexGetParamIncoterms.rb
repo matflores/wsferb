@@ -7,12 +7,11 @@ module WSFEX
     class FEXGetParamIncoterms < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        ticket = obtieneTicket
-        WSFEX::Client.getParamIncoterms(ticket, @options.log)
+        WSFEX::Client.getParamIncoterms(ticket)
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetParamIncoterms"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXGetParamIncoterms"
         parser.separator ""
         parse_authentication_options
         parse_common_options

@@ -6,11 +6,11 @@ module WSFEX
   module Runner
     class FEXDummy < Base
       def main
-        WSFEX::Client.test(@options.log)
+        WSFEX::Client.fex_dummy
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXDummy"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXDummy"
         parser.separator ""
         parse_authentication_options
         parse_common_options

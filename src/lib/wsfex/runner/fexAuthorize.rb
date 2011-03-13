@@ -6,22 +6,21 @@ module WSFEX
   module Runner
     class FEXAuthorize < Base
       def main
-        error("CUIT no informado") unless @options.cuit
-        error("Ubicacion del archivo de entrada no informada") unless @entrada
+        raise "CUIT no informado" unless @options.cuit
+        raise "Ubicacion del archivo de entrada no informada" unless @entrada
         error("Ubicacion del archivo de salida no informada") unless @salida
-        ticket = obtieneTicket
-        WSFEX::Client.authorize(ticket, @entrada, @salida, @options.log)
+        WSFEX::Client.authorize(ticket, @entrada, @salida)
       end
 
       def load_options(argv)
         super
         argv.shift
-        @entrada = RUBYSCRIPT2EXE.userdir(argv.shift)
-        @salida  = RUBYSCRIPT2EXE.userdir(argv.shift)
+        @entrada = argv.shift
+        @salida  = argv.shift
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXAuthorize <entrada> <salida>"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXAuthorize <entrada> <salida>"
         parser.separator ""
         parse_authentication_options
         parse_common_options
@@ -38,8 +37,8 @@ Recibe la informacion del comprobante a autorizar y lo procesa, retornando el CA
 
 Ejemplos:
 
-wsfe FEXAuthorize entrada.txt salida.txt --cuit 20123456780
-wsfe FEXAuthorize entrada.txt salida.txt --cuit 20123456780 --test --log cae.log
+wsfex FEXAuthorize entrada.txt salida.txt --cuit 20123456780
+wsfex FEXAuthorize entrada.txt salida.txt --cuit 20123456780 --test --log cae.log
 __EOD__
       end
     end

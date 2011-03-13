@@ -7,12 +7,11 @@ module WSFEX
     class FEXGetParamDstPais < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        ticket = obtieneTicket
-        WSFEX::Client.getParamDstPais(ticket, @options.log)
+        WSFEX::Client.getParamDstPais(ticket)
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetParamDstPais"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXGetParamDstPais"
         parser.separator ""
         parse_authentication_options
         parse_common_options

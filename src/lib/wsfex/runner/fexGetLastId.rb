@@ -7,12 +7,11 @@ module WSFEX
     class FEXGetLastId < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        ticket = obtieneTicket
-        WSFEX::Client.getLastId(ticket, @options.log)
+        WSFEX::Client.getLastId(ticket)
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetLastId"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXGetLastId"
         parser.separator ""
         parse_authentication_options
         parse_common_options

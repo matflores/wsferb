@@ -10,8 +10,7 @@ module WSFEX
         error("Tipo de comprobante no informado") unless @tipo_cbte
         error("Punto de venta no informado") unless @punto_vta
         error("Nro de comprobante no informado") unless @nro_cbte
-        ticket = obtieneTicket
-        WSFEX::Client.getCmp(ticket, @tipo_cbte, @punto_vta, @nro_cbte, @salida, @options.log)
+        WSFEX::Client.getCmp(ticket, @tipo_cbte, @punto_vta, @nro_cbte, @salida)
       end
 
       def load_options(argv)
@@ -20,11 +19,11 @@ module WSFEX
         @tipo_cbte = argv.shift
         @punto_vta = argv.shift
         @nro_cbte  = argv.shift
-        @salida    = RUBYSCRIPT2EXE.userdir(argv.shift)
+        @salida    = argv.shift
       end
 
       def parse_options
-        parser.banner = "Modo de uso: wsfe [opciones] FEXGetCmp <tipo-cbte> <punto-vta> <nro-cbte> <salida>"
+        parser.banner = "Modo de uso: wsfex [opciones] FEXGetCmp <tipo-cbte> <punto-vta> <nro-cbte> <salida>"
         parser.separator ""
         parse_authentication_options
         parse_common_options
@@ -42,8 +41,8 @@ Retorna los detalles de un comprobante ya enviado y autorizado.
 
 Ejemplos:
 
-wsfe FEXGetCmp 19 0001 1234 comprobante.txt --cuit 20123456780
-wsfe FEXGetCmp 19 0001 1234 comprobante.txt --cuit 20123456780 --test
+wsfex FEXGetCmp 19 0001 1234 comprobante.txt --cuit 20123456780
+wsfex FEXGetCmp 19 0001 1234 comprobante.txt --cuit 20123456780 --test
 __EOD__
       end
     end
