@@ -36,7 +36,7 @@ module WSAA
     def self.client
       @client ||= Savon::Client.new do |wsdl, http|
         wsdl.document = WSDL
-        wsdl.endpoint = test_mode_enabled ? TEST_URL : PROD_URL
+        wsdl.endpoint = test_mode_enabled? ? TEST_URL : PROD_URL
       end
     end
 
