@@ -7,7 +7,8 @@ module WSFEX
     class FEXGetLastId < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        WSFEX::Client.getLastId(ticket)
+
+        WSFEX::Client.fex_get_last_id(ticket)
       end
 
       def parse_options

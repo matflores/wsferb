@@ -8,7 +8,8 @@ module WSFEX
       def main
         error("CUIT no informado") unless @options.cuit
         error("Codigo de moneda no informado") unless @moneda
-        WSFEX::Client.getParamCtz(ticket, @moneda)
+
+        WSFEX::Client.fex_get_param_ctz(ticket, @moneda)
       end
 
       def load_options(argv)

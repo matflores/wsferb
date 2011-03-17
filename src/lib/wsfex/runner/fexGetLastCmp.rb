@@ -9,7 +9,8 @@ module WSFEX
         error("CUIT no informado") unless @options.cuit
         error("Tipo de comprobante no informado") unless @tipo_cbte
         error("Punto de venta no informado") unless @punto_vta
-        WSFEX::Client.getLastCmp(ticket, @tipo_cbte, @punto_vta)
+
+        WSFEX::Client.fex_get_last_cmp(ticket, @tipo_cbte, @punto_vta)
       end
 
       def load_options(argv)

@@ -7,7 +7,8 @@ module WSFEX
     class FEXGetParamTipoCbte < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        WSFEX::Client.getParamTipoCbte(ticket)
+
+        WSFEX::Client.fex_get_param_tipo_cbte(ticket)
       end
 
       def parse_options

@@ -7,7 +7,8 @@ module WSFEX
     class FEXGetParamIdiomas < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        WSFEX::Client.getParamIdiomas(ticket)
+
+        WSFEX::Client.fex_get_param_idiomas(ticket)
       end
 
       def parse_options

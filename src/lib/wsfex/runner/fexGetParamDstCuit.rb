@@ -7,7 +7,8 @@ module WSFEX
     class FEXGetParamDstCuit < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        WSFEX::Client.getParamDstCuit(ticket)
+
+        WSFEX::Client.fex_get_param_dst_cuit(ticket)
       end
 
       def parse_options

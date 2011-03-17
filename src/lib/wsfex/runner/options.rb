@@ -9,9 +9,10 @@ module WSFEX
         
       def cuit=(cuit)
         @cuit = cuit
+
         @cert ||= "./#{@cuit}.crt"
-        @key ||= "./#{@cuit}.key"
-        @log ||= "./#{@cuit}.log"
+        @key  ||= "./#{@cuit}.key"
+        @log  ||= "./#{@cuit}.log"
       end
     end
   end

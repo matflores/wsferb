@@ -7,7 +7,8 @@ module WSFEX
     class FEXGetParamTipoExpo < Base
       def main
         error("CUIT no informado") unless @options.cuit
-        WSFEX::Client.getParamTipoExpo(ticket)
+
+        WSFEX::Client.fex_get_param_tipo_expo(ticket)
       end
 
       def parse_options

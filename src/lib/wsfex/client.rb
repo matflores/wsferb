@@ -15,7 +15,7 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
-    def self.authorize(ticket, entrada, salida)
+    def self.fex_authorize(ticket, entrada, salida)
       return ticket_missing if ticket.nil?
 
       fex = Fex.from_file(entrada)
@@ -36,7 +36,7 @@ module WSFEX
       end
     end
 
-    def self.checkPermiso(ticket, permiso, pais)
+    def self.fex_check_permiso(ticket, permiso, pais)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_check_permiso) do
@@ -46,7 +46,7 @@ module WSFEX
       return Response::FEXCheckPermiso.new(response)
     end
 
-    def self.getCmp(ticket, tipoCbte, puntoVta, nroCbte, salida)
+    def self.fex_get_cmp(ticket, tipoCbte, puntoVta, nroCbte, salida)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_cmp) do
@@ -125,7 +125,7 @@ module WSFEX
       end
     end
 
-    def self.getLastCmp(ticket, tipoCbte, puntoVta)
+    def self.fex_get_last_cmp(ticket, tipoCbte, puntoVta)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_last_cmp) do
@@ -139,7 +139,7 @@ module WSFEX
       return Response::FEXGetLastCmp.new(response)
     end
 
-    def self.getLastId(ticket)
+    def self.fex_get_last_id(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_last_id) do
@@ -149,7 +149,7 @@ module WSFEX
       return Response::FEXGetLastId.new(response)
     end
 
-    def self.getParamCtz(ticket, moneda)
+    def self.fex_get_param_ctz(ticket, moneda)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_ctz) do
@@ -159,7 +159,7 @@ module WSFEX
       return Response::FEXGetParamCtz.new(response)
     end
 
-    def self.getParamDstCuit(ticket)
+    def self.fex_get_param_dst_cuit(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_dst_cuit) do
@@ -169,7 +169,7 @@ module WSFEX
       return Response::FEXGetParamDstCuit.new(response)
     end
 
-    def self.getParamDstPais(ticket)
+    def self.fex_get_param_dst_pais(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_dst_pais) do
@@ -179,7 +179,7 @@ module WSFEX
       return Response::FEXGetParamDstPais.new(response)
     end
 
-    def self.getParamIdiomas(ticket)
+    def self.fex_get_param_idiomas(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_idiomas) do
@@ -189,7 +189,7 @@ module WSFEX
       return Response::FEXGetParamIdiomas.new(response)
     end
 
-    def self.getParamIncoterms(ticket)
+    def self.fex_get_param_incoterms(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_incoterms) do
@@ -199,7 +199,7 @@ module WSFEX
       return Response::FEXGetParamIncoterms.new(response)
     end
 
-    def self.getParamMon(ticket)
+    def self.fex_get_param_mon(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_mon) do
@@ -209,7 +209,7 @@ module WSFEX
       return Response::FEXGetParamMon.new(response)
     end
 
-    def self.getParamPtoVenta(ticket)
+    def self.fex_get_param_pto_venta(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_pto_venta) do
@@ -219,7 +219,7 @@ module WSFEX
       return Response::FEXGetParamPtoVenta.new(response)
     end
 
-    def self.getParamTipoCbte(ticket)
+    def self.fex_get_param_tipo_cbte(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_tipo_cbte) do
@@ -229,7 +229,7 @@ module WSFEX
       return Response::FEXGetParamTipoCbte.new(response)
     end
 
-    def self.getParamTipoExpo(ticket)
+    def self.fex_get_param_tipo_expo(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_tipo_expo) do
@@ -239,7 +239,7 @@ module WSFEX
       return Response::FEXGetParamTipoExpo.new(response)
     end
 
-    def self.getParamUMed(ticket)
+    def self.fex_get_param_u_med(ticket)
       return ticket_missing if ticket.nil?
 
       response = client.request(:n1, :fex_get_param_u_med) do

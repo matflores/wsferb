@@ -10,7 +10,8 @@ module WSFEX
         error("Tipo de comprobante no informado") unless @tipo_cbte
         error("Punto de venta no informado") unless @punto_vta
         error("Nro de comprobante no informado") unless @nro_cbte
-        WSFEX::Client.getCmp(ticket, @tipo_cbte, @punto_vta, @nro_cbte, @salida)
+
+        WSFEX::Client.fex_get_cmp(ticket, @tipo_cbte, @punto_vta, @nro_cbte, @salida)
       end
 
       def load_options(argv)

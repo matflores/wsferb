@@ -9,7 +9,8 @@ module WSFEX
         error("CUIT no informado") unless @options.cuit
         error("Codigo de permiso de embarque no informado") unless @permiso
         error("Codigo de pais de destino no informado") unless @pais
-        WSFEX::Client.checkPermiso(ticket, @permiso, @pais)
+
+        WSFEX::Client.fex_check_permiso(ticket, @permiso, @pais)
       end
 
       def load_options(argv)

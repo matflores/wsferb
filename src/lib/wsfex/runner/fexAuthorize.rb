@@ -9,7 +9,8 @@ module WSFEX
         raise "CUIT no informado" unless @options.cuit
         raise "Ubicacion del archivo de entrada no informada" unless @entrada
         error("Ubicacion del archivo de salida no informada") unless @salida
-        WSFEX::Client.authorize(ticket, @entrada, @salida)
+
+        WSFEX::Client.fex_authorize(ticket, @entrada, @salida)
       end
 
       def load_options(argv)
