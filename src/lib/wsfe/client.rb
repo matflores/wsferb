@@ -127,12 +127,32 @@ module WSFE
       "authserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]};"
     end
 
+    def self.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
+      return ticket_missing if ticket.nil?
+
+      response = client.request(:n1, :fe_comp_ultimo_autorizado) do
+        soap.body = ticket_to_arg(ticket).merge({ "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup })
+      end
+
+      return Response::FECompUltimoAutorizado.new(response)
+    end
+
+    def self.fe_comp_tot_x_request(ticket)
+      return ticket_missing if ticket.nil?
+
+      response = client.request(:n1, :fe_comp_tot_x_request) do
+        soap.body = ticket_to_arg(ticket)
+      end
+
+      return Response::FECompTotXRequest.new(response)
+    end
+
     def self.ticket_missing
       Response.new(nil, :nil, nil)
     end
 
     def self.ticket_to_arg(ticket)
-      return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :cuit => ticket.cuit } }
+      return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :Cuit => ticket.cuit } }
     end
 
     def self.client

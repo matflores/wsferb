@@ -15,3 +15,6 @@ module WSFE
     end
   end
 end
+
+require "wsfe/response/feCompUltimoAutorizado"
+require "wsfe/response/feCompTotXRequest"

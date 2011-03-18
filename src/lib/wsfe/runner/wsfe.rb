@@ -40,11 +40,7 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
      servicio                        Uno de los servicios provistos por el WSFE de AFIP.
                                      Valores posibles:
                                        - FEDummy
-                                       - FEAutRequest
-                                       - FEUltNroRequest
-                                       - FERecuperaQTYRequest
-                                       - FERecuperaLastCMPRequest
-                                       - FEConsultaCAERequest
+                                       - FECompUltimoAutorizado
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
