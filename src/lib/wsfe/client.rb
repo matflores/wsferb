@@ -147,6 +147,16 @@ module WSFE
       return Response::FECompTotXRequest.new(response)
     end
 
+    def self.fe_param_get_tipos_cbte(ticket)
+      return ticket_missing if ticket.nil?
+
+      response = client.request(:n1, :fe_param_get_tipos_cbte) do
+        soap.body = ticket_to_arg(ticket)
+      end
+
+      return Response::FEParamGetTiposCbte.new(response)
+    end
+
     def self.ticket_missing
       Response.new(nil, :nil, nil)
     end

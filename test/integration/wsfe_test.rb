@@ -2,6 +2,7 @@ require "test_helper"
 
 Protest.describe "WSFE" do
   test_method :FEDummy
+  test_method :FEParamGetTiposCbte
 
   test :FECompUltimoAutorizado do
     execute :FECompUltimoAutorizado, "01 0001"
