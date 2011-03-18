@@ -16,19 +16,4 @@ module WSFEX
   end
 end
 
-require 'wsfex/response/fexAuthorize'
-require 'wsfex/response/fexCheckPermiso'
-require 'wsfex/response/fexGetCmp'
-require 'wsfex/response/fexGetLastCmp'
-require 'wsfex/response/fexGetLastId'
-require 'wsfex/response/fexGetParam'
-require 'wsfex/response/fexGetParamCtz'
-require 'wsfex/response/fexGetParamDstCuit'
-require 'wsfex/response/fexGetParamDstPais'
-require 'wsfex/response/fexGetParamIncoterms'
-require 'wsfex/response/fexGetParamIdiomas'
-require 'wsfex/response/fexGetParamMon'
-require 'wsfex/response/fexGetParamPtoVenta'
-require 'wsfex/response/fexGetParamTipoCbte'
-require 'wsfex/response/fexGetParamTipoExpo'
-require 'wsfex/response/fexGetParamUMed'
+Dir[File.join(File.dirname(__FILE__), "response", "*.rb")].each { |file| require file }

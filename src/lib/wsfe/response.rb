@@ -16,5 +16,4 @@ module WSFE
   end
 end
 
-require "wsfe/response/feCompUltimoAutorizado"
-require "wsfe/response/feCompTotXRequest"
+Dir[File.join(File.dirname(__FILE__), "response", "*.rb")].each { |file| require file }
