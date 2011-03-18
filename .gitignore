@@ -1,4 +1,6 @@
 *.log
+*.key
+*.crt
 test/TA.xml
 test/output
 test/tmp
