@@ -16,4 +16,6 @@ module WSFE
   end
 end
 
+require "wsfe/response/feParam"
+
 Dir[File.join(File.dirname(__FILE__), "response", "*.rb")].each { |file| require file }

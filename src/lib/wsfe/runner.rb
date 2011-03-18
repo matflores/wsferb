@@ -7,4 +7,6 @@ module WSFE
   end
 end
 
+require "wsfe/runner/base"
+
 Dir[File.join(File.dirname(__FILE__), "runner", "*.rb")].each { |file| require file }

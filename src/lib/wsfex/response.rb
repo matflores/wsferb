@@ -16,4 +16,6 @@ module WSFEX
   end
 end
 
+require "wsfex/response/fexGetParam"
+
 Dir[File.join(File.dirname(__FILE__), "response", "*.rb")].each { |file| require file }
