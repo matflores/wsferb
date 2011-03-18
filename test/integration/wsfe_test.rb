@@ -3,6 +3,13 @@ require "test_helper"
 Protest.describe "WSFE" do
   test_method :FEDummy
   test_method :FEParamGetTiposCbte
+  test_method :FEParamGetTiposConcepto
+  test_method :FEParamGetTiposDoc
+  test_method :FEParamGetTiposIva
+  test_method :FEParamGetTiposMoneda
+  test_method :FEParamGetTiposOpcional
+  test_method :FEParamGetTiposTributos
+  test_method :FEParamGetPtosVenta
 
   test :FECompUltimoAutorizado do
     execute :FECompUltimoAutorizado, "01 0001"
