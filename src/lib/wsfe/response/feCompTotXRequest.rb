@@ -4,7 +4,11 @@
 module WSFE
   class Response::FECompTotXRequest < Response
     def value
-      result[:reg_x_req] rescue "n/d"
+      result[:reg_x_req] rescue 0
+    end
+
+    def formatted_records
+      ["1%04d" % value]
     end
 
     def result
