@@ -26,7 +26,7 @@ class Protest::TestCase
   end
 
   def execute(method, arguments = nil, credentials = credentials)
-    `#{script} #{method} #{arguments} #{credentials} --ticket test/tmp/ticket.xml --test > test/output/#{method}.txt`
+    `#{script} #{method} #{arguments} #{credentials} --ticket test/tmp/ticket_#{script}.xml --test > test/output/#{method}.txt`
   end
 
   def credentials
