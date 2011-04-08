@@ -7,4 +7,4 @@ test/tmp
 build/wsfe.rb
 build/wsfe.exe
 build/*.zip
-doc/build
+docs/build
