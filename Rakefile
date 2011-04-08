@@ -30,6 +30,12 @@ task :compile do
   system("cd build && ruby tar2rubyscript.rb ../src/ wsfe.rb")
 end
 
+desc 'Build docs'
+task :docs do
+  format = ENV['format'] || 'html'
+  system "cd docs && make #{format}"
+end
+
 namespace :zip do
   desc 'Zip wsfe.exe'
   task :exe do
