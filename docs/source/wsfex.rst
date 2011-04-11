@@ -42,12 +42,12 @@ Servicios
 .. toctree::
    :maxdepth: 1
 
-   fexDummy.rst
    fexAuthorize.rst
    fexCheckPermiso.rst
+   fexDummy.rst
    fexGetCmp.rst
-   fexGetLastId.rst
    fexGetLastCmp.rst
+   fexGetLastId.rst
    fexGetParamCtz.rst
    fexGetParamDstCuit.rst
    fexGetParamDstPais.rst

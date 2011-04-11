@@ -42,13 +42,18 @@ Servicios
 .. toctree::
    :maxdepth: 1
 
-   feDummy.rst
-   feCAESolicitar.rst
-   feCAEASolicitar.rst
    feCAEAConsultar.rst
    feCAEARegInformativo.rst
    feCAEASinMovimientoConsultar.rst
    feCAEASinMovimientoInformar.rst
+   feCAEASolicitar.rst
+   feCAESolicitar.rst
+   feCompConsultar.rst
+   feCompTotXRequest.rst
+   feCompUltimoAutorizado.rst
+   feDummy.rst
+   feParamGetCotizacion.rst
+   feParamGetPtosVenta.rst
    feParamGetTiposCbte.rst
    feParamGetTiposConcepto.rst
    feParamGetTiposDoc.rst
@@ -56,8 +61,3 @@ Servicios
    feParamGetTiposMonedas.rst
    feParamGetTiposOpcional.rst
    feParamGetTiposTributos.rst
-   feParamGetPtosVenta.rst
-   feParamGetCotizacion.rst
-   feCompConsultar.rst
-   feCompUltimoAutorizado.rst
-   feCompTotXRequest.rst
