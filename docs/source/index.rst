@@ -9,7 +9,7 @@ WSFErb
 Contenido:
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
 
    wsfe.rst
    wsfex.rst
