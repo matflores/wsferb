@@ -1,5 +1,5 @@
-Consideraciones Generales
-=========================
+WSFEX
+=====
 
 Esta sección tiene como objetivo detallar los métodos disponibles en |WSFEX|, el script que facilita el
 acceso a los web services de facturación electrónica de exportación, complementando el manual para el

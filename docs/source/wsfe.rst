@@ -1,5 +1,5 @@
-Consideraciones Generales
-=========================
+WSFE
+====
 
 Esta sección tiene como objetivo detallar los métodos disponibles en |WSFE|, el script que facilita el
 acceso a los web services de facturación electrónica, complementando el manual para el desarrollador
