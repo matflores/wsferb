@@ -46,17 +46,7 @@ Opciones
 Formato del Lote
 ----------------
 
-.. include:: _wsfe_lote_entrada.inc
-
-Respuesta
----------
-
-.. include:: _response_format.inc
-
-.. include:: _wsfe_lote_salida.inc
-
-.. include:: _errors.inc
-.. include:: _events.inc
+.. include:: _wsfe_lote.inc
 
 Errores Posibles
 ~~~~~~~~~~~~~~~~

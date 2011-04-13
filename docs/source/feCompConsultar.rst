@@ -3,7 +3,7 @@
 FECompConsultar
 ===============
 
-Permite consultar los datos de un comprobante ya emitido.
+Permite consultar los datos de un comprobante ya emitido. Devuelve un lote con un sólo registro de tipo "2".
 
 Modo de uso
 -----------
@@ -27,14 +27,10 @@ Opciones
 
 .. include:: _options.inc
 
-Respuesta
----------
+Formato del Lote
+----------------
 
-.. include:: _response_format.inc
-.. include:: _cbte_wsfe.inc
-
-.. include:: _errors.inc
-.. include:: _events.inc
+.. include:: _wsfe_lote.inc
 
 Errores Posibles
 ~~~~~~~~~~~~~~~~
