@@ -112,7 +112,7 @@ NroCbteDesde         N(8)    Número de comprobante desde (00000001-99999999)
 NroCbteHasta         N(8)    Número de comprobante hasta (00000001-99999999)
 Id                   N(2)    Código de tributo (ver :doc:`feParamGetTiposTributos`)
 BaseImp              N(15,2) Base imponible sobre la que se aplica el impuesto
-Alicuota             N(5,2)  Alícuota
+Alícuota             N(5,2)  Alícuota
 Importe              N(15,2) Importe del tributo
 Desc                 S(80)   Descripción
 ==================== ======= ==================================================
