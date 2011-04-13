@@ -55,11 +55,14 @@ Errores Posibles
 
 Este servicio puede devolver los siguientes códigos de error:
 
+.. include:: _wsfe_common_errors.inc
+
+Errores específicos de este servicio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ====== ================================================================================
 Código Descripción
 ====== ================================================================================
-600    Usuario no autorizado a realizar esta operación
-601    CUIT solicitante no se encuentra entre sus representados
 1200   El código de autorización informado no es de tipo CAEA
 1201   El código de autorización informado no correponde al CUIT especificado
 1202   El código de autorización informado ya fue utilizado en algún comprobante

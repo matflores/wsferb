@@ -65,6 +65,9 @@ Este servicio puede devolver los siguientes códigos de error:
 
 .. include:: _wsfe_common_errors.inc
 
+Errores específicos de este servicio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ====== ================================================================================
 Código Descripción
 ====== ================================================================================

@@ -52,11 +52,14 @@ Errores Posibles
 
 Este servicio puede devolver los siguientes códigos de error:
 
+.. include:: _wsfe_common_errors.inc
+
+Errores específicos de este servicio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ====== ================================================================================
 Código Descripción
 ====== ================================================================================
-600    Usuario no autorizado a realizar esta operación
-601    CUIT solicitante no se encuentra entre sus representados
 10100  Código de autorización no válido
 10102  Código de autorización no registrado
 ====== ================================================================================

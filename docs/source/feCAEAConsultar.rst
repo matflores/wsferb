@@ -58,11 +58,14 @@ Errores Posibles
 
 Este servicio puede devolver los siguientes códigos de error:
 
+.. include:: _wsfe_common_errors.inc
+
+Errores específicos de este servicio
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 ====== ================================================================================
 Código Descripción
 ====== ================================================================================
-600    Usuario no autorizado a realizar esta operación
-601    CUIT solicitante no se encuentra entre sus representados
 15000  CUIT no autorizado a solicitar CAEA
 15001  CUIT no registrado como autoimpresor
 15002  CUIT con comprobantes apócrifos
