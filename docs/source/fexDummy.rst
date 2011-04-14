@@ -15,29 +15,35 @@ Modo de uso
 
 ::
 
-  wsfe FEXDummy
+  wsfex FEXDummy
 
 Opciones
 ~~~~~~~~
-.. program:: wsfex
 
-.. option:: -m <module>, --module <module>
+.. include:: _options.inc
 
-   Run a module as a script.
+Respuesta
+---------
 
-Respuesta (exitosa)::
--------------------
+.. include:: _response_format.inc
 
-Respuesta exitosa::
+Tipo de Registro 1
+~~~~~~~~~~~~~~~~~~
 
-  authserver=OK; appserver=OK; dbserver=OK;
+El registro de tipo "1" informa el estado de los servidores de la |AFIP|.
+
+==================== ======= ==================================================
+Campo                Tipo    Descripción
+==================== ======= ==================================================
+TipoReg              S(1)    Tipo de Registro - "1"
+AppServer            S(2)    Estado del servidor de aplicaciones
+DbServer             S(2)    Estado del servidor de base de datos
+AuthServer           S(2)    Estado del servidor de autenticación
+==================== ======= ==================================================
 
 .. note::
-   Note that if you use the :option:`-m` option, a module will be included. See :term:`service`.
+   Si los servidores de |AFIP| están funcionando correctamente, este método devuelve
+   un sólo registro: "1OKOKOK".
 
-.. warning::
-   A warning note. See :term:`service`.
-
-.. seealso::
-  :doc:`fexGetLastId`
-    Get last id used
+.. include:: _errors.inc
+.. include:: _events.inc
