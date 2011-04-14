@@ -24,31 +24,8 @@ utilizan las siguientes opciones, válidas para cualquier servicio detallado en 
 son necesarias para :doc:`feDummy`):
 
 .. include:: _options.inc
-
-
-Entornos de ejecución
----------------------
-
-Existen dos entornos distintos para la ejecución de los web services de AFIP: :term:`Testing` y :term:`Producción`.
-WSFE utilizará siempre el entorno :term:`Producción`, a menos que le indiquemos lo contrario con la opción --test.
-
-:term:`Testing` se utiliza unicamente en la etapa de pruebas y es el que debemos utilizar durante el desarrollo
-hasta confirmar que nuestra aplicación funciona correctamente. Los comprobantes autorizados en este
-entorno carecen de validez.
-
-Nomenclatura
-------------
-
-Para describir el formato de las respuestas se utiliza la siguiente nomenclatura:
-
-============ =================================== ======= ==================
-Tipo de dato Descripción                         Ejemplo Ejemplo formateado
-============ =================================== ======= ==================
-S(6)         Campo alfanumérico de 6 caracteres  AB123   "AB123 "
-N(6)         Campo numérico entero de 6 dígitos  1234    "001234"
-N(12,2)      Campo numérico de 12 dígitos        1234.56 "000000123456"
-             (10 enteros y 2 decimales)
-============ =================================== ======= ==================
+.. include:: _environments.inc
+.. include:: _naming_conventions.inc
 
 Servicios
 ---------
