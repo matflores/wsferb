@@ -1,0 +1,165 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FEXGetParamMon &mdash; WSFErb v2.0.rc1</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
+    <link rel="up" title="WSFEX" href="wsfex.html" />
+    <link rel="prev" title="FEXGetLastId" href="fexGetLastId.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="fexGetLastId.html" title="FEXGetLastId"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" accesskey="U">WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FEXGetParamMon</a><ul>
+<li><a class="reference internal" href="#modo-de-uso">Modo de uso</a><ul>
+<li><a class="reference internal" href="#opciones">Opciones</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#respuesta">Respuesta</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="fexGetLastId.html"
+                        title="Capítulo anterior">FEXGetLastId</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introducir términos de búsqueda.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fexgetparammon">
+<span id="index-0"></span><h1>FEXGetParamMon<a class="headerlink" href="#fexgetparammon" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Devuelve la lista completa de monedas disponibles.</p>
+<div class="section" id="modo-de-uso">
+<h2>Modo de uso<a class="headerlink" href="#modo-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-python"><pre>wsfe FEXGetParamMon &lt;opciones&gt;</pre>
+</div>
+<div class="section" id="opciones">
+<h3>Opciones<a class="headerlink" href="#opciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<dl class="option">
+<dt id="cmdoption-wsfex-c">
+<tt class="descname">-c</tt><tt class="descclassname"> &lt;cuit&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--cuit</tt><tt class="descclassname"> &lt;cuit&gt;</tt><a class="headerlink" href="#cmdoption-wsfex-c" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p><a class="reference internal" href="glossary.html#term-cuit"><em class="xref std std-term">CUIT</em></a> del</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="respuesta">
+<h2>Respuesta<a class="headerlink" href="#respuesta" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>Devuelve una lista de registros con el siguiente formato:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="9%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro</td>
+</tr>
+<tr><td>Mon_id</td>
+<td>S(3)</td>
+<td>Código de moneda</td>
+</tr>
+<tr><td>Mon_ds</td>
+<td>S(250)</td>
+<td>Descripción de moneda</td>
+</tr>
+<tr><td>Mon_vig_desde</td>
+<td>S(8)</td>
+<td>Fecha de vigencia desde (AAAAMMDD)</td>
+</tr>
+<tr><td>Mon_vig_hasta</td>
+<td>S(8)</td>
+<td>Fecha de vigencia hasta (AAAAMMDD)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="fexGetLastId.html" title="FEXGetLastId"
+             >anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" >WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2011, Matías Alejandro Flores.
+      Actualizado por última vez en 13 Apr 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

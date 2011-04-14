@@ -1,0 +1,179 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FEXGetLastId &mdash; WSFErb v2.0.rc1</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
+    <link rel="up" title="WSFEX" href="wsfex.html" />
+    <link rel="next" title="FEXGetParamMon" href="fexGetParamMon.html" />
+    <link rel="prev" title="FEXDummy" href="fexDummy.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="fexGetParamMon.html" title="FEXGetParamMon"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="fexDummy.html" title="FEXDummy"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" accesskey="U">WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="fexDummy.html"
+                        title="Capítulo anterior">FEXDummy</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="fexGetParamMon.html"
+                        title="Próximo capítulo">FEXGetParamMon</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introducir términos de búsqueda.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fexgetlastid">
+<h1>FEXGetLastId<a class="headerlink" href="#fexgetlastid" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Este documento tiene como objetivo detallar los métodos disponibles en WSFEX, el script que facilita el
+acceso a los web services de facturación electrónica de exportación, complementando el manual para el
+desarrollador provisto por AFIP.</p>
+<p>Modo de uso:</p>
+<div class="highlight-python"><pre>wsfe &lt;servicio&gt; [parámetros] [opciones]</pre>
+</div>
+<p>Donde &lt;servicio&gt; puede ser uno de los siguientes: FEDummy, FEAutRequest, FEUltNroRequest,
+FERecuperaQTYRequest, FERecuperaLastCMPRequest, FEConsultaCAERequest, FEXAuthorize,
+FEXCheckPermiso, FEXDummy, FEXGetCmp, FEXGetLastCmp, FEXGetLastId, FEXGetParamCtz,
+FEXGetParamDstCuit, FEXGetParamDstPais, FEXGetParamIncoterms, FEXGetParamIdiomas,
+FEXGetParamMon, FEXGetParamPtoVenta, FEXGetParamTipoCbte, FEXGetParamTipoExpo,
+FEXGetParamUMed.</p>
+<p>En este documento sólo se incluyen aquellos servicios correspondientes al WSFEX de
+AFIP (todos los que comienzan con FEX).</p>
+<p>Con la excepción de FEXDummy, todos los servicios/métodos requieren autorización. La autorización se
+obtiene mediante un ticket de acceso que se puede solicitar a la AFIP utilizando el servicio WSAA (ver
+documentación WSAA en el sitio web de AFIP).</p>
+<p>El script WSFEX permite automatizar la obtención y verificación de dicho ticket de acceso. Para lograrlo se
+utilizan las siguientes opciones, válidas para cualquier servicio detallado en este documento (aunque no
+son necesarias para FEXDummy):</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="23%" />
+<col width="13%" />
+<col width="63%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro</td>
+</tr>
+<tr><td>Valor</td>
+<td>N(5)</td>
+<td>Ultimo ID utilizado</td>
+</tr>
+</tbody>
+</table>
+<table border="1" class="docutils">
+<colgroup>
+<col width="24%" />
+<col width="21%" />
+<col width="55%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro</td>
+</tr>
+<tr><td>Codigo</td>
+<td>N(6)</td>
+<td>Código de error</td>
+</tr>
+<tr><td>Mensaje</td>
+<td>S(512)</td>
+<td>Mensaje de error</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="fexGetParamMon.html" title="FEXGetParamMon"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="fexDummy.html" title="FEXDummy"
+             >anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" >WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2011, Matías Alejandro Flores.
+      Actualizado por última vez en 13 Apr 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>
