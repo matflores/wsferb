@@ -21,7 +21,7 @@ Opciones
 
 El script |WSFEX| permite automatizar la obtención y verificación de dicho :term:`ticket de acceso`. Para lograrlo se
 utilizan las siguientes opciones, válidas para cualquier servicio detallado en este documento (aunque no
-son necesarias para :doc:`fexDummy`):
+son necesarias para :doc:`fexDummy`).
 
 .. include:: _options.inc
 .. include:: _environments.inc

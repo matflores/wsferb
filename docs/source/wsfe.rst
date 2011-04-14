@@ -21,7 +21,7 @@ Opciones
 
 El script |WSFE| permite automatizar la obtención y verificación de dicho :term:`ticket de acceso`. Para lograrlo se
 utilizan las siguientes opciones, válidas para cualquier servicio detallado en este documento (aunque no
-son necesarias para :doc:`feDummy`):
+son necesarias para :doc:`feDummy`).
 
 .. include:: _options.inc
 .. include:: _environments.inc

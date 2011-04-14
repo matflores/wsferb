@@ -1,3 +1,5 @@
+Cada una de estas opciones tiene una versión abreviada y una versión descriptiva. Ambas tienen exactamente la misma funcionalidad.
+
 .. option:: -c <cuit>, --cuit <cuit>
 
    :term:`CUIT` del contribuyente. Sólo los 11 dígitos numéricos, sin guiones ni signos de puntuación. Esta
