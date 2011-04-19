@@ -71,7 +71,7 @@ El último campo (CAEA) sólo será tenido en cuenta al informar comprobantes co
 Tipo de Registro 3 (comprobantes asociados)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Cada comprobante del lote puede contener uno o más registros de tipo "3" por cada comprobante asociado.
+Cada comprobante del lote puede contener uno o más registros de tipo "3", uno por cada comprobante asociado.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
