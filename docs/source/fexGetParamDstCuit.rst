@@ -1,16 +1,16 @@
-.. index:: FEXGetLastId
+.. index:: FEXGetParamDstCuit
 
-FEXGetLastId
-============
+FEXGetParamDstCuit
+==================
 
-Devuelve el identificador único del último requerimiento enviado a :doc:`fexAuthorize`.
+Devuelve la lista de CUITs de países habilitados.
 
 Modo de uso
 -----------
 
 ::
 
-  wsfex FEXGetLastId <opciones>
+  wsfex FEXGetParamDstCuit <opciones>
 
 Opciones
 ~~~~~~~~
@@ -25,13 +25,14 @@ Respuesta
 Tipo de Registro 1
 ~~~~~~~~~~~~~~~~~~
 
-La respuesta contiene un registro de tipo "1" con el identificador del último requerimiento enviado a :doc:`fexAuthorize`.
+La respuesta contiene un registro de tipo "1" por cada país habilitado.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
 TipoReg              S(1)    Tipo de Registro - "1"
-Id                   N(15)   Ultimo ID utilizado
+Cuit                 S(11)   CUIT
+Desc                 S(250)  Descripción
 ==================== ======= ==================================================
 
 .. include:: _errors.inc

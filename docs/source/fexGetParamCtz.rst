@@ -1,16 +1,17 @@
-.. index:: FEXGetLastId
+.. index:: FEXGetParamCtz
 
-FEXGetLastId
-============
+FEXGetParamCtz
+==============
 
-Devuelve el identificador único del último requerimiento enviado a :doc:`fexAuthorize`.
+Devuelve la última cotización registrada en la base de datos aduanera para la moneda indicada.
+Este valor es orientativo.
 
 Modo de uso
 -----------
 
 ::
 
-  wsfex FEXGetLastId <opciones>
+  wsfex FEXGetParamCtz <moneda> <opciones>
 
 Opciones
 ~~~~~~~~
@@ -25,13 +26,15 @@ Respuesta
 Tipo de Registro 1
 ~~~~~~~~~~~~~~~~~~
 
-La respuesta contiene un registro de tipo "1" con el identificador del último requerimiento enviado a :doc:`fexAuthorize`.
+La respuesta contiene un registro de tipo "1" con la última cotización registrada para la moneda indicada.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
 TipoReg              S(1)    Tipo de Registro - "1"
-Id                   N(15)   Ultimo ID utilizado
+MonId                S(3)    Código de moneda
+MonCotiz             N(12,6) Cotización
+FchCotiz             S(8)    Fecha de la cotización (AAAAMMDD)
 ==================== ======= ==================================================
 
 .. include:: _errors.inc

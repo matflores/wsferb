@@ -1,23 +1,24 @@
-El lote que se envía a la |AFIP| para autorizar los comprobantes tiene el mismo formato que el lote
-que se recibe como respuesta conteniendo el :term:`CAE` / :term:`CAEA` otorgado.
+El comprobante que se envía a la |AFIP| para autorizar los comprobantes tiene el mismo formato que el comprobante
+que se recibe como respuesta conteniendo el :term:`CAE` otorgado.
 
 En ambos casos, el primer caracter de cada registro define el tipo de registro y el formato de los caracteres siguientes.
 
-Los registros de tipo "C", "O", "E" y "V" son válidos unicamente en los lotes recibidos como respuesta.
+Los registros de tipo "C", "O", "E" y "V" son válidos unicamente en los comprobantes recibidos como respuesta.
 
 Tipo de Registro 1 (cabecera)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-El lote comienza con un registro de tipo "1" indicando la cantidad de comprobantes (registros de tipo "2") informados, como así también el tipo de comprobante y el punto de venta de todos los comprobantes incluídos en el lote.
+El archivo contiene un único registro de tipo "1" con los datos de la cabecera del comprobante.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
 TipoReg              S(1)    Tipo de Registro - "1"
-CantReg              N(4)    Cantidad de registros de tipo "2"
-TipoCbte             N(3)    Tipo de comprobante (ver :doc:`feParamGetTiposCbte`)
-PtoVenta             N(4)    Punto de venta (ver :doc:`feParamGetPtosVenta`)
-FchProceso           S(14)   Fecha de proceso (AAAAMMDDHHMMSS)
+ID                   N(15)   Identificador único del requerimiento
+TipoCbte             N(3)    Tipo de comprobante (ver :doc:`fexGetParamTipoCbte`)
+PtoVenta             N(4)    Punto de venta (ver :doc:`fexGetParamPtoVenta`)
+NroCbte              N(8)    Número de comprobante (ver :doc:`fexGetLastCmp`)
+FchCbte              S(8)    Fecha de comprobante (AAAAMMDD)
 Resultado            S(1)    Resultado
 ==================== ======= ==================================================
 

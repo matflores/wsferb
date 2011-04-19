@@ -1,7 +1,7 @@
 Nomenclatura
 ------------
 
-Para describir el formato de las respuestas se utiliza la siguiente nomenclatura:
+Para describir el formato de los registros se utiliza la siguiente nomenclatura:
 
 ============ =================================== ======= ==================
 Tipo de dato Descripción                         Ejemplo Ejemplo formateado

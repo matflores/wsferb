@@ -3,36 +3,46 @@
 FEXGetParamMon
 ==============
 
-Devuelve la lista completa de monedas disponibles.
+Devuelve la lista de monedas habilitadas.
 
 Modo de uso
 -----------
 
 ::
 
-  wsfe FEXGetParamMon <opciones>
+  wsfex FEXGetParamMon <opciones>
 
 Opciones
 ~~~~~~~~
-.. program:: wsfex
 
-.. option:: -c <cuit>, --cuit <cuit>
-
-   :term:`CUIT` del 
+.. include:: _options.inc
 
 Respuesta
 ---------
 
-Devuelve una lista de registros con el siguiente formato:
+.. include:: _response_format.inc
+
+Tipo de Registro 1
+~~~~~~~~~~~~~~~~~~
+
+La respuesta contiene un registro de tipo "1" por cada moneda habilitada.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
-TipoReg              S(1)    Tipo de Registro
-Mon_id               S(3)    Código de moneda
-Mon_ds               S(250)  Descripción de moneda
-Mon_vig_desde        S(8)    Fecha de vigencia desde (AAAAMMDD)
-Mon_vig_hasta        S(8)    Fecha de vigencia hasta (AAAAMMDD)
+TipoReg              S(1)    Tipo de Registro - "1"
+Id                   S(3)    Código
+FchDesde             S(8)    Fecha de vigencia desde (AAAAMMDD)
+FchHasta             S(8)    Fecha de vigencia hasta (AAAAMMDD)
+Desc                 S(250)  Descripción
 ==================== ======= ==================================================
 
-.. include:: errores.inc
+.. include:: _errors.inc
+.. include:: _events.inc
+
+Errores Posibles
+~~~~~~~~~~~~~~~~
+
+Este servicio puede devolver los siguientes códigos de error:
+
+.. include:: _wsfex_common_errors.inc

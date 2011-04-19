@@ -1,3 +1,5 @@
-.. |WSAA| replace:: :term:`WSAA`
-.. |WSFEX| replace:: :term:`WSFEX`
 .. |AFIP| replace:: :term:`AFIP`
+.. |WSAA| replace:: :term:`WSAA`
+.. |WSFE| replace:: :term:`WSFEX`
+.. |WSFEX| replace:: :term:`WSFEX`
+.. |WSMTXCA| replace:: :term:`WSMTXCA`

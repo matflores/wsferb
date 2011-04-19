@@ -1,16 +1,16 @@
-.. index:: FEXGetLastId
+.. index:: FEXGetParamTipoCbte
 
-FEXGetLastId
-============
+FEXGetParamTipoCbte
+===================
 
-Devuelve el identificador único del último requerimiento enviado a :doc:`fexAuthorize`.
+Devuelve la lista de tipos de comprobantes habilitados.
 
 Modo de uso
 -----------
 
 ::
 
-  wsfex FEXGetLastId <opciones>
+  wsfex FEXGetParamTipoCbte <opciones>
 
 Opciones
 ~~~~~~~~
@@ -25,13 +25,16 @@ Respuesta
 Tipo de Registro 1
 ~~~~~~~~~~~~~~~~~~
 
-La respuesta contiene un registro de tipo "1" con el identificador del último requerimiento enviado a :doc:`fexAuthorize`.
+La respuesta contiene un registro de tipo "1" por cada tipo de comprobante habilitado.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
 TipoReg              S(1)    Tipo de Registro - "1"
-Id                   N(15)   Ultimo ID utilizado
+Id                   N(3)    Código
+FchDesde             S(8)    Fecha de vigencia desde (AAAAMMDD)
+FchHasta             S(8)    Fecha de vigencia hasta (AAAAMMDD)
+Desc                 S(250)  Descripción
 ==================== ======= ==================================================
 
 .. include:: _errors.inc
