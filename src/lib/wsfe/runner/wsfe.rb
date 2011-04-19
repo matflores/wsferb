@@ -44,7 +44,7 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
-                                     Escriba wsfe <servicio> --info para obtener mayor
+                                     Escriba wsfe <servicio> --help para obtener mayor
                                      informacion acerca de un servicio en particular.
 __EOD__
       end

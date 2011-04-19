@@ -58,7 +58,7 @@ Modo de uso: wsfex [opciones] <servicio> [argumentos]
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
-                                     Escriba wsfex <servicio> --info para obtener mayor
+                                     Escriba wsfex <servicio> --help para obtener mayor
                                      informacion acerca de un servicio en particular.
 __EOD__
       end

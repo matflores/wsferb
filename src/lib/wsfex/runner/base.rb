@@ -28,7 +28,7 @@ module WSFEX
         :servicios => ["-s", "--servicios",    "Indica que lo que se esta facturando corresponde",
                                                "a prestacion de servicios (opcional)."],
         :test      => ["-e", "--test",         "Ejecuta el servicio en el entorno de pruebas de AFIP."],
-        :info      => ["-i", "--info",         "Muestra informacion de ayuda acerca del servicio especificado."],
+        :help      => ["-h", "--help",         "Muestra informacion de ayuda acerca del servicio especificado."],
         :version   => ["-v", "--version",      "Informa la version actual del script."]
       }
 
@@ -80,7 +80,7 @@ module WSFEX
         parser.on(*OPTIONS[:log])          { |log| Savon.log, Savon.logger = true, Logger.new(log) }
         parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
-        parser.on_tail(*OPTIONS[:info])    { info_exit }
+        parser.on_tail(*OPTIONS[:help])    { info_exit }
       end
 
       def parse_other_options
