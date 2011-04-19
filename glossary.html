@@ -23,7 +23,9 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
-    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" /> 
+    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
+    <link rel="next" title="Changelog" href="changelog.html" />
+    <link rel="prev" title="Obtención del certificado digital" href="certificate_request_howto.html" /> 
   </head>
   <body>
     <div class="related">
@@ -32,11 +34,23 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="certificate_request_howto.html" title="Obtención del certificado digital"
+             accesskey="P">anterior</a> |</li>
         <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="certificate_request_howto.html"
+                        title="Capítulo anterior">Obtención del certificado digital</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="changelog.html"
+                        title="Próximo capítulo">Changelog</a></p>
 <div id="searchbox" style="display: none">
   <h3>Búsqueda rápida</h3>
     <form class="search" action="search.html" method="get">
@@ -62,15 +76,41 @@
 <span id="index-0"></span><h1>Glosario<a class="headerlink" href="#glosario" title="Enlazar permanentemente con este título">¶</a></h1>
 <dl class="glossary docutils">
 <dt id="term-afip">AFIP</dt>
-<dd>Administración Federal de Ingresos Públicos</dd>
+<dd>Administración Federal de Ingresos Públicos. Ver sección <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más datos sobre los servicios de facturación electrónica.</dd>
+<dt id="term-cae">CAE</dt>
+<dd>Código de Autorización Electrónico. Es el código que asigna la <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a> al autorizar un comprobante electrónico.</dd>
+<dt id="term-caea">CAEA</dt>
+<dd>Código de Autorización Electrónico Anticipado. Utilizado por autoimpresores. En lugar de solicitar un código por comprobante, se solicita un código de autorización por quincena y luego se vinculan los comprobantes emitidos con dicho código de autorización.</dd>
+<dt id="term-certificate-signing-request">Certificate signing request</dt>
+<dd>Solicitud que debe ser enviada a una entidad autorizada a fin de recibir un certificado digital. Esta solicitud debe ser firmada digitalmente utilizando criptografía de clave pública. Ver instrucciones para generar un <a class="reference internal" href="#term-csr"><em class="xref std std-term">CSR</em></a> en <a class="reference internal" href="certificate_request_howto.html"><em>Obtención del certificado digital</em></a>.</dd>
+<dt id="term-certificado-digital">Certificado digital</dt>
+<dd>Un certificado digital es un documento digital que garantiza el vínculo entre una entidad determinada y una clave pública. Para utilizar los web services de facturación electrónica, es necesario solicitar a la <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a> un certificado digital X.509 (ver <a class="reference internal" href="certificate_request_howto.html"><em>Obtención del certificado digital</em></a> para obtener mayor información sobre este proceso).</dd>
+<dt id="term-certificado-digital-x-509">Certificado digital X.509</dt>
+<dd>X.509 es un formato standard para certificados digitales de clave pública. Ver también <a class="reference internal" href="#term-certificado-digital"><em class="xref std std-term">Certificado digital</em></a>.</dd>
+<dt id="term-clave-privada">Clave privada</dt>
+<dd>Una de las dos claves utilizadas en los sistemas de cifrado de clave pública o asimétricos. <strong>WSFErb</strong> requiere una clave privada para firmar las solicitudes de tickets de acceso a los web services de <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a>. Una vez generada, debe guardar la clave en un lugar seguro. En <a class="reference internal" href="certificate_request_howto.html"><em>Obtención del certificado digital</em></a> encontrará instrucciones para generar una clave privada si aún no posee ninguna.</dd>
+<dt id="term-csr">CSR</dt>
+<dd>Ver <a class="reference internal" href="#term-certificate-signing-request"><em class="xref std std-term">Certificate signing request</em></a>.</dd>
 <dt id="term-cuit">CUIT</dt>
-<dd>Clave Única de Identificación Tributaria</dd>
+<dd>Clave Única de Identificación Tributaria. Siempre que se envía o se recibe un CUIT en <strong>WSFErb</strong> deben incluirse unicamente los 11 dígitos numéricos, sin guiones, espacios, ni otros signos de puntuación.</dd>
+<dt id="term-produccion">Producción</dt>
+<dd>Entorno real de <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a> que debe utilizarse para autorizar legalmente los comprobantes electrónicos emitidos.</dd>
+<dt id="term-testing">Testing</dt>
+<dd>Entorno de prueba de <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a>. Permite probar la implementación de clientes de los web services y autorizar comprobantes. Los CAEs y CAEAs devueltos en este entorno carecen de validez legal.</dd>
+<dt id="term-ticket-de-acceso">Ticket de acceso</dt>
+<dd>Todos los web services de <a class="reference internal" href="#term-afip"><em class="xref std std-term">AFIP</em></a> requieren que el contribuyente solicite un ticket de acceso para poder utilizarlos. Estos tickets de acceso se solicitan utilizando los servicios <a class="reference internal" href="#term-wsaa"><em class="xref std std-term">WSAA</em></a> y son válidos por 24 horas. <strong>WSFErb</strong> automatiza este proceso por Ud., solicitando un nuevo ticket sólo cuando es necesario (ver opción -t).</dd>
 <dt id="term-wsaa">WSAA</dt>
-<dd>Web Service de Autenticación y Autorización</dd>
+<dd>Web Service de Autenticación y Autorización. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
 <dt id="term-wsfe">WSFE</dt>
-<dd>Web Service de Facturación Electrónica</dd>
+<dd>Web Service de Facturación Electrónica. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
+<dt id="term-wsfev0">WSFEv0</dt>
+<dd>Web Service de Facturación Electrónica versión 0, válido hasta el 30/06/2011. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
+<dt id="term-wsfev1">WSFEv1</dt>
+<dd>Web Service de Facturación Electrónica versión 1, válido desde el 01/03/2011 y obligatorio a partir del 01/07/2011. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
 <dt id="term-wsfex">WSFEX</dt>
-<dd>Web Service de Facturación Electrónica de Exportación</dd>
+<dd>Web Service de Facturación Electrónica de Exportación. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
+<dt id="term-wsmtxca">WSMTXCA</dt>
+<dd>Web Service de Facturación Electrónica con codificación de productos y detalle de items. Ver <a class="reference external" href="http://www.afip.gov.ar/eFactura">eFactura</a> para más información.</dd>
 </dl>
 </div>
 
@@ -86,12 +126,18 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
+        <li class="right" >
+          <a href="changelog.html" title="Changelog"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="certificate_request_howto.html" title="Obtención del certificado digital"
+             >anterior</a> |</li>
         <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 13 Apr 2011.
+      Actualizado por última vez en 19 Apr 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

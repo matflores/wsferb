@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>FEXCheckPermiso &mdash; WSFErb v2.0.rc1</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
+    <link rel="up" title="WSFEX" href="wsfex.html" />
+    <link rel="next" title="FEXDummy" href="fexDummy.html" />
+    <link rel="prev" title="FEXAuthorize" href="fexAuthorize.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="fexDummy.html" title="FEXDummy"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="fexAuthorize.html" title="FEXAuthorize"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" accesskey="U">WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Contenidos</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">FEXCheckPermiso</a><ul>
+<li><a class="reference internal" href="#modo-de-uso">Modo de uso</a><ul>
+<li><a class="reference internal" href="#opciones">Opciones</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#respuesta">Respuesta</a><ul>
+<li><a class="reference internal" href="#tipo-de-registro-1">Tipo de Registro 1</a></li>
+<li><a class="reference internal" href="#tipo-de-registro-e-errores">Tipo de Registro E (errores)</a></li>
+<li><a class="reference internal" href="#tipo-de-registro-v-eventos">Tipo de Registro V (eventos)</a></li>
+<li><a class="reference internal" href="#errores-posibles">Errores Posibles</a><ul>
+<li><a class="reference internal" href="#errores-comunes-a-todos-los-servicios-wsfex">Errores comunes a todos los servicios WSFEX</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="fexAuthorize.html"
+                        title="Capítulo anterior">FEXAuthorize</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="fexDummy.html"
+                        title="Próximo capítulo">FEXDummy</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introducir términos de búsqueda.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fexcheckpermiso">
+<span id="index-0"></span><h1>FEXCheckPermiso<a class="headerlink" href="#fexcheckpermiso" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Confirma si el permiso de embarque indicado está registrado en la base de datos aduanera y corresponde
+al país de destino especificado.</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">En modo <a class="reference internal" href="glossary.html#term-testing"><em class="xref std std-term">Testing</em></a> este servicio devuelve siempre <strong>OK</strong>, sin importar el código de
+permiso de embarque utilizado.</p>
+</div>
+<div class="section" id="modo-de-uso">
+<h2>Modo de uso<a class="headerlink" href="#modo-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
+<div class="highlight-python"><pre>wsfex FEXCheckPermiso &lt;permiso&gt; &lt;pais&gt; &lt;opciones&gt;</pre>
+</div>
+<p>donde:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="28%" />
+<col width="72%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>Permiso</td>
+<td>Código de permiso de embarque</td>
+</tr>
+<tr><td>País</td>
+<td>Código de país de destino de la mercadería</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="opciones">
+<h3>Opciones<a class="headerlink" href="#opciones" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Cada una de estas opciones tiene una versión abreviada y una versión descriptiva. Ambas tienen exactamente la misma funcionalidad.</p>
+<dl class="option">
+<dt id="cmdoption-c">
+<tt class="descname">-c</tt><tt class="descclassname"> &lt;cuit&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--cuit</tt><tt class="descclassname"> &lt;cuit&gt;</tt><a class="headerlink" href="#cmdoption-c" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p><a class="reference internal" href="glossary.html#term-cuit"><em class="xref std std-term">CUIT</em></a> del contribuyente. Sólo los 11 dígitos numéricos, sin guiones ni signos de puntuación. Esta
+es la única opción obligatoria para todos los servicios.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-r">
+<tt class="descname">-r</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--cert</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><a class="headerlink" href="#cmdoption-r" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Ubicación del <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>. En caso de no estar presente se intentará
+localizar el <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> <strong>&lt;cuit&gt;.crt</strong> en el directorio actual. De no existir dicho archivo,
+no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de necesitarlo.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-k">
+<tt class="descname">-k</tt><tt class="descclassname"> &lt;key-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--key</tt><tt class="descclassname"> &lt;key-file&gt;</tt><a class="headerlink" href="#cmdoption-k" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Ubicación de la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> utilizada para firmar el <a class="reference internal" href="glossary.html#term-csr"><em class="xref std std-term">CSR</em></a> enviado a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.
+En caso de no estar presente se intentará localizar la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> <strong>&lt;cuit&gt;.key</strong> en el directorio
+actual. De no existir dicho archivo, no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de
+necesitarlo.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-t">
+<tt class="descname">-t</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--ticket</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><a class="headerlink" href="#cmdoption-t" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Ubicación de un <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> con anterioridad. Si el archivo existe y
+el ticket aún es válido, se utilizará este <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en lugar de solicitar uno nuevo. Si
+en cambio el archivo no existe, o si existe pero el ticket ya expiró, se solicitará un nuevo
+<a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>. En todos los casos en que sea necesario solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>,
+el mismo será almacenado en el &lt;ticket-file&gt; especificado. En caso de no estar presente esta opción, se
+intentará localizar el <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> <strong>&lt;cuit&gt;.xml</strong> en el directorio actual. De no existir dicho
+archivo, se requerirá un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> al <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a> de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> por cada transacción. Por
+este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-o">
+<tt class="descname">-o</tt><tt class="descclassname"> &lt;path&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--out</tt><tt class="descclassname"> &lt;path&gt;</tt><a class="headerlink" href="#cmdoption-o" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Guarda la respuesta en el archivo indicado en lugar de mostrarla por pantalla.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-l">
+<tt class="descname">-l</tt><tt class="descclassname"> &lt;path&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--log</tt><tt class="descclassname"> &lt;path&gt;</tt><a class="headerlink" href="#cmdoption-l" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Guarda un log de la comunicación con los web services de AFIP en el archivo indicado.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-e">
+<tt class="descname">-e</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--test</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-e" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Ejecuta el servicio en el entorno de pruebas (modo <a class="reference internal" href="glossary.html#term-testing"><em class="xref std std-term">Testing</em></a>). Ver <a class="reference internal" href="modes.html"><em>Modos de ejecución</em></a>.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-h">
+<tt class="descname">-h</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-h" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Muestra más información sobre la sintaxis del servicio especificado.</p>
+</dd></dl>
+
+<dl class="option">
+<dt id="cmdoption-v">
+<tt class="descname">-v</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-v" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dd><p>Informa la versión actual de <strong>WSFErb</strong>.</p>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="respuesta">
+<h2>Respuesta<a class="headerlink" href="#respuesta" title="Enlazar permanentemente con este título">¶</a></h2>
+<p>El primer caracter de cada registro define el tipo de registro y el formato de los caracteres siguientes.</p>
+<p>Los espacios a la derecha del último caracter significativo se eliminan.</p>
+<div class="section" id="tipo-de-registro-1">
+<h3>Tipo de Registro 1<a class="headerlink" href="#tipo-de-registro-1" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La respuesta contiene un registro de tipo &#8220;1&#8221; indicando si el permiso especificado es válido.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="25%" />
+<col width="9%" />
+<col width="66%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro - &#8220;1&#8221;</td>
+</tr>
+<tr><td>Valor</td>
+<td>S(2)</td>
+<td><strong>OK</strong> si el permiso indicado se encuentra
+registrado en la base de datos aduanera y corresponde
+al país de destino especificado. <strong>NO</strong> en caso de
+que no se encuentre ningún permiso de embarque con
+el código especificado para el país de destino
+indicado. Valores posibles: <strong>OK</strong> o <strong>NO</strong>.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tipo-de-registro-e-errores">
+<h3>Tipo de Registro E (errores)<a class="headerlink" href="#tipo-de-registro-e-errores" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La respuesta contiene un registro de tipo &#8220;E&#8221; por cada error detectado. No se incluirán registros de tipo &#8220;E&#8221; en caso de que la operación finalice exitosamente.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="9%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro - &#8220;E&#8221;</td>
+</tr>
+<tr><td>ErrCode</td>
+<td>N(6)</td>
+<td>Código de error</td>
+</tr>
+<tr><td>ErrMessage</td>
+<td>S(512)</td>
+<td>Descripción del error</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="tipo-de-registro-v-eventos">
+<h3>Tipo de Registro V (eventos)<a class="headerlink" href="#tipo-de-registro-v-eventos" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>La respuesta contiene un registro de tipo &#8220;V&#8221; por cada evento detectado.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="26%" />
+<col width="9%" />
+<col width="65%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Campo</th>
+<th class="head">Tipo</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>TipoReg</td>
+<td>S(1)</td>
+<td>Tipo de Registro - &#8220;V&#8221;</td>
+</tr>
+<tr><td>EvtCode</td>
+<td>N(6)</td>
+<td>Código de evento</td>
+</tr>
+<tr><td>EvtMessage</td>
+<td>S(512)</td>
+<td>Descripción del evento</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section" id="errores-posibles">
+<h3>Errores Posibles<a class="headerlink" href="#errores-posibles" title="Enlazar permanentemente con este título">¶</a></h3>
+<p>Este servicio puede devolver los siguientes códigos de error:</p>
+<div class="section" id="errores-comunes-a-todos-los-servicios-wsfex">
+<h4>Errores comunes a todos los servicios WSFEX<a class="headerlink" href="#errores-comunes-a-todos-los-servicios-wsfex" title="Enlazar permanentemente con este título">¶</a></h4>
+<table border="1" class="docutils">
+<colgroup>
+<col width="7%" />
+<col width="93%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Código</th>
+<th class="head">Descripción</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>500</td>
+<td>Error interno de aplicación</td>
+</tr>
+<tr><td>501</td>
+<td>Error interno de base de datos</td>
+</tr>
+<tr><td>502</td>
+<td>Error interno - Autorizador - Transacción Activa</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="fexDummy.html" title="FEXDummy"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="fexAuthorize.html" title="FEXAuthorize"
+             >anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li>
+          <li><a href="wsfex.html" >WSFEX</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2011, Matías Alejandro Flores.
+      Actualizado por última vez en 19 Apr 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

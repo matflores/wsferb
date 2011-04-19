@@ -5,10 +5,10 @@ FEDummy
 
 El único propósito de este método es determinar el estado de los servidores de la :term:`AFIP`.
 
-Si tenemos algún problema con cualquiera de los otros métodos, podemos utilizar FEDummy para
+Si tenemos algún problema con cualquiera de los otros métodos, podemos utilizar **FEDummy** para
 verificar si los servidores de la :term:`AFIP` están funcionando correctamente.
 
-Este es el único método que no requiere un :term:`CUIT` válido, ni :term:certificados, ni :term:claves, ni un :term:`ticket de acceso`.
+Este es el único método que no requiere un :term:`CUIT` válido, ni :term:`certificado digital`, ni :term:`clave privada`, ni siquiera un :term:`ticket de acceso`.
 
 Modo de uso
 -----------

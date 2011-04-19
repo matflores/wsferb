@@ -24,7 +24,7 @@
     <script type="text/javascript" src="_static/doctools.js"></script>
     <script type="text/javascript" src="_static/translations.js"></script>
     <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
-    <link rel="next" title="FEXDummy" href="fexDummy.html" />
+    <link rel="next" title="FEXAuthorize" href="fexAuthorize.html" />
     <link rel="prev" title="FEParamGetTiposTributos" href="feParamGetTiposTributos.html" /> 
   </head>
   <body>
@@ -35,7 +35,7 @@
           <a href="genindex.html" title="Índice General"
              accesskey="I">índice</a></li>
         <li class="right" >
-          <a href="fexDummy.html" title="FEXDummy"
+          <a href="fexAuthorize.html" title="FEXAuthorize"
              accesskey="N">siguiente</a> |</li>
         <li class="right" >
           <a href="feParamGetTiposTributos.html" title="FEParamGetTiposTributos"
@@ -52,8 +52,6 @@
 <li><a class="reference internal" href="#opciones">Opciones</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#entornos-de-ejecucion">Entornos de ejecución</a></li>
-<li><a class="reference internal" href="#nomenclatura">Nomenclatura</a></li>
 <li><a class="reference internal" href="#servicios">Servicios</a><ul>
 </ul>
 </li>
@@ -65,8 +63,8 @@
   <p class="topless"><a href="feParamGetTiposTributos.html"
                         title="Capítulo anterior">FEParamGetTiposTributos</a></p>
   <h4>Próximo tema</h4>
-  <p class="topless"><a href="fexDummy.html"
-                        title="Próximo capítulo">FEXDummy</a></p>
+  <p class="topless"><a href="fexAuthorize.html"
+                        title="Próximo capítulo">FEXAuthorize</a></p>
 <div id="searchbox" style="display: none">
   <h3>Búsqueda rápida</h3>
     <form class="search" action="search.html" method="get">
@@ -89,22 +87,29 @@
           <div class="body">
             
   <div class="section" id="wsfex">
-<h1>WSFEX<a class="headerlink" href="#wsfex" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Esta sección tiene como objetivo detallar los métodos disponibles en <a class="reference internal" href="glossary.html#term-wsfex"><em class="xref std std-term">WSFEX</em></a>, el script que facilita el
-acceso a los web services de facturación electrónica de exportación, complementando el manual para el
-desarrollador provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.</p>
+<span id="index-0"></span><h1>WSFEX<a class="headerlink" href="#wsfex" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Esta sección tiene como objetivo detallar los servicios de <strong>WSFErb</strong> que se comunican con los servicios
+<a class="reference internal" href="glossary.html#term-wsfex"><em class="xref std std-term">WSFEX</em></a> de <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.</p>
+<div class="admonition important">
+<p class="first admonition-title">Importante</p>
+<p class="last">Este documento pretende complementar, y no reemplazar, el <a class="reference external" href="http://www.afip.gov.ar/eFactura/documentos/WSFEX-Manualparaeldesarrollador_V1.pdf">manual para el desarrollador</a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.</p>
+</div>
 <div class="section" id="modo-de-uso">
 <h2>Modo de uso<a class="headerlink" href="#modo-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="highlight-python"><pre>wsfe &lt;servicio&gt; [parámetros] [opciones]</pre>
+<div class="highlight-python"><pre>wsfex &lt;servicio&gt; [parámetros] [opciones]</pre>
 </div>
-<p>Con la excepción de <a class="reference internal" href="fexDummy.html"><em>FEXDummy</em></a>, todos los servicios/métodos requieren autorización. La autorización se
-obtiene mediante un <em class="xref std std-term">ticket de acceso</em> que se puede solicitar a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> utilizando el servicio <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a>
-(ver documentación WSAA en el sitio web de <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>).</p>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p><strong>WSFErb</strong> incluye dos archivos ejecutables para utilizar los servicios <strong>WSFEX</strong>: <em>wsfex.exe</em> y <em>wsfexw.exe</em>.
+Ambos comparten la misma sintaxis y opciones, y la única diferencia entre ambos es que <em>wsfex.exe</em>
+es una aplicación de consola y <em>wsfexw.exe</em> es una aplicación Win32. Si piensa ejecutar <strong>WSFErb</strong>
+desde una aplicación Windows, es probable que la mejor opción sea ejecutar <em>wsfexw.exe</em> con la opción
+-o para guardar la respuesta en un archivo, evitando así abrir ventanas innecesarias.</p>
+<p class="last">En el resto del documento se utilizará <em>wsfex.exe</em> para documentar la sintaxis de cada método, recuerde
+que siempre puede utilizar <em>wsfexw.exe</em> en su lugar si así lo prefiere.</p>
+</div>
 <div class="section" id="opciones">
 <h3>Opciones<a class="headerlink" href="#opciones" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>El script <a class="reference internal" href="glossary.html#term-wsfex"><em class="xref std std-term">WSFEX</em></a> permite automatizar la obtención y verificación de dicho <em class="xref std std-term">ticket de acceso</em>. Para lograrlo se
-utilizan las siguientes opciones, válidas para cualquier servicio detallado en este documento (aunque no
-son necesarias para <a class="reference internal" href="fexDummy.html"><em>FEXDummy</em></a>).</p>
 <p>Cada una de estas opciones tiene una versión abreviada y una versión descriptiva. Ambas tienen exactamente la misma funcionalidad.</p>
 <dl class="option">
 <dt id="cmdoption-c">
@@ -116,30 +121,30 @@ es la única opción obligatoria para todos los servicios.</p>
 <dl class="option">
 <dt id="cmdoption-r">
 <tt class="descname">-r</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--cert</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><a class="headerlink" href="#cmdoption-r" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación del <em class="xref std std-term">certificado digital</em> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>. En caso de no estar presente se intentará
-localizar el <em class="xref std std-term">certificado digital</em> &#8220;&lt;cuit&gt;.crt&#8221; en el directorio actual. De no existir dicho archivo,
-no se podrá solicitar un nuevo <em class="xref std std-term">ticket de acceso</em> en caso de necesitarlo.</p>
+<dd><p>Ubicación del <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>. En caso de no estar presente se intentará
+localizar el <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> <strong>&lt;cuit&gt;.crt</strong> en el directorio actual. De no existir dicho archivo,
+no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de necesitarlo.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-k">
 <tt class="descname">-k</tt><tt class="descclassname"> &lt;key-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--key</tt><tt class="descclassname"> &lt;key-file&gt;</tt><a class="headerlink" href="#cmdoption-k" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación de la <em class="xref std std-term">clave privada</em> utilizada para firmar el <em class="xref std std-term">CSR</em> enviado a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.
-En caso de no estar presente se intentará localizar la <em class="xref std std-term">clave privada</em> &#8220;&lt;cuit&gt;.key&#8221; en el directorio
-actual. De no existir dicho archivo, no se podrá solicitar un nuevo <em class="xref std std-term">ticket de acceso</em> en caso de
+<dd><p>Ubicación de la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> utilizada para firmar el <a class="reference internal" href="glossary.html#term-csr"><em class="xref std std-term">CSR</em></a> enviado a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.
+En caso de no estar presente se intentará localizar la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> <strong>&lt;cuit&gt;.key</strong> en el directorio
+actual. De no existir dicho archivo, no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de
 necesitarlo.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-t">
 <tt class="descname">-t</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--ticket</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><a class="headerlink" href="#cmdoption-t" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación de un <em class="xref std std-term">ticket de acceso</em> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> con anterioridad. Si el archivo existe y
-el ticket aún es válido, se utilizará este <em class="xref std std-term">ticket de acceso</em> en lugar de solicitar uno nuevo. Si
+<dd><p>Ubicación de un <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> con anterioridad. Si el archivo existe y
+el ticket aún es válido, se utilizará este <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en lugar de solicitar uno nuevo. Si
 en cambio el archivo no existe, o si existe pero el ticket ya expiró, se solicitará un nuevo
-<em class="xref std std-term">ticket de acceso</em>. En todos los casos en que sea necesario solicitar un nuevo <em class="xref std std-term">ticket de acceso</em>,
+<a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>. En todos los casos en que sea necesario solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>,
 el mismo será almacenado en el &lt;ticket-file&gt; especificado. En caso de no estar presente esta opción, se
-intentará localizar el <em class="xref std std-term">ticket de acceso</em> &#8220;&lt;cuit&gt;.xml&#8221; en el directorio actual. De no existir dicho
-archivo, se requerirá un nuevo <em class="xref std std-term">ticket de acceso</em> al <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a> de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> por cada transacción. Por
+intentará localizar el <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> <strong>&lt;cuit&gt;.xml</strong> en el directorio actual. De no existir dicho
+archivo, se requerirá un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> al <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a> de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> por cada transacción. Por
 este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 </dd></dl>
 
@@ -158,76 +163,50 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <dl class="option">
 <dt id="cmdoption-e">
 <tt class="descname">-e</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--test</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-e" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ejecuta el servicio en el entorno de pruebas (<em class="xref std std-term">Testing</em>).</p>
+<dd><p>Ejecuta el servicio en el entorno de pruebas (modo <a class="reference internal" href="glossary.html#term-testing"><em class="xref std std-term">Testing</em></a>). Ver <a class="reference internal" href="modes.html"><em>Modos de ejecución</em></a>.</p>
 </dd></dl>
 
 <dl class="option">
-<dt id="cmdoption-i">
-<tt class="descname">-i</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--info</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-i" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="cmdoption-h">
+<tt class="descname">-h</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-h" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Muestra más información sobre la sintaxis del servicio especificado.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-v">
 <tt class="descname">-v</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-v" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Informa la versión actual del script.</p>
+<dd><p>Informa la versión actual de <strong>WSFErb</strong>.</p>
 </dd></dl>
 
 </div>
-</div>
-<div class="section" id="entornos-de-ejecucion">
-<h2>Entornos de ejecución<a class="headerlink" href="#entornos-de-ejecucion" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Existen dos entornos distintos para la ejecución de los web services de AFIP: <em class="xref std std-term">Testing</em> y <em class="xref std std-term">Producción</em>.
-WSFErb utilizará siempre el entorno <em class="xref std std-term">Producción</em>, a menos que le indiquemos lo contrario con la opción &#8211;test.</p>
-<p><em class="xref std std-term">Testing</em> se utiliza unicamente en la etapa de pruebas y es el que debemos utilizar durante el desarrollo
-hasta confirmar que nuestra aplicación funciona correctamente. Los comprobantes autorizados en este
-entorno carecen de validez.</p>
-</div>
-<div class="section" id="nomenclatura">
-<h2>Nomenclatura<a class="headerlink" href="#nomenclatura" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>Para describir el formato de las respuestas se utiliza la siguiente nomenclatura:</p>
-<table border="1" class="docutils">
-<colgroup>
-<col width="17%" />
-<col width="49%" />
-<col width="10%" />
-<col width="25%" />
-</colgroup>
-<thead valign="bottom">
-<tr><th class="head">Tipo de dato</th>
-<th class="head">Descripción</th>
-<th class="head">Ejemplo</th>
-<th class="head">Ejemplo formateado</th>
-</tr>
-</thead>
-<tbody valign="top">
-<tr><td>S(6)</td>
-<td>Campo alfanumérico de 6 caracteres</td>
-<td>AB123</td>
-<td>&#8220;AB123 &#8220;</td>
-</tr>
-<tr><td>N(6)</td>
-<td>Campo numérico entero de 6 dígitos</td>
-<td>1234</td>
-<td>&#8220;001234&#8221;</td>
-</tr>
-<tr><td>N(12,2)</td>
-<td>Campo numérico de 12 dígitos
-(10 enteros y 2 decimales)</td>
-<td>1234.56</td>
-<td>&#8220;000000123456&#8221;</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div class="section" id="servicios">
 <h2>Servicios<a class="headerlink" href="#servicios" title="Enlazar permanentemente con este título">¶</a></h2>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="fexAuthorize.html">FEXAuthorize</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexCheckPermiso.html">FEXCheckPermiso</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fexDummy.html">FEXDummy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetCmp.html">FEXGetCmp</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetLastCmp.html">FEXGetLastCmp</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fexGetLastId.html">FEXGetLastId</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamCtz.html">FEXGetParamCtz</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamDstCuit.html">FEXGetParamDstCuit</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamDstPais.html">FEXGetParamDstPais</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamIdiomas.html">FEXGetParamIdiomas</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamIncoterms.html">FEXGetParamIncoterms</a></li>
 <li class="toctree-l1"><a class="reference internal" href="fexGetParamMon.html">FEXGetParamMon</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamPtoVenta.html">FEXGetParamPtoVenta</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamTipoCbte.html">FEXGetParamTipoCbte</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamTipoExpo.html">FEXGetParamTipoExpo</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fexGetParamUMed.html">FEXGetParamUMed</a></li>
 </ul>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Para emitir comprobantes electrónicos de exportación, el único servicio realmente necesario es <a class="reference internal" href="fexAuthorize.html"><em>FEXAuthorize</em></a>.
+El resto de los servicios permiten realizar consultas y obtener las tablas de códigos referenciales de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> y,
+si bien pueden ser útiles en muchos casos, no se utilizan al momento de autorizar un comprobante.</p>
 </div>
 </div>
 </div>
@@ -245,7 +224,7 @@ entorno carecen de validez.</p>
           <a href="genindex.html" title="Índice General"
              >índice</a></li>
         <li class="right" >
-          <a href="fexDummy.html" title="FEXDummy"
+          <a href="fexAuthorize.html" title="FEXAuthorize"
              >siguiente</a> |</li>
         <li class="right" >
           <a href="feParamGetTiposTributos.html" title="FEParamGetTiposTributos"
@@ -255,7 +234,7 @@ entorno carecen de validez.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 13 Apr 2011.
+      Actualizado por última vez en 19 Apr 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

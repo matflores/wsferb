@@ -1,43 +1,45 @@
+.. index:: FEXGetLastId
+
 FEXGetLastId
 ============
 
-Este documento tiene como objetivo detallar los métodos disponibles en WSFEX, el script que facilita el
-acceso a los web services de facturación electrónica de exportación, complementando el manual para el
-desarrollador provisto por AFIP.
+Devuelve el identificador único del último requerimiento enviado a :doc:`fexAuthorize`.
 
-Modo de uso::
+Modo de uso
+-----------
 
-  wsfe <servicio> [parámetros] [opciones]
+::
 
-Donde <servicio> puede ser uno de los siguientes: FEDummy, FEAutRequest, FEUltNroRequest,
-FERecuperaQTYRequest, FERecuperaLastCMPRequest, FEConsultaCAERequest, FEXAuthorize,
-FEXCheckPermiso, FEXDummy, FEXGetCmp, FEXGetLastCmp, FEXGetLastId, FEXGetParamCtz,
-FEXGetParamDstCuit, FEXGetParamDstPais, FEXGetParamIncoterms, FEXGetParamIdiomas,
-FEXGetParamMon, FEXGetParamPtoVenta, FEXGetParamTipoCbte, FEXGetParamTipoExpo,
-FEXGetParamUMed.
+  wsfex FEXGetLastId <opciones>
 
-En este documento sólo se incluyen aquellos servicios correspondientes al WSFEX de
-AFIP (todos los que comienzan con FEX).
+Opciones
+~~~~~~~~
 
-Con la excepción de FEXDummy, todos los servicios/métodos requieren autorización. La autorización se
-obtiene mediante un ticket de acceso que se puede solicitar a la AFIP utilizando el servicio WSAA (ver
-documentación WSAA en el sitio web de AFIP).
+.. include:: _options.inc
 
-El script WSFEX permite automatizar la obtención y verificación de dicho ticket de acceso. Para lograrlo se
-utilizan las siguientes opciones, válidas para cualquier servicio detallado en este documento (aunque no
-son necesarias para FEXDummy):
+Respuesta
+---------
 
-======= ==== ================
-Campo   Tipo Descripción
-======= ==== ================
-TipoReg S(1) Tipo de Registro
-Valor   N(5) Ultimo ID utilizado
-======= ==== ================
+.. include:: _response_format.inc
 
-======= ====== ================
-Campo   Tipo   Descripción
-======= ====== ================
-TipoReg S(1)   Tipo de Registro
-Codigo  N(6)   Código de error
-Mensaje S(512) Mensaje de error
-======= ====== ================
+Tipo de Registro 1
+~~~~~~~~~~~~~~~~~~
+
+La respuesta contiene un registro de tipo "1" con el identificador del último requerimiento enviado a :doc:`fexAuthorize`.
+
+==================== ======= ==================================================
+Campo                Tipo    Descripción
+==================== ======= ==================================================
+TipoReg              S(1)    Tipo de Registro - "1"
+Id                   N(15)   Ultimo ID utilizado
+==================== ======= ==================================================
+
+.. include:: _errors.inc
+.. include:: _events.inc
+
+Errores Posibles
+~~~~~~~~~~~~~~~~
+
+Este servicio puede devolver los siguientes códigos de error:
+
+.. include:: _wsfex_common_errors.inc

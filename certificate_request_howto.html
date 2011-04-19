@@ -1,0 +1,135 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Obtención del certificado digital &mdash; WSFErb v2.0.rc1</title>
+    <link rel="stylesheet" href="_static/sphinxdoc.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.0.rc1',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <link rel="top" title="WSFErb v2.0.rc1" href="index.html" />
+    <link rel="next" title="Glosario" href="glossary.html" />
+    <link rel="prev" title="Modos de ejecución" href="modes.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             accesskey="I">índice</a></li>
+        <li class="right" >
+          <a href="glossary.html" title="Glosario"
+             accesskey="N">siguiente</a> |</li>
+        <li class="right" >
+          <a href="modes.html" title="Modos de ejecución"
+             accesskey="P">anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li> 
+      </ul>
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Tema anterior</h4>
+  <p class="topless"><a href="modes.html"
+                        title="Capítulo anterior">Modos de ejecución</a></p>
+  <h4>Próximo tema</h4>
+  <p class="topless"><a href="glossary.html"
+                        title="Próximo capítulo">Glosario</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Búsqueda rápida</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Ir a" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Introducir términos de búsqueda.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="obtencion-del-certificado-digital">
+<span id="index-0"></span><h1>Obtención del certificado digital<a class="headerlink" href="#obtencion-del-certificado-digital" title="Enlazar permanentemente con este título">¶</a></h1>
+<p>Para obtener su <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a>, necesita el utilitario <strong>OpenSSL</strong>.
+Si tiene acceso a un equipo Unix/Linux, seguramente ya lo tiene instalado.
+Si sólo tiene acceso a equipos Windows, puede descargar <strong>OpenSSL</strong> desde <a class="reference external" href="http://www.slproweb.com/products/Win32OpenSSL.html">aquí</a>.</p>
+<p>Los pasos a seguir para generar el certificado son los siguientes:</p>
+<p>Genere su <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> ejecutando desde la línea de comandos:</p>
+<div class="highlight-python"><pre>openssl genrsa -out privada 1024</pre>
+</div>
+<p>Reemplazando <em>privada</em> por el nombre de archivo de la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> a generar.
+Haga un backup de su <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> para evitar futuros inconvenientes. Tenga
+en cuenta que la va a necesitar una vez que obtenga su certificado X.509, el
+cual no le va a servir de mucho si Ud. no dispone de la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> que le
+corresponde.</p>
+<p>Genere su <a class="reference internal" href="glossary.html#term-csr"><em class="xref std std-term">CSR</em></a> (<a class="reference internal" href="glossary.html#term-certificate-signing-request"><em class="xref std std-term">Certificate Signing Request</em></a>) ejecutando desde la línea de comandos:</p>
+<div class="highlight-python"><pre>openssl req -new -key privada -subj "/C=AR/O=[empresa]/CN=[nombre]/serialNumber=CUIT [nro_cuit]" -out pedido</pre>
+</div>
+<p>Reemplazando:</p>
+<blockquote>
+<div><ul class="simple">
+<li><em>privada</em> por el nombre de archivo de la clave privada generada en el paso anterior.</li>
+<li>[empresa] por el nombre de su empresa.</li>
+<li>[nombre] por su nombre o server hostname.</li>
+<li>[nro_cuit] por la CUIT sin guiones del contribuyente.</li>
+</ul>
+</div></blockquote>
+<p>Una vez que haya generado correctamente su <a class="reference internal" href="glossary.html#term-csr"><em class="xref std std-term">CSR</em></a>, puede usarlo para obtener su <a class="reference internal" href="glossary.html#term-certificado-digital-x-509"><em class="xref std std-term">certificado digital X.509</em></a>.
+Para el caso del entorno de <a class="reference internal" href="glossary.html#term-testing"><em class="xref std std-term">Testing</em></a>, envíelo por email a <a class="reference external" href="mailto:webservices&#37;&#52;&#48;afip&#46;gov&#46;ar">webservices<span>&#64;</span>afip<span>&#46;</span>gov<span>&#46;</span>ar</a> aclarando a qué web service
+pretende acceder usando este certificado (ej: <a class="reference internal" href="glossary.html#term-wsfe"><em class="xref std std-term">WSFE</em></a>, <a class="reference internal" href="glossary.html#term-wsfex"><em class="xref std std-term">WSFEX</em></a>, etc.). El certificado le será enviado por email.
+Para el caso del entorno de <a class="reference internal" href="glossary.html#term-produccion"><em class="xref std std-term">Producción</em></a>, Ud. podrá obtener su certificado interactivamente usando la opción
+<em>Adminitración de Certificados Digitales</em> del menú de trámites con Clave Fiscal en el sitio web de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>: <a class="reference external" href="http://www.afip.gov.ar">http://www.afip.gov.ar</a>.</p>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navegación</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="Índice General"
+             >índice</a></li>
+        <li class="right" >
+          <a href="glossary.html" title="Glosario"
+             >siguiente</a> |</li>
+        <li class="right" >
+          <a href="modes.html" title="Modos de ejecución"
+             >anterior</a> |</li>
+        <li><a href="index.html">WSFErb v2.0.rc1</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2008-2011, Matías Alejandro Flores.
+      Actualizado por última vez en 19 Apr 2011.
+      Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
+    </div>
+  </body>
+</html>

@@ -157,30 +157,30 @@ es la única opción obligatoria para todos los servicios.</p>
 <dl class="option">
 <dt id="cmdoption-r">
 <tt class="descname">-r</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--cert</tt><tt class="descclassname"> &lt;cert-file&gt;</tt><a class="headerlink" href="#cmdoption-r" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación del <em class="xref std std-term">certificado digital</em> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>. En caso de no estar presente se intentará
-localizar el <em class="xref std std-term">certificado digital</em> &#8220;&lt;cuit&gt;.crt&#8221; en el directorio actual. De no existir dicho archivo,
-no se podrá solicitar un nuevo <em class="xref std std-term">ticket de acceso</em> en caso de necesitarlo.</p>
+<dd><p>Ubicación del <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>. En caso de no estar presente se intentará
+localizar el <a class="reference internal" href="glossary.html#term-certificado-digital"><em class="xref std std-term">certificado digital</em></a> <strong>&lt;cuit&gt;.crt</strong> en el directorio actual. De no existir dicho archivo,
+no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de necesitarlo.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-k">
 <tt class="descname">-k</tt><tt class="descclassname"> &lt;key-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--key</tt><tt class="descclassname"> &lt;key-file&gt;</tt><a class="headerlink" href="#cmdoption-k" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación de la <em class="xref std std-term">clave privada</em> utilizada para firmar el <em class="xref std std-term">CSR</em> enviado a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.
-En caso de no estar presente se intentará localizar la <em class="xref std std-term">clave privada</em> &#8220;&lt;cuit&gt;.key&#8221; en el directorio
-actual. De no existir dicho archivo, no se podrá solicitar un nuevo <em class="xref std std-term">ticket de acceso</em> en caso de
+<dd><p>Ubicación de la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> utilizada para firmar el <a class="reference internal" href="glossary.html#term-csr"><em class="xref std std-term">CSR</em></a> enviado a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a>.
+En caso de no estar presente se intentará localizar la <a class="reference internal" href="glossary.html#term-clave-privada"><em class="xref std std-term">clave privada</em></a> <strong>&lt;cuit&gt;.key</strong> en el directorio
+actual. De no existir dicho archivo, no se podrá solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en caso de
 necesitarlo.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-t">
 <tt class="descname">-t</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><tt class="descclassname">, </tt><tt class="descname">--ticket</tt><tt class="descclassname"> &lt;ticket-file&gt;</tt><a class="headerlink" href="#cmdoption-t" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ubicación de un <em class="xref std std-term">ticket de acceso</em> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> con anterioridad. Si el archivo existe y
-el ticket aún es válido, se utilizará este <em class="xref std std-term">ticket de acceso</em> en lugar de solicitar uno nuevo. Si
+<dd><p>Ubicación de un <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> provisto por la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> con anterioridad. Si el archivo existe y
+el ticket aún es válido, se utilizará este <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> en lugar de solicitar uno nuevo. Si
 en cambio el archivo no existe, o si existe pero el ticket ya expiró, se solicitará un nuevo
-<em class="xref std std-term">ticket de acceso</em>. En todos los casos en que sea necesario solicitar un nuevo <em class="xref std std-term">ticket de acceso</em>,
+<a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>. En todos los casos en que sea necesario solicitar un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a>,
 el mismo será almacenado en el &lt;ticket-file&gt; especificado. En caso de no estar presente esta opción, se
-intentará localizar el <em class="xref std std-term">ticket de acceso</em> &#8220;&lt;cuit&gt;.xml&#8221; en el directorio actual. De no existir dicho
-archivo, se requerirá un nuevo <em class="xref std std-term">ticket de acceso</em> al <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a> de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> por cada transacción. Por
+intentará localizar el <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> <strong>&lt;cuit&gt;.xml</strong> en el directorio actual. De no existir dicho
+archivo, se requerirá un nuevo <a class="reference internal" href="glossary.html#term-ticket-de-acceso"><em class="xref std std-term">ticket de acceso</em></a> al <a class="reference internal" href="glossary.html#term-wsaa"><em class="xref std std-term">WSAA</em></a> de la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> por cada transacción. Por
 este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 </dd></dl>
 
@@ -199,26 +199,27 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <dl class="option">
 <dt id="cmdoption-e">
 <tt class="descname">-e</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--test</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-e" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Ejecuta el servicio en el entorno de pruebas (<em class="xref std std-term">Testing</em>).</p>
+<dd><p>Ejecuta el servicio en el entorno de pruebas (modo <a class="reference internal" href="glossary.html#term-testing"><em class="xref std std-term">Testing</em></a>). Ver <a class="reference internal" href="modes.html"><em>Modos de ejecución</em></a>.</p>
 </dd></dl>
 
 <dl class="option">
-<dt id="cmdoption-i">
-<tt class="descname">-i</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--info</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-i" title="Enlazar permanentemente con esta definición">¶</a></dt>
+<dt id="cmdoption-h">
+<tt class="descname">-h</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--help</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-h" title="Enlazar permanentemente con esta definición">¶</a></dt>
 <dd><p>Muestra más información sobre la sintaxis del servicio especificado.</p>
 </dd></dl>
 
 <dl class="option">
 <dt id="cmdoption-v">
 <tt class="descname">-v</tt><tt class="descclassname"></tt><tt class="descclassname">, </tt><tt class="descname">--version</tt><tt class="descclassname"></tt><a class="headerlink" href="#cmdoption-v" title="Enlazar permanentemente con esta definición">¶</a></dt>
-<dd><p>Informa la versión actual del script.</p>
+<dd><p>Informa la versión actual de <strong>WSFErb</strong>.</p>
 </dd></dl>
 
 </div>
 </div>
 <div class="section" id="formato-del-lote">
 <h2>Formato del Lote<a class="headerlink" href="#formato-del-lote" title="Enlazar permanentemente con este título">¶</a></h2>
-<p>El lote que se envía a la AFIP para autorizar los comprobantes tiene el mismo formato que el lote que se recibe como respuesta conteniendo los CAE/CAEA otorgados.</p>
+<p>El lote que se envía a la <a class="reference internal" href="glossary.html#term-afip"><em class="xref std std-term">AFIP</em></a> para autorizar los comprobantes tiene el mismo formato que el lote
+que se recibe como respuesta conteniendo el <a class="reference internal" href="glossary.html#term-cae"><em class="xref std std-term">CAE</em></a> / <a class="reference internal" href="glossary.html#term-caea"><em class="xref std std-term">CAEA</em></a> otorgado.</p>
 <p>En ambos casos, el primer caracter de cada registro define el tipo de registro y el formato de los caracteres siguientes.</p>
 <p>Los registros de tipo &#8220;C&#8221;, &#8220;O&#8221;, &#8220;E&#8221; y &#8220;V&#8221; son válidos unicamente en los lotes recibidos como respuesta.</p>
 <div class="section" id="tipo-de-registro-1-cabecera">
@@ -377,7 +378,7 @@ debe ser 1</td>
 </div>
 <div class="section" id="tipo-de-registro-3-comprobantes-asociados">
 <h3>Tipo de Registro 3 (comprobantes asociados)<a class="headerlink" href="#tipo-de-registro-3-comprobantes-asociados" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>Cada comprobante del lote puede contener uno o más registros de tipo &#8220;3&#8221; por cada comprobante asociado.</p>
+<p>Cada comprobante del lote puede contener uno o más registros de tipo &#8220;3&#8221;, uno por cada comprobante asociado.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="25%" />
@@ -716,11 +717,23 @@ para códigos de autorización de tipo CAEA.</td>
 </tr>
 </thead>
 <tbody valign="top">
+<tr><td>500</td>
+<td>Error interno de aplicación</td>
+</tr>
+<tr><td>501</td>
+<td>Error interno de base de datos</td>
+</tr>
+<tr><td>502</td>
+<td>Error interno - Autorizador - Transacción Activa</td>
+</tr>
 <tr><td>600</td>
-<td>Usuario no autorizado a realizar esta operación</td>
+<td>No se corresponden token y firma. Usuario no autorizado a realizar esta operación</td>
 </tr>
 <tr><td>601</td>
 <td>CUIT solicitante no se encuentra entre sus representados</td>
+</tr>
+<tr><td>602</td>
+<td>No existen datos en los registros de la AFIP</td>
 </tr>
 </tbody>
 </table>
@@ -909,7 +922,7 @@ la fecha del comprobante</td>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 13 Apr 2011.
+      Actualizado por última vez en 19 Apr 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
