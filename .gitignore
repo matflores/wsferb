@@ -1,7 +1,6 @@
 *.log
 *.key
 *.crt
-test/TA.xml
 test/credentials
 test/output
 test/tmp

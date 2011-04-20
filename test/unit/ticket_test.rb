@@ -84,11 +84,10 @@ Protest.describe "An access ticket" do
   it "can be exported to an xml file" do
     options = Defaults.merge(:generationTime => Time.local(2008,9,1), :expirationTime => Time.local(2008,10,1))
     ticket = WSAA::Ticket.new(options)
-    xml_file = File.dirname(__FILE__) + "/TA.xml"
-    ticket.save(xml_file)
-    xml_file_contents = File.read(xml_file)
+    xml_file = Tempfile.new("ticket")
+    ticket.save(xml_file.path)
 
-    assert_equal XML_response, xml_file_contents
+    assert_equal XML_response, File.read(xml_file.path)
   end
 
   it "can be imported from valid xml" do
@@ -105,11 +104,11 @@ Protest.describe "An access ticket" do
   end
 
   it "can be loaded from a valid xml file" do
-    xml_file = File.dirname(__FILE__) + "/TA.xml"
-    f = File.new(xml_file, "w")
-    f.write(XML_response)
-    f.close
-    ticket = WSAA::Ticket.load(Defaults[:cuit], xml_file)
+    xml_file = Tempfile.new("ticket")
+    xml_file.write(XML_response)
+    xml_file.close
+
+    ticket = WSAA::Ticket.load(Defaults[:cuit], xml_file.path)
 
     assert !ticket.nil?
     assert_equal Defaults[:cuit]       , ticket.cuit
