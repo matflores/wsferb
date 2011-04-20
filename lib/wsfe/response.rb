@@ -5,7 +5,7 @@
 require "response"
 
 module WSFE
-  class Response < WSFErb::Response
+  class Response < ::Response
     attr_accessor :result
 
     def err_code
