@@ -5,10 +5,12 @@
 require 'afip'
 require 'wsfe/client'
 require 'wsfe/response'
-require 'wsfe/version'
 require 'wsfe/runner'
+require "version"
 
 module WSFE
+  include VERSION
+
   SERVICES = %w(FEAutRequest
                 FEUltNroRequest
                 FERecuperaQTYRequest

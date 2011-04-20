@@ -7,10 +7,12 @@ require 'core_ext/hash'
 require 'wsfex/fex'
 require 'wsfex/client'
 require 'wsfex/response'
-require 'wsfex/version'
 require 'wsfex/runner'
+require "version"
 
 module WSFEX
+  include VERSION
+
   SERVICES = %w(FEXDummy
                 FEXAuthorize
                 FEXGetCmp
