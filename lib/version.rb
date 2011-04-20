@@ -2,7 +2,7 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-module VERSION
+module Version
   unless defined? MAJOR
     MAJOR  = 2
     MINOR  = 0

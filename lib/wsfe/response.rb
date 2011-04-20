@@ -2,8 +2,10 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
+require "response"
+
 module WSFE
-  class Response < AFIP::Response
+  class Response < WSFErb::Response
     attr_accessor :result
 
     def err_code

@@ -8,7 +8,7 @@ require 'wsfe/runner'
 require "version"
 
 module WSFE
-  include VERSION
+  include Version
 
   SERVICES = %w(FEAutRequest
                 FEUltNroRequest

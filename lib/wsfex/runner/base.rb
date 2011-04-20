@@ -89,7 +89,7 @@ module WSFEX
       end
 
       def version_exit
-        puts VERSION::DESCRIPTION
+        puts Version::DESCRIPTION
         exit 1
       end
 

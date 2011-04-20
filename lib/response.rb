@@ -2,7 +2,7 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-module AFIP
+module WSFErb
   class Response
     attr_accessor :response, :errors
 

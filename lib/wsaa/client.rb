@@ -9,7 +9,7 @@ require "config"
 
 module WSAA
 
-  class Client < AFIP::Client
+  class Client
 
     include OpenSSL
 

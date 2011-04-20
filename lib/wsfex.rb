@@ -10,7 +10,7 @@ require 'wsfex/runner'
 require "version"
 
 module WSFEX
-  include VERSION
+  include Version
 
   SERVICES = %w(FEXDummy
                 FEXAuthorize

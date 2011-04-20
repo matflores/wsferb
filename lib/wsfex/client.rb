@@ -9,7 +9,7 @@ require "config"
 
 module WSFEX
 
-  class Client < AFIP::Client
+  class Client
 
     WSDL = File.join(File.dirname(__FILE__), '/wsfex.wsdl')
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
