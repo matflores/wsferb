@@ -6,7 +6,7 @@
 require "rubygems"
 require "pathname"
 
-LIB_DIR = File.expand_path(File.join(File.dirname(Pathname.new(__FILE__).realpath), "..", "src", "lib"))
+LIB_DIR = File.expand_path(File.join(File.dirname(Pathname.new(__FILE__).realpath), "..", "lib"))
 
 $: << LIB_DIR
 
