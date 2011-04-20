@@ -10,11 +10,11 @@ LIB_DIR = File.expand_path(File.join(File.dirname(Pathname.new(__FILE__).realpat
 
 $: << LIB_DIR
 
-require "wsfe"
+require "wsfex"
 require "silence"
 
 silence_warnings do
-  WSFE::Runner::Wsfe.run(ARGV)
+  WSFEX::Runner::Wsfex.run(ARGV)
 end
 
 exit 0
