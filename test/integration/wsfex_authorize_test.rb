@@ -6,7 +6,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.id_cbte = last_id_cbte_used + 1
     @fact.nro_cbte = last_nro_cbte_used(@fact.tipo_cbte, @fact.punto_vta) + 1
     @input_file = expand_path("tmp/FEXAuthorizeInput.txt")
-    @output_file = expand_path("output/FEXAuthorizeOutput.txt")
+    @output_file = expand_path("tmp/FEXAuthorizeOutput.txt")
   end
 
   it "success" do

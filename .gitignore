@@ -2,7 +2,6 @@
 *.key
 *.crt
 test/credentials
-test/output
 test/tmp
 build/wsfe.rb
 build/wsfe.exe

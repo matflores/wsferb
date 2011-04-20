@@ -48,7 +48,7 @@ class Protest::TestCase
   end
 
   def execute(method, arguments = nil, credentials = credentials)
-    `#{script} #{method} #{arguments} #{credentials} --ticket test/tmp/ticket_#{script}.xml --test > test/output/#{method}.txt`
+    `#{script} #{method} #{arguments} #{credentials} --ticket test/tmp/ticket_#{script}.xml --test > test/tmp/#{method}.txt`
   end
 
   def credentials
@@ -57,7 +57,7 @@ class Protest::TestCase
 
   def check_output(method)
     sample_file = expand_path("samples/#{method}.txt")
-    output_file = expand_path("output/#{method}.txt")
+    output_file = expand_path("tmp/#{method}.txt")
 
     assert_equal '', `diff #{sample_file} #{output_file}`
     assert $?.success?, 'diff failed'
@@ -108,7 +108,7 @@ class Protest::TestCase
   end
 
   def parse_response(method)
-    output = File.read(expand_path("output/#{method}.txt"))
+    output = File.read(expand_path("tmp/#{method}.txt"))
     AFIP::Response.parse(output)
   end
 
