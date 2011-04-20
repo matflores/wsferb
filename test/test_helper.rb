@@ -56,10 +56,10 @@ class Protest::TestCase
   end
 
   def check_output(method)
-    sample_file = expand_path("samples/#{method}.txt")
-    output_file = expand_path("tmp/#{method}.txt")
+    fixture_file = expand_path("fixtures/#{method}.txt")
+    output_file  = expand_path("tmp/#{method}.txt")
 
-    assert_equal '', `diff #{sample_file} #{output_file}`
+    assert_equal '', `diff #{fixture_file} #{output_file}`
     assert $?.success?, 'diff failed'
   end
 

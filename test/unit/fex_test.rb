@@ -100,7 +100,7 @@ Protest.describe "A FEX invoice" do
   end
 
   it "can be imported from a text file" do
-    fex = WSFEX::Fex.from_file(expand_pathname('fex_input.txt'))
+    fex = WSFEX::Fex.from_file(expand_path("fixtures/fex_input.txt"))
 
     assert_equal 1234567890                  , fex.id_cbte
     assert_equal 20                          , fex.tipo_cbte
@@ -156,14 +156,13 @@ Protest.describe "A FEX invoice" do
   end
 
   it "can be exported to a text file" do
-    fex = WSFEX::Fex.from_file(expand_pathname('fex_input.txt'))
-    fex.to_file expand_pathname('fex_output.txt')
+    fex_input  = expand_path("fixtures/fex_input.txt")
+    fex_output = Tempfile.new("fex")
 
-    assert_equal File.read(expand_pathname('fex_input.txt')), File.read(expand_pathname('fex_output.txt'))
-  end
+    fex = WSFEX::Fex.from_file(fex_input)
+    fex.to_file(fex_output.path)
 
-  def expand_pathname(filename)
-    File.dirname(__FILE__) + '/../samples/' + filename
+    assert_equal File.read(fex_input), File.read(fex_output)
   end
 end
 
