@@ -9,11 +9,25 @@ require "config"
 
 module WSFE
 
-  class Client < AFIP::Client
+  class Client
 
     WSDL = File.join(File.dirname(__FILE__), '/wsfev1.wsdl')
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfev1/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfev1/service.asmx'
+
+    @@test_mode_enabled = false
+
+    def self.enable_test_mode
+      @@test_mode_enabled = true
+    end
+
+    def self.disable_test_mode
+      @@test_mode_enabled = false
+    end
+
+    def self.test_mode_enabled?
+      @@test_mode_enabled
+    end
 
     def self.fe_dummy
       response = client.request(:fe_dummy)

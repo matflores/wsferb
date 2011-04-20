@@ -17,6 +17,20 @@ module WSAA
     PROD_URL = 'https://wsaa.afip.gov.ar/ws/services/LoginCms'
     TEST_URL = 'https://wsaahomo.afip.gov.ar/ws/services/LoginCms'
 
+    @@test_mode_enabled = false
+
+    def self.enable_test_mode
+      @@test_mode_enabled = true
+    end
+
+    def self.disable_test_mode
+      @@test_mode_enabled = false
+    end
+
+    def self.test_mode_enabled?
+      @@test_mode_enabled
+    end
+
     def self.requestTicket(cuit, service, cert_file, key_file)
       request = generate_request_for(service)
       signed = sign_request(request, cert_file, key_file)

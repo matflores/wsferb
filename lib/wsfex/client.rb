@@ -15,6 +15,20 @@ module WSFEX
     PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
     TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
 
+    @@test_mode_enabled = false
+
+    def self.enable_test_mode
+      @@test_mode_enabled = true
+    end
+
+    def self.disable_test_mode
+      @@test_mode_enabled = false
+    end
+
+    def self.test_mode_enabled?
+      @@test_mode_enabled
+    end
+
     def self.fex_authorize(ticket, entrada, salida)
       return ticket_missing if ticket.nil?
 
