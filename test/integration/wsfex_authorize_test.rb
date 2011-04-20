@@ -20,7 +20,7 @@ Protest.describe "WSFEX Authorize" do
   it "should fail if the specified credentials are not valid" do
     @fact.to_file(@input_file)
  
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}", "--cuit 12345678910 --cert test/credentials/20238883890.crt --key test/credentials/20238883890.key"
+    execute :FEXAuthorize, "#{@input_file} #{@output_file}", "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
  
     assert_error_code :FEXAuthorize, 1000
   end

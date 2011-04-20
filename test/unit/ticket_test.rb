@@ -1,10 +1,10 @@
 require 'test_helper'
 
-Defaults = { :cuit => 20238883890, 
+Defaults = { :cuit => CUIT, 
              :token => 'token', 
              :sign => 'sign', 
              :source => 'CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239',
-             :destination => 'SERIALNUMBER=CUIT 20238883890, EMAILADDRESS=mflores@atlanware.com, CN=matias alejandro flores, O=matias alejandro flores, ST=buenos aires, C=ar',
+             :destination => "SERIALNUMBER=CUIT #{CUIT}, EMAILADDRESS=mflores@atlanware.com, CN=matias alejandro flores, O=matias alejandro flores, ST=buenos aires, C=ar",
              :generationTime => Time.now,
              :expirationTime => Time.now + 600 }
 
@@ -22,7 +22,7 @@ XML_response = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
               "<loginTicketResponse version=\"1\">\n" +
               "  <header>\n" +
               "    <source>CN=wsaahomo, O=AFIP, C=AR, SERIALNUMBER=CUIT 33693450239</source>\n" +
-              "    <destination>SERIALNUMBER=CUIT 20238883890, EMAILADDRESS=mflores@atlanware.com, CN=matias alejandro flores, O=matias alejandro flores, ST=buenos aires, C=ar</destination>\n" +
+              "    <destination>SERIALNUMBER=CUIT #{CUIT}, EMAILADDRESS=mflores@atlanware.com, CN=matias alejandro flores, O=matias alejandro flores, ST=buenos aires, C=ar</destination>\n" +
               "    <uniqueId>#{Time.local(2008,9,1).to_i}</uniqueId>\n" +
               "    <generationTime>2008-09-01T00:00:00-03:00</generationTime>\n" +
               "    <expirationTime>2008-10-01T00:00:00-03:00</expirationTime>\n" +

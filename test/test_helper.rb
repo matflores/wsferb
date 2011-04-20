@@ -6,16 +6,38 @@ require 'silence'
 require 'wsaa'
 require 'wsfe'
 require 'wsfex'
+require 'yaml'
 
 WSAA::Client.enable_test_mode
 WSFE::Client.enable_test_mode
 WSFEX::Client.enable_test_mode
 
-CERT_FILE = File.join File.dirname(__FILE__), 'credentials', '20238883890.crt'
-KEY_FILE  = File.join File.dirname(__FILE__), 'credentials', '20238883890.key'
+def settings
+  $settings ||= YAML.load_file(File.join(File.dirname(__FILE__), "settings.yml"))
+end
+
+CUIT = settings[:cuit]
+CERT_FILE = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.crt")
+KEY_FILE  = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.key")
 
 Protest.autorun = false
 Protest.report_with(:documentation)
+
+unless File.exists?(CERT_FILE) && File.exists?(KEY_FILE)
+  puts <<-EOS
+
+    Falta configurar el certificado digital y/o la clave privada.
+
+    Copiar el certificado digital X.509 otorgado por AFIP en test/credentials/#{CUIT}.crt.
+    Copiar la clave privada utilizada para crear el CSR en test/credentials/#{CUIT}.key.
+    El certificado digital debe estar habilitado para acceder al entono Testing.
+
+    Si su CUIT no es "#{CUIT}", modifique el CUIT especificado en el archivo test/settings.yml
+    y renombre el certificado digital y la clave privada.
+
+  EOS
+  exit 1
+end
 
 class Protest::TestCase
   def self.test_method(method, arguments = nil)
@@ -30,7 +52,7 @@ class Protest::TestCase
   end
 
   def credentials
-    "--cuit 20238883890 --cert test/credentials/20238883890.crt --key test/credentials/20238883890.key"
+    "--cuit #{CUIT} --cert #{CERT_FILE} --key #{KEY_FILE}"
   end
 
   def check_output(method)
