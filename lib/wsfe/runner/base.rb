@@ -3,6 +3,7 @@
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'optparse'
+require 'options'
 
 module WSFE
   module Runner
@@ -36,7 +37,7 @@ module WSFE
 
       def initialize
         super
-        @options = Options.new
+        @options = WSFErb::Options.new
       end
 
       def run(argv)

@@ -39,6 +39,7 @@ Modo de uso: wsfe [opciones] <servicio> [argumentos]
 
      servicio                        Uno de los servicios provistos por el WSFE de AFIP.
                                      Valores posibles:
+                                       #{WSFE::Runner.constants.map { |c| "- #{c}" }.join("\n")}
                                        - FEDummy
                                        - FECompUltimoAutorizado
 

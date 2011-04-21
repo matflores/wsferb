@@ -16,7 +16,7 @@ module WSFE
       @err_msg ||= result[:fex_err][:err_msg] rescue "n/d"
     end
 
-    def formated_records
+    def formatted_records
       []
     end
 
