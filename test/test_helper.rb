@@ -2,7 +2,7 @@ $: << File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
 
 require 'rubygems'
 require 'protest'
-require 'silence'
+require 'core_ext/kernel'
 require 'wsaa'
 require 'wsfe'
 require 'wsfex'
