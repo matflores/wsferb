@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 Protest.describe "A response" do
   it "should be successful if there were no errors" do
