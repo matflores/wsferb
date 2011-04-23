@@ -1,12 +1,9 @@
 $: << File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
 
-require 'rubygems'
-require 'protest'
-require 'core_ext/kernel'
-require 'wsaa'
-require 'wsfe'
-require 'wsfex'
-require 'yaml'
+require "rubygems"
+require "protest"
+require "wsferb"
+require "yaml"
 
 WSAA::Client.enable_test_mode
 WSFE::Client.enable_test_mode
