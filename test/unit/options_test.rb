@@ -1,0 +1,135 @@
+require "test_helper"
+
+Protest.describe "An options object" do
+  it "should accept a CUIT with the -c option" do
+    options = WSFErb::Options.parse(["-c", "20238883890"])
+
+    assert_equal "20238883890", options.cuit
+  end
+
+  it "should accept a CUIT with the --cuit option" do
+    options = WSFErb::Options.parse(["--cuit", "20238883890"])
+
+    assert_equal "20238883890", options.cuit
+  end
+
+  it "should accept a certificate file with the --cert option" do
+    options = WSFErb::Options.parse(["--cert", "mycert.crt"])
+
+    assert_equal "mycert.crt", options.cert
+  end
+
+  it "should accept a certificate file with the -r option" do
+    options = WSFErb::Options.parse(["-r", "mycert.crt"])
+
+    assert_equal "mycert.crt", options.cert
+  end
+
+  it "should accept a private key file with the --key option" do
+    options = WSFErb::Options.parse(["--key", "mykey.key"])
+
+    assert_equal "mykey.key", options.key
+  end
+
+  it "should accept a private key file with the -k option" do
+    options = WSFErb::Options.parse(["-k", "mykey.key"])
+
+    assert_equal "mykey.key", options.key
+  end
+
+  it "should accept a ticket file with the --ticket option" do
+    options = WSFErb::Options.parse(["--ticket", "myticket.xml"])
+
+    assert_equal "myticket.xml", options.ticket
+  end
+
+  it "should accept a ticket file with the -t option" do
+    options = WSFErb::Options.parse(["-t", "myticket.xml"])
+
+    assert_equal "myticket.xml", options.ticket
+  end
+
+  it "should accept an output file with the --out option" do
+    options = WSFErb::Options.parse(["--out", "output.txt"])
+
+    assert_equal "output.txt", options.out
+  end
+
+  it "should accept an output file with the -o option" do
+    options = WSFErb::Options.parse(["-o", "output.txt"])
+
+    assert_equal "output.txt", options.out
+  end
+
+  it "should accept a log file with the --log option" do
+    options = WSFErb::Options.parse(["--log", "output.log"])
+
+    assert_equal "output.log", options.log
+  end
+
+  it "should accept a log file with the -l option" do
+    options = WSFErb::Options.parse(["-l", "output.log"])
+
+    assert_equal "output.log", options.log
+  end
+
+  it "should enable test mode with the --test option" do
+    options = WSFErb::Options.parse(["--test"])
+
+    assert options.test?
+  end
+
+  it "should enable test mode with the -e option" do
+    options = WSFErb::Options.parse(["-e"])
+
+    assert options.test?
+  end
+
+  it "should enable help switch with the --help option" do
+    options = WSFErb::Options.parse(["--help"])
+
+    assert options.help?
+  end
+
+  it "should enable help switch with the -h option" do
+    options = WSFErb::Options.parse(["-h"])
+
+    assert options.help?
+  end
+
+  it "should enabe version switch with the --version option" do
+    options = WSFErb::Options.parse(["--version"])
+
+    assert options.version?
+  end
+
+  it "should enable version switch with the -v option" do
+    options = WSFErb::Options.parse(["-v"])
+
+    assert options.version?
+  end
+
+  it "should use ./<cuit>.crt as the default certificate file" do
+    options = WSFErb::Options.parse(["--cuit", "20238883890"])
+
+    assert_equal "./20238883890.crt", options.cert
+  end
+
+  it "should use ./<cuit>.key as the default primary key file" do
+    options = WSFErb::Options.parse(["--cuit", "20238883890"])
+
+    assert_equal "./20238883890.key", options.key
+  end
+
+  it "should use ./<cuit>.log as the default log file" do
+    options = WSFErb::Options.parse(["--cuit", "20238883890"])
+
+    assert_equal "./20238883890.log", options.log
+  end
+
+  it "should run in production mode by default" do
+    options = WSFErb::Options.parse()
+
+    assert !options.test?
+  end
+end
