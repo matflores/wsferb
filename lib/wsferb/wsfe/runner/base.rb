@@ -3,7 +3,7 @@
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
 require 'optparse'
-require 'options'
+require 'wsferb/options'
 
 module WSFE
   module Runner
@@ -82,11 +82,6 @@ module WSFE
         parser.on_tail(*OPTIONS[:test])    { Client.enable_test_mode ; WSAA::Client.enable_test_mode }
         parser.on_tail(*OPTIONS[:version]) { version_exit }
         parser.on_tail(*OPTIONS[:help])    { info_exit }
-      end
-
-      def parse_other_options
-        parser.on(*OPTIONS[:id])        { |id| @options.id = id }
-        parser.on(*OPTIONS[:servicios]) { @options.servicios = true }
       end
 
       def version_exit

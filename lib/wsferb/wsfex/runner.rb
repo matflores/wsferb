@@ -2,11 +2,18 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-module WSFEX
-  module Runner
+module WSFErb
+  module WSFEX
+    module Runner
+      def self.run(*args)
+        silence_warnings do
+          puts "hey"
+        end
+      end
+    end
   end
 end
 
-require "wsfex/runner/base"
+require "wsferb/wsfex/runner/base"
 
 Dir[File.join(File.dirname(__FILE__), "runner", "*.rb")].each { |file| require file }
