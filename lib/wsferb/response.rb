@@ -44,9 +44,20 @@ class Response
   end
 
   def to_s
-    [].tap do |output|
-      output << errors.map { |e| ("E%06d%-512s" % [ e[:code], e[:message] ]).strip } unless errors.empty?
-      output << events.map { |e| ("V%06d%-512s" % [ e[:code], e[:message] ]).strip } unless events.empty?
-    end.join("\n")
+    (formatted_records + formatted_errors + formatted_events).join("\n")
+  end
+
+  protected
+
+  def formatted_records
+    []
+  end
+
+  def formatted_errors
+    errors.map { |e| ("E%06d%-512s" % [ e[:code], e[:message] ]).strip }
+  end
+
+  def formatted_events
+    events.map { |e| ("V%06d%-512s" % [ e[:code], e[:message] ]).strip }
   end
 end
