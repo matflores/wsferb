@@ -5,9 +5,9 @@ require "protest"
 require "wsferb"
 require "yaml"
 
-WSAA::Client.enable_test_mode
-WSFE::Client.enable_test_mode
-WSFEX::Client.enable_test_mode
+WSFErb::WSAA::Client.enable_test_mode
+WSFErb::WSFE::Client.enable_test_mode
+WSFErb::WSFEX::Client.enable_test_mode
 
 def settings
   $settings ||= YAML.load_file(File.join(File.dirname(__FILE__), "settings.yml"))

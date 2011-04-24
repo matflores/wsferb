@@ -2,11 +2,10 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'time'
-require 'rexml/document'
+require "time"
+require "rexml/document"
 
-module WSAA
-
+module WSFErb
   class Ticket
     attr_accessor :cuit, :token, :sign, :source, :destination, :generationTime, :expirationTime
 
@@ -62,9 +61,9 @@ module WSAA
     end
 
     def save(xml_file)
-      f = File.new(xml_file, "w")
-      f.write to_xml
-      f.close
+      File.open(xml_file, "w") do |file|
+        file.write to_xml
+      end
     end
 
     def self.from_xml(cuit, xml)
@@ -88,7 +87,5 @@ module WSAA
       return nil unless File.exists?(xml_file)
       from_xml(cuit, File.read(xml_file))
     end
-
   end
-
 end

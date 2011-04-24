@@ -36,39 +36,39 @@ XML_response = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
 Protest.describe "An access ticket" do
   describe "(validations)" do
     it "is valid if it has a cuit, a token, a sign, and it has not expired yet" do
-      ticket = WSAA::Ticket.new(Defaults)
+      ticket = WSFErb::Ticket.new(Defaults)
       assert ticket.valid?
     end
 
     it "is not valid without a cuit" do
-      ticket = WSAA::Ticket.new(Defaults.merge(:cuit => nil))
+      ticket = WSFErb::Ticket.new(Defaults.merge(:cuit => nil))
       assert !ticket.valid?
     end
 
     it "is not valid without a token" do
-      ticket = WSAA::Ticket.new(Defaults.merge(:token => nil))
+      ticket = WSFErb::Ticket.new(Defaults.merge(:token => nil))
       assert !ticket.valid?
     end
 
     it "is not valid without a sign" do
-      ticket = WSAA::Ticket.new(Defaults.merge(:sign => nil))
+      ticket = WSFErb::Ticket.new(Defaults.merge(:sign => nil))
       assert !ticket.valid?
     end
 
     it "is not valid without an expiration date" do
-      ticket = WSAA::Ticket.new(Defaults.merge(:expirationTime => nil))
+      ticket = WSFErb::Ticket.new(Defaults.merge(:expirationTime => nil))
       assert !ticket.valid?
     end
 
     it "is not valid if already expired" do
-      ticket = WSAA::Ticket.new(Defaults.merge(:expirationTime => Time.now - 600))
+      ticket = WSFErb::Ticket.new(Defaults.merge(:expirationTime => Time.now - 600))
       assert !ticket.valid?
     end
   end
 
   it "knows if it's already expired" do
-    ticket = WSAA::Ticket.new(Defaults)
-    expired_ticket = WSAA::Ticket.new(Defaults.merge(:expirationTime => Time.now - 600))
+    ticket = WSFErb::Ticket.new(Defaults)
+    expired_ticket = WSFErb::Ticket.new(Defaults.merge(:expirationTime => Time.now - 600))
 
     assert !ticket.expired?
     assert expired_ticket.expired?
@@ -76,14 +76,14 @@ Protest.describe "An access ticket" do
 
   it "can be exported to xml" do
     options = Defaults.merge(:generationTime => Time.local(2008,9,1), :expirationTime => Time.local(2008,10,1))
-    ticket = WSAA::Ticket.new(options)
+    ticket = WSFErb::Ticket.new(options)
 
     assert_equal XML_response, ticket.to_xml
   end
 
   it "can be exported to an xml file" do
     options = Defaults.merge(:generationTime => Time.local(2008,9,1), :expirationTime => Time.local(2008,10,1))
-    ticket = WSAA::Ticket.new(options)
+    ticket = WSFErb::Ticket.new(options)
     xml_file = Tempfile.new("ticket")
     ticket.save(xml_file.path)
 
@@ -91,7 +91,7 @@ Protest.describe "An access ticket" do
   end
 
   it "can be imported from valid xml" do
-    ticket = WSAA::Ticket.from_xml(Defaults[:cuit], XML_response)
+    ticket = WSFErb::Ticket.from_xml(Defaults[:cuit], XML_response)
 
     assert !ticket.nil?
     assert_equal Defaults[:cuit]       , ticket.cuit
@@ -108,7 +108,7 @@ Protest.describe "An access ticket" do
     xml_file.write(XML_response)
     xml_file.close
 
-    ticket = WSAA::Ticket.load(Defaults[:cuit], xml_file.path)
+    ticket = WSFErb::Ticket.load(Defaults[:cuit], xml_file.path)
 
     assert !ticket.nil?
     assert_equal Defaults[:cuit]       , ticket.cuit
