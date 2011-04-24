@@ -2,10 +2,10 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require "response"
+require "wsferb/response"
 
 module WSFEX
-  class Response < ::Response
+  class Response < WSFErb::Response
     attr_accessor :result
 
     def err_code
@@ -18,6 +18,6 @@ module WSFEX
   end
 end
 
-require "wsfex/response/fexGetParam"
+require "wsferb/wsfex/response/fexGetParam"
 
 Dir[File.join(File.dirname(__FILE__), "response", "*.rb")].each { |file| require file }
