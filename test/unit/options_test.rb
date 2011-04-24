@@ -1,14 +1,26 @@
 require "test_helper"
 
 Protest.describe "An options object" do
-  it "should accept a CUIT with the -c option" do
-    options = WSFErb::Options.parse(["-c", "20238883890"])
+  it "should take the service name as its first argument" do
+    options = WSFErb::Options.parse(["FECAESolicitar", "--cuit", "20238883890"])
 
-    assert_equal "20238883890", options.cuit
+    assert_equal "FECAESolicitar", options.service
+  end
+
+  it "should take the service name as its first non-option argument" do
+    options = WSFErb::Options.parse(["--cuit", "20238883890", "FECAESolicitar"])
+
+    assert_equal "FECAESolicitar", options.service
   end
 
   it "should accept a CUIT with the --cuit option" do
     options = WSFErb::Options.parse(["--cuit", "20238883890"])
+
+    assert_equal "20238883890", options.cuit
+  end
+
+  it "should accept a CUIT with the -c option" do
+    options = WSFErb::Options.parse(["-c", "20238883890"])
 
     assert_equal "20238883890", options.cuit
   end
@@ -97,7 +109,7 @@ Protest.describe "An options object" do
     assert options.help?
   end
 
-  it "should enabe version switch with the --version option" do
+  it "should enable version switch with the --version option" do
     options = WSFErb::Options.parse(["--version"])
 
     assert options.version?
@@ -131,5 +143,18 @@ Protest.describe "An options object" do
     options = WSFErb::Options.parse()
 
     assert !options.test?
+  end
+
+  it "should accept a combination of multiple arguments and options" do
+    options = WSFErb::Options.parse(["FECAESolicitar", "--cuit", "20238883890", "--cert", "mycert.crt", "--key", "mykey.key", "--ticket", "myticket.xml", "--out", "output.txt", "--log", "output.log", "--test"])
+
+    assert_equal "FECAESolicitar", options.service
+    assert_equal "20238883890", options.cuit
+    assert_equal "mycert.crt", options.cert
+    assert_equal "mykey.key", options.key
+    assert_equal "myticket.xml", options.ticket
+    assert_equal "output.txt", options.out
+    assert_equal "output.log", options.log
+    assert options.test?
   end
 end
