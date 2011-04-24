@@ -6,15 +6,17 @@
 require "rubygems"
 require "pathname"
 
-LIB_DIR = File.expand_path(File.join(File.dirname(Pathname.new(__FILE__).realpath), "..", "lib"))
+$: << File.expand_path(File.join(File.dirname(Pathname.new(__FILE__).realpath), "..", "lib"))
 
-$: << LIB_DIR
+require "wsferb"
 
-require "wsfe"
-require "silence"
+options = WSFErb::Options.parse(ARGV)
 
-silence_warnings do
-  WSFE::Runner::Wsfe.run(ARGV)
+if options.test?
+  WSFErb::WSFE::Client.enable_test_mode
+  WSFErb::WSAA::Client.enable_test_mode
 end
+
+WSFErb::WSFE.run(options)
 
 exit 0
