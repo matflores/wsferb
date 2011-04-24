@@ -29,8 +29,15 @@ module WSFErb
 
     attr_accessor :parser, :service, :cuit, :ticket, :cert, :key, :out, :log, :help, :test, :version
 
-    def self.parse(args=[])
-      new(args)
+    def self.parse(options=[])
+      case options
+      when Array
+        new(options)
+      when Options
+        options
+      else
+        nil
+      end
     end
 
     def initialize(args=[])

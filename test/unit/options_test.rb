@@ -157,4 +157,10 @@ Protest.describe "An options object" do
     assert_equal "output.log", options.log
     assert options.test?
   end
+
+  it "should accept an existing options object instead of an array of arguments" do
+    options = WSFErb::Options.parse(["FECAESolicitar", "--cuit", "20238883890", "--cert", "mycert.crt", "--key", "mykey.key", "--ticket", "myticket.xml", "--out", "output.txt", "--log", "output.log", "--test"])
+
+    assert_equal options, WSFErb::Options.parse(options)
+  end
 end
