@@ -4,6 +4,7 @@
 #
 require "core_ext/hash"
 require "core_ext/kernel"
+require "wsferb/ticket"
 require "wsferb/wsaa"
 require "wsferb/wsfe"
 require "wsferb/wsfex"
