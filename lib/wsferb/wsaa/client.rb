@@ -5,7 +5,6 @@
 require "time"
 require "openssl"
 require "savon"
-require "wsferb/config"
 
 module WSFErb
   module WSAA
