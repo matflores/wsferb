@@ -4,16 +4,18 @@
 #
 require "wsferb/response"
 
-module WSFEX
-  class Response < WSFErb::Response
-    attr_accessor :result
+module WSFErb
+  module WSFEX
+    class Response < WSFErb::Response
+      attr_accessor :result
 
-    def err_code
-      @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
-    end
+      def err_code
+        @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
+      end
 
-    def err_msg
-      @err_msg ||= result[:fex_err][:err_msg] rescue "n/d"
+      def err_msg
+        @err_msg ||= result[:fex_err][:err_msg] rescue "n/d"
+      end
     end
   end
 end

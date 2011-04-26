@@ -2,18 +2,20 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-module WSFEX
-  class Response::FEXGetParamDstPais < Response::FEXGetParam
-    def format_record(record)
-      "%-3s%-250s" % [ record[:dst_codigo], record[:dst_ds] ]
-    end
+module WSFErb
+  module WSFEX
+    class Response::FEXGetParamDstPais < Response::FEXGetParam
+      def format_record(record)
+        "%-3s%-250s" % [ record[:dst_codigo], record[:dst_ds] ]
+      end
 
-    def records
-      @records ||= result[:fex_result_get][:cls_fex_response_dst_pais] rescue []
-    end
+      def records
+        @records ||= result[:fex_result_get][:cls_fex_response_dst_pais] rescue []
+      end
 
-    def result
-      @result ||= response[:fex_get_param_dst_pais_response][:fex_get_param_dst_pais_result] rescue []
+      def result
+        @result ||= response[:fex_get_param_dst_pais_response][:fex_get_param_dst_pais_result] rescue []
+      end
     end
   end
 end

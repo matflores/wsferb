@@ -1,8 +1,6 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'wsferb/response'
-
 module WSFErb
   module WSFE
     class Response::FECompTotXRequest < Response
