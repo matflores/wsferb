@@ -2,8 +2,7 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require "core_ext/hash"
-require "core_ext/kernel"
+require "wsferb/core_ext"
 require "wsferb/ticket"
 require "wsferb/wsaa"
 require "wsferb/wsfe"
