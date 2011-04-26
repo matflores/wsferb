@@ -24,6 +24,8 @@ module WSFErb
               fe_dummy(options)
             when /fecomptotxrequest/i
               fe_comp_tot_x_request(options)
+            when /fecompultimoautorizado/i
+              fe_comp_ultimo_autorizado(options)
             end
       rescue RuntimeError => e
         puts e.message
@@ -42,6 +44,15 @@ module WSFErb
     def self.fe_comp_tot_x_request(options)
       raise(ArgumentError, "CUIT missing") unless options.cuit
       Client.fe_comp_tot_x_request(self.ticket(options))
+    end
+
+    def self.fe_comp_ultimo_autorizado(options)
+      raise(ArgumentError, "CUIT missing") unless options.cuit
+
+      tipo_cbte = options.arguments[0]
+      punto_vta = options.arguments[1]
+
+      Client.fe_comp_ultimo_autorizado(self.ticket(options), tipo_cbte, punto_vta)
     end
 
     def self.ticket(options)
