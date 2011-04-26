@@ -2,7 +2,7 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-require 'optparse'
+require "optparse"
 
 module WSFEX
   module Runner
@@ -47,7 +47,7 @@ module WSFEX
           puts e.message
         end
         if @options.out 
-          File.open(@options.out, 'w') { |f| f.puts(r) } 
+          File.open(@options.out, "w") { |f| f.puts(r) } 
         else
           puts r
         end
@@ -110,7 +110,7 @@ module WSFEX
         cert_file = @options.cert
         key_file = @options.key
         ticket = WSAA::Ticket.load(@options.cuit, @options.ticket) if @options.ticket
-        ticket = WSAA::Client.requestTicket(@options.cuit, 'wsfex', cert_file, key_file) if ticket.nil? || ticket.invalid?
+        ticket = WSAA::Client.requestTicket(@options.cuit, "wsfex", cert_file, key_file) if ticket.nil? || ticket.invalid?
         ticket.save(@options.ticket) if ticket && ticket.valid? && @options.ticket
         ticket
       end

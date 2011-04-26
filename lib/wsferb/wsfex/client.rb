@@ -7,12 +7,10 @@ require "savon"
 
 module WSFErb
   module WSFEX
-
     class Client
-
-      WSDL = File.join(File.dirname(__FILE__), '/wsfex.wsdl')
-      PROD_URL = 'https://servicios1.afip.gov.ar/wsfex/service.asmx'
-      TEST_URL = 'https://wswhomo.afip.gov.ar/wsfex/service.asmx'
+      WSDL = File.join(File.dirname(__FILE__), "/wsfex.wsdl")
+      PROD_URL = "https://servicios1.afip.gov.ar/wsfex/service.asmx"
+      TEST_URL = "https://wswhomo.afip.gov.ar/wsfex/service.asmx"
 
       @@test_mode_enabled = false
 

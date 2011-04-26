@@ -2,7 +2,6 @@
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
 #
-
 module WSFEX
   class Fex
     attr_accessor :id_cbte, :tipo_cbte, :nro_cbte, :punto_vta, :fecha_cbte, :tipo_expo, :tiene_permiso,
@@ -21,8 +20,8 @@ module WSFEX
         lines = File.readlines(filename)
         lines.each do |line|
           case line.split(//).first
-          when '1'
-            fields = line.unpack('A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A1000A1000')
+          when "1"
+            fields = line.unpack("A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A1000A1000")
             fex.id_cbte          = fields[1].to_i
             fex.tipo_cbte        = fields[2].to_i
             fex.punto_vta        = fields[3].to_i
@@ -48,17 +47,17 @@ module WSFEX
             fex.resultado        = fields[23]
             fex.obs              = fields[24]
             fex.obs_comerciales  = fields[25]
-          when '2'
-            fields = line.unpack('A1A16A3')
+          when "2"
+            fields = line.unpack("A1A16A3")
             fex.permisos << { :Id_permiso => fields[1],
                               :Dst_merc   => fields[2].to_i }
-          when '3'
-            fields = line.unpack('A1A2A4A8')
+          when "3"
+            fields = line.unpack("A1A2A4A8")
             fex.comprobantes << { :CBte_tipo      => fields[1].to_i,
                                   :Cbte_punto_vta => fields[2].to_i,
                                   :Cbte_nro       => fields[3].to_i }
-          when '4'
-            fields = line.unpack('A1A30A4000A12A2A12A14')
+          when "4"
+            fields = line.unpack("A1A30A4000A12A2A12A14")
             fex.items << { :Pro_codigo     => fields[1],
                            :Pro_ds         => fields[2],
                            :Pro_qty        => fields[3].to_i / 100.0,
@@ -104,7 +103,7 @@ module WSFEX
     end
 
     def to_file(filename)
-      File.open(filename, 'w') do |file|
+      File.open(filename, "w") do |file|
         formato = "1%015d%02d%04d%08d%-8s%1s%1s%03d%011d%-50s%-200s%-300s%3s%011d%015d%-50s%1s%-3s%-20s%-14s%-8s%-8s%1s%-1000s%-1000s\n"
         file.write formato % [ id_cbte.to_s, tipo_cbte.to_s, punto_vta.to_s, nro_cbte.to_s, fecha_cbte.to_s,
                                tipo_expo.to_s, tiene_permiso.to_s, pais.to_s, cuit_pais.to_s, id_impositivo.to_s,

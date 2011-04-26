@@ -12,7 +12,7 @@ module WSFErb
       end
 
       def format_record(record)
-        ''
+        ""
       end
     end
   end

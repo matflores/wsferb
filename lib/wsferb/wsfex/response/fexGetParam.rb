@@ -16,7 +16,7 @@ module WSFErb
       end
 
       def format_record(record)
-        ''
+        ""
       end
 
       def to_s
