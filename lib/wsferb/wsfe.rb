@@ -42,7 +42,6 @@ module WSFErb
     def self.fe_comp_tot_x_request(options)
       raise(ArgumentError, "CUIT missing") unless options.cuit
       Client.fe_comp_tot_x_request(self.ticket(options))
-      Client.fe
     end
 
     def self.ticket(options)
