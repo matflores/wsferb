@@ -12,6 +12,8 @@ require "wsferb"
 
 options = WSFErb::Options.parse(ARGV)
 
+WSFErb.enable_test_mode if options.test?
+
 WSFErb::WSFEX.run(options)
 
 exit 0

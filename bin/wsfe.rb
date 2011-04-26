@@ -12,10 +12,7 @@ require "wsferb"
 
 options = WSFErb::Options.parse(ARGV)
 
-if options.test?
-  WSFErb::WSFE::Client.enable_test_mode
-  WSFErb::WSAA::Client.enable_test_mode
-end
+WSFErb.enable_test_mode if options.test?
 
 WSFErb::WSFE.run(options)
 
