@@ -5,6 +5,7 @@
 require "wsferb/config"
 require "wsferb/core_ext"
 require "wsferb/ticket"
+require "wsferb/version"
 require "wsferb/wsaa"
 require "wsferb/wsfe"
 require "wsferb/wsfex"
