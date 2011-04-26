@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 Protest.describe "WSAA client" do 
   %w(wsfe wsfex).each do |service|

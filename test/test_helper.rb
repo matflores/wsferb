@@ -13,12 +13,9 @@ def settings
   $settings ||= YAML.load_file(File.join(File.dirname(__FILE__), "settings.yml"))
 end
 
-CUIT = settings[:cuit]
+CUIT      = settings[:cuit]
 CERT_FILE = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.crt")
 KEY_FILE  = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.key")
-
-Protest.autorun = false
-Protest.report_with(:documentation)
 
 unless File.exists?(CERT_FILE) && File.exists?(KEY_FILE)
   puts <<-EOS
@@ -117,6 +114,9 @@ class Protest::TestCase
     "wsfe"
   end
 end
+
+Protest.autorun = false
+Protest.report_with(:documentation)
 
 at_exit do
   silence_warnings do

@@ -1,4 +1,4 @@
-require 'test_helper'
+require "test_helper"
 
 Protest.describe "A FEX invoice" do
   it "can be imported from a hash" do
