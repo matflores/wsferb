@@ -27,7 +27,7 @@ module WSFErb
       :version   => ["-v", "--version",      "Informa la version actual del script."]
     }
 
-    attr_accessor :parser, :service, :cuit, :ticket, :cert, :key, :out, :log, :help, :test, :version
+    attr_accessor :parser, :service, :arguments, :cuit, :ticket, :cert, :key, :out, :log, :help, :test, :version
 
     def self.parse(options=[])
       case options
@@ -46,6 +46,7 @@ module WSFErb
       begin
         parser.parse!(args)
         @service = args.shift
+        @arguments = args.dup
       rescue OptionParser::InvalidOption => e
         info_exit
       end
