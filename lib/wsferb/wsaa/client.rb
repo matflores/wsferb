@@ -60,7 +60,7 @@ module WSFErb
         expirationTime = t + 4200
 
         xml = []
-        xml << "<?xml version="1.0" encoding=\"UTF-8\"?>"
+        xml << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>"
         xml << "<loginTicketRequest version=\"1.0\">"
         xml << "  <header>"
         xml << "    <uniqueId>#{t.to_i}</uniqueId>"
