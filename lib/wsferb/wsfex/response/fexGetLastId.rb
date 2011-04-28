@@ -3,9 +3,13 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetLastId < Response
-      def value
-        result[:fex_result_get][:id] rescue "n/d"
+    class Response::FEXGetLastId < WSFErb::Response
+      def format_record(record)
+        "1%015d" % [ record[:id] ]
+      end
+
+      def records
+        [ result[:fex_result_get] ] rescue []
       end
 
       def result

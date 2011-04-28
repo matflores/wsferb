@@ -4,12 +4,12 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetTiposOpcional < Response::FEParam
+    class Response::FEParamGetTiposOpcional < WSFErb::Response
       def format_record(record)
-        "%04d%-250s%-8s%-8s" % [ record[:id],
-                                 record[:desc],
-                                 record[:fch_desde],
-                                 record[:fch_hasta] ]
+        "1%04d%-8s%-8s%-250s" % [ record[:id] || 0,
+                                  record[:fch_desde],
+                                  record[:fch_hasta],
+                                  record[:desc] ]
       end
 
       def records

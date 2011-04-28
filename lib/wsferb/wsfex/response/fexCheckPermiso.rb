@@ -3,9 +3,13 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXCheckPermiso < Response
-      def value
-        result[:fex_result_get][:status] rescue "n/d"
+    class Response::FEXCheckPermiso < WSFErb::Response
+      def format_record(record)
+        "1%-2s" % [ record[:status] ]
+      end
+
+      def records
+        [ result[:fex_result_get] ] rescue []
       end
 
       def result

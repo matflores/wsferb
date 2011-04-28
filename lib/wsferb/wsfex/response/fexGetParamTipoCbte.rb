@@ -4,12 +4,12 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamTipoCbte < Response::FEXGetParam
+    class Response::FEXGetParamTipoCbte < WSFErb::Response
       def format_record(record)
-        "%02d%-250s%-8s%-8s" % [ record[:cbte_id],
-                                 record[:cbte_ds],
-                                 record[:cbte_vig_desde],
-                                 record[:cbte_vig_hasta] ]
+        "1%03d%-8s%-8s%-250s" % [ record[:cbte_id],
+                                  record[:cbte_vig_desde],
+                                  record[:cbte_vig_hasta],
+                                  record[:cbte_ds] ]
       end
 
       def records

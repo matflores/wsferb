@@ -4,12 +4,12 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetPtosVenta < Response::FEParam
+    class Response::FEParamGetPtosVenta < WSFErb::Response
       def format_record(record)
-        "%04d%-8s%1s%-8s" % [ record[:nro],
-                              record[:emision_tipo],
-                              record[:bloqueado],
-                              record[:fch_baja] ]
+        "1%04d%-8s%1s%-8s" % [ record[:nro],
+                               record[:emision_tipo],
+                               record[:bloqueado],
+                               record[:fch_baja] ]
       end
 
       def records

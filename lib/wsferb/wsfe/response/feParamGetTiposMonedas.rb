@@ -4,20 +4,20 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetTiposTributos < WSFErb::Response
+    class Response::FEParamGetTiposMonedas < WSFErb::Response
       def format_record(record)
-        "1%02d%-8s%-8s%-250s" % [ record[:id],
+        "1%-3s%-8s%-8s%-250s" % [ record[:id],
                                   record[:fch_desde],
                                   record[:fch_hasta],
                                   record[:desc] ]
       end
 
       def records
-        @records ||= result[:result_get][:tributo_tipo] rescue []
+        @records ||= result[:result_get][:moneda] rescue []
       end
 
       def result
-        @result ||= response[:fe_param_get_tipos_tributos_response][:fe_param_get_tipos_tributos_result] rescue []
+        @result ||= response[:fe_param_get_tipos_monedas_response][:fe_param_get_tipos_monedas_result] rescue []
       end
     end
   end

@@ -6,11 +6,11 @@ module WSFErb
   module WSFEX
     class Response::FEXGetParamCtz < Response::FEXGetParam
       def format_record(record)
-        "%-3s%-250s" % [ record[:dst_codigo], record[:dst_ds] ]
+        "1%018d%-8s" % [ record[:cls_fex_response_ctz] ] rescue ""
       end
 
-      def records(result)
-        @records ||= result[:fex_result_get][:cls_fex_response_ctz] rescue []
+      def records
+        [ result[:fex_result_get] ] rescue []
       end
 
       def result

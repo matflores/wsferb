@@ -4,12 +4,8 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParam < Response
+    class Response::FEParam < WSFErb::Response
       attr_accessor :records
-
-      def formatted_records
-        records.map { |record| format_record(record) }
-      end
 
       def format_record(record)
         ""

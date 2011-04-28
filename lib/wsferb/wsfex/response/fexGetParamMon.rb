@@ -4,12 +4,12 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamMon < Response::FEXGetParam
+    class Response::FEXGetParamMon < WSFErb::Response
       def format_record(record)
-        "%-3s%-250s%-8s%-8s" % [ record[:mon_id],
-                                 record[:mon_ds],
-                                 record[:mon_vig_desde],
-                                 record[:mon_vig_hasta] ]
+        "1%-3s%-8s%-8s%-250s" % [ record[:mon_id],
+                                  record[:mon_vig_desde],
+                                  record[:mon_vig_hasta],
+                                  record[:mon_ds] ]
       end
 
       def records

@@ -4,11 +4,11 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamPtoVenta < Response::FEXGetParam
+    class Response::FEXGetParamPtoVenta < WSFErb::Response
       def format_record(record)
-        "%04d%1s%-8s" % [ record[:pve_nro],
-                          record[:pve_bloqueado],
-                          record[:pve_fch_baja] ]
+        "1%04d%1s%-8s" % [ record[:pve_nro],
+                           record[:pve_bloqueado],
+                           record[:pve_fch_baja] ]
       end
 
       def records

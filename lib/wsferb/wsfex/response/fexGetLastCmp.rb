@@ -3,9 +3,13 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetLastCmp < Response
-      def value
-        result[:fex_result_last_cmp][:cbte_nro] rescue "n/d"
+    class Response::FEXGetLastCmp < WSFErb::Response
+      def format_record(record)
+        "1%08d" % [ record[:cbte_nro] ]
+      end
+
+      def records
+        [ result[:fex_result_last_cmp] ] rescue []
       end
 
       def result

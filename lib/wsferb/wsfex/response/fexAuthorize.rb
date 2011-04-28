@@ -3,7 +3,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXAuthorize < Response
+    class Response::FEXAuthorize < WSFErb::Response
       def value
         info[:cae] || "n/d" rescue "n/d"
       end
