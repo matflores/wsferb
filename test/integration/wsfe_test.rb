@@ -6,7 +6,7 @@ Protest.describe "WSFE" do
   test_method :FEParamGetTiposConcepto
   test_method :FEParamGetTiposDoc
   test_method :FEParamGetTiposIva
-  test_method :FEParamGetTiposMoneda
+  test_method :FEParamGetTiposMonedas
   test_method :FEParamGetTiposOpcional
   test_method :FEParamGetTiposTributos
   test_method :FEParamGetPtosVenta
