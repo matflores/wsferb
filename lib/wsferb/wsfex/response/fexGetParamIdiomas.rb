@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamIdiomas < WSFErb::Response
+    class Response::FEXGetParamIdiomas < Response
       def format_record(record)
         "1%03d%-8s%-8s%-250s" % [ record[:idi_id],
                                   record[:idi_vig_desde],

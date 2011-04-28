@@ -3,7 +3,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetCmp < WSFErb::Response
+    class Response::FEXGetCmp < Response
       def value
         info[:cae] || "n/d" rescue "n/d"
       end

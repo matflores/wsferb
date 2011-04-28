@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamTipoExpo < WSFErb::Response
+    class Response::FEXGetParamTipoExpo < Response
       def format_record(record)
         "1%03d%-8s%-8s%-250s" % [ record[:tex_id],
                                   record[:tex_vig_desde],

@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamDstPais < WSFErb::Response
+    class Response::FEXGetParamDstPais < Response
       def format_record(record)
         "1%-3s%-250s" % [ record[:dst_codigo], record[:dst_ds] ]
       end

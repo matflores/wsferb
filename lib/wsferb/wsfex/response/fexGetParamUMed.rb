@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamUMed < WSFErb::Response
+    class Response::FEXGetParamUMed < Response
       def format_record(record)
         "1%03d%-8s%-8s%-250s" % [ record[:umed_id]        || 0,
                                   record[:umed_vig_desde] || '',

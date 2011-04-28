@@ -3,7 +3,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetLastId < WSFErb::Response
+    class Response::FEXGetLastId < Response
       def format_record(record)
         "1%015d" % [ record[:id] ]
       end

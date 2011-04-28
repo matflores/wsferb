@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamCtz < Response::FEXGetParam
+    class Response::FEXGetParamCtz < Response
       def format_record(record)
         "1%018d%-8s" % [ record[:cls_fex_response_ctz] ] rescue ""
       end

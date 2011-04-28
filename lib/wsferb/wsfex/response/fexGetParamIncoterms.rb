@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamIncoterms < WSFErb::Response
+    class Response::FEXGetParamIncoterms < Response
       def format_record(record)
         "1%-3s%-8s%-8s%-250s" % [ record[:inc_id],
                                   record[:inc_vig_desde],

@@ -3,7 +3,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetLastCmp < WSFErb::Response
+    class Response::FEXGetLastCmp < Response
       def format_record(record)
         "1%08d" % [ record[:cbte_nro] ]
       end

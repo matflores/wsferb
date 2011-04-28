@@ -3,7 +3,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXCheckPermiso < WSFErb::Response
+    class Response::FEXCheckPermiso < Response
       def format_record(record)
         "1%-2s" % [ record[:status] ]
       end

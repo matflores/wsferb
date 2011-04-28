@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetPtosVenta < WSFErb::Response
+    class Response::FEParamGetPtosVenta < Response
       def format_record(record)
         "1%04d%-8s%1s%-8s" % [ record[:nro],
                                record[:emision_tipo],

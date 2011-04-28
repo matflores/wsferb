@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamMon < WSFErb::Response
+    class Response::FEXGetParamMon < Response
       def format_record(record)
         "1%-3s%-8s%-8s%-250s" % [ record[:mon_id],
                                   record[:mon_vig_desde],

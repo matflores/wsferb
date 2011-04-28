@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamTipoCbte < WSFErb::Response
+    class Response::FEXGetParamTipoCbte < Response
       def format_record(record)
         "1%03d%-8s%-8s%-250s" % [ record[:cbte_id],
                                   record[:cbte_vig_desde],

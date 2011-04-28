@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetTiposCbte < WSFErb::Response
+    class Response::FEParamGetTiposCbte < Response
       def format_record(record)
         "1%03d%-8s%-8s%-250s" % [ record[:id],
                                   record[:fch_desde],

@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFEX
-    class Response::FEXGetParamPtoVenta < WSFErb::Response
+    class Response::FEXGetParamPtoVenta < Response
       def format_record(record)
         "1%04d%1s%-8s" % [ record[:pve_nro],
                            record[:pve_bloqueado],

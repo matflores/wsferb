@@ -4,7 +4,7 @@
 #
 module WSFErb
   module WSFE
-    class Response::FEParamGetTiposMonedas < WSFErb::Response
+    class Response::FEParamGetTiposMonedas < Response
       def format_record(record)
         "1%-3s%-8s%-8s%-250s" % [ record[:id],
                                   record[:fch_desde],
