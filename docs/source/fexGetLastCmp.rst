@@ -40,8 +40,6 @@ La respuesta contiene un registro de tipo "1" indicando el último número de co
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
 TipoReg              S(1)    Tipo de Registro - "1"
-TipoCbte             N(3)    Tipo de comprobante
-PtoVenta             N(4)    Punto de venta
 NroCbte              N(8)    Número de comprobante
 ==================== ======= ==================================================
 
