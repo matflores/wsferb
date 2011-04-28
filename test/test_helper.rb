@@ -62,12 +62,13 @@ class Protest::TestCase
   def assert_value(method, min, max = nil)
     max ||= min
 
-    response = parse_response(method)
+    output = File.read(expand_path("tmp/#{method}.txt"))
+    value  = output[1..-1].strip
 
-    if numeric?(response.value)
-      assert response.value.to_f >= min && response.value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{response.value}]"
+    if numeric?(value)
+      assert value.to_f >= min && value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{value}]"
     else
-      assert response.value == min, "expected [#{min}] but was [#{response.value}]"
+      assert value == min, "expected [#{min}] but was [#{value}]"
     end
   end
 
