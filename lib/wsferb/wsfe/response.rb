@@ -7,14 +7,12 @@ require "wsferb/response"
 module WSFErb
   module WSFE
     class Response < WSFErb::Response
-      attr_accessor :result
-
       def err_code
-        @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
+        @err_code ||= result[:err][:err_code].to_i rescue "n/d"
       end
 
       def err_msg
-        @err_msg ||= result[:fex_err][:err_msg] rescue "n/d"
+        @err_msg ||= result[:err][:err_msg] rescue "n/d"
       end
     end
   end

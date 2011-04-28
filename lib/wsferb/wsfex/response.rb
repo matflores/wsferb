@@ -7,8 +7,6 @@ require "wsferb/response"
 module WSFErb
   module WSFEX
     class Response < WSFErb::Response
-      attr_accessor :result
-
       def err_code
         @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
       end

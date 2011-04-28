@@ -4,7 +4,8 @@
 #
 module WSFErb
   class Response
-    attr_accessor :response
+    attr_accessor :response, :result
+
 
     def initialize(response = {})
       @response = Hash === response ? response : response.to_hash
