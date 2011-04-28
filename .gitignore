@@ -1,6 +1,7 @@
-*.log
-*.key
 *.crt
+*.key
+*.log
+*.xml
 test/credentials
 test/tmp
 build/wsfe.rb
