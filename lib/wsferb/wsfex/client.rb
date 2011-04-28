@@ -8,10 +8,6 @@ require "savon"
 module WSFErb
   module WSFEX
     class Client
-      WSDL = File.join(File.dirname(__FILE__), "/wsfex.wsdl")
-      PROD_URL = "https://servicios1.afip.gov.ar/wsfex/service.asmx"
-      TEST_URL = "https://wswhomo.afip.gov.ar/wsfex/service.asmx"
-
       def self.fex_authorize(ticket, entrada, salida)
         return ticket_missing if ticket.nil?
 
@@ -260,10 +256,11 @@ module WSFErb
       end
 
       def self.client
-        @client ||= Savon::Client.new do |wsdl, http|
-          wsdl.document = WSDL
-          wsdl.endpoint = WSFErb.test_mode_enabled? ? TEST_URL : PROD_URL
-        end
+        options = { :wsdl           => File.join(File.dirname(__FILE__), "/wsfex.wsdl"),
+                    :production_url => "https://servicios1.afip.gov.ar/wsfex/service.asmx",
+                    :testing_url    => "https://wswhomo.afip.gov.ar/wsfex/service.asmx" }
+
+        @client ||= WSFErb.client(options)
       end
     end
   end

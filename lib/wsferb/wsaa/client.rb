@@ -11,10 +11,6 @@ module WSFErb
     class Client
       include OpenSSL
 
-      WSDL = File.join(File.dirname(__FILE__), "/wsaa.wsdl")
-      PROD_URL = "https://wsaa.afip.gov.ar/ws/services/LoginCms"
-      TEST_URL = "https://wsaahomo.afip.gov.ar/ws/services/LoginCms"
-
       def self.requestTicket(cuit, service, cert_file, key_file)
         request = generate_request_for(service)
         signed = sign_request(request, cert_file, key_file)
@@ -32,10 +28,11 @@ module WSFErb
       end
 
       def self.client
-        @client ||= Savon::Client.new do |wsdl, http|
-          wsdl.document = WSDL
-          wsdl.endpoint = WSFErb.test_mode_enabled? ? TEST_URL : PROD_URL
-        end
+        options = { :wsdl           => File.join(File.dirname(__FILE__), "/wsaa.wsdl"),
+                    :production_url => "https://wsaa.afip.gov.ar/ws/services/LoginCms",
+                    :testing_url    => "https://wsaahomo.afip.gov.ar/ws/services/LoginCms" }
+
+        @client ||= WSFErb.client(options)
       end
 
       private
