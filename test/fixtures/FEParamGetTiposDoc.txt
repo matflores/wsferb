@@ -1,36 +1,36 @@
-80CUIT                                                                                                                                                                                                                                                      20080725NULL    
-86CUIL                                                                                                                                                                                                                                                      20080725NULL    
-87CDI                                                                                                                                                                                                                                                       20080725NULL    
-89LE                                                                                                                                                                                                                                                        20080725NULL    
-90LC                                                                                                                                                                                                                                                        20080725NULL    
-91CI Extranjera                                                                                                                                                                                                                                             20080725NULL    
-92en trámite                                                                                                                                                                                                                                                20080725NULL    
-93Acta Nacimiento                                                                                                                                                                                                                                           20080725NULL    
-95CI Bs. As. RNP                                                                                                                                                                                                                                            20080725NULL    
-96DNI                                                                                                                                                                                                                                                       20080725NULL    
-94Pasaporte                                                                                                                                                                                                                                                 20080725NULL    
-00CI Policía Federal                                                                                                                                                                                                                                        20080725NULL    
-01CI Buenos Aires                                                                                                                                                                                                                                           20080725NULL    
-02CI Catamarca                                                                                                                                                                                                                                              20080725NULL    
-03CI Córdoba                                                                                                                                                                                                                                                20080725NULL    
-04CI Corrientes                                                                                                                                                                                                                                             20080728NULL    
-05CI Entre Ríos                                                                                                                                                                                                                                             20080728NULL    
-06CI Jujuy                                                                                                                                                                                                                                                  20080728NULL    
-07CI Mendoza                                                                                                                                                                                                                                                20080728NULL    
-08CI La Rioja                                                                                                                                                                                                                                               20080728NULL    
-09CI Salta                                                                                                                                                                                                                                                  20080728NULL    
-10CI San Juan                                                                                                                                                                                                                                               20080728NULL    
-11CI San Luis                                                                                                                                                                                                                                               20080728NULL    
-12CI Santa Fe                                                                                                                                                                                                                                               20080728NULL    
-13CI Santiago del Estero                                                                                                                                                                                                                                    20080728NULL    
-14CI Tucumán                                                                                                                                                                                                                                                20080728NULL    
-16CI Chaco                                                                                                                                                                                                                                                  20080728NULL    
-17CI Chubut                                                                                                                                                                                                                                                 20080728NULL    
-18CI Formosa                                                                                                                                                                                                                                                20080728NULL    
-19CI Misiones                                                                                                                                                                                                                                               20080728NULL    
-20CI Neuquén                                                                                                                                                                                                                                                20080728NULL    
-21CI La Pampa                                                                                                                                                                                                                                               20080728NULL    
-22CI Río Negro                                                                                                                                                                                                                                              20080728NULL    
-23CI Santa Cruz                                                                                                                                                                                                                                             20080728NULL    
-24CI Tierra del Fuego                                                                                                                                                                                                                                       20080728NULL    
-99Doc. (Otro)                                                                                                                                                                                                                                               20080728NULL    
+18020080725NULL    CUIT
+18620080725NULL    CUIL
+18720080725NULL    CDI
+18920080725NULL    LE
+19020080725NULL    LC
+19120080725NULL    CI Extranjera
+19220080725NULL    en trámite
+19320080725NULL    Acta Nacimiento
+19520080725NULL    CI Bs. As. RNP
+19620080725NULL    DNI
+19420080725NULL    Pasaporte
+10020080725NULL    CI Policía Federal
+10120080725NULL    CI Buenos Aires
+10220080725NULL    CI Catamarca
+10320080725NULL    CI Córdoba
+10420080728NULL    CI Corrientes
+10520080728NULL    CI Entre Ríos
+10620080728NULL    CI Jujuy
+10720080728NULL    CI Mendoza
+10820080728NULL    CI La Rioja
+10920080728NULL    CI Salta
+11020080728NULL    CI San Juan
+11120080728NULL    CI San Luis
+11220080728NULL    CI Santa Fe
+11320080728NULL    CI Santiago del Estero
+11420080728NULL    CI Tucumán
+11620080728NULL    CI Chaco
+11720080728NULL    CI Chubut
+11820080728NULL    CI Formosa
+11920080728NULL    CI Misiones
+12020080728NULL    CI Neuquén
+12120080728NULL    CI La Pampa
+12220080728NULL    CI Río Negro
+12320080728NULL    CI Santa Cruz
+12420080728NULL    CI Tierra del Fuego
+19920080728NULL    Doc. (Otro)

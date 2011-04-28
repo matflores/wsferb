@@ -1,5 +1,5 @@
-01Impuestos nacionales                                                                                                                                                                                                                                      20100917NULL    
-02Impuestos provinciales                                                                                                                                                                                                                                    20100917NULL    
-03Impuestos municipales                                                                                                                                                                                                                                     20100917NULL    
-04Impuestos Internos                                                                                                                                                                                                                                        20100917NULL    
-99Otro                                                                                                                                                                                                                                                      20100917NULL    
+10120100917NULL    Impuestos nacionales
+10220100917NULL    Impuestos provinciales
+10320100917NULL    Impuestos municipales
+10420100917NULL    Impuestos Internos
+19920100917NULL    Otro

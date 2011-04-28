@@ -1,8 +1,5 @@
-19Facturas de Exportación
-                                                                                                                                                                                                                                 20100101NULL    
-20Nota de Débito por Operaciones con el Exterior
-                                                                                                                                                                                                          20100101NULL    
-21Nota de Crédito por Operaciones con el Exterior
-                                                                                                                                                                                                         20100101NULL    
-88Remito Electrónico                                                                                                                                                                                                                                       20110315NULL    
-89Resumen de Datos                                                                                                                                                                                                                                          20110315NULL    
+101920100101NULL    Facturas de Exportación
+102020100101NULL    Nota de Débito por Operaciones con el Exterior
+102120100101NULL    Nota de Crédito por Operaciones con el Exterior
+108820110315NULL    Remito Electrónico
+108920110315NULL    Resumen de Datos

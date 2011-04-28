@@ -1,18 +1,22 @@
-001Factura A                                                                                                                                                                                                                                                 20100917NULL    
-002Nota de Débito A                                                                                                                                                                                                                                          20100917NULL    
-003Nota de Crédito A                                                                                                                                                                                                                                         20100917NULL    
-006Factura B                                                                                                                                                                                                                                                 20100917NULL    
-007Nota de Débito B                                                                                                                                                                                                                                          20100917NULL    
-008Nota de Crédito B                                                                                                                                                                                                                                         20100917NULL    
-004Recibos A                                                                                                                                                                                                                                                 20100917NULL    
-005Notas de Venta al contado A                                                                                                                                                                                                                               20100917NULL    
-009Recibos B                                                                                                                                                                                                                                                 20100917NULL    
-010Notas de Venta al contado B                                                                                                                                                                                                                               20100917NULL    
-063Liquidacion A                                                                                                                                                                                                                                             20100917NULL    
-064Liquidacion B                                                                                                                                                                                                                                             20100917NULL    
-034Cbtes. A del Anexo I, Apartado A,inc.f),R.G.Nro. 1415                                                                                                                                                                                                     20100917NULL    
-035Cbtes. B del Anexo I,Apartado A,inc. f),R.G. Nro. 1415                                                                                                                                                                                                    20100917NULL    
-039Otros comprobantes A que cumplan con R.G.Nro. 1415                                                                                                                                                                                                        20100917NULL    
-040Otros comprobantes B que cumplan con R.G.Nro. 1415                                                                                                                                                                                                        20100917NULL    
-060Cta de Vta y Liquido prod. A                                                                                                                                                                                                                              20100917NULL    
-061Cta de Vta y Liquido prod. B                                                                                                                                                                                                                              20100917NULL    
+100120100917NULL    Factura A
+100220100917NULL    Nota de Débito A
+100320100917NULL    Nota de Crédito A
+100620100917NULL    Factura B
+100720100917NULL    Nota de Débito B
+100820100917NULL    Nota de Crédito B
+100420100917NULL    Recibos A
+100520100917NULL    Notas de Venta al contado A
+100920100917NULL    Recibos B
+101020100917NULL    Notas de Venta al contado B
+106320100917NULL    Liquidacion A
+106420100917NULL    Liquidacion B
+103420100917NULL    Cbtes. A del Anexo I, Apartado A,inc.f),R.G.Nro. 1415
+103520100917NULL    Cbtes. B del Anexo I,Apartado A,inc. f),R.G. Nro. 1415
+103920100917NULL    Otros comprobantes A que cumplan con R.G.Nro. 1415
+104020100917NULL    Otros comprobantes B que cumplan con R.G.Nro. 1415
+106020100917NULL    Cta de Vta y Liquido prod. A
+106120100917NULL    Cta de Vta y Liquido prod. B
+101120110330NULL    Factura C
+101220110330NULL    Nota de Débito C
+101320110330NULL    Nota de Crédito C
+101520110330NULL    Recibo C

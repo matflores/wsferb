@@ -1,51 +1,51 @@
-41miligramos                                                                                                                                                                                                                                                20080704NULL    
-14gramos                                                                                                                                                                                                                                                    20080704NULL    
-01kilogramos                                                                                                                                                                                                                                                20080704NULL    
-29toneladas                                                                                                                                                                                                                                                 20080704NULL    
-10quilates                                                                                                                                                                                                                                                  20080704NULL    
-47mililitros                                                                                                                                                                                                                                                20080704NULL    
-05litros                                                                                                                                                                                                                                                    20080704NULL    
-27cm cúbicos                                                                                                                                                                                                                                               20080704NULL    
-15milimetros                                                                                                                                                                                                                                                20080704NULL    
-20centímetros                                                                                                                                                                                                                                              20080704NULL    
-17kilómetros                                                                                                                                                                                                                                               20080704NULL    
-07unidades                                                                                                                                                                                                                                                  20080704NULL    
-08pares                                                                                                                                                                                                                                                     20080704NULL    
-09docenas                                                                                                                                                                                                                                                   20080704NULL    
-11millares                                                                                                                                                                                                                                                  20080704NULL    
-96packs                                                                                                                                                                                                                                                     20080704NULL    
-97hormas                                                                                                                                                                                                                                                    20080704NULL    
-02metros                                                                                                                                                                                                                                                    20080704NULL    
-03metros cuadrados                                                                                                                                                                                                                                          20080704NULL    
-04metros cúbicos                                                                                                                                                                                                                                           20080704NULL    
-061000 kWh                                                                                                                                                                                                                                                  20080704NULL    
-98bonificación                                                                                                                                                                                                                                             20080704NULL    
-99otras unidades                                                                                                                                                                                                                                            20080704NULL    
-16mm cúbicos                                                                                                                                                                                                                                               20080704NULL    
-18hectolitros                                                                                                                                                                                                                                               20080704NULL    
-25jgo. pqt. mazo naipes                                                                                                                                                                                                                                     20080704NULL    
-30dam cúbicos                                                                                                                                                                                                                                              20080704NULL    
-31hm cúbicos                                                                                                                                                                                                                                               20080704NULL    
-32km cúbicos                                                                                                                                                                                                                                               20080704NULL    
-33microgramos                                                                                                                                                                                                                                               20080704NULL    
-34nanogramos                                                                                                                                                                                                                                                20080704NULL    
-35picogramos                                                                                                                                                                                                                                                20080704NULL    
-48curie                                                                                                                                                                                                                                                     20080704NULL    
-49milicurie                                                                                                                                                                                                                                                 20080704NULL    
-50microcurie                                                                                                                                                                                                                                                20080704NULL    
-51uiacthor                                                                                                                                                                                                                                                  20080704NULL    
-52muiacthor                                                                                                                                                                                                                                                 20080704NULL    
-53kg base                                                                                                                                                                                                                                                   20080704NULL    
-54gruesa                                                                                                                                                                                                                                                    20080704NULL    
-61kg bruto                                                                                                                                                                                                                                                  20080704NULL    
-62uiactant                                                                                                                                                                                                                                                  20080704NULL    
-63muiactant                                                                                                                                                                                                                                                 20080704NULL    
-64uiactig                                                                                                                                                                                                                                                   20080704NULL    
-65muiactig                                                                                                                                                                                                                                                  20080704NULL    
-66kg activo                                                                                                                                                                                                                                                 20080704NULL    
-67gramo activo                                                                                                                                                                                                                                              20080704NULL    
-68gramo base                                                                                                                                                                                                                                                20080704NULL    
-00                                                                                                                                                                                                                                                          20091211NULL    
-97seña/anticipo                                                                                                                                                                                                                                            20101022NULL    
-98otras unidades                                                                                                                                                                                                                                            20101022NULL    
-99bonificación                                                                                                                                                                                                                                             20101022NULL    
+104120080704NULL    miligramos
+101420080704NULL    gramos
+100120080704NULL    kilogramos
+102920080704NULL    toneladas
+101020080704NULL    quilates
+104720080704NULL    mililitros
+100520080704NULL    litros
+102720080704NULL    cm cúbicos
+101520080704NULL    milimetros
+102020080704NULL    centímetros
+101720080704NULL    kilómetros
+100720080704NULL    unidades
+100820080704NULL    pares
+100920080704NULL    docenas
+101120080704NULL    millares
+109620080704NULL    packs
+100220080704NULL    metros
+100320080704NULL    metros cuadrados
+100420080704NULL    metros cúbicos
+100620080704NULL    1000 kWh
+101620080704NULL    mm cúbicos
+101820080704NULL    hectolitros
+102520080704NULL    jgo. pqt. mazo naipes
+103020080704NULL    dam cúbicos
+103120080704NULL    hm cúbicos
+103220080704NULL    km cúbicos
+103320080704NULL    microgramos
+103420080704NULL    nanogramos
+103520080704NULL    picogramos
+104820080704NULL    curie
+104920080704NULL    milicurie
+105020080704NULL    microcurie
+105120080704NULL    uiacthor
+105220080704NULL    muiacthor
+105320080704NULL    kg base
+105420080704NULL    gruesa
+106120080704NULL    kg bruto
+106220080704NULL    uiactant
+106320080704NULL    muiactant
+106420080704NULL    uiactig
+106520080704NULL    muiactig
+106620080704NULL    kg activo
+106720080704NULL    gramo activo
+106820080704NULL    gramo base
+100020091211NULL
+109720101022NULL    seña/anticipo
+109820101022NULL    otras unidades
+109920101022NULL    bonificación
+1000
+1000
+1000

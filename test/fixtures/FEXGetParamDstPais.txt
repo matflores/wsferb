@@ -1,255 +1,255 @@
-101BURKINA FASO                                                                                                                                                                                                                                              
-102ARGELIA                                                                                                                                                                                                                                                   
-103BOTSWANA                                                                                                                                                                                                                                                  
-104BURUNDI                                                                                                                                                                                                                                                   
-105CAMERUN                                                                                                                                                                                                                                                   
-107REP. CENTROAFRICANA.                                                                                                                                                                                                                                      
-108CONGO                                                                                                                                                                                                                                                     
-109REP.DEMOCRAT.DEL CONGO EX ZAIRE                                                                                                                                                                                                                           
-110COSTA DE MARFIL                                                                                                                                                                                                                                           
-111CHAD                                                                                                                                                                                                                                                      
-112BENIN                                                                                                                                                                                                                                                     
-113EGIPTO                                                                                                                                                                                                                                                    
-115GABON                                                                                                                                                                                                                                                     
-116GAMBIA                                                                                                                                                                                                                                                    
-117GHANA                                                                                                                                                                                                                                                     
-118GUINEA                                                                                                                                                                                                                                                    
-119GUINEA ECUATORIAL                                                                                                                                                                                                                                         
-120KENYA                                                                                                                                                                                                                                                     
-121LESOTHO                                                                                                                                                                                                                                                   
-122LIBERIA                                                                                                                                                                                                                                                   
-123LIBIA                                                                                                                                                                                                                                                     
-124MADAGASCAR                                                                                                                                                                                                                                                
-125MALAWI                                                                                                                                                                                                                                                    
-126MALI                                                                                                                                                                                                                                                      
-127MARRUECOS                                                                                                                                                                                                                                                 
-128MAURICIO,ISLAS                                                                                                                                                                                                                                            
-129MAURITANIA                                                                                                                                                                                                                                                
-130NIGER                                                                                                                                                                                                                                                     
-131NIGERIA                                                                                                                                                                                                                                                   
-132ZIMBABWE                                                                                                                                                                                                                                                  
-133RWANDA                                                                                                                                                                                                                                                    
-134SENEGAL                                                                                                                                                                                                                                                   
-135SIERRA LEONA                                                                                                                                                                                                                                              
-136SOMALIA                                                                                                                                                                                                                                                   
-137SWAZILANDIA                                                                                                                                                                                                                                               
-138SUDAN                                                                                                                                                                                                                                                     
-139TANZANIA                                                                                                                                                                                                                                                  
-140TOGO                                                                                                                                                                                                                                                      
-141TUNEZ                                                                                                                                                                                                                                                     
-142UGANDA                                                                                                                                                                                                                                                    
-144ZAMBIA                                                                                                                                                                                                                                                    
-145TERRIT.VINCULADOS AL R UNIDO                                                                                                                                                                                                                              
-146TERRIT.VINCULADOS A ESPAÑA                                                                                                                                                                                                                               
-147TERRIT.VINCULADOS A FRANCIA                                                                                                                                                                                                                               
-149ANGOLA                                                                                                                                                                                                                                                    
-150CABO VERDE                                                                                                                                                                                                                                                
-151MOZAMBIQUE                                                                                                                                                                                                                                                
-152SEYCHELLES                                                                                                                                                                                                                                                
-153DJIBOUTI                                                                                                                                                                                                                                                  
-155COMORAS                                                                                                                                                                                                                                                   
-156GUINEA BISSAU                                                                                                                                                                                                                                             
-157STO.TOME Y PRINCIPE                                                                                                                                                                                                                                       
-158NAMIBIA                                                                                                                                                                                                                                                   
-159SUDAFRICA                                                                                                                                                                                                                                                 
-160ERITREA                                                                                                                                                                                                                                                   
-161ETIOPIA                                                                                                                                                                                                                                                   
-197RESTO (AFRICA)                                                                                                                                                                                                                                            
-198INDETERMINADO (AFRICA)                                                                                                                                                                                                                                    
-200ARGENTINA                                                                                                                                                                                                                                                 
-201BARBADOS                                                                                                                                                                                                                                                  
-202BOLIVIA                                                                                                                                                                                                                                                   
-203BRASIL                                                                                                                                                                                                                                                    
-204CANADA                                                                                                                                                                                                                                                    
-205COLOMBIA                                                                                                                                                                                                                                                  
-206COSTA RICA                                                                                                                                                                                                                                                
-207CUBA                                                                                                                                                                                                                                                      
-208CHILE                                                                                                                                                                                                                                                     
-209REPÚBLICA DOMINICANA                                                                                                                                                                                                                                     
-210ECUADOR                                                                                                                                                                                                                                                   
-211EL SALVADOR                                                                                                                                                                                                                                               
-212ESTADOS UNIDOS                                                                                                                                                                                                                                            
-213GUATEMALA                                                                                                                                                                                                                                                 
-214GUYANA                                                                                                                                                                                                                                                    
-215HAITI                                                                                                                                                                                                                                                     
-216HONDURAS                                                                                                                                                                                                                                                  
-217JAMAICA                                                                                                                                                                                                                                                   
-218MEXICO                                                                                                                                                                                                                                                    
-219NICARAGUA                                                                                                                                                                                                                                                 
-220PANAMA                                                                                                                                                                                                                                                    
-221PARAGUAY                                                                                                                                                                                                                                                  
-222PERU                                                                                                                                                                                                                                                      
-223PUERTO RICO                                                                                                                                                                                                                                               
-224TRINIDAD Y TOBAGO                                                                                                                                                                                                                                         
-225URUGUAY                                                                                                                                                                                                                                                   
-226VENEZUELA                                                                                                                                                                                                                                                 
-227TERRIT.VINCULADO AL R.UNIDO                                                                                                                                                                                                                               
-228TER.VINCULADOS A DINAMARCA                                                                                                                                                                                                                                
-229TERRIT.VINCULADOS A FRANCIA AMERIC.                                                                                                                                                                                                                       
-230TERRIT. HOLANDESES                                                                                                                                                                                                                                        
-231TER.VINCULADOS A ESTADOS UNIDOS                                                                                                                                                                                                                           
-232SURINAME                                                                                                                                                                                                                                                  
-233DOMINICA                                                                                                                                                                                                                                                  
-234SANTA LUCIA                                                                                                                                                                                                                                               
-235SAN VICENTE Y LAS GRANADINAS                                                                                                                                                                                                                              
-236BELICE                                                                                                                                                                                                                                                    
-237ANTIGUA Y BARBUDA                                                                                                                                                                                                                                         
-238S.CRISTOBAL Y NEVIS                                                                                                                                                                                                                                       
-239BAHAMAS                                                                                                                                                                                                                                                   
-240GRENADA                                                                                                                                                                                                                                                   
-241ANTILLAS HOLANDESAS                                                                                                                                                                                                                                       
-250AAE Tierra del Fuego - ARGENTINA                                                                                                                                                                                                                          
-251ZF La Plata - ARGENTINA                                                                                                                                                                                                                                   
-252ZF Justo Daract - ARGENTINA                                                                                                                                                                                                                               
-253ZF Río Gallegos - ARGENTINA                                                                                                                                                                                                                              
-254Islas Malvinas - ARGENTINA                                                                                                                                                                                                                                
-255ZF Tucumán - ARGENTINA                                                                                                                                                                                                                                   
-256ZF Córdoba - ARGENTINA                                                                                                                                                                                                                                   
-257ZF Mendoza - ARGENTINA                                                                                                                                                                                                                                    
-258ZF General Pico - ARGENTINA                                                                                                                                                                                                                               
-259ZF Comodoro Rivadavia - ARGENTINA                                                                                                                                                                                                                         
-260ZF Iquique                                                                                                                                                                                                                                                
-261ZF Punta Arenas                                                                                                                                                                                                                                           
-262ZF Salta - ARGENTINA                                                                                                                                                                                                                                      
-263ZF Paso de los Libres - ARGENTINA                                                                                                                                                                                                                         
-264ZF Puerto Iguazú - ARGENTINA                                                                                                                                                                                                                             
-265SECTOR ANTARTICO ARG.                                                                                                                                                                                                                                     
-270ZF Colón - REPÚBLICA DE PANAMÁ                                                                                                                                                                                                                         
-271ZF Winner (Sta. C. de la Sierra) - BOLIVIA                                                                                                                                                                                                                
-280ZF Colonia - URUGUAY                                                                                                                                                                                                                                      
-281ZF Florida - URUGUAY                                                                                                                                                                                                                                      
-282ZF Libertad - URUGUAY                                                                                                                                                                                                                                     
-283ZF Zonamerica - URUGUAY                                                                                                                                                                                                                                   
-284ZF Nueva Helvecia - URUGUAY                                                                                                                                                                                                                               
-285ZF Nueva Palmira - URUGUAY                                                                                                                                                                                                                                
-286ZF Río Negro - URUGUAY                                                                                                                                                                                                                                   
-287ZF Rivera - URUGUAY                                                                                                                                                                                                                                       
-288ZF San José - URUGUAY                                                                                                                                                                                                                                    
-291ZF Manaos - BRASIL                                                                                                                                                                                                                                        
-295MAR ARG ZONA ECO.EX                                                                                                                                                                                                                                       
-296RIOS ARG NAVEG INTER                                                                                                                                                                                                                                      
-297RESTO AMERICA                                                                                                                                                                                                                                             
-298INDETERMINADO (AMERICA)                                                                                                                                                                                                                                   
-301AFGANISTAN                                                                                                                                                                                                                                                
-302ARABIA SAUDITA                                                                                                                                                                                                                                            
-303BAHREIN                                                                                                                                                                                                                                                   
-304MYANMAR (EX-BIRMANIA)                                                                                                                                                                                                                                     
-305BUTAN                                                                                                                                                                                                                                                     
-306CAMBODYA (EX-KAMPUCHE)                                                                                                                                                                                                                                    
-307SRI LANKA                                                                                                                                                                                                                                                 
-308COREA DEMOCRATICA                                                                                                                                                                                                                                         
-309COREA REPUBLICANA                                                                                                                                                                                                                                         
-310CHINA                                                                                                                                                                                                                                                     
-312FILIPINAS                                                                                                                                                                                                                                                 
-313TAIWAN                                                                                                                                                                                                                                                    
-315INDIA                                                                                                                                                                                                                                                     
-316INDONESIA                                                                                                                                                                                                                                                 
-317IRAK                                                                                                                                                                                                                                                      
-318IRAN                                                                                                                                                                                                                                                      
-319ISRAEL                                                                                                                                                                                                                                                    
-320JAPON                                                                                                                                                                                                                                                     
-321JORDANIA                                                                                                                                                                                                                                                  
-322QATAR                                                                                                                                                                                                                                                     
-323KUWAIT                                                                                                                                                                                                                                                    
-324LAOS                                                                                                                                                                                                                                                      
-325LIBANO                                                                                                                                                                                                                                                    
-326MALASIA                                                                                                                                                                                                                                                   
-327MALDIVAS ISLAS                                                                                                                                                                                                                                            
-328OMAN                                                                                                                                                                                                                                                      
-329MONGOLIA                                                                                                                                                                                                                                                  
-330NEPAL                                                                                                                                                                                                                                                     
-331EMIRATOS ARABES UNIDOS                                                                                                                                                                                                                                    
-332PAKISTÁN                                                                                                                                                                                                                                                 
-333SINGAPUR                                                                                                                                                                                                                                                  
-334SIRIA                                                                                                                                                                                                                                                     
-335THAILANDIA                                                                                                                                                                                                                                                
-337VIETNAM                                                                                                                                                                                                                                                   
-341HONG KONG                                                                                                                                                                                                                                                 
-344MACAO                                                                                                                                                                                                                                                     
-345BANGLADESH                                                                                                                                                                                                                                                
-346BRUNEI                                                                                                                                                                                                                                                    
-348REPUBLICA DE YEMEN                                                                                                                                                                                                                                        
-349ARMENIA                                                                                                                                                                                                                                                   
-350AZERBAIJAN                                                                                                                                                                                                                                                
-351GEORGIA                                                                                                                                                                                                                                                   
-352KAZAJSTAN                                                                                                                                                                                                                                                 
-353KIRGUIZISTAN                                                                                                                                                                                                                                              
-354TAYIKISTAN                                                                                                                                                                                                                                                
-355TURKMENISTAN                                                                                                                                                                                                                                              
-356UZBEKISTAN                                                                                                                                                                                                                                                
-357TERR. AU. PALESTINOS                                                                                                                                                                                                                                      
-397RESTO DE ASIA                                                                                                                                                                                                                                             
-398INDET.(ASIA)                                                                                                                                                                                                                                              
-401ALBANIA                                                                                                                                                                                                                                                   
-404ANDORRA                                                                                                                                                                                                                                                   
-405AUSTRIA                                                                                                                                                                                                                                                   
-406BELGICA                                                                                                                                                                                                                                                   
-407BULGARIA                                                                                                                                                                                                                                                  
-409DINAMARCA                                                                                                                                                                                                                                                 
-410ESPAÑA                                                                                                                                                                                                                                                   
-411FINLANDIA                                                                                                                                                                                                                                                 
-412FRANCIA                                                                                                                                                                                                                                                   
-413GRECIA                                                                                                                                                                                                                                                    
-414HUNGRIA                                                                                                                                                                                                                                                   
-415IRLANDA                                                                                                                                                                                                                                                   
-416ISLANDIA                                                                                                                                                                                                                                                  
-417ITALIA                                                                                                                                                                                                                                                    
-418LIECHTENSTEIN                                                                                                                                                                                                                                             
-419LUXEMBURGO                                                                                                                                                                                                                                                
-420MALTA                                                                                                                                                                                                                                                     
-421MONACO                                                                                                                                                                                                                                                    
-422NORUEGA                                                                                                                                                                                                                                                   
-423PAISES BAJOS                                                                                                                                                                                                                                              
-424POLONIA                                                                                                                                                                                                                                                   
-425PORTUGAL                                                                                                                                                                                                                                                  
-426REINO UNIDO                                                                                                                                                                                                                                               
-427RUMANIA                                                                                                                                                                                                                                                   
-428SAN MARINO                                                                                                                                                                                                                                                
-429SUECIA                                                                                                                                                                                                                                                    
-430SUIZA                                                                                                                                                                                                                                                     
-431VATICANO(SANTA SEDE)                                                                                                                                                                                                                                      
-433POS.BRIT.(EUROPA)                                                                                                                                                                                                                                         
-435CHIPRE                                                                                                                                                                                                                                                    
-436TURQUIA                                                                                                                                                                                                                                                   
-438ALEMANIA,REP.FED.                                                                                                                                                                                                                                         
-439BIELORRUSIA                                                                                                                                                                                                                                               
-440ESTONIA                                                                                                                                                                                                                                                   
-441LETONIA                                                                                                                                                                                                                                                   
-442LITUANIA                                                                                                                                                                                                                                                  
-443MOLDAVIA                                                                                                                                                                                                                                                  
-444RUSIA                                                                                                                                                                                                                                                     
-445UCRANIA                                                                                                                                                                                                                                                   
-446BOSNIA HERZEGOVINA                                                                                                                                                                                                                                        
-447CROACIA                                                                                                                                                                                                                                                   
-448ESLOVAQUIA                                                                                                                                                                                                                                                
-449ESLOVENIA                                                                                                                                                                                                                                                 
-450MACEDONIA                                                                                                                                                                                                                                                 
-451REP. CHECA                                                                                                                                                                                                                                                
-453MONTENEGRO                                                                                                                                                                                                                                                
-454SERBIA                                                                                                                                                                                                                                                    
-497RESTO EUROPA                                                                                                                                                                                                                                              
-498INDET.(EUROPA)                                                                                                                                                                                                                                            
-501AUSTRALIA                                                                                                                                                                                                                                                 
-503NAURU                                                                                                                                                                                                                                                     
-504NUEVA ZELANDIA                                                                                                                                                                                                                                            
-505VANATU                                                                                                                                                                                                                                                    
-506SAMOA OCCIDENTAL                                                                                                                                                                                                                                          
-507TERRITORIO VINCULADOS A AUSTRALIA                                                                                                                                                                                                                         
-508TERRITORIOS VINCULADOS AL R. UNIDO                                                                                                                                                                                                                        
-509TERRITORIOS VINCULADOS A FRANCIA                                                                                                                                                                                                                          
-510TER VINCULADOS A NUEVA. ZELANDA                                                                                                                                                                                                                           
-511TER. VINCULADOS A ESTADOS UNIDOS                                                                                                                                                                                                                          
-512FIJI, ISLAS                                                                                                                                                                                                                                               
-513PAPUA NUEVA GUINEA                                                                                                                                                                                                                                        
-514KIRIBATI, ISLAS                                                                                                                                                                                                                                           
-515MICRONESIA,EST.FEDER                                                                                                                                                                                                                                      
-516PALAU                                                                                                                                                                                                                                                     
-517TUVALU                                                                                                                                                                                                                                                    
-518SALOMON,ISLAS                                                                                                                                                                                                                                             
-519TONGA                                                                                                                                                                                                                                                     
-520MARSHALL,ISLAS                                                                                                                                                                                                                                            
-521MARIANAS,ISLAS                                                                                                                                                                                                                                            
-597RESTO OCEANIA                                                                                                                                                                                                                                             
-598INDET.(OCEANIA)                                                                                                                                                                                                                                           
-997RESTO CONTINENTE                                                                                                                                                                                                                                          
-998INDET.(CONTINENTE)                                                                                                                                                                                                                                        
+1101BURKINA FASO
+1102ARGELIA
+1103BOTSWANA
+1104BURUNDI
+1105CAMERUN
+1107REP. CENTROAFRICANA.
+1108CONGO
+1109REP.DEMOCRAT.DEL CONGO EX ZAIRE
+1110COSTA DE MARFIL
+1111CHAD
+1112BENIN
+1113EGIPTO
+1115GABON
+1116GAMBIA
+1117GHANA
+1118GUINEA
+1119GUINEA ECUATORIAL
+1120KENYA
+1121LESOTHO
+1122LIBERIA
+1123LIBIA
+1124MADAGASCAR
+1125MALAWI
+1126MALI
+1127MARRUECOS
+1128MAURICIO,ISLAS
+1129MAURITANIA
+1130NIGER
+1131NIGERIA
+1132ZIMBABWE
+1133RWANDA
+1134SENEGAL
+1135SIERRA LEONA
+1136SOMALIA
+1137SWAZILANDIA
+1138SUDAN
+1139TANZANIA
+1140TOGO
+1141TUNEZ
+1142UGANDA
+1144ZAMBIA
+1145TERRIT.VINCULADOS AL R UNIDO
+1146TERRIT.VINCULADOS A ESPAÑA
+1147TERRIT.VINCULADOS A FRANCIA
+1149ANGOLA
+1150CABO VERDE
+1151MOZAMBIQUE
+1152SEYCHELLES
+1153DJIBOUTI
+1155COMORAS
+1156GUINEA BISSAU
+1157STO.TOME Y PRINCIPE
+1158NAMIBIA
+1159SUDAFRICA
+1160ERITREA
+1161ETIOPIA
+1197RESTO (AFRICA)
+1198INDETERMINADO (AFRICA)
+1200ARGENTINA
+1201BARBADOS
+1202BOLIVIA
+1203BRASIL
+1204CANADA
+1205COLOMBIA
+1206COSTA RICA
+1207CUBA
+1208CHILE
+1209REPÚBLICA DOMINICANA
+1210ECUADOR
+1211EL SALVADOR
+1212ESTADOS UNIDOS
+1213GUATEMALA
+1214GUYANA
+1215HAITI
+1216HONDURAS
+1217JAMAICA
+1218MEXICO
+1219NICARAGUA
+1220PANAMA
+1221PARAGUAY
+1222PERU
+1223PUERTO RICO
+1224TRINIDAD Y TOBAGO
+1225URUGUAY
+1226VENEZUELA
+1227TERRIT.VINCULADO AL R.UNIDO
+1228TER.VINCULADOS A DINAMARCA
+1229TERRIT.VINCULADOS A FRANCIA AMERIC.
+1230TERRIT. HOLANDESES
+1231TER.VINCULADOS A ESTADOS UNIDOS
+1232SURINAME
+1233DOMINICA
+1234SANTA LUCIA
+1235SAN VICENTE Y LAS GRANADINAS
+1236BELICE
+1237ANTIGUA Y BARBUDA
+1238S.CRISTOBAL Y NEVIS
+1239BAHAMAS
+1240GRENADA
+1241ANTILLAS HOLANDESAS
+1250AAE Tierra del Fuego - ARGENTINA
+1251ZF La Plata - ARGENTINA
+1252ZF Justo Daract - ARGENTINA
+1253ZF Río Gallegos - ARGENTINA
+1254Islas Malvinas - ARGENTINA
+1255ZF Tucumán - ARGENTINA
+1256ZF Córdoba - ARGENTINA
+1257ZF Mendoza - ARGENTINA
+1258ZF General Pico - ARGENTINA
+1259ZF Comodoro Rivadavia - ARGENTINA
+1260ZF Iquique
+1261ZF Punta Arenas
+1262ZF Salta - ARGENTINA
+1263ZF Paso de los Libres - ARGENTINA
+1264ZF Puerto Iguazú - ARGENTINA
+1265SECTOR ANTARTICO ARG.
+1270ZF Colón - REPÚBLICA DE PANAMÁ
+1271ZF Winner (Sta. C. de la Sierra) - BOLIVIA
+1280ZF Colonia - URUGUAY
+1281ZF Florida - URUGUAY
+1282ZF Libertad - URUGUAY
+1283ZF Zonamerica - URUGUAY
+1284ZF Nueva Helvecia - URUGUAY
+1285ZF Nueva Palmira - URUGUAY
+1286ZF Río Negro - URUGUAY
+1287ZF Rivera - URUGUAY
+1288ZF San José - URUGUAY
+1291ZF Manaos - BRASIL
+1295MAR ARG ZONA ECO.EX
+1296RIOS ARG NAVEG INTER
+1297RESTO AMERICA
+1298INDETERMINADO (AMERICA)
+1301AFGANISTAN
+1302ARABIA SAUDITA
+1303BAHREIN
+1304MYANMAR (EX-BIRMANIA)
+1305BUTAN
+1306CAMBODYA (EX-KAMPUCHE)
+1307SRI LANKA
+1308COREA DEMOCRATICA
+1309COREA REPUBLICANA
+1310CHINA
+1312FILIPINAS
+1313TAIWAN
+1315INDIA
+1316INDONESIA
+1317IRAK
+1318IRAN
+1319ISRAEL
+1320JAPON
+1321JORDANIA
+1322QATAR
+1323KUWAIT
+1324LAOS
+1325LIBANO
+1326MALASIA
+1327MALDIVAS ISLAS
+1328OMAN
+1329MONGOLIA
+1330NEPAL
+1331EMIRATOS ARABES UNIDOS
+1332PAKISTÁN
+1333SINGAPUR
+1334SIRIA
+1335THAILANDIA
+1337VIETNAM
+1341HONG KONG
+1344MACAO
+1345BANGLADESH
+1346BRUNEI
+1348REPUBLICA DE YEMEN
+1349ARMENIA
+1350AZERBAIJAN
+1351GEORGIA
+1352KAZAJSTAN
+1353KIRGUIZISTAN
+1354TAYIKISTAN
+1355TURKMENISTAN
+1356UZBEKISTAN
+1357TERR. AU. PALESTINOS
+1397RESTO DE ASIA
+1398INDET.(ASIA)
+1401ALBANIA
+1404ANDORRA
+1405AUSTRIA
+1406BELGICA
+1407BULGARIA
+1409DINAMARCA
+1410ESPAÑA
+1411FINLANDIA
+1412FRANCIA
+1413GRECIA
+1414HUNGRIA
+1415IRLANDA
+1416ISLANDIA
+1417ITALIA
+1418LIECHTENSTEIN
+1419LUXEMBURGO
+1420MALTA
+1421MONACO
+1422NORUEGA
+1423PAISES BAJOS
+1424POLONIA
+1425PORTUGAL
+1426REINO UNIDO
+1427RUMANIA
+1428SAN MARINO
+1429SUECIA
+1430SUIZA
+1431VATICANO(SANTA SEDE)
+1433POS.BRIT.(EUROPA)
+1435CHIPRE
+1436TURQUIA
+1438ALEMANIA,REP.FED.
+1439BIELORRUSIA
+1440ESTONIA
+1441LETONIA
+1442LITUANIA
+1443MOLDAVIA
+1444RUSIA
+1445UCRANIA
+1446BOSNIA HERZEGOVINA
+1447CROACIA
+1448ESLOVAQUIA
+1449ESLOVENIA
+1450MACEDONIA
+1451REP. CHECA
+1453MONTENEGRO
+1454SERBIA
+1497RESTO EUROPA
+1498INDET.(EUROPA)
+1501AUSTRALIA
+1503NAURU
+1504NUEVA ZELANDIA
+1505VANATU
+1506SAMOA OCCIDENTAL
+1507TERRITORIO VINCULADOS A AUSTRALIA
+1508TERRITORIOS VINCULADOS AL R. UNIDO
+1509TERRITORIOS VINCULADOS A FRANCIA
+1510TER VINCULADOS A NUEVA. ZELANDA
+1511TER. VINCULADOS A ESTADOS UNIDOS
+1512FIJI, ISLAS
+1513PAPUA NUEVA GUINEA
+1514KIRIBATI, ISLAS
+1515MICRONESIA,EST.FEDER
+1516PALAU
+1517TUVALU
+1518SALOMON,ISLAS
+1519TONGA
+1520MARSHALL,ISLAS
+1521MARIANAS,ISLAS
+1597RESTO OCEANIA
+1598INDET.(OCEANIA)
+1997RESTO CONTINENTE
+1998INDET.(CONTINENTE)
