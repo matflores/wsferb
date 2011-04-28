@@ -5,63 +5,10 @@
 require "wsferb/version"
 require "wsferb/wsfe/client"
 require "wsferb/wsfe/response"
+require "wsferb/wsfe/runner"
 
 module WSFErb
   module WSFE
     include Version
-
-  SERVICES = %w(FEAutRequest
-                FEUltNroRequest
-                FERecuperaQTYRequest
-                FERecuperaLastCMPRequest
-                FEConsultaCAERequest
-                FEDummy)
-
-    def self.run(options)
-      begin
-        r = case options.service
-            when /fedummy/i
-              fe_dummy(options)
-            when /fecomptotxrequest/i
-              fe_comp_tot_x_request(options)
-            when /fecompultimoautorizado/i
-              fe_comp_ultimo_autorizado(options)
-            end
-      rescue RuntimeError => e
-        puts e.message
-      end
-      if options.out 
-        File.open(options.out, "w") { |f| f.puts(r) } 
-      else
-        puts r
-      end
-    end
-
-    def self.fe_dummy(options)
-      Client.fe_dummy
-    end
-
-    def self.fe_comp_tot_x_request(options)
-      raise(ArgumentError, "CUIT missing") unless options.cuit
-      Client.fe_comp_tot_x_request(self.ticket(options))
-    end
-
-    def self.fe_comp_ultimo_autorizado(options)
-      raise(ArgumentError, "CUIT missing") unless options.cuit
-
-      tipo_cbte = options.arguments[0]
-      punto_vta = options.arguments[1]
-
-      Client.fe_comp_ultimo_autorizado(self.ticket(options), tipo_cbte, punto_vta)
-    end
-
-    def self.ticket(options)
-      cert_file = options.cert
-      key_file = options.key
-      ticket = Ticket.load(options.cuit, options.ticket) if options.ticket
-      ticket = WSAA::Client.requestTicket(options.cuit, "wsfe", cert_file, key_file) if ticket.nil? || ticket.invalid?
-      ticket.save(options.ticket) if ticket && ticket.valid? && options.ticket
-      ticket
-    end
   end
 end
