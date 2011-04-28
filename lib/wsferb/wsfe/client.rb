@@ -28,7 +28,7 @@ module WSFErb
 
       def self.fe_dummy
         response = client.request(:fe_dummy)
-        "authserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]};"
+        "1#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]}"
       end
 
       def self.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
@@ -91,14 +91,14 @@ module WSFErb
         return Response::FEParamGetTiposIva.new(response)
       end
 
-      def self.fe_param_get_tipos_moneda(ticket)
+      def self.fe_param_get_tipos_monedas(ticket)
         return ticket_missing if ticket.nil?
 
-        response = client.request(:n1, :fe_param_get_tipos_moneda) do
+        response = client.request(:n1, :fe_param_get_tipos_monedas) do
           soap.body = ticket_to_arg(ticket)
         end
 
-        return Response::FEParamGetTiposMoneda.new(response)
+        return Response::FEParamGetTiposMonedas.new(response)
       end
 
       def self.fe_param_get_tipos_opcional(ticket)

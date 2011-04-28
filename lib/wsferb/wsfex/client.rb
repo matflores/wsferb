@@ -262,7 +262,7 @@ module WSFErb
 
       def self.fex_dummy
         response = client.request(:fex_dummy)
-        "authserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}; appserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}; dbserver=#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]};"
+        "1#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]}"
       end
 
       def self.ticket_missing
