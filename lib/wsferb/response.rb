@@ -49,7 +49,7 @@ module WSFErb
     end
 
     def formatted_records
-      []
+      records.map { |record| format_record(record).strip }
     end
 
     def formatted_errors
