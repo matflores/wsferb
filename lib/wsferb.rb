@@ -12,9 +12,17 @@ require "wsferb/wsfe"
 require "wsferb/wsfex"
 
 module WSFErb
+  @@test_mode_enabled = false
+
   def self.enable_test_mode
-    WSAA::Client.enable_test_mode
-    WSFE::Client.enable_test_mode
-    WSFEX::Client.enable_test_mode
+    @@test_mode_enabled = true
+  end
+
+  def self.disable_test_mode
+    @@test_mode_enabled = false
+  end
+
+  def self.test_mode_enabled?
+    @@test_mode_enabled
   end
 end

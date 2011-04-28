@@ -15,20 +15,6 @@ module WSFErb
       PROD_URL = "https://wsaa.afip.gov.ar/ws/services/LoginCms"
       TEST_URL = "https://wsaahomo.afip.gov.ar/ws/services/LoginCms"
 
-      @@test_mode_enabled = false
-
-      def self.enable_test_mode
-        @@test_mode_enabled = true
-      end
-
-      def self.disable_test_mode
-        @@test_mode_enabled = false
-      end
-
-      def self.test_mode_enabled?
-        @@test_mode_enabled
-      end
-
       def self.requestTicket(cuit, service, cert_file, key_file)
         request = generate_request_for(service)
         signed = sign_request(request, cert_file, key_file)
@@ -48,7 +34,7 @@ module WSFErb
       def self.client
         @client ||= Savon::Client.new do |wsdl, http|
           wsdl.document = WSDL
-          wsdl.endpoint = test_mode_enabled? ? TEST_URL : PROD_URL
+          wsdl.endpoint = WSFErb.test_mode_enabled? ? TEST_URL : PROD_URL
         end
       end
 

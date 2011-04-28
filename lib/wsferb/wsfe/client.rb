@@ -12,20 +12,6 @@ module WSFErb
       PROD_URL = "https://servicios1.afip.gov.ar/wsfev1/service.asmx"
       TEST_URL = "https://wswhomo.afip.gov.ar/wsfev1/service.asmx"
 
-      @@test_mode_enabled = false
-
-      def self.enable_test_mode
-        @@test_mode_enabled = true
-      end
-
-      def self.disable_test_mode
-        @@test_mode_enabled = false
-      end
-
-      def self.test_mode_enabled?
-        @@test_mode_enabled
-      end
-
       def self.fe_dummy
         response = client.request(:fe_dummy)
         "1#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]}"
@@ -142,7 +128,7 @@ module WSFErb
       def self.client
         @client ||= Savon::Client.new do |wsdl, http|
           wsdl.document = WSDL
-          wsdl.endpoint = test_mode_enabled? ? TEST_URL : PROD_URL
+          wsdl.endpoint = WSFErb.test_mode_enabled? ? TEST_URL : PROD_URL
         end
       end
     end
