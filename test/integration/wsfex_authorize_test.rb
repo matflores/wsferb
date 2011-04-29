@@ -2,7 +2,7 @@ require "test_helper"
 
 Protest.describe "WSFEX Authorize" do
   before do
-    @fact = WSFEX::Fex.from_hash(FACTURA)
+    @fact = WSFErb::WSFEX::Fex.from_hash(FACTURA)
     @fact.id_cbte = last_id_cbte_used + 1
     @fact.nro_cbte = last_nro_cbte_used(@fact.tipo_cbte, @fact.punto_vta) + 1
     @input_file = expand_path("tmp/FEXAuthorizeInput.txt")
@@ -12,7 +12,7 @@ Protest.describe "WSFEX Authorize" do
   it "success" do
     @fact.to_file(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_success :FEXAuthorize
   end
@@ -20,7 +20,7 @@ Protest.describe "WSFEX Authorize" do
   it "should fail if the specified credentials are not valid" do
     @fact.to_file(@input_file)
  
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}", "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
+    execute :FEXAuthorize, @input_file, "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
  
     assert_error_code :FEXAuthorize, 1000
   end
@@ -29,7 +29,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.id_cbte = 0
     @fact.to_file(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1014
   end

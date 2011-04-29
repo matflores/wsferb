@@ -39,8 +39,7 @@ module WSFErb
 
         raise(ArgumentError, "CUIT missing") unless options.cuit
 
-        entrada = options.arguments[0]
-        salida  = options.arguments[1]
+        cbte = options.arguments[0]
 
         Client.fex_authorize(ticket, cbte)
       end
