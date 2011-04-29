@@ -79,11 +79,18 @@ Protest.describe "A response" do
     response_output = Tempfile.new("response")
 
     response = WSFErb::Response.new
+    response.add_record(1, "1234567890")
     response.add_error(1000, "Not authorized")
     response.add_event(1000, "An event occurred")
 
     response.save(response_output.path)
 
     assert_equal File.read(response_input).strip, File.read(response_output.path)
+  end
+
+  it "should have a convenience method for returning the value of the first record of type #1" do
+    response = WSFErb::Response.load(expand_path("fixtures/response.txt"))
+
+    assert_equal "1234567890", response.value
   end
 end

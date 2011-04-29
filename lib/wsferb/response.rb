@@ -32,6 +32,10 @@ module WSFErb
       events << { :code => code.to_i, :message => message }
     end
 
+    def add_record(type, contents)
+      records << "#{type}#{contents}"
+    end
+
     def has_error?(code)
       errors.any? { |e| e[:code].to_i == code.to_i }
     end
@@ -56,12 +60,20 @@ module WSFErb
       records.map { |record| format_record(record).strip }
     end
 
+    def format_record(record)
+      record.to_s
+    end
+
     def formatted_errors
       errors.map { |e| ("E%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
     end
 
     def formatted_events
       events.map { |e| ("V%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
+    end
+
+    def value
+      formatted_records.first[1..-1] rescue ""
     end
 
     def save(file)
@@ -79,6 +91,7 @@ module WSFErb
             case record_type
             when "E" ; response.add_error(code, message)
             when "V" ; response.add_event(code, message)
+            else     ; response.add_record(record_type, line[1..-1])
             end
           end
         end
