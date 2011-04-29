@@ -7,6 +7,10 @@ require "wsferb/response"
 module WSFErb
   module WSFEX
     class Response < WSFErb::Response
+      def errors
+        result[:fex_err] ? [ { :code => err_code, :message => err_msg } ] : []
+      end
+
       def err_code
         @err_code ||= result[:fex_err][:err_code].to_i rescue "n/d"
       end
