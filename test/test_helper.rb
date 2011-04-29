@@ -81,11 +81,6 @@ class Protest::TestCase
     assert response.success?
   end
 
-  def parse_response(method)
-    output = File.read(expand_path("tmp/#{method}.txt"))
-    AFIP::Response.parse(output)
-  end
-
   def numeric?(value)
     true if Float(value) rescue false
   end

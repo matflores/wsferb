@@ -117,13 +117,13 @@ Protest.describe "WSFEX Authorize" do
 
   def last_id_cbte_used
     execute :FEXGetLastId
-    response = parse_response(:FEXGetLastId)
+    response = WSFErb::Response.load(expand_path("tmp/FEXGetLastId.txt"))
     response.value.to_i
   end
 
   def last_nro_cbte_used(tipo_cbte, punto_vta)
     execute :FEXGetLastCmp, "#{tipo_cbte} #{punto_vta}"
-    response = parse_response(:FEXGetLastCmp)
+    response = WSFErb::Response.load(expand_path("tmp/FEXGetLastCmp.txt"))
     response.value.to_i
   end
 
