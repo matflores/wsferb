@@ -59,16 +59,13 @@ class Protest::TestCase
     File.join(File.dirname(__FILE__), filename)
   end
 
-  def assert_value(method, min, max = nil)
-    max ||= min
+  def assert_value(method, min, max = min)
+    response = WSFErb::Response.load(expand_path("tmp/#{method}.txt"))
 
-    output = File.read(expand_path("tmp/#{method}.txt"))
-    value  = output[1..-1].strip
-
-    if numeric?(value)
-      assert value.to_f >= min && value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{value}]"
+    if numeric?(response.value)
+      assert response.value.to_f >= min && response.value.to_f <= max, "expected [#{min == max ? min : [min, max].join('..')}] but was [#{response.value}]"
     else
-      assert value == min, "expected [#{min}] but was [#{value}]"
+      assert response.value == min, "expected [#{min}] but was [#{response.value}]"
     end
   end
 
