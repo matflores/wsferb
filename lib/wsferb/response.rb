@@ -73,7 +73,7 @@ module WSFErb
     end
 
     def value
-      formatted_records.first[1..-1] rescue ""
+      formatted_records.first[1..-1].strip rescue ""
     end
 
     def save(file)
