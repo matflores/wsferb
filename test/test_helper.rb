@@ -72,32 +72,16 @@ class Protest::TestCase
     end
   end
 
-  def assert_error(method, code, message)
-    assert_error_code(method, code)
-    assert_error_message(method, message)
-  end
+  def assert_error_code(method, code)
+    response = WSFErb::Response.load(expand_path("tmp/#{method}.txt"))
 
-  def assert_error_code(method, value)
-    response = parse_response(method)
-
-    assert response.err_code.to_s == value.to_s, "expected [#{value}] but was [#{response.err_code}]"
-  end
-
-  def assert_error_message(method, value)
-    response = parse_response(method)
-
-    case value
-    when Regexp
-      match = response.err_msg.to_s =~ value
-    else
-      match = response.err_msg.to_s == value.to_s
-    end
-
-    assert match, "expected [#{value}] but was [#{response.err_msg}]"
+    assert response.has_error?(code), "expected response to have the error code [#{code}]"
   end
 
   def assert_success(method)
-    assert_error_code(method, 0)
+    response = WSFErb::Response.load(expand_path("tmp/#{method}.txt"))
+
+    assert response.success?
   end
 
   def parse_response(method)
