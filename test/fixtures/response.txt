@@ -1,0 +1,2 @@
+E001000Not authorized
+V001000An event occurred
