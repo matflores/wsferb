@@ -20,6 +20,10 @@ module WSFErb
       @events ||= []
     end
 
+    def records
+      @records ||= []
+    end
+
     def add_error(code, message)
       errors << { :code => code, :message => message }
     end
