@@ -65,7 +65,7 @@ module WSFErb
     end
 
     def formatted_errors
-      errors.map { |e| ("E%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
+      errors.select { |e| e[:code].to_i > 0 }.map { |e| ("E%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
     end
 
     def formatted_events
