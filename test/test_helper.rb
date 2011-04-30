@@ -33,7 +33,7 @@ end
 
 class Protest::TestCase
   def self.test_method(method, arguments = nil)
-    test method do
+    test "Success" do
       execute method, arguments
       check_output method
     end
@@ -67,6 +67,13 @@ class Protest::TestCase
     else
       assert response.value == min, "expected [#{min}] but was [#{response.value}]"
     end
+  end
+
+  def assert_error(method, code, message)
+    expected = "E%06d%s" % [ code, message ]
+    actual   = File.read(expand_path("tmp/#{method}.txt")).strip
+
+    assert_equal expected, actual
   end
 
   def assert_error_code(method, code)
