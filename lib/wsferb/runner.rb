@@ -14,12 +14,19 @@ module WSFErb
 
     def run
       response = begin
+                   raise(InvalidDir, File.dirname(options.out)) if options.out && !File.exists?(File.dirname(options.out))
+                   raise(InvalidDir, File.dirname(options.log)) if options.log && !File.exists?(File.dirname(options.log))
+
+                   if options.log
+                     Savon.log, Savon.logger = true, Logger.new(options.log)
+                   end
+
                    run_service
                  rescue StandardError => error
                    error.to_s
                  end
 
-      if options.out
+      if options.out && File.exists?(File.dirname(options.out))
         File.open(options.out, "w") { |f| f.puts(response) }
       else
         puts(response)
@@ -31,10 +38,11 @@ module WSFErb
     end
 
     def ticket
-      cert_file = options.cert
-      key_file = options.key
+      raise(CertificateNotFound, options.cert) unless File.exists?(options.cert)
+      raise(PrivateKeyNotFound, options.key) unless File.exists?(options.key)
+
       ticket = Ticket.load(options.cuit, options.ticket) if options.ticket
-      ticket = WSAA::Client.requestTicket(options.cuit, script, cert_file, key_file) if ticket.nil? || ticket.invalid?
+      ticket = WSAA::Client.requestTicket(options.cuit, script, options.cert, options.key) if ticket.nil? || ticket.invalid?
       ticket.save(options.ticket) if ticket && ticket.valid? && options.ticket
       ticket
     end
