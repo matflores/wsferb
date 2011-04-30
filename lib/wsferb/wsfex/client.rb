@@ -32,26 +32,26 @@ module WSFErb
         return Response::FEXCheckPermiso.new(response)
       end
 
-      def self.fex_get_cmp(ticket, tipoCbte, puntoVta, nroCbte)
-        puts "info for #{tipoCbte}-#{puntoVta}-#{nroCbte}"
+      def self.fex_get_cmp(ticket, tipo_cbte, punto_vta, nro_cbte)
+        puts "info for #{tipo_cbte}-#{punto_vta}-#{nro_cbte}"
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_cmp) do
-          soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipoCbte, "Punto_vta" => puntoVta, "Cbte_nro" => nroCbte }})
+          soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipo_cbte, "Punto_vta" => punto_vta, "Cbte_nro" => nro_cbte }})
         end
 
         Response::FEXGetCmp.new(response)
       end
 
-      def self.fex_get_last_cmp(ticket, tipoCbte, puntoVta)
+      def self.fex_get_last_cmp(ticket, tipo_cbte, punto_vta)
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_last_cmp) do
           soap.body = { "Auth" => { "Token"     => ticket.token.dup,
                                     "Sign"      => ticket.sign.dup,
                                     "Cuit"      => ticket.cuit.dup,
-                                    "Pto_venta" => puntoVta.dup,
-                                    "Tipo_cbte" => tipoCbte.dup } }
+                                    "Pto_venta" => punto_vta.dup,
+                                    "Tipo_cbte" => tipo_cbte.dup } }
         end
 
         return Response::FEXGetLastCmp.new(response)
