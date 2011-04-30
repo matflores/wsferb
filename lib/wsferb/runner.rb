@@ -15,8 +15,8 @@ module WSFErb
     def run
       response = begin
                    run_service
-                 rescue StandardError => e
-                   e.message
+                 rescue StandardError => error
+                   error.to_s
                  end
 
       if options.out
