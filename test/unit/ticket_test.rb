@@ -33,6 +33,8 @@ XML_response = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
               "  </credentials>\n" +
               "</loginTicketResponse>\n"
 
+AUTH_HASH = { :Auth => { :Token => "token", :Sign  => "sign", :Cuit  => CUIT } }
+
 Protest.describe "An access ticket" do
   describe "(validations)" do
     it "is valid if it has a cuit, a token, a sign, and it has not expired yet" do
@@ -118,5 +120,12 @@ Protest.describe "An access ticket" do
     assert_equal Defaults[:destination], ticket.destination
     assert_equal Time.local(2008,9,1)  , ticket.generationTime
     assert_equal Time.local(2008,10,1) , ticket.expirationTime
+  end
+
+  it "can be exported as a hash" do
+    options = Defaults.merge(:generationTime => Time.local(2008,9,1), :expirationTime => Time.local(2008,10,1))
+    ticket = WSFErb::Ticket.new(options)
+
+    assert_equal AUTH_HASH, ticket.to_hash
   end
 end

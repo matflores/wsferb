@@ -30,7 +30,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_comp_tot_x_request) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FECompTotXRequest.new(response)
@@ -40,7 +40,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_comp_ultimo_autorizado) do
-          soap.body = ticket_to_arg(ticket).merge({ "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup })
+          soap.body = ticket.to_hash.merge({ "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup })
         end
 
         return Response::FECompUltimoAutorizado.new(response)
@@ -58,7 +58,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_ptos_venta) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetPtosVenta.new(response)
@@ -68,7 +68,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_cbte) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposCbte.new(response)
@@ -78,7 +78,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_concepto) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposConcepto.new(response)
@@ -88,7 +88,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_doc) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposDoc.new(response)
@@ -98,7 +98,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_iva) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposIva.new(response)
@@ -108,7 +108,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_monedas) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposMonedas.new(response)
@@ -118,7 +118,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_opcional) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposOpcional.new(response)
@@ -128,7 +128,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fe_param_get_tipos_tributos) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposTributos.new(response)
@@ -136,10 +136,6 @@ module WSFErb
 
       def self.ticket_missing
         Response.new(nil, :nil, nil)
-      end
-
-      def self.ticket_to_arg(ticket)
-        return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :Cuit => ticket.cuit } }
       end
 
       def self.client

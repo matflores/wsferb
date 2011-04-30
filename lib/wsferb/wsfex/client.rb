@@ -14,7 +14,7 @@ module WSFErb
         fex = Fex.from_file(cbte)
 
         response = client.request(:n1, :fex_authorize) do
-          soap.body = ticket_to_arg(ticket).merge({ :Cmp => fex.to_hash.stringify_keys })
+          soap.body = ticket.to_hash.merge({ :Cmp => fex.to_hash.stringify_keys })
         end
 
         response = Response::FEXAuthorize.new(response)
@@ -26,7 +26,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_check_permiso) do
-          soap.body = ticket_to_arg(ticket).merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
+          soap.body = ticket.to_hash.merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
         end
 
         return Response::FEXCheckPermiso.new(response)
@@ -42,7 +42,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_cmp) do
-          soap.body = ticket_to_arg(ticket).merge({ "Cmp" => { "Tipo_cbte" => tipo_cbte, "Punto_vta" => punto_vta, "Cbte_nro" => nro_cbte }})
+          soap.body = ticket.to_hash.merge({ "Cmp" => { "Tipo_cbte" => tipo_cbte, "Punto_vta" => punto_vta, "Cbte_nro" => nro_cbte }})
         end
 
         Response::FEXGetCmp.new(response)
@@ -66,7 +66,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_last_id) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetLastId.new(response)
@@ -76,7 +76,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_ctz) do
-          soap.body = ticket_to_arg(ticket).merge({ :mon_id => moneda })
+          soap.body = ticket.to_hash.merge({ :mon_id => moneda })
         end
 
         return Response::FEXGetParamCtz.new(response)
@@ -86,7 +86,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_dst_cuit) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamDstCuit.new(response)
@@ -96,7 +96,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_dst_pais) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamDstPais.new(response)
@@ -106,7 +106,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_idiomas) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamIdiomas.new(response)
@@ -116,7 +116,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_incoterms) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamIncoterms.new(response)
@@ -126,7 +126,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_mon) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamMon.new(response)
@@ -136,7 +136,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_pto_venta) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamPtoVenta.new(response)
@@ -146,7 +146,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_tipo_cbte) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamTipoCbte.new(response)
@@ -156,7 +156,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_tipo_expo) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamTipoExpo.new(response)
@@ -166,7 +166,7 @@ module WSFErb
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_u_med) do
-          soap.body = ticket_to_arg(ticket)
+          soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamUMed.new(response)
@@ -174,10 +174,6 @@ module WSFErb
 
       def self.ticket_missing
         Response.new(nil, :nil, nil)
-      end
-
-      def self.ticket_to_arg(ticket)
-        return { :Auth => { :Token => ticket.token, :Sign => ticket.sign, :Cuit => ticket.cuit } }
       end
 
       def self.client

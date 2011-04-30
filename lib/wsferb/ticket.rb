@@ -31,6 +31,10 @@ module WSFErb
       @expirationTime && @expirationTime < Time.now
     end
 
+    def to_hash
+      { :Auth => { :Token => token.to_s, :Sign  => sign.to_s, :Cuit  => cuit.to_s } }
+    end
+
     def to_xml
       "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n" + 
       "<loginTicketResponse version=\"1\">\n" +
