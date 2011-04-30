@@ -32,6 +32,11 @@ module WSFErb
         return Response::FEXCheckPermiso.new(response)
       end
 
+      def self.fex_dummy
+        response = client.request(:fex_dummy)
+        "1#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]}"
+      end
+
       def self.fex_get_cmp(ticket, tipo_cbte, punto_vta, nro_cbte)
         puts "info for #{tipo_cbte}-#{punto_vta}-#{nro_cbte}"
         return ticket_missing if ticket.nil?
@@ -165,11 +170,6 @@ module WSFErb
         end
 
         return Response::FEXGetParamUMed.new(response)
-      end
-
-      def self.fex_dummy
-        response = client.request(:fex_dummy)
-        "1#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:auth_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:app_server]}#{response.to_hash[:fex_dummy_response][:fex_dummy_result][:db_server]}"
       end
 
       def self.ticket_missing

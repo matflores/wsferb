@@ -8,9 +8,32 @@ require "savon"
 module WSFErb
   module WSFE
     class Client
-      def self.fe_dummy
-        response = client.request(:fe_dummy)
-        "1#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]}"
+      def self.fe_caea_consultar(ticket)
+      end
+
+      def self.fe_caea_reg_informativo(ticket)
+      end
+
+      def self.fe_caea_sin_movimiento_consultar(ticket)
+      end
+
+      def self.fe_caea_sin_movimiento_informar(ticket)
+      end
+
+      def self.fe_caea_solicitar(ticket)
+      end
+
+      def self.fe_comp_consultar(ticket)
+      end
+
+      def self.fe_comp_tot_x_request(ticket)
+        return ticket_missing if ticket.nil?
+
+        response = client.request(:n1, :fe_comp_tot_x_request) do
+          soap.body = ticket_to_arg(ticket)
+        end
+
+        return Response::FECompTotXRequest.new(response)
       end
 
       def self.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
@@ -23,14 +46,22 @@ module WSFErb
         return Response::FECompUltimoAutorizado.new(response)
       end
 
-      def self.fe_comp_tot_x_request(ticket)
+      def self.fe_dummy
+        response = client.request(:fe_dummy)
+        "1#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]}"
+      end
+
+      def self.fe_param_get_cotizacion(ticket)
+      end
+
+      def self.fe_param_get_ptos_venta(ticket)
         return ticket_missing if ticket.nil?
 
-        response = client.request(:n1, :fe_comp_tot_x_request) do
+        response = client.request(:n1, :fe_param_get_ptos_venta) do
           soap.body = ticket_to_arg(ticket)
         end
 
-        return Response::FECompTotXRequest.new(response)
+        return Response::FEParamGetPtosVenta.new(response)
       end
 
       def self.fe_param_get_tipos_cbte(ticket)
@@ -101,16 +132,6 @@ module WSFErb
         end
 
         return Response::FEParamGetTiposTributos.new(response)
-      end
-
-      def self.fe_param_get_ptos_venta(ticket)
-        return ticket_missing if ticket.nil?
-
-        response = client.request(:n1, :fe_param_get_ptos_venta) do
-          soap.body = ticket_to_arg(ticket)
-        end
-
-        return Response::FEParamGetPtosVenta.new(response)
       end
 
       def self.ticket_missing
