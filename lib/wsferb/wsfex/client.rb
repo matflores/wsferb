@@ -9,7 +9,7 @@ module WSFErb
   module WSFEX
     class Client
       def self.fex_authorize(ticket, cbte)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         fex = Fex.from_file(cbte)
 
@@ -143,6 +143,7 @@ module WSFErb
       end
 
       def self.fex_get_param_tipo_cbte(ticket)
+        raise TicketMissing# ticket.nil?
         return ticket_missing if ticket.nil?
 
         response = client.request(:n1, :fex_get_param_tipo_cbte) do

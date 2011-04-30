@@ -30,16 +30,16 @@ module WSFErb
         when /fexgetparamtipoexpo/i  ; fex_get_param_tipo_expo
         when /fexgetparamumed/i      ; fex_get_param_u_med
         else 
-          raise(ArgumentError, "Servicio no valido: #{service}")
+          raise InvalidService, service
         end
       end
 
       def fex_authorize
         usage "FEXAuthorize <Cbte>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
-        cbte = options.arguments[0]
+        cbte = options.arguments[0] || raise(WSFErb::ArgumentError, "Cbte no informado")
 
         Client.fex_authorize(ticket, cbte)
       end
@@ -49,7 +49,7 @@ module WSFErb
 
         raise(ArgumentError, "CUIT missing") unless options.cuit
 
-        permiso = options.arguments[0]
+        permiso = options.arguments[0] || raise(ArgumentError, "")
         pais    = options.arguments[1]
 
         Client.fex_check_permiso(ticket, permiso, pais)
@@ -151,7 +151,7 @@ module WSFErb
       def fex_get_param_tipo_cbte
         usage "FEXGetParamTipoCbte" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_tipo_cbte(ticket)
       end

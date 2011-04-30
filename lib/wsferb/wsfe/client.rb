@@ -65,7 +65,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_cbte(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_cbte) do
           soap.body = ticket.to_hash

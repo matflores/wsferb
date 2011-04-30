@@ -33,7 +33,7 @@ module WSFErb
         when /feparamgettiposopcional/i      ; fe_param_get_tipos_opcional
         when /feparamgettipostributos/i      ; fe_param_get_tipos_tributos
         else 
-          raise(ArgumentError, "Servicio no valido: #{service}")
+          raise InvalidService, service
         end
       end
 
@@ -61,7 +61,7 @@ module WSFErb
       def fe_comp_tot_x_request
         usage "FECompTotXRequest" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_comp_tot_x_request(ticket)
       end
@@ -69,7 +69,7 @@ module WSFErb
       def fe_comp_ultimo_autorizado
         usage "FECompUltimoAutorizado <TipoCbte> <PuntoVta>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         tipo_cbte = options.arguments[0]
         punto_vta = options.arguments[1]
@@ -84,7 +84,7 @@ module WSFErb
       def fe_param_get_cotizacion
         usage "FEParamGetCotizacion" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         moneda = options.arguments[0]
 
@@ -94,7 +94,7 @@ module WSFErb
       def fe_param_get_ptos_venta
         usage "FEParamGetPtosVenta" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_ptos_venta(ticket)
       end
@@ -102,7 +102,7 @@ module WSFErb
       def fe_param_get_tipos_cbte
         usage "FEParamGetTiposCbte" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_cbte(ticket)
       end
@@ -110,7 +110,7 @@ module WSFErb
       def fe_param_get_tipos_concepto
         usage "FEParamGetTiposConcepto" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_concepto(ticket)
       end
@@ -118,7 +118,7 @@ module WSFErb
       def fe_param_get_tipos_doc
         usage "FEParamGetTiposDoc" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_doc(ticket)
       end
@@ -126,7 +126,7 @@ module WSFErb
       def fe_param_get_tipos_iva
         usage "FEParamGetTiposIva" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_iva(ticket)
       end
@@ -134,7 +134,7 @@ module WSFErb
       def fe_param_get_tipos_monedas
         usage "FEParamGetTiposMonedas" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_monedas(ticket)
       end
@@ -142,7 +142,7 @@ module WSFErb
       def fe_param_get_tipos_opcional
         usage "FEParamGetTiposOpcional" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_opcional(ticket)
       end
@@ -150,7 +150,7 @@ module WSFErb
       def fe_param_get_tipos_tributos
         usage "FEParamGetTiposTributos" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_tributos(ticket)
       end
