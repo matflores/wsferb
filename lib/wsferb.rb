@@ -4,6 +4,7 @@
 #
 require "wsferb/config"
 require "wsferb/core_ext"
+require "wsferb/errors"
 require "wsferb/options"
 require "wsferb/ticket"
 require "wsferb/version"
