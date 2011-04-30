@@ -11,7 +11,7 @@ def settings
   $settings ||= YAML.load_file(File.join(File.dirname(__FILE__), "settings.yml"))
 end
 
-CUIT      = settings[:cuit]
+CUIT      = settings[:cuit].to_s
 CERT_FILE = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.crt")
 KEY_FILE  = File.join(File.dirname(__FILE__), "credentials", "#{CUIT}.key")
 
