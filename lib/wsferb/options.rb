@@ -53,12 +53,13 @@ module WSFErb
     end
 
     def parse_options
-      parser.on(*OPTIONS[:cuit])         { |cuit|   self.cuit = cuit unless cuit.empty? }
-      parser.on(*OPTIONS[:cert])         { |cert|   self.cert = cert unless cert.empty? }
-      parser.on(*OPTIONS[:key])          { |key|    self.key  = key  unless key.empty?  }
-      parser.on(*OPTIONS[:out])          { |out|    self.out  = out  unless out.empty?  }
-      parser.on(*OPTIONS[:log])          { |log|    self.log  = log  unless log.empty? ; Savon.log, Savon.logger = true, Logger.new(log) }
-      parser.on(*OPTIONS[:ticket])       { |ticket| self.ticket = ticket unless ticket.empty? }
+      parser.on(*OPTIONS[:cuit])         { |cuit|   self.cuit   = cuit unless cuit.empty? }
+
+      parser.on(*OPTIONS[:cert])         { |cert|   self.cert   = File.expand_path(cert)   unless cert.empty?   }
+      parser.on(*OPTIONS[:key])          { |key|    self.key    = File.expand_path(key)    unless key.empty?    }
+      parser.on(*OPTIONS[:out])          { |out|    self.out    = File.expand_path(out)    unless out.empty?    }
+      parser.on(*OPTIONS[:log])          { |log|    self.log    = File.expand_path(log)    unless log.empty?    }
+      parser.on(*OPTIONS[:ticket])       { |ticket| self.ticket = File.expand_path(ticket) unless ticket.empty? }
 
       parser.on_tail(*OPTIONS[:help])    { self.help    = true }
       parser.on_tail(*OPTIONS[:test])    { self.test    = true }
@@ -67,9 +68,9 @@ module WSFErb
 
     def cuit=(cuit)
       @cuit = cuit
-      @cert ||= "./#{@cuit}.crt"
-      @key  ||= "./#{@cuit}.key"
-      @log  ||= "./#{@cuit}.log"
+      @cert ||= File.expand_path("./#{@cuit}.crt")
+      @key  ||= File.expand_path("./#{@cuit}.key")
+      @log  ||= File.expand_path("./#{@cuit}.log")
     end
 
     def help?
