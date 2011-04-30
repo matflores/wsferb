@@ -180,7 +180,7 @@ module WSFErb
                                (item[:Pro_total_item].to_f * 1000) ]
         end
 
-        lines.join("\n")
+        lines.join
       end
 
       def tap
