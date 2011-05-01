@@ -10,6 +10,40 @@ module WSFErb
       Runner.new(options).run
     end
 
+    def self.help_info
+<<__EOD__
+Modo de uso: wsfex [opciones] <servicio> [argumentos]
+
+     servicio                        Uno de los servicios provistos por el WSFEX de AFIP.
+                                     Valores posibles:
+                                       - FEXAuthorize
+                                       - FEXCheckPermiso
+                                       - FEXDummy
+                                       - FEXGetCmp
+                                       - FEXGetLastCmp
+                                       - FEXGetLastId
+                                       - FEXGetParamCtz
+                                       - FEXGetParamDstCuit
+                                       - FEXGetParamDstPais
+                                       - FEXGetParamIncoterms
+                                       - FEXGetParamIdiomas
+                                       - FEXGetParamMon
+                                       - FEXGetParamPtoVenta
+                                       - FEXGetParamTipoCbte
+                                       - FEXGetParamTipoExpo
+                                       - FEXGetParamUMed
+
+                                     La sintaxis de las opciones y argumentos requeridos
+                                     dependen del servicio a utilizar.
+                                     Escriba wsfex <servicio> --help para obtener mayor
+                                     informacion acerca de un servicio en particular.
+__EOD__
+    end
+
+    def self.version_info
+      Version::DESCRIPTION
+    end
+
     class Runner < WSFErb::Runner
       def run_service
         case service
@@ -30,6 +64,9 @@ module WSFErb
         when /fexgetparamtipoexpo/i  ; fex_get_param_tipo_expo
         when /fexgetparamumed/i      ; fex_get_param_u_med
         else 
+          return WSFEX.version_info if options.version?
+          return WSFEX.help_info    if options.help?
+
           raise InvalidService, service
         end
       end
@@ -50,7 +87,7 @@ module WSFErb
         raise CuitMissing unless options.cuit
 
         permiso = options.arguments[0] || raise(WSFErb::ArgumentError, "Codigo de permiso de embarque no informado")
-        pais    = options.arguments[1] || raise(WSFErb::ArgumentError, "Codigo de país de destino no informado")
+        pais    = options.arguments[1] || raise(WSFErb::ArgumentError, "Codigo de pais de destino no informado")
 
         Client.fex_check_permiso(ticket, permiso, pais)
       end
@@ -172,35 +209,6 @@ module WSFErb
         Client.fex_get_param_u_med(ticket)
       end
 
-      def help_text
-<<__EOD__
-Modo de uso: wsfex [opciones] <servicio> [argumentos]
-
-     servicio                        Uno de los servicios provistos por el WSFEX de AFIP.
-                                     Valores posibles:
-                                       - FEXAuthorize
-                                       - FEXCheckPermiso
-                                       - FEXDummy
-                                       - FEXGetCmp
-                                       - FEXGetLastCmp
-                                       - FEXGetLastId
-                                       - FEXGetParamCtz
-                                       - FEXGetParamDstCuit
-                                       - FEXGetParamDstPais
-                                       - FEXGetParamIncoterms
-                                       - FEXGetParamIdiomas
-                                       - FEXGetParamMon
-                                       - FEXGetParamPtoVenta
-                                       - FEXGetParamTipoCbte
-                                       - FEXGetParamTipoExpo
-                                       - FEXGetParamUMed
-
-                                     La sintaxis de las opciones y argumentos requeridos
-                                     dependen del servicio a utilizar.
-                                     Escriba wsfex <servicio> --help para obtener mayor
-                                     informacion acerca de un servicio en particular.
-__EOD__
-      end
       def script
         "wsfex"
       end

@@ -96,6 +96,24 @@ class Protest::TestCase
     "wsfe"
   end
 
+  def self.test_common_options(service)
+    describe "Common options" do
+      ["-v", "--version"].each do |switch|
+        test "Should display version information when #{switch} switch is present" do
+          `#{script} #{switch} > test/tmp/version.txt`
+          assert_equal service.version_info.strip, File.read(expand_path("tmp/version.txt")).strip
+        end
+      end
+
+      ["-h", "--help"].each do |switch|
+        test "Should display help information when #{switch} switch is present" do
+          `#{script} #{switch} > test/tmp/help.txt`
+          assert_equal service.help_info.strip, File.read(expand_path("tmp/help.txt")).strip
+        end
+      end
+    end
+  end
+
   def self.test_common_errors(service = nil, args = nil)
     if service
       test "Missing CUIT" do
@@ -123,7 +141,7 @@ class Protest::TestCase
         assert_error service, 900006, "Directorio no valido: #{File.expand_path('unknown_dir')}"
       end
     else
-      describe "common errors" do
+      describe "Common errors" do
         test "Invalid Service (blank)" do
           execute ""
           assert_error "", 900001, "Servicio no informado"

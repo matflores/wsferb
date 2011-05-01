@@ -10,6 +10,27 @@ module WSFErb
       Runner.new(options).run
     end
 
+    def self.help_info
+<<__EOD__
+Modo de uso: wsfe [opciones] <servicio> [argumentos]
+
+     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
+                                     Valores posibles:
+                                       #{WSFE::Runner.constants.map { |c| "- #{c}" }.join("\n")}
+                                       - FEDummy
+                                       - FECompUltimoAutorizado
+
+                                     La sintaxis de las opciones y argumentos requeridos 
+                                     dependen del servicio a utilizar.
+                                     Escriba wsfe <servicio> --help para obtener mayor
+                                     informacion acerca de un servicio en particular.
+__EOD__
+    end
+
+    def self.version_info
+      Version::DESCRIPTION
+    end
+
     class Runner < WSFErb::Runner
       def run_service
         case service
@@ -33,6 +54,9 @@ module WSFErb
         when /feparamgettiposopcional/i      ; fe_param_get_tipos_opcional
         when /feparamgettipostributos/i      ; fe_param_get_tipos_tributos
         else 
+          return WSFE.version_info if options.version?
+          return WSFE.help_info    if options.help?
+
           raise InvalidService, service
         end
       end
@@ -153,23 +177,6 @@ module WSFErb
         raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_tributos(ticket)
-      end
-
-      def help_text
-<<__EOD__
-Modo de uso: wsfe [opciones] <servicio> [argumentos]
-
-     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
-                                     Valores posibles:
-                                       #{WSFE::Runner.constants.map { |c| "- #{c}" }.join("\n")}
-                                       - FEDummy
-                                       - FECompUltimoAutorizado
-
-                                     La sintaxis de las opciones y argumentos requeridos 
-                                     dependen del servicio a utilizar.
-                                     Escriba wsfe <servicio> --help para obtener mayor
-                                     informacion acerca de un servicio en particular.
-__EOD__
       end
 
       def script

@@ -64,6 +64,7 @@ Protest.describe "WSFE" do
 
   end
 
+  test_common_options(WSFErb::WSFE)
   test_common_errors
 
   def script
