@@ -28,61 +28,61 @@ Protest.describe "An options object" do
   it "should accept a certificate file with the --cert option" do
     options = WSFErb::Options.parse(["--cert", "mycert.crt"])
 
-    assert_equal "mycert.crt", options.cert
+    assert_equal File.expand_path("mycert.crt"), options.cert
   end
 
   it "should accept a certificate file with the -r option" do
     options = WSFErb::Options.parse(["-r", "mycert.crt"])
 
-    assert_equal "mycert.crt", options.cert
+    assert_equal File.expand_path("mycert.crt"), options.cert
   end
 
   it "should accept a private key file with the --key option" do
     options = WSFErb::Options.parse(["--key", "mykey.key"])
 
-    assert_equal "mykey.key", options.key
+    assert_equal File.expand_path("mykey.key"), options.key
   end
 
   it "should accept a private key file with the -k option" do
     options = WSFErb::Options.parse(["-k", "mykey.key"])
 
-    assert_equal "mykey.key", options.key
+    assert_equal File.expand_path("mykey.key"), options.key
   end
 
   it "should accept a ticket file with the --ticket option" do
     options = WSFErb::Options.parse(["--ticket", "myticket.xml"])
 
-    assert_equal "myticket.xml", options.ticket
+    assert_equal File.expand_path("myticket.xml"), options.ticket
   end
 
   it "should accept a ticket file with the -t option" do
     options = WSFErb::Options.parse(["-t", "myticket.xml"])
 
-    assert_equal "myticket.xml", options.ticket
+    assert_equal File.expand_path("myticket.xml"), options.ticket
   end
 
   it "should accept an output file with the --out option" do
     options = WSFErb::Options.parse(["--out", "output.txt"])
 
-    assert_equal "output.txt", options.out
+    assert_equal File.expand_path("output.txt"), options.out
   end
 
   it "should accept an output file with the -o option" do
     options = WSFErb::Options.parse(["-o", "output.txt"])
 
-    assert_equal "output.txt", options.out
+    assert_equal File.expand_path("output.txt"), options.out
   end
 
   it "should accept a log file with the --log option" do
     options = WSFErb::Options.parse(["--log", "output.log"])
 
-    assert_equal "output.log", options.log
+    assert_equal File.expand_path("output.log"), options.log
   end
 
   it "should accept a log file with the -l option" do
     options = WSFErb::Options.parse(["-l", "output.log"])
 
-    assert_equal "output.log", options.log
+    assert_equal File.expand_path("output.log"), options.log
   end
 
   it "should enable test mode with the --test option" do
@@ -124,19 +124,19 @@ Protest.describe "An options object" do
   it "should use ./<cuit>.crt as the default certificate file" do
     options = WSFErb::Options.parse(["--cuit", "20238883890"])
 
-    assert_equal "./20238883890.crt", options.cert
+    assert_equal File.expand_path("20238883890.crt"), options.cert
   end
 
   it "should use ./<cuit>.key as the default primary key file" do
     options = WSFErb::Options.parse(["--cuit", "20238883890"])
 
-    assert_equal "./20238883890.key", options.key
+    assert_equal File.expand_path("20238883890.key"), options.key
   end
 
   it "should use ./<cuit>.log as the default log file" do
     options = WSFErb::Options.parse(["--cuit", "20238883890"])
 
-    assert_equal "./20238883890.log", options.log
+    assert_equal File.expand_path("20238883890.log"), options.log
   end
 
   it "should run in production mode by default" do
@@ -150,11 +150,11 @@ Protest.describe "An options object" do
 
     assert_equal "FECAESolicitar", options.service
     assert_equal "20238883890", options.cuit
-    assert_equal "mycert.crt", options.cert
-    assert_equal "mykey.key", options.key
-    assert_equal "myticket.xml", options.ticket
-    assert_equal "output.txt", options.out
-    assert_equal "output.log", options.log
+    assert_equal File.expand_path("mycert.crt"), options.cert
+    assert_equal File.expand_path("mykey.key"), options.key
+    assert_equal File.expand_path("myticket.xml"), options.ticket
+    assert_equal File.expand_path("output.txt"), options.out
+    assert_equal File.expand_path("output.log"), options.log
     assert options.test?
   end
 
