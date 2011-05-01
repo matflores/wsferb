@@ -7,12 +7,16 @@ require "wsferb/response"
 module WSFErb
   module WSFE
     class Response < WSFErb::Response
+      def errors
+        result[:errors] ? [ { :code => err_code, :message => err_msg } ] : []
+      end
+
       def err_code
-        @err_code ||= result[:err][:err_code].to_i rescue "n/d"
+        @err_code ||= result[:errors][:err][:code].to_i rescue "n/d"
       end
 
       def err_msg
-        @err_msg ||= result[:err][:err_msg] rescue "n/d"
+        @err_msg ||= result[:errors][:err][:msg] rescue "n/d"
       end
     end
   end
