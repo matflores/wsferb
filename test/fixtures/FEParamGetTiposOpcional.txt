@@ -1,3 +1,1 @@
-1000120100917NULL    Opcional 1
-1000220100917NULL    Opcional 2
-1000320100917NULL    Opcional 3
+1000220100917NULL    RG Empresas Promovidas - Indentificador de proyecto vinculado a Régimen de Promoción Industrial
