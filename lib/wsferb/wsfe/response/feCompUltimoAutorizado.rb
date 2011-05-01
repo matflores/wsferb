@@ -5,7 +5,7 @@ module WSFErb
   module WSFE
     class Response::FECompUltimoAutorizado < Response
       def format_record(record)
-        "1%03d%04d%08d" % [ result[:cbte_tipo], result[:pto_vta], result[:cbte_nro] ]
+        "1%08d" % [ record[:cbte_nro] ]
       end
 
       def records
