@@ -71,8 +71,8 @@ module WSFErb
 
         raise CuitMissing unless options.cuit
 
-        tipo_cbte = options.arguments[0]
-        punto_vta = options.arguments[1]
+        tipo_cbte = options.arguments[0] || raise(WSFErb::ArgumentError, "Tipo de comprobante no informado")
+        punto_vta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
 
         Client.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
       end
@@ -153,6 +153,23 @@ module WSFErb
         raise CuitMissing unless options.cuit
 
         Client.fe_param_get_tipos_tributos(ticket)
+      end
+
+      def help_text
+<<__EOD__
+Modo de uso: wsfe [opciones] <servicio> [argumentos]
+
+     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
+                                     Valores posibles:
+                                       #{WSFE::Runner.constants.map { |c| "- #{c}" }.join("\n")}
+                                       - FEDummy
+                                       - FECompUltimoAutorizado
+
+                                     La sintaxis de las opciones y argumentos requeridos 
+                                     dependen del servicio a utilizar.
+                                     Escriba wsfe <servicio> --help para obtener mayor
+                                     informacion acerca de un servicio en particular.
+__EOD__
       end
 
       def script
