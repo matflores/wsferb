@@ -133,12 +133,6 @@ Protest.describe "An options object" do
     assert_equal File.expand_path("20238883890.key"), options.key
   end
 
-  it "should use ./<cuit>.log as the default log file" do
-    options = WSFErb::Options.parse(["--cuit", "20238883890"])
-
-    assert_equal File.expand_path("20238883890.log"), options.log
-  end
-
   it "should run in production mode by default" do
     options = WSFErb::Options.parse()
 
