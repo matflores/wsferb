@@ -35,7 +35,14 @@ Protest.describe "WSFE" do
   describe "FEParamGetCotizacion" do
     test "Success" do
       execute :FEParamGetCotizacion, "DOL"
-      assert_value :FEParamGetCotizacion, 3.5, 4.5
+
+      response = WSFErb::Response.load(expand_path("tmp/FEParamGetCotizacion.txt"))
+
+      mon_id  = response.value[0..2]
+      mon_ctz = response.value[3..14].to_f / 1000000
+
+      assert_equal "DOL", mon_id
+      assert mon_ctz >= 3.5 && mon_ctz <= 4.5
     end
 
     test_common_errors(:FEParamGetCotizacion, "DOL")

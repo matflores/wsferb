@@ -57,7 +57,14 @@ module WSFErb
         "1#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:auth_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:app_server]}#{response.to_hash[:fe_dummy_response][:fe_dummy_result][:db_server]}"
       end
 
-      def self.fe_param_get_cotizacion(ticket)
+      def self.fe_param_get_cotizacion(ticket, moneda)
+        raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fe_param_get_cotizacion) do
+          soap.body = ticket.to_hash.merge({ "MonId" => moneda.dup })
+        end
+
+        return Response::FEParamGetCotizacion.new(response)
       end
 
       def self.fe_param_get_ptos_venta(ticket)
