@@ -6,6 +6,7 @@ module WSFErb
   module WSFE
     class Response::FEParamGetTiposOpcional < Response
       def format_record(record)
+        puts "**** #{record.inspect}"
         "1%04d%-8s%-8s%-250s" % [ record[:id] || 0,
                                   record[:fch_desde],
                                   record[:fch_hasta],
@@ -13,7 +14,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:result_get][:opcional_tipo] rescue []
+        @records ||= [result[:result_get][:opcional_tipo]].flatten rescue []
       end
 
       def result

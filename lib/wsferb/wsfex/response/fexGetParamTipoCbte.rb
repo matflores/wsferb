@@ -13,7 +13,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:fex_result_get][:cls_fex_response_tipo_cbte] rescue []
+        @records ||= [result[:fex_result_get][:cls_fex_response_tipo_cbte]].flatten rescue []
       end
 
       def result

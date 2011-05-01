@@ -12,7 +12,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:fex_result_get][:cls_fex_response_pto_venta] rescue []
+        @records ||= [result[:fex_result_get][:cls_fex_response_pto_venta]].flatten rescue []
       end
 
       def result

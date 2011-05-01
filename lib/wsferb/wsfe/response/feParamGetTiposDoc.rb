@@ -13,7 +13,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:result_get][:doc_tipo] rescue []
+        @records ||= [result[:result_get][:doc_tipo]].flatten rescue []
       end
 
       def result

@@ -10,7 +10,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:fex_result_get][:cls_fex_response_dst_cuit] rescue []
+        @records ||= [result[:fex_result_get][:cls_fex_response_dst_cuit]].flatten rescue []
       end
 
       def result

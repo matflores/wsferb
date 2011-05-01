@@ -13,7 +13,7 @@ module WSFErb
       end
 
       def records
-        @records ||= result[:fex_result_get][:cls_fex_response_tex] rescue []
+        @records ||= [result[:fex_result_get][:cls_fex_response_tex]].flatten rescue []
       end
 
       def result
