@@ -47,7 +47,7 @@ module WSFErb
       def fex_check_permiso
         usage "FEXCheckPermiso <Permiso> <Pais>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         permiso = options.arguments[0] || raise(ArgumentError, "")
         pais    = options.arguments[1]
@@ -62,7 +62,7 @@ module WSFErb
       def fex_get_cmp
         usage "FEXGetCmp <TipoCbte> <PtoVenta> <NroCbte>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         tipo_cbte = options.arguments[0]
         pto_venta = options.arguments[1]
@@ -74,7 +74,7 @@ module WSFErb
       def fex_get_last_cmp
         usage "FEXGetLastCmp <TipoCbte> <PtoVenta>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         tipo_cbte = options.arguments[0]
         pto_venta = options.arguments[1]
@@ -85,7 +85,7 @@ module WSFErb
       def fex_get_last_id
         usage "FEXGetLastId" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_last_id(ticket)
       end
@@ -93,7 +93,7 @@ module WSFErb
       def fex_get_param_ctz
         usage "FEXGetParamCtz <Moneda>" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         moneda = options.arguments[0]
 
@@ -103,7 +103,7 @@ module WSFErb
       def fex_get_param_dst_cuit
         usage "FEXGetParamDstCuit" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_dst_cuit(ticket)
       end
@@ -111,7 +111,7 @@ module WSFErb
       def fex_get_param_dst_pais
         usage "FEXGetParamDstPais" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_dst_pais(ticket)
       end
@@ -119,7 +119,7 @@ module WSFErb
       def fex_get_param_idiomas
         usage "FEXGetParamIdiomas" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_idiomas(ticket)
       end
@@ -127,7 +127,7 @@ module WSFErb
       def fex_get_param_incoterms
         usage "FEXGetParamIncoterms" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_incoterms(ticket)
       end
@@ -135,7 +135,7 @@ module WSFErb
       def fex_get_param_mon
         usage "FEXGetParamMon" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_mon(ticket)
       end
@@ -143,7 +143,7 @@ module WSFErb
       def fex_get_param_pto_venta
         usage "FEXGetParamPtoVenta" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_pto_venta(ticket)
       end
@@ -159,7 +159,7 @@ module WSFErb
       def fex_get_param_tipo_expo
         usage "FEXGetParamTipoExpo" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_tipo_expo(ticket)
       end
@@ -167,7 +167,7 @@ module WSFErb
       def fex_get_param_u_med
         usage "FEXGetParamUMed" if options.help?
 
-        raise(ArgumentError, "CUIT missing") unless options.cuit
+        raise CuitMissing unless options.cuit
 
         Client.fex_get_param_u_med(ticket)
       end
