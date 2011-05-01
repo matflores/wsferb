@@ -114,12 +114,12 @@ class Protest::TestCase
       end
 
       test "Invalid output dir" do
-        execute service, "--out unknown_dir/output.txt"
+        execute service, "#{args} --out unknown_dir/output.txt"
         assert_error service, 900006, "Directorio no valido: #{File.expand_path('unknown_dir')}"
       end
 
       test "Invalid log dir" do
-        execute service, "--log unknown_dir/output.log"
+        execute service, "#{args} --log unknown_dir/output.log"
         assert_error service, 900006, "Directorio no valido: #{File.expand_path('unknown_dir')}"
       end
     else
