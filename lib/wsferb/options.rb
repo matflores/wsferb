@@ -70,7 +70,6 @@ module WSFErb
       @cuit = cuit
       @cert ||= File.expand_path("./#{@cuit}.crt")
       @key  ||= File.expand_path("./#{@cuit}.key")
-      @log  ||= File.expand_path("./#{@cuit}.log")
     end
 
     def help?
