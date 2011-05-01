@@ -9,25 +9,31 @@ module WSFErb
   module WSFE
     class Client
       def self.fe_caea_consultar(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_caea_reg_informativo(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_caea_sin_movimiento_consultar(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_caea_sin_movimiento_informar(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_caea_solicitar(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_comp_consultar(ticket)
+        raise TicketMissing unless ticket
       end
 
       def self.fe_comp_tot_x_request(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_comp_tot_x_request) do
           soap.body = ticket.to_hash
@@ -37,7 +43,7 @@ module WSFErb
       end
 
       def self.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_comp_ultimo_autorizado) do
           soap.body = ticket.to_hash.merge({ "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup })
@@ -55,7 +61,7 @@ module WSFErb
       end
 
       def self.fe_param_get_ptos_venta(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_ptos_venta) do
           soap.body = ticket.to_hash
@@ -75,7 +81,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_concepto(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_concepto) do
           soap.body = ticket.to_hash
@@ -85,7 +91,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_doc(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_doc) do
           soap.body = ticket.to_hash
@@ -95,7 +101,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_iva(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_iva) do
           soap.body = ticket.to_hash
@@ -105,7 +111,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_monedas(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_monedas) do
           soap.body = ticket.to_hash
@@ -115,7 +121,7 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_opcional(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_opcional) do
           soap.body = ticket.to_hash
@@ -125,17 +131,13 @@ module WSFErb
       end
 
       def self.fe_param_get_tipos_tributos(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fe_param_get_tipos_tributos) do
           soap.body = ticket.to_hash
         end
 
         return Response::FEParamGetTiposTributos.new(response)
-      end
-
-      def self.ticket_missing
-        Response.new(nil, :nil, nil)
       end
 
       def self.client

@@ -23,7 +23,7 @@ module WSFErb
       end
 
       def self.fex_check_permiso(ticket, permiso, pais)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_check_permiso) do
           soap.body = ticket.to_hash.merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
@@ -38,8 +38,7 @@ module WSFErb
       end
 
       def self.fex_get_cmp(ticket, tipo_cbte, punto_vta, nro_cbte)
-        puts "info for #{tipo_cbte}-#{punto_vta}-#{nro_cbte}"
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_cmp) do
           soap.body = ticket.to_hash.merge({ "Cmp" => { "Tipo_cbte" => tipo_cbte, "Punto_vta" => punto_vta, "Cbte_nro" => nro_cbte }})
@@ -49,7 +48,7 @@ module WSFErb
       end
 
       def self.fex_get_last_cmp(ticket, tipo_cbte, punto_vta)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_last_cmp) do
           soap.body = { "Auth" => { "Token"     => ticket.token.dup,
@@ -63,7 +62,7 @@ module WSFErb
       end
 
       def self.fex_get_last_id(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_last_id) do
           soap.body = ticket.to_hash
@@ -73,7 +72,7 @@ module WSFErb
       end
 
       def self.fex_get_param_ctz(ticket, moneda)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_ctz) do
           soap.body = ticket.to_hash.merge({ :mon_id => moneda })
@@ -83,7 +82,7 @@ module WSFErb
       end
 
       def self.fex_get_param_dst_cuit(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_dst_cuit) do
           soap.body = ticket.to_hash
@@ -93,7 +92,7 @@ module WSFErb
       end
 
       def self.fex_get_param_dst_pais(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_dst_pais) do
           soap.body = ticket.to_hash
@@ -103,7 +102,7 @@ module WSFErb
       end
 
       def self.fex_get_param_idiomas(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_idiomas) do
           soap.body = ticket.to_hash
@@ -113,7 +112,7 @@ module WSFErb
       end
 
       def self.fex_get_param_incoterms(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_incoterms) do
           soap.body = ticket.to_hash
@@ -123,7 +122,7 @@ module WSFErb
       end
 
       def self.fex_get_param_mon(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_mon) do
           soap.body = ticket.to_hash
@@ -133,7 +132,7 @@ module WSFErb
       end
 
       def self.fex_get_param_pto_venta(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_pto_venta) do
           soap.body = ticket.to_hash
@@ -143,8 +142,7 @@ module WSFErb
       end
 
       def self.fex_get_param_tipo_cbte(ticket)
-        raise TicketMissing# ticket.nil?
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_tipo_cbte) do
           soap.body = ticket.to_hash
@@ -154,7 +152,7 @@ module WSFErb
       end
 
       def self.fex_get_param_tipo_expo(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_tipo_expo) do
           soap.body = ticket.to_hash
@@ -164,17 +162,13 @@ module WSFErb
       end
 
       def self.fex_get_param_u_med(ticket)
-        return ticket_missing if ticket.nil?
+        raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_u_med) do
           soap.body = ticket.to_hash
         end
 
         return Response::FEXGetParamUMed.new(response)
-      end
-
-      def self.ticket_missing
-        Response.new(nil, :nil, nil)
       end
 
       def self.client
