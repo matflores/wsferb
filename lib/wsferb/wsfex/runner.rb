@@ -12,10 +12,11 @@ module WSFErb
 
     def self.help_info
 <<__EOD__
-Modo de uso: wsfex [opciones] <servicio> [argumentos]
+Modo de uso: wsfex <servicio> [argumentos] <opciones>
 
      servicio                        Uno de los servicios provistos por el WSFEX de AFIP.
                                      Valores posibles:
+
                                        - FEXAuthorize
                                        - FEXCheckPermiso
                                        - FEXDummy
@@ -37,6 +38,10 @@ Modo de uso: wsfex [opciones] <servicio> [argumentos]
                                      dependen del servicio a utilizar.
                                      Escriba wsfex <servicio> --help para obtener mayor
                                      informacion acerca de un servicio en particular.
+
+                                     Visite http://docs.wsferb.com.ar para obtener
+                                     documentacion actualizada y completa sobre cada
+                                     uno de los servicios soportados.
 __EOD__
     end
 

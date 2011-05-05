@@ -12,18 +12,39 @@ module WSFErb
 
     def self.help_info
 <<__EOD__
-Modo de uso: wsfe [opciones] <servicio> [argumentos]
+Modo de uso: wsfe <servicio> [argumentos] <opciones>
 
      servicio                        Uno de los servicios provistos por el WSFE de AFIP.
                                      Valores posibles:
-                                       #{WSFE::Runner.constants.map { |c| "- #{c}" }.join("\n")}
-                                       - FEDummy
+
+                                       - FECAEAConsultar
+                                       - FECAEARegInformativo
+                                       - FECAEASinMovimientoConsultar
+                                       - FECAEASinMovimientoInformar
+                                       - FECAEASolicitar
+                                       - FECAESolicitar
+                                       - FECompConsultar
+                                       - FECompTotXRequest
                                        - FECompUltimoAutorizado
+                                       - FEDummy
+                                       - FEParamGetCotizacion
+                                       - FEParamGetPtosVenta
+                                       - FEParamGetTiposCbte
+                                       - FEParamGetTiposConcepto
+                                       - FEParamGetTiposDoc
+                                       - FEParamGetTiposIva
+                                       - FEParamGetTiposMonedas
+                                       - FEParamGetTiposOpcional
+                                       - FEParamGetTiposTributos
 
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
                                      Escriba wsfe <servicio> --help para obtener mayor
                                      informacion acerca de un servicio en particular.
+
+                                     Visite http://docs.wsferb.com.ar para obtener
+                                     documentacion actualizada y completa sobre cada
+                                     uno de los servicios soportados.
 __EOD__
     end
 
