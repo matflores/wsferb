@@ -13,7 +13,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.rc1',
+        VERSION:     '2.0.rc2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -218,14 +218,6 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <td>S(1)</td>
 <td>Tipo de Registro - &#8220;1&#8221;</td>
 </tr>
-<tr><td>TipoCbte</td>
-<td>N(3)</td>
-<td>Tipo de comprobante</td>
-</tr>
-<tr><td>PtoVenta</td>
-<td>N(4)</td>
-<td>Punto de venta</td>
-</tr>
 <tr><td>NroCbte</td>
 <td>N(8)</td>
 <td>Número de comprobante</td>
@@ -329,6 +321,30 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <tr><td>602</td>
 <td>No existen datos en los registros de la AFIP</td>
 </tr>
+<tr><td>900000</td>
+<td>Error genérico</td>
+</tr>
+<tr><td>900001</td>
+<td>Servicio no válido</td>
+</tr>
+<tr><td>900002</td>
+<td>CUIT no informado</td>
+</tr>
+<tr><td>900003</td>
+<td>No se encontró el certificado X.509</td>
+</tr>
+<tr><td>900004</td>
+<td>No se encontró la clave privada</td>
+</tr>
+<tr><td>900005</td>
+<td>No se pudo obtener un ticket de acceso</td>
+</tr>
+<tr><td>900006</td>
+<td>Directorio no válido</td>
+</tr>
+<tr><td>900007</td>
+<td>Argumento inválido o no informado</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -360,7 +376,7 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 19 Apr 2011.
+      Actualizado por última vez en 04 May 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>

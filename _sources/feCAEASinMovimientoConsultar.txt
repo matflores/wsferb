@@ -3,14 +3,14 @@
 FECAEASinMovimientoConsultar
 ============================
 
-Permite consultar cuáles fueron los puntos de venta que fueron notificados como sin movimiento para un determinado CAEA.
+Permite consultar si un punto de venta fue notificado como sin movimiento para un determinado CAEA.
 
 Modo de uso
 -----------
 
 ::
 
-  wsfe FECAEASinMovimientoConsultar <CAEA> <opciones>
+  wsfe FECAEASinMovimientoConsultar <CAEA> <PtoVenta> <opciones>
 
 donde:
 
@@ -18,6 +18,7 @@ donde:
 Campo                Descripción
 ==================== ==================================================
 CAEA                 Código de autorización CAEA
+PtoVenta             Punto de Venta
 ==================== ==================================================
 
 Opciones
@@ -33,7 +34,7 @@ Respuesta
 Tipo de Registro 1
 ~~~~~~~~~~~~~~~~~~
 
-La respuesta contiene un registro de tipo "1" por cada punto de venta informado como sin movimientos para el CAEA indicado.
+La respuesta contiene un registro de tipo "1" sólo si el punto de venta fue informado como sin movimientos para el CAEA indicado.
 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
@@ -61,5 +62,6 @@ Errores específicos de este servicio
 Código Descripción
 ====== ================================================================================
 10100  Código de autorización no válido
+10101  Punto de venta no válido
 10102  Código de autorización no registrado
 ====== ================================================================================

@@ -13,7 +13,7 @@
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
-        VERSION:     '2.0.rc1',
+        VERSION:     '2.0.rc2',
         COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -98,10 +98,10 @@
             
   <div class="section" id="fecaeasinmovimientoconsultar">
 <span id="index-0"></span><h1>FECAEASinMovimientoConsultar<a class="headerlink" href="#fecaeasinmovimientoconsultar" title="Enlazar permanentemente con este título">¶</a></h1>
-<p>Permite consultar cuáles fueron los puntos de venta que fueron notificados como sin movimiento para un determinado CAEA.</p>
+<p>Permite consultar si un punto de venta fue notificado como sin movimiento para un determinado CAEA.</p>
 <div class="section" id="modo-de-uso">
 <h2>Modo de uso<a class="headerlink" href="#modo-de-uso" title="Enlazar permanentemente con este título">¶</a></h2>
-<div class="highlight-python"><pre>wsfe FECAEASinMovimientoConsultar &lt;CAEA&gt; &lt;opciones&gt;</pre>
+<div class="highlight-python"><pre>wsfe FECAEASinMovimientoConsultar &lt;CAEA&gt; &lt;PtoVenta&gt; &lt;opciones&gt;</pre>
 </div>
 <p>donde:</p>
 <table border="1" class="docutils">
@@ -117,6 +117,9 @@
 <tbody valign="top">
 <tr><td>CAEA</td>
 <td>Código de autorización CAEA</td>
+</tr>
+<tr><td>PtoVenta</td>
+<td>Punto de Venta</td>
 </tr>
 </tbody>
 </table>
@@ -198,7 +201,7 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <p>Los espacios a la derecha del último caracter significativo se eliminan.</p>
 <div class="section" id="tipo-de-registro-1">
 <h3>Tipo de Registro 1<a class="headerlink" href="#tipo-de-registro-1" title="Enlazar permanentemente con este título">¶</a></h3>
-<p>La respuesta contiene un registro de tipo &#8220;1&#8221; por cada punto de venta informado como sin movimientos para el CAEA indicado.</p>
+<p>La respuesta contiene un registro de tipo &#8220;1&#8221; sólo si el punto de venta fue informado como sin movimientos para el CAEA indicado.</p>
 <table border="1" class="docutils">
 <colgroup>
 <col width="26%" />
@@ -327,6 +330,30 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <tr><td>602</td>
 <td>No existen datos en los registros de la AFIP</td>
 </tr>
+<tr><td>900000</td>
+<td>Error genérico</td>
+</tr>
+<tr><td>900001</td>
+<td>Servicio no válido</td>
+</tr>
+<tr><td>900002</td>
+<td>CUIT no informado</td>
+</tr>
+<tr><td>900003</td>
+<td>No se encontró el certificado X.509</td>
+</tr>
+<tr><td>900004</td>
+<td>No se encontró la clave privada</td>
+</tr>
+<tr><td>900005</td>
+<td>No se pudo obtener un ticket de acceso</td>
+</tr>
+<tr><td>900006</td>
+<td>Directorio no válido</td>
+</tr>
+<tr><td>900007</td>
+<td>Argumento inválido o no informado</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -345,6 +372,9 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
 <tbody valign="top">
 <tr><td>10100</td>
 <td>Código de autorización no válido</td>
+</tr>
+<tr><td>10101</td>
+<td>Punto de venta no válido</td>
 </tr>
 <tr><td>10102</td>
 <td>Código de autorización no registrado</td>
@@ -380,7 +410,7 @@ este motivo se recomienda utilizar esta opción siempre que sea posible.</p>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 19 Apr 2011.
+      Actualizado por última vez en 04 May 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
