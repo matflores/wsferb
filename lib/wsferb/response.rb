@@ -57,7 +57,7 @@ module WSFErb
     end
 
     def formatted_records
-      records.map { |record| format_record(record).strip }
+      records.compact.map { |record| format_record(record).strip }
     end
 
     def format_record(record)
@@ -65,11 +65,11 @@ module WSFErb
     end
 
     def formatted_errors
-      errors.select { |e| e[:code].to_i > 0 }.map { |e| ("E%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
+      errors.compact.select { |e| e[:code].to_i > 0 }.map { |e| ("E%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
     end
 
     def formatted_events
-      events.map { |e| ("V%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
+      events.compact.map { |e| ("V%06d%-512s" % [ e[:code].to_i, e[:message] ]).strip }
     end
 
     def value
