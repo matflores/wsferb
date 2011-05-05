@@ -36,7 +36,8 @@ module WSFErb
     end
 
     def error_message
-      service.to_s.empty? ? "Servicio no informado" : "Servicio no valido: #{service}"
+      message = service.to_s.empty? ? "Servicio no informado" : "Servicio no valido: #{service}"
+      "#{message}. Utilice la opcion --help para obtener una lista de los servicios soportados."
     end
   end
 
