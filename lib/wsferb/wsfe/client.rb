@@ -52,8 +52,14 @@ module WSFErb
         return Response::FECAEASolicitar.new(response)
       end
 
-      def self.fe_comp_consultar(ticket)
+      def self.fe_comp_consultar(ticket, tipo_cbte, punto_vta, nro_cbte)
         raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fe_comp_consultar) do
+          soap.body = ticket.to_hash.merge({ "FeCompConsReq" => { "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup, "CbteNro" => nro_cbte.dup }})
+        end
+
+        return Response::FECompConsultar.new(response)
       end
 
       def self.fe_comp_tot_x_request(ticket)

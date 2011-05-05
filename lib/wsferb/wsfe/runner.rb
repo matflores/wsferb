@@ -112,6 +112,15 @@ __EOD__
       end
 
       def fe_comp_consultar
+        usage "FECompConsultar <TipoCbte> <PuntoVta> <NroCbte>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        tipo_cbte = options.arguments[0] || raise(WSFErb::ArgumentError, "Tipo de comprobante no informado")
+        punto_vta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
+        nro_cbte  = options.arguments[2] || raise(WSFErb::ArgumentError, "Numero de comprobante no informado")
+
+        Client.fe_comp_consultar(ticket, tipo_cbte, punto_vta, nro_cbte)
       end
 
       def fe_comp_tot_x_request
