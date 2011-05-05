@@ -121,4 +121,8 @@ module WSFErb
       "900007"
     end
   end
+
+  # Exception used to display usage and exit
+  class UsageException < StandardError
+  end
 end

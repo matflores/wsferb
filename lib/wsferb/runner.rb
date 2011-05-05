@@ -22,6 +22,8 @@ module WSFErb
                    end
 
                    run_service
+                 rescue WSFErb::UsageException => usage
+                   usage.to_s
                  rescue WSFErb::Error => error
                    error.to_s
                  rescue StandardError => error
@@ -51,7 +53,7 @@ module WSFErb
 
     def usage(syntax)
       options.parser.banner = "Modo de uso: #{script} #{syntax} [opciones]"
-      raise(ArgumentError, options.parser)
+      raise(UsageException, options.parser)
     end
   end
 end
