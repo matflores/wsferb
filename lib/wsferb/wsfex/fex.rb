@@ -8,7 +8,7 @@ module WSFErb
       attr_accessor :id_cbte, :tipo_cbte, :nro_cbte, :punto_vta, :fecha_cbte, :tipo_expo, :tiene_permiso,
                     :pais, :cuit_pais, :id_impositivo, :cliente, :domicilio, :moneda, :cotizacion, :total,
                     :forma_pago, :idioma, :incoterms, :incoterms_info, :obs, :obs_comerciales,
-                    :cae, :fecha_cae, :fecha_vto_cae, :resultado, :permisos, :comprobantes, :items
+                    :cae, :fecha_vto_cae, :resultado, :permisos, :comprobantes, :items
 
       def initialize
         @permisos     = []
@@ -22,11 +22,11 @@ module WSFErb
           lines.each do |line|
             case line.split(//).first
             when "1"
-              fields = line.unpack("A1A15A2A4A8A8A1A1A3A11A50A200A300A3A11A15A50A1A3A20A14A8A8A1A1000A1000")
-              fex.id_cbte          = fields[1].to_i
-              fex.tipo_cbte        = fields[2].to_i
-              fex.punto_vta        = fields[3].to_i
-              fex.nro_cbte         = fields[4].to_i
+              fields = line.strip.unpack("A1A3A4A8A15A8A3A1A3A11A50A200A300A3A12A15A50A3A3A20A1000A1000")
+              fex.tipo_cbte        = fields[1].to_i
+              fex.punto_vta        = fields[2].to_i
+              fex.nro_cbte         = fields[3].to_i
+              fex.id_cbte          = fields[4].to_i
               fex.fecha_cbte       = fields[5]
               fex.tipo_expo        = fields[6].to_i
               fex.tiene_permiso    = fields[7]
@@ -42,29 +42,30 @@ module WSFErb
               fex.idioma           = fields[17].to_i
               fex.incoterms        = fields[18]
               fex.incoterms_info   = fields[19]
-              fex.cae              = fields[20]
-              fex.fecha_cae        = fields[21]
-              fex.fecha_vto_cae    = fields[22]
-              fex.resultado        = fields[23]
-              fex.obs              = fields[24]
-              fex.obs_comerciales  = fields[25]
+              fex.obs              = fields[20]
+              fex.obs_comerciales  = fields[21]
             when "2"
-              fields = line.unpack("A1A16A3")
-              fex.permisos << { :Id_permiso => fields[1],
-                                :Dst_merc   => fields[2].to_i }
+              fields = line.strip.unpack("A1A3A4A8A16A3")
+              fex.permisos << { :Id_permiso => fields[4],
+                                :Dst_merc   => fields[5].to_i }
             when "3"
-              fields = line.unpack("A1A2A4A8")
-              fex.comprobantes << { :CBte_tipo      => fields[1].to_i,
-                                    :Cbte_punto_vta => fields[2].to_i,
-                                    :Cbte_nro       => fields[3].to_i }
+              fields = line.strip.unpack("A1A3A4A8A3A4A8")
+              fex.comprobantes << { :CBte_tipo      => fields[4].to_i,
+                                    :Cbte_punto_vta => fields[5].to_i,
+                                    :Cbte_nro       => fields[6].to_i }
             when "4"
-              fields = line.unpack("A1A30A4000A12A2A12A14")
-              fex.items << { :Pro_codigo     => fields[1],
-                             :Pro_ds         => fields[2],
-                             :Pro_qty        => fields[3].to_i / 100.0,
-                             :Pro_umed       => fields[4].to_i,
-                             :Pro_precio_uni => fields[5].to_i / 1000.0,
-                             :Pro_total_item => fields[6].to_i / 1000.0 }
+              fields = line.strip.unpack("A1A3A4A8A12A3A12A14A30A4000")
+              fex.items << { :Pro_qty        => fields[4].to_i / 100.0,
+                             :Pro_umed       => fields[5].to_i,
+                             :Pro_precio_uni => fields[6].to_i / 1000.0,
+                             :Pro_total_item => fields[7].to_i / 1000.0,
+                             :Pro_codigo     => fields[8],
+                             :Pro_ds         => fields[9] }
+            when "C"
+              fields = line.strip.unpack("A1A3A4A8A1A14A8")
+              fex.resultado     = fields[4]
+              fex.cae           = fields[5]
+              fex.fecha_vto_cae = fields[6]
             end
           end
         end
@@ -92,7 +93,6 @@ module WSFErb
           fex.incoterms        = hash[:Incoterms]
           fex.incoterms_info   = hash[:Incoterms_Ds]
           fex.cae              = hash[:Cae]
-          fex.fecha_cae        = hash[:Fecha_cbte_cae]
           fex.fecha_vto_cae    = hash[:Fecha_venc_cae]
           fex.resultado        = hash[:Resultado]
           fex.obs              = hash[:Obs]
@@ -138,7 +138,6 @@ module WSFErb
         cbte_data.merge!({ :Items        => { :Item     => items        }}) unless items.empty?
 
         cae_data =  { :Cae               => cae,
-                      :Fecha_cbte_cae    => fecha_cae,
                       :Fecha_venc_cae    => fecha_vto_cae,
                       :Resultado         => resultado
                     }
@@ -149,38 +148,72 @@ module WSFErb
       def to_s
         lines = []
 
-        formato = "1%015d%02d%04d%08d%-8s%1s%1s%03d%011d%-50s%-200s%-300s%3s%011d%015d%-50s%1s%-3s%-20s%-14s%-8s%-8s%1s%-1000s%-1000s\n"
-        lines << formato % [ id_cbte.to_s, tipo_cbte.to_s, punto_vta.to_s, nro_cbte.to_s, fecha_cbte.to_s,
-                             tipo_expo.to_s, tiene_permiso.to_s, pais.to_s, cuit_pais.to_s, id_impositivo.to_s,
-                             cliente.to_s, domicilio.to_s, moneda.to_s, (cotizacion.to_f*1000000),
-                             (total.to_f*100), forma_pago.to_s, idioma.to_s, incoterms.to_s,
-                             incoterms_info.to_s, cae.to_s, fecha_cae.to_s, fecha_vto_cae.to_s,
-                             resultado.to_s, obs.to_s, obs_comerciales.to_s ]
+        formato = "1%03d%04d%08d%015d%-8s%03d%1s%03d%011d%-50s%-200s%-300s%3s%012d%015d%-50s%03d%-3s%-20s%-1000s%-1000s"
+        lines << (formato % [ tipo_cbte.to_s,
+                              punto_vta.to_s,
+                              nro_cbte.to_s,
+                              id_cbte.to_s,
+                              fecha_cbte.to_s,
+                              tipo_expo.to_i,
+                              tiene_permiso.to_s,
+                              pais.to_i,
+                              cuit_pais.to_s,
+                              id_impositivo.to_s,
+                              cliente.to_s,
+                              domicilio.to_s,
+                              moneda.to_s,
+                              (cotizacion.to_f*1000000),
+                              (total.to_f*100),
+                              forma_pago.to_s,
+                              idioma.to_i,
+                              incoterms.to_s,
+                              incoterms_info.to_s,
+                              obs.to_s,
+                              obs_comerciales.to_s ]).strip
 
-        formato = "2%-16s%03d\n"
+        formato = "2%03d%04d%08d%-16s%03d"
         permisos.each do |permiso|
-          lines << formato % [ permiso[:Id_permiso].to_s, 
-                               permiso[:Dst_merc].to_i ]
+          lines << (formato % [ tipo_cbte.to_s,
+                                punto_vta.to_s,
+                                nro_cbte.to_s,
+                                permiso[:Id_permiso].to_s, 
+                                permiso[:Dst_merc].to_i ]).strip
         end
 
-        formato = "3%02d%04d%08d\n"
+        formato = "3%03d%04d%08d%03d%04d%08d"
         comprobantes.each do |comprobante|
-          lines << formato % [ comprobante[:CBte_tipo].to_i, 
-                               comprobante[:Cbte_punto_vta].to_i,
-                               comprobante[:Cbte_nro].to_i ]
+          lines << (formato % [ tipo_cbte.to_s,
+                                punto_vta.to_s,
+                                nro_cbte.to_s,
+                                comprobante[:CBte_tipo].to_i, 
+                                comprobante[:Cbte_punto_vta].to_i,
+                                comprobante[:Cbte_nro].to_i ]).strip
         end
 
-        formato = "4%-30s%-4000s%012d%02d%012d%014d\n"
+        formato = "4%03d%04d%08d%012d%03d%012d%014d%-30s%-4000s"
         items.each do |item|
-          lines << formato % [ item[:Pro_codigo].to_s,
-                               item[:Pro_ds].to_s,
-                               (item[:Pro_qty].to_f * 100),
-                               item[:Pro_umed].to_i,
-                               (item[:Pro_precio_uni].to_f * 1000),
-                               (item[:Pro_total_item].to_f * 1000) ]
+          lines << (formato % [ tipo_cbte.to_s,
+                                punto_vta.to_s,
+                                nro_cbte.to_s,
+                                (item[:Pro_qty].to_f * 100),
+                                item[:Pro_umed].to_i,
+                                (item[:Pro_precio_uni].to_f * 1000),
+                                (item[:Pro_total_item].to_f * 1000),
+                                item[:Pro_codigo].to_s,
+                                item[:Pro_ds].to_s ]).strip
         end
 
-        lines.join
+        unless cae.to_s.empty? 
+          formato = "C%03d%04d%08d%1s%-14s%-8s"
+          lines << (formato % [ tipo_cbte.to_s,
+                                punto_vta.to_s,
+                                nro_cbte.to_s,
+                                resultado.to_s,
+                                cae.to_s,
+                                fecha_vto_cae.to_s ]).strip
+        end
+
+        lines.join("\n")
       end
 
       def tap

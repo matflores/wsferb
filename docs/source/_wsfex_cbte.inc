@@ -19,7 +19,7 @@ PtoVenta             N(4)    Punto de venta (ver :doc:`fexGetParamPtoVenta`)
 NroCbte              N(8)    Número de comprobante (ver :doc:`fexGetLastCmp`)
 ID                   N(15)   Identificador único del requerimiento
 FchCbte              S(8)    Fecha de comprobante (AAAAMMDD)
-TipoExpo             N(1)    Tipo de exportación (ver :doc:`fexGetParamTipoExpo`)
+TipoExpo             N(3)    Tipo de exportación (ver :doc:`fexGetParamTipoExpo`)
 PermisoExistente     S(1)    Indica si posee permiso de embarque.
                              Valores posibles: **S**, **N**, o NULL (vacío)
 Destino              N(3)    Código del país de destino (ver :doc:`fexGetParamDstPais`)
@@ -35,7 +35,7 @@ MonId                S(3)    Código de moneda (ver :doc:`fexGetParamMon`)
 MonCotiz             N(12,6) Cotización de la moneda (ver :doc:`fexGetParamCtz`)
 ImpTotal             N(15,2) Importe total del comprobante
 FormaPago            S(50)   Descripción de la forma de pago
-Idioma               S(1)    Idioma del comprobante (ver :doc:`fexGetParamIdiomas`)
+Idioma               N(3)    Idioma del comprobante (ver :doc:`fexGetParamIdiomas`)
 IncotermId           S(3)    Incoterm (ver :doc:`fexGetParamIncoterms`)
 IncotermDesc         S(20)   Descripción del Incoterm (ver :doc:`fexGetParamIncoterms`)
 Observaciones        S(1000) Observaciones
@@ -88,7 +88,7 @@ TipoCbte             N(3)    Tipo de comprobante (ver :doc:`fexGetParamTipoCbte`
 PtoVenta             N(4)    Punto de venta (ver :doc:`fexGetParamPtoVenta`)
 NroCbte              N(8)    Número de comprobante
 Cantidad             N(12,2) Cantidad
-UMed                 N(2)    Unidad de medida (ver :doc:`fexGetParamUMed`)
+UMed                 N(3)    Unidad de medida (ver :doc:`fexGetParamUMed`)
 PrecioUni            N(12,3) Precio unitario
 TotalItem            N(14,3) Importe total
 ProdId               S(30)   Código de producto
