@@ -22,8 +22,10 @@ module WSFErb
                    end
 
                    run_service
-                 rescue StandardError => error
+                 rescue WSFErb::Error => error
                    error.to_s
+                 rescue StandardError => error
+                   WSFErb::GenericError.new(error.to_s)
                  end
 
       if options.out && File.exists?(File.dirname(options.out))

@@ -19,10 +19,9 @@ module WSFErb
             soap.body = { :in0 => signed }
           end
           ticket = Ticket.from_xml(cuit, response.to_hash[:login_cms_response][:login_cms_return])
-        rescue Exception => e
-          puts e.message
-          puts e.backtrace.join("\n")
+        rescue StandardError => e
           ticket = nil
+          raise
         end
         ticket
       end
