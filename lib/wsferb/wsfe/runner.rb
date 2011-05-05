@@ -62,18 +62,50 @@ __EOD__
       end
 
       def fe_caea_consultar
+        usage "FECAEAConsultar <Periodo> <Quincena>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Periodo no informado")
+        quincena = options.arguments[1] || raise(WSFErb::ArgumentError, "Quincena no informada")
+
+        Client.fe_caea_consultar(ticket, periodo, quincena)
       end
 
       def fe_caea_reg_informativo
       end
 
       def fe_caea_sin_movimiento_consultar
+        usage "FECAEASinMovimientoConsultar <CAEA> <PuntoVta>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        caea      = options.arguments[0] || raise(WSFErb::ArgumentError, "CAEA no informado")
+        punto_vta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
+
+        Client.fe_caea_sin_movimiento_consultar(ticket, caea, punto_vta)
       end
 
       def fe_caea_sin_movimiento_informar
+        usage "FECAEASinMovimientoInformar <CAEA> <PuntoVta>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        caea      = options.arguments[0] || raise(WSFErb::ArgumentError, "CAEA no informado")
+        punto_vta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
+
+        Client.fe_caea_sin_movimiento_informar(ticket, caea, punto_vta)
       end
 
       def fe_caea_solicitar
+        usage "FECAEASolicitar <Periodo> <Quincena>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Periodo no informado")
+        quincena = options.arguments[1] || raise(WSFErb::ArgumentError, "Quincena no informada")
+
+        Client.fe_caea_solicitar(ticket, periodo, quincena)
       end
 
       def fe_cae_solicitar

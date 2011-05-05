@@ -8,24 +8,48 @@ require "savon"
 module WSFErb
   module WSFE
     class Client
-      def self.fe_caea_consultar(ticket)
+      def self.fe_caea_consultar(ticket, periodo, quincena)
         raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fecaea_consultar) do
+          soap.body = ticket.to_hash.merge({ "Periodo" => periodo.dup, "Orden" => quincena.dup })
+        end
+
+        return Response::FECAEAConsultar.new(response)
       end
 
       def self.fe_caea_reg_informativo(ticket)
         raise TicketMissing unless ticket
       end
 
-      def self.fe_caea_sin_movimiento_consultar(ticket)
+      def self.fe_caea_sin_movimiento_consultar(ticket, caea, punto_vta)
         raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fecaea_sin_movimiento_consultar) do
+          soap.body = ticket.to_hash.merge({ "CAEA" => caea.dup, "PtoVta" => punto_vta.dup })
+        end
+
+        return Response::FECAEASinMovimientoConsultar.new(response)
       end
 
-      def self.fe_caea_sin_movimiento_informar(ticket)
+      def self.fe_caea_sin_movimiento_informar(ticket, caea, punto_vta)
         raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fecaea_sin_movimiento_informar) do
+          soap.body = ticket.to_hash.merge({ "CAEA" => caea.dup, "PtoVta" => punto_vta.dup })
+        end
+
+        return Response::FECAEASinMovimientoInformar.new(response)
       end
 
-      def self.fe_caea_solicitar(ticket)
+      def self.fe_caea_solicitar(ticket, periodo, quincena)
         raise TicketMissing unless ticket
+
+        response = client.request(:n1, :fecaea_solicitar) do
+          soap.body = ticket.to_hash.merge({ "Periodo" => periodo.dup, "Orden" => quincena.dup })
+        end
+
+        return Response::FECAEASolicitar.new(response)
       end
 
       def self.fe_comp_consultar(ticket)
