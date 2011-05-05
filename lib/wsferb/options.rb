@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
@@ -8,23 +9,23 @@ module WSFErb
   class Options
     OPTIONS = {
       :cuit      => ["-c", "--cuit CUIT",    "Cuit del contribuyente."],
-      :ticket    => ["-t", "--ticket TICKET","Ubicacion del ticket de acceso. Si existe y",
-                                             "el ticket aun es valido, se utilizara para",
-                                             "la comunicacion con el WSFE. En caso contrario",
-                                             "se solicitara un nuevo ticket y se almacenara",
-                                             "en la ubicacion especificada.",
+      :ticket    => ["-t", "--ticket TICKET","Ubicación del ticket de acceso. Si existe y",
+                                             "el ticket aún es válido, se utilizará para",
+                                             "la comunicación con el WSFE. En caso contrario",
+                                             "se solicitará un nuevo ticket y se almacenará",
+                                             "en la ubicación especificada.",
                                              "Valor por defecto: ./<cuit>.xml"],
-      :cert      => ["-r", "--cert CERT",    "Ubicacion del certificado digital provisto por AFIP.",
+      :cert      => ["-r", "--cert CERT",    "Ubicación del certificado digital provisto por AFIP.",
                                              "Valor por defecto: ./<cuit>.crt"],
-      :key       => ["-k", "--key KEY",      "Ubicacion de la clave privada que se utilizara para",
+      :key       => ["-k", "--key KEY",      "Ubicación de la clave privada que se utilizará para",
                                              "firmar las solicitudes.",
                                              "Valor por defecto: ./<cuit>.key"],
       :out       => ["-o", "--out PATH",     "Guarda la respuesta en el archivo indicado (opcional)"],
-      :log       => ["-l", "--log PATH",     "Guarda un log de la transaccion en el archivo indicado,",
-                                             "incluyendo el xml devuelto por AFIP (opcional)."],
+      :log       => ["-l", "--log PATH",     "Guarda un log de la transacción en el archivo indicado,",
+                                             "incluyendo el xml devuelto por AFIP."],
       :test      => ["-e", "--test",         "Ejecuta el servicio en el entorno de pruebas de AFIP."],
-      :help      => ["-h", "--help",         "Muestra informacion de ayuda acerca del servicio especificado."],
-      :version   => ["-v", "--version",      "Informa la version actual del script."]
+      :help      => ["-h", "--help",         "Muestra información de ayuda acerca del servicio especificado."],
+      :version   => ["-v", "--version",      "Informa la versión actual del WSFErb."]
     }
 
     attr_accessor :parser, :service, :arguments, :cuit, :ticket, :cert, :key, :out, :log, :help, :test, :version

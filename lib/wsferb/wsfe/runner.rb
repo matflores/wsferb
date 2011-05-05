@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
@@ -40,10 +41,10 @@ Modo de uso: wsfe <servicio> [argumentos] <opciones>
                                      La sintaxis de las opciones y argumentos requeridos 
                                      dependen del servicio a utilizar.
                                      Escriba wsfe <servicio> --help para obtener mayor
-                                     informacion acerca de un servicio en particular.
+                                     información acerca de un servicio en particular.
 
                                      Visite http://docs.wsferb.com.ar para obtener
-                                     documentacion actualizada y completa sobre cada
+                                     documentación actualizada y completa sobre cada
                                      uno de los servicios soportados.
 __EOD__
     end
@@ -83,11 +84,11 @@ __EOD__
       end
 
       def fe_caea_consultar
-        usage "FECAEAConsultar <Periodo> <Quincena>" if options.help?
+        usage "FECAEAConsultar <Período> <Quincena>" if options.help?
 
         raise CuitMissing unless options.cuit
 
-        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Periodo no informado")
+        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Período no informado")
         quincena = options.arguments[1] || raise(WSFErb::ArgumentError, "Quincena no informada")
 
         Client.fe_caea_consultar(ticket, periodo, quincena)
@@ -119,11 +120,11 @@ __EOD__
       end
 
       def fe_caea_solicitar
-        usage "FECAEASolicitar <Periodo> <Quincena>" if options.help?
+        usage "FECAEASolicitar <Período> <Quincena>" if options.help?
 
         raise CuitMissing unless options.cuit
 
-        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Periodo no informado")
+        periodo  = options.arguments[0] || raise(WSFErb::ArgumentError, "Período no informado")
         quincena = options.arguments[1] || raise(WSFErb::ArgumentError, "Quincena no informada")
 
         Client.fe_caea_solicitar(ticket, periodo, quincena)
@@ -139,7 +140,7 @@ __EOD__
 
         tipo_cbte = options.arguments[0] || raise(WSFErb::ArgumentError, "Tipo de comprobante no informado")
         punto_vta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
-        nro_cbte  = options.arguments[2] || raise(WSFErb::ArgumentError, "Numero de comprobante no informado")
+        nro_cbte  = options.arguments[2] || raise(WSFErb::ArgumentError, "Número de comprobante no informado")
 
         Client.fe_comp_consultar(ticket, tipo_cbte, punto_vta, nro_cbte)
       end

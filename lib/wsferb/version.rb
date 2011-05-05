@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
@@ -16,7 +17,7 @@ module WSFErb
       NAME   = "WSFErb"
       URL    = "wsferb@atlanware.com"  
     
-      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturacion Electronica AFIP"
+      DESCRIPTION = "#{NAME}-#{FULL_VERSION} - Web Services Facturación Electrónica AFIP"
     end
   end
 end

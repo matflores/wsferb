@@ -1,3 +1,4 @@
+# encoding: utf-8
 #
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
@@ -37,10 +38,10 @@ Modo de uso: wsfex <servicio> [argumentos] <opciones>
                                      La sintaxis de las opciones y argumentos requeridos
                                      dependen del servicio a utilizar.
                                      Escriba wsfex <servicio> --help para obtener mayor
-                                     informacion acerca de un servicio en particular.
+                                     información acerca de un servicio en particular.
 
                                      Visite http://docs.wsferb.com.ar para obtener
-                                     documentacion actualizada y completa sobre cada
+                                     documentación actualizada y completa sobre cada
                                      uno de los servicios soportados.
 __EOD__
     end
@@ -87,12 +88,12 @@ __EOD__
       end
 
       def fex_check_permiso
-        usage "FEXCheckPermiso <Permiso> <Pais>" if options.help?
+        usage "FEXCheckPermiso <Permiso> <País>" if options.help?
 
         raise CuitMissing unless options.cuit
 
-        permiso = options.arguments[0] || raise(WSFErb::ArgumentError, "Codigo de permiso de embarque no informado")
-        pais    = options.arguments[1] || raise(WSFErb::ArgumentError, "Codigo de pais de destino no informado")
+        permiso = options.arguments[0] || raise(WSFErb::ArgumentError, "Código de permiso de embarque no informado")
+        pais    = options.arguments[1] || raise(WSFErb::ArgumentError, "Código de país de destino no informado")
 
         Client.fex_check_permiso(ticket, permiso, pais)
       end
@@ -108,7 +109,7 @@ __EOD__
 
         tipo_cbte = options.arguments[0] || raise(WSFErb::ArgumentError, "Tipo de comprobante no informado")
         pto_venta = options.arguments[1] || raise(WSFErb::ArgumentError, "Punto de venta no informado")
-        nro_cbte  = options.arguments[2] || raise(WSFErb::ArgumentError, "Nro de comprobante no informado")
+        nro_cbte  = options.arguments[2] || raise(WSFErb::ArgumentError, "Número de comprobante no informado")
 
         Client.fex_get_cmp(ticket, tipo_cbte, pto_venta, nro_cbte)
       end
@@ -137,7 +138,7 @@ __EOD__
 
         raise CuitMissing unless options.cuit
 
-        moneda = options.arguments[0] || raise(WSFErb::ArgumentError, "Codigo de moneda no informado")
+        moneda = options.arguments[0] || raise(WSFErb::ArgumentError, "Código de moneda no informado")
 
         Client.fex_get_param_ctz(ticket, moneda)
       end
