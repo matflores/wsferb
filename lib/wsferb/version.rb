@@ -9,7 +9,7 @@ module WSFErb
       MAJOR  = 2
       MINOR  = 0
       TINY   = 0
-      RELEASE_CANDIDATE = "rc1"
+      RELEASE_CANDIDATE = "rc2"
 
       STRING = [MAJOR, MINOR, TINY].join(".")
       FULL_VERSION = [MAJOR, MINOR, TINY, RELEASE_CANDIDATE].compact.join(".")

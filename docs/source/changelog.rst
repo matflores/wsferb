@@ -6,7 +6,15 @@ Changelog
 ========== ======== =============================================================
 Fecha      Versión  Descripción
 ========== ======== =============================================================
-2011-05-01 v2.0.rc1 Soporte WSFEv1/v2
+2011-05-10 v2.0.rc2 Soporte WSFEv2
+
+                    Soporte autoimpresores (CAEA)
+
+                    Soporte monotributistas (FAC/NC/ND de tipo C)
+
+                    Bug fixes
+
+2011-05-01 v2.0.rc1 Soporte WSFEv1
 
                     Nuevo soporte para WSFEX
 
