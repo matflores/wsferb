@@ -18,7 +18,6 @@ module WSFErb
 
         fex               = Fex.new
         fex.cae           = info[:cae]
-        fex.fecha_cae     = info[:fch_cbte]
         fex.fecha_vto_cae = info[:fch_venc_cae]
         fex.resultado     = info[:resultado]
 

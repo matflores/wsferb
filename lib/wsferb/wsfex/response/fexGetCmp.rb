@@ -37,7 +37,6 @@ module WSFErb
         fex.incoterms       = info[:incoterms]
         fex.incoterms_info  = info[:incoterms_ds]
         fex.cae             = info[:cae]
-        fex.fecha_cae       = info[:fecha_cbte]
         fex.fecha_vto_cae   = info[:fch_venc_cae]
         fex.resultado       = info[:resultado]
         fex.obs             = info[:obs]
