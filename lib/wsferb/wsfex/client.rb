@@ -75,7 +75,7 @@ module WSFErb
         raise TicketMissing unless ticket
 
         response = client.request(:n1, :fex_get_param_ctz) do
-          soap.body = ticket.to_hash.merge({ :mon_id => moneda })
+          soap.body = ticket.to_hash.merge({ "Mon_id" => moneda })
         end
 
         return Response::FEXGetParamCtz.new(response)

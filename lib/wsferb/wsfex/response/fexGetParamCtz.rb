@@ -6,7 +6,8 @@ module WSFErb
   module WSFEX
     class Response::FEXGetParamCtz < Response
       def format_record(record)
-        "1%018d%-8s" % [ record[:cls_fex_response_ctz] ] rescue ""
+        "1%012d%-8s" % [ (record[:mon_ctz].to_f * 1000000).to_i,
+                          record[:mon_fecha] ]
       end
 
       def records
