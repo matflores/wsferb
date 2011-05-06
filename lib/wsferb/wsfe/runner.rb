@@ -95,6 +95,13 @@ __EOD__
       end
 
       def fe_caea_reg_informativo
+        usage "FECAEARegInformativo <Lote>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        lote = options.arguments[0] || raise(WSFErb::ArgumentError, "Archivo con datos de los comprobantes a autorizar no informado")
+
+        Client.fe_caea_reg_informativo(ticket, lote)
       end
 
       def fe_caea_sin_movimiento_consultar
@@ -131,6 +138,13 @@ __EOD__
       end
 
       def fe_cae_solicitar
+        usage "FECAESolicitar <Lote>" if options.help?
+
+        raise CuitMissing unless options.cuit
+
+        lote = options.arguments[0] || raise(WSFErb::ArgumentError, "Archivo con datos de los comprobantes a autorizar no informado")
+
+        Client.fe_cae_solicitar(ticket, lote)
       end
 
       def fe_comp_consultar

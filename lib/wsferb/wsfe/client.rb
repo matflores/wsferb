@@ -18,8 +18,16 @@ module WSFErb
         return Response::FECAEAConsultar.new(response)
       end
 
-      def self.fe_caea_reg_informativo(ticket)
+      def self.fe_caea_reg_informativo(ticket, lote)
         raise TicketMissing unless ticket
+
+        lote = Lote.from_file(lote)
+
+        response = client.request(:n1, :fecaea_reg_informativo) do
+          soap.body = ticket.to_hash.merge({ "FeCAEARegInfReq" => lote.to_hash.stringify_keys })
+        end
+
+        return Response::FECAEARegInformativo.new(response)
       end
 
       def self.fe_caea_sin_movimiento_consultar(ticket, caea, punto_vta)
@@ -50,6 +58,18 @@ module WSFErb
         end
 
         return Response::FECAEASolicitar.new(response)
+      end
+
+      def self.fe_cae_solicitar(ticket, lote)
+        raise TicketMissing unless ticket
+
+        lote = Lote.from_file(lote)
+
+        response = client.request(:n1, :fe_cae_solicitar) do
+          soap.body = ticket.to_hash.merge({ "FeCAEReq" => lote.to_hash.stringify_keys })
+        end
+
+        return Response::FECAESolicitar.new(response)
       end
 
       def self.fe_comp_consultar(ticket, tipo_cbte, punto_vta, nro_cbte)
