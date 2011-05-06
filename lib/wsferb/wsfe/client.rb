@@ -21,7 +21,7 @@ module WSFErb
       def self.fe_caea_reg_informativo(ticket, lote)
         raise TicketMissing unless ticket
 
-        lote = Lote.from_file(lote)
+        lote = Lote.load(lote)
 
         response = client.request(:n1, :fecaea_reg_informativo) do
           soap.body = ticket.to_hash.merge({ "FeCAEARegInfReq" => lote.to_hash.stringify_keys })
@@ -63,7 +63,7 @@ module WSFErb
       def self.fe_cae_solicitar(ticket, lote)
         raise TicketMissing unless ticket
 
-        lote = Lote.from_file(lote)
+        lote = Lote.load(lote)
 
         response = client.request(:n1, :fe_cae_solicitar) do
           soap.body = ticket.to_hash.merge({ "FeCAEReq" => lote.to_hash.stringify_keys })

@@ -98,7 +98,7 @@ Protest.describe "A FEX invoice" do
   end
 
   it "can be imported from a text file" do
-    fex = WSFErb::WSFEX::Fex.from_file(expand_path("fixtures/fex_input.txt"))
+    fex = WSFErb::WSFEX::Fex.load(expand_path("fixtures/fex_input.txt"))
 
     assert_equal 123456789012345             , fex.id_cbte
     assert_equal 20                          , fex.tipo_cbte
@@ -156,8 +156,8 @@ Protest.describe "A FEX invoice" do
     fex_input  = expand_path("fixtures/fex_input.txt")
     fex_output = Tempfile.new("fex")
 
-    fex = WSFErb::WSFEX::Fex.from_file(fex_input)
-    fex.to_file(fex_output.path)
+    fex = WSFErb::WSFEX::Fex.load(fex_input)
+    fex.save(fex_output.path)
 
     assert_equal File.read(fex_input).strip, File.read(fex_output).strip
   end

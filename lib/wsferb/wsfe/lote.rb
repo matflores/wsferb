@@ -16,7 +16,7 @@ module WSFErb
 #         @items        = []
 #       end
 # 
-       def self.from_file(filename)
+       def self.load(filename)
 #         new.tap do |fex|
 #           lines = File.readlines(filename)
 #           lines.each do |line|
@@ -103,7 +103,7 @@ module WSFErb
 #         end
        end
 # 
-       def to_file(filename)
+       def save(filename)
          File.open(filename, "w") do |file|
            file.write to_s
          end

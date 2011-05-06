@@ -11,7 +11,7 @@ module WSFErb
       def self.fex_authorize(ticket, cbte)
         raise TicketMissing unless ticket
 
-        fex = Fex.from_file(cbte)
+        fex = Fex.load(cbte)
 
         response = client.request(:n1, :fex_authorize) do
           soap.body = ticket.to_hash.merge({ :Cmp => fex.to_hash.stringify_keys })

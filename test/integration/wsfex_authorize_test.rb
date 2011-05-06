@@ -10,7 +10,7 @@ Protest.describe "WSFEX Authorize" do
   end
 
   it "success" do
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, @input_file
 
@@ -18,7 +18,7 @@ Protest.describe "WSFEX Authorize" do
   end
 
   it "should fail if the specified credentials are not valid" do
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
  
     execute :FEXAuthorize, @input_file, "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
  
@@ -27,7 +27,7 @@ Protest.describe "WSFEX Authorize" do
  
   it "should fail if a request id was not specified" do
     @fact.id_cbte = 0
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, @input_file
 
@@ -36,7 +36,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if fecha_cbte is invalid" do
     @fact.fecha_cbte = "20100101"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -45,7 +45,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if fecha_cbte does not follow the expected sequence" do
     @fact.fecha_cbte = (Date.today - 1).strftime("%Y%m%d")
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -54,7 +54,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if punto_vta is invalid" do
     @fact.punto_vta = "9999"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -63,7 +63,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if tipo_cbte is invalid" do
     @fact.tipo_cbte = "01"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -72,7 +72,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if nro_cbte does not follow the expected sequence" do
     @fact.nro_cbte -= 1
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -81,7 +81,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if tipo_expo is invalid" do
     @fact.tipo_expo = "9"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -90,7 +90,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if tiene_permiso is invalid" do
     @fact.tiene_permiso = "X"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -99,7 +99,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if moneda is invalid" do
     @fact.moneda = "XXX"
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
@@ -108,7 +108,7 @@ Protest.describe "WSFEX Authorize" do
 
   it "should fail if total does not match the sum of all items" do
     @fact.total = 1000.0
-    @fact.to_file(@input_file)
+    @fact.save(@input_file)
 
     execute :FEXAuthorize, "#{@input_file} #{@output_file}"
 
