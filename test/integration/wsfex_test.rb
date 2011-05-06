@@ -35,7 +35,12 @@ Protest.describe "WSFEX" do
   describe "FEXGetParamCtz" do
     test "Success" do
       execute :FEXGetParamCtz, "DOL"
-      assert_value :FEXGetParamCtz, 3.5, 4.5
+
+      response = WSFErb::Response.load(expand_path("tmp/FEXGetParamCtz.txt"))
+
+      mon_ctz = response.value[0..11].to_f / 1000000
+
+      assert mon_ctz >= 3.5 && mon_ctz <= 4.5
     end
 
     test_common_errors(:FEXGetParamCtz, "DOL")
