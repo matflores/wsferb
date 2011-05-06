@@ -29,7 +29,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "ID_Permiso" => permiso.dup, "Dst_merc" => pais.dup })
         end
 
-        return Response::FEXCheckPermiso.new(response)
+        Response::FEXCheckPermiso.new(response)
       end
 
       def self.fex_dummy
@@ -58,7 +58,7 @@ module WSFErb
                                     "Tipo_cbte" => tipo_cbte.dup } }
         end
 
-        return Response::FEXGetLastCmp.new(response)
+        Response::FEXGetLastCmp.new(response)
       end
 
       def self.fex_get_last_id(ticket)
@@ -68,7 +68,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetLastId.new(response)
+        Response::FEXGetLastId.new(response)
       end
 
       def self.fex_get_param_ctz(ticket, moneda)
@@ -78,7 +78,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "Mon_id" => moneda })
         end
 
-        return Response::FEXGetParamCtz.new(response)
+        Response::FEXGetParamCtz.new(response)
       end
 
       def self.fex_get_param_dst_cuit(ticket)
@@ -88,7 +88,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamDstCuit.new(response)
+        Response::FEXGetParamDstCuit.new(response)
       end
 
       def self.fex_get_param_dst_pais(ticket)
@@ -98,7 +98,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamDstPais.new(response)
+        Response::FEXGetParamDstPais.new(response)
       end
 
       def self.fex_get_param_idiomas(ticket)
@@ -108,7 +108,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamIdiomas.new(response)
+        Response::FEXGetParamIdiomas.new(response)
       end
 
       def self.fex_get_param_incoterms(ticket)
@@ -118,7 +118,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamIncoterms.new(response)
+        Response::FEXGetParamIncoterms.new(response)
       end
 
       def self.fex_get_param_mon(ticket)
@@ -128,7 +128,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamMon.new(response)
+        Response::FEXGetParamMon.new(response)
       end
 
       def self.fex_get_param_pto_venta(ticket)
@@ -138,7 +138,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamPtoVenta.new(response)
+        Response::FEXGetParamPtoVenta.new(response)
       end
 
       def self.fex_get_param_tipo_cbte(ticket)
@@ -148,7 +148,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamTipoCbte.new(response)
+        Response::FEXGetParamTipoCbte.new(response)
       end
 
       def self.fex_get_param_tipo_expo(ticket)
@@ -158,7 +158,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamTipoExpo.new(response)
+        Response::FEXGetParamTipoExpo.new(response)
       end
 
       def self.fex_get_param_u_med(ticket)
@@ -168,7 +168,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEXGetParamUMed.new(response)
+        Response::FEXGetParamUMed.new(response)
       end
 
       def self.client

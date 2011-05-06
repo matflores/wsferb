@@ -15,7 +15,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "Periodo" => periodo.dup, "Orden" => quincena.dup })
         end
 
-        return Response::FECAEAConsultar.new(response)
+        Response::FECAEAConsultar.new(response)
       end
 
       def self.fe_caea_reg_informativo(ticket, lote)
@@ -27,7 +27,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "FeCAEARegInfReq" => lote.to_hash.stringify_keys })
         end
 
-        return Response::FECAEARegInformativo.new(response)
+        Response::FECAEARegInformativo.new(response)
       end
 
       def self.fe_caea_sin_movimiento_consultar(ticket, caea, punto_vta)
@@ -37,7 +37,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "CAEA" => caea.dup, "PtoVta" => punto_vta.dup })
         end
 
-        return Response::FECAEASinMovimientoConsultar.new(response)
+        Response::FECAEASinMovimientoConsultar.new(response)
       end
 
       def self.fe_caea_sin_movimiento_informar(ticket, caea, punto_vta)
@@ -47,7 +47,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "CAEA" => caea.dup, "PtoVta" => punto_vta.dup })
         end
 
-        return Response::FECAEASinMovimientoInformar.new(response)
+        Response::FECAEASinMovimientoInformar.new(response)
       end
 
       def self.fe_caea_solicitar(ticket, periodo, quincena)
@@ -57,7 +57,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "Periodo" => periodo.dup, "Orden" => quincena.dup })
         end
 
-        return Response::FECAEASolicitar.new(response)
+        Response::FECAEASolicitar.new(response)
       end
 
       def self.fe_cae_solicitar(ticket, lote)
@@ -69,7 +69,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "FeCAEReq" => lote.to_hash.stringify_keys })
         end
 
-        return Response::FECAESolicitar.new(response)
+        Response::FECAESolicitar.new(response)
       end
 
       def self.fe_comp_consultar(ticket, tipo_cbte, punto_vta, nro_cbte)
@@ -79,7 +79,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "FeCompConsReq" => { "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup, "CbteNro" => nro_cbte.dup }})
         end
 
-        return Response::FECompConsultar.new(response)
+        Response::FECompConsultar.new(response)
       end
 
       def self.fe_comp_tot_x_request(ticket)
@@ -89,7 +89,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FECompTotXRequest.new(response)
+        Response::FECompTotXRequest.new(response)
       end
 
       def self.fe_comp_ultimo_autorizado(ticket, tipo_cbte, punto_vta)
@@ -99,7 +99,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "CbteTipo" => tipo_cbte.dup, "PtoVta" => punto_vta.dup })
         end
 
-        return Response::FECompUltimoAutorizado.new(response)
+        Response::FECompUltimoAutorizado.new(response)
       end
 
       def self.fe_dummy
@@ -114,7 +114,7 @@ module WSFErb
           soap.body = ticket.to_hash.merge({ "MonId" => moneda.dup })
         end
 
-        return Response::FEParamGetCotizacion.new(response)
+        Response::FEParamGetCotizacion.new(response)
       end
 
       def self.fe_param_get_ptos_venta(ticket)
@@ -124,7 +124,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetPtosVenta.new(response)
+        Response::FEParamGetPtosVenta.new(response)
       end
 
       def self.fe_param_get_tipos_cbte(ticket)
@@ -134,7 +134,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposCbte.new(response)
+        Response::FEParamGetTiposCbte.new(response)
       end
 
       def self.fe_param_get_tipos_concepto(ticket)
@@ -144,7 +144,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposConcepto.new(response)
+        Response::FEParamGetTiposConcepto.new(response)
       end
 
       def self.fe_param_get_tipos_doc(ticket)
@@ -154,7 +154,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposDoc.new(response)
+        Response::FEParamGetTiposDoc.new(response)
       end
 
       def self.fe_param_get_tipos_iva(ticket)
@@ -164,7 +164,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposIva.new(response)
+        Response::FEParamGetTiposIva.new(response)
       end
 
       def self.fe_param_get_tipos_monedas(ticket)
@@ -174,7 +174,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposMonedas.new(response)
+        Response::FEParamGetTiposMonedas.new(response)
       end
 
       def self.fe_param_get_tipos_opcional(ticket)
@@ -184,7 +184,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposOpcional.new(response)
+        Response::FEParamGetTiposOpcional.new(response)
       end
 
       def self.fe_param_get_tipos_tributos(ticket)
@@ -194,7 +194,7 @@ module WSFErb
           soap.body = ticket.to_hash
         end
 
-        return Response::FEParamGetTiposTributos.new(response)
+        Response::FEParamGetTiposTributos.new(response)
       end
 
       def self.client
