@@ -119,7 +119,7 @@ LOTE = {
     :Pto_vta   => 0001,
   },
   :FeDetReq => {
-    :FeCaeaDetRequest => [{
+    :FEDetRequest => [{
       :Cbte_desde     => 00000001,
       :Cbte_hasta     => 00000001,
       :Concepto       => 02,

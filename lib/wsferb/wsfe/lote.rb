@@ -131,11 +131,11 @@ module WSFErb
          end
        end
  
-       def self.from_hash(hash)
+       def self.from_hash(hash, header_key = :FeCabReq, items_key = :FeDetReq, item_key = :FEDetRequest)
          new.tap do |lote|
-           lote.tipo_cbte = hash[:FeCabReq][:Cbte_tipo]
-           lote.punto_vta = hash[:FeCabReq][:Pto_vta]
-           [hash[:FeDetReq][:FeCaeaDetRequest]].flatten.each do |hash_cbte|
+           lote.tipo_cbte = hash[header_key][:Cbte_tipo]
+           lote.punto_vta = hash[header_key][:Pto_vta]
+           [hash[items_key][item_key]].flatten.each do |hash_cbte|
              lote.add(Cbte.from_hash(hash_cbte))
            end
          end
@@ -147,15 +147,15 @@ module WSFErb
          end
        end
  
-       def to_hash
+       def to_hash(header_key = :FeCabReq, items_key = :FeDetReq, item_key = :FEDetRequest)
          cbte_data = {
-           :FeCabReq => {
+           header_key => {
              :Cant_reg  => comprobantes.size,
              :Tipo_cbte => tipo_cbte,
              :Pto_vta   => punto_vta
            },
-           :FeDetReq => {
-             :FeCaeaDetRequest => comprobantes.values.map(&:to_hash)
+           items_key => {
+             item_key => comprobantes.values.map(&:to_hash)
            }
          }
        end
