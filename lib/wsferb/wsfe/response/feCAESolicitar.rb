@@ -12,7 +12,7 @@ module WSFErb
       def formatted_records
         return [] unless success?
 
-        Lote.from_hash(result).to_s
+        Lote.from_hash(result, :fe_cab_resp, :fe_det_resp, :fecae_det_response).to_s.split("\n")
       end
     end
   end
