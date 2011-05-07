@@ -110,6 +110,16 @@ Protest.describe "A WSFE::Lote" do
 
     assert_equal File.read(lote_input).strip, File.read(lote_output).strip
   end
+
+  it "should support multiple invoices" do
+    lote_input  = expand_path("fixtures/lote_input_multi.txt")
+    lote_output = Tempfile.new("lote")
+
+    lote = WSFErb::WSFE::Lote.load(lote_input)
+    lote.save(lote_output.path)
+
+    assert_equal File.read(lote_input).strip, File.read(lote_output).strip
+  end
 end
 
 LOTE = {
