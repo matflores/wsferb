@@ -5,6 +5,8 @@
 require "wsferb/wsfe/client"
 require "wsferb/wsfe/response"
 require "wsferb/wsfe/runner"
+require "wsferb/wsfe/cbte"
+require "wsferb/wsfe/lote"
 
 module WSFErb
   module WSFE

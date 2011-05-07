@@ -5,221 +5,177 @@
 module WSFErb
   module WSFE
     class Lote
-#       attr_accessor :id_cbte, :tipo_cbte, :nro_cbte, :punto_vta, :fecha_cbte, :tipo_expo, :tiene_permiso,
-#                     :pais, :cuit_pais, :id_impositivo, :cliente, :domicilio, :moneda, :cotizacion, :total,
-#                     :forma_pago, :idioma, :incoterms, :incoterms_info, :obs, :obs_comerciales,
-#                     :cae, :fecha_vto_cae, :resultado, :permisos, :comprobantes, :items
-# 
-#       def initialize
-#         @permisos     = []
-#         @comprobantes = []
-#         @items        = []
-#       end
-# 
+       attr_accessor :tipo_cbte, :punto_vta, :fecha_proceso, :resultado, :comprobantes
+
+       def initialize(tipo_cbte=nil, punto_vta=nil)
+         @tipo_cbte = tipo_cbte
+         @punto_vta = punto_vta
+         @comprobantes = {}
+       end
+
+       def add(cbte)
+         @comprobantes["#{cbte.nro_cbte_desde}:#{cbte.nro_cbte_hasta}"] = cbte
+       end
+
+       def get(nro_cbte_desde, nro_cbte_hasta)
+         @comprobantes["#{nro_cbte_desde}:#{nro_cbte_hasta}"] ||= Cbte.new
+       end
+
        def self.load(filename)
-#         new.tap do |fex|
-#           lines = File.readlines(filename)
-#           lines.each do |line|
-#             case line.split(//).first
-#             when "1"
-#               fields = line.strip.unpack("A1A3A4A8A15A8A3A1A3A11A50A200A300A3A12A15A50A3A3A20A1000A1000")
-#               fex.tipo_cbte        = fields[1].to_i
-#               fex.punto_vta        = fields[2].to_i
-#               fex.nro_cbte         = fields[3].to_i
-#               fex.id_cbte          = fields[4].to_i
-#               fex.fecha_cbte       = fields[5]
-#               fex.tipo_expo        = fields[6].to_i
-#               fex.tiene_permiso    = fields[7]
-#               fex.pais             = fields[8].to_i
-#               fex.cuit_pais        = fields[9].to_i
-#               fex.id_impositivo    = fields[10]
-#               fex.cliente          = fields[11]
-#               fex.domicilio        = fields[12]
-#               fex.moneda           = fields[13]
-#               fex.cotizacion       = fields[14].to_i / 1000000.0
-#               fex.total            = fields[15].to_i / 100.0
-#               fex.forma_pago       = fields[16]
-#               fex.idioma           = fields[17].to_i
-#               fex.incoterms        = fields[18]
-#               fex.incoterms_info   = fields[19]
-#               fex.obs              = fields[20]
-#               fex.obs_comerciales  = fields[21]
-#             when "2"
-#               fields = line.strip.unpack("A1A3A4A8A16A3")
-#               fex.permisos << { :Id_permiso => fields[4],
-#                                 :Dst_merc   => fields[5].to_i }
-#             when "3"
-#               fields = line.strip.unpack("A1A3A4A8A3A4A8")
-#               fex.comprobantes << { :CBte_tipo      => fields[4].to_i,
-#                                     :Cbte_punto_vta => fields[5].to_i,
-#                                     :Cbte_nro       => fields[6].to_i }
-#             when "4"
-#               fields = line.strip.unpack("A1A3A4A8A12A3A12A14A30A4000")
-#               fex.items << { :Pro_qty        => fields[4].to_i / 100.0,
-#                              :Pro_umed       => fields[5].to_i,
-#                              :Pro_precio_uni => fields[6].to_i / 1000.0,
-#                              :Pro_total_item => fields[7].to_i / 1000.0,
-#                              :Pro_codigo     => fields[8],
-#                              :Pro_ds         => fields[9] }
-#             when "C"
-#               fields = line.strip.unpack("A1A3A4A8A1A14A8")
-#               fex.resultado     = fields[4]
-#               fex.cae           = fields[5]
-#               fex.fecha_vto_cae = fields[6]
-#             end
-#           end
-#         end
+         new.tap do |lote|
+           lines = File.readlines(filename)
+           lines.each do |line|
+             case line.split(//).first
+             when "1"
+               fields = line.strip.unpack("A1A4A3A4A14A1")
+
+               lote.tipo_cbte     = fields[2].to_i
+               lote.punto_vta     = fields[3].to_i
+               lote.fecha_proceso = fields[4].to_s
+               lote.resultado     = fields[5].to_s
+             when "2"
+               fields = line.strip.unpack("A1A8A8A2A2A11A8A15A15A15A15A15A15A8A8A8A3A10A14")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.nro_cbte_desde   = nro_cbte_desde
+               cbte.nro_cbte_hasta   = nro_cbte_hasta
+               cbte.concepto         = fields[3].to_i
+               cbte.tipo_doc         = fields[4].to_i
+               cbte.nro_doc          = fields[5].to_i
+               cbte.fecha_cbte       = fields[6]
+               cbte.imp_total        = fields[7].to_i / 100.0
+               cbte.imp_tot_conc     = fields[8].to_i / 100.0
+               cbte.imp_neto         = fields[9].to_i / 100.0
+               cbte.imp_op_ex        = fields[10].to_i / 100.0
+               cbte.imp_iva          = fields[11].to_i / 100.0
+               cbte.imp_trib         = fields[12].to_i / 100.0
+               cbte.fecha_serv_desde = fields[13]
+               cbte.fecha_serv_hasta = fields[14]
+               cbte.fecha_vto        = fields[15]
+               cbte.moneda           = fields[16]
+               cbte.cotizacion       = fields[17].to_i / 1000000.0
+               cbte.caea             = fields[18]
+             when "3"
+               fields = line.strip.unpack("A1A8A8A3A4A8")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.comprobantes << { :Tipo    => fields[3].to_i,
+                                      :Pto_vta => fields[4].to_i,
+                                      :Nro     => fields[5].to_i }
+             when "4"
+               fields = line.strip.unpack("A1A8A8A2A15A15")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.iva << { :Id       => fields[3].to_i,
+                             :Base_imp => fields[4].to_i / 100.0,
+                             :Importe  => fields[5].to_i / 100.0 }
+             when "5"
+               fields = line.strip.unpack("A1A8A8A2A15A5A15A80")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.tributos << { :Id       => fields[3].to_i,
+                                  :Base_imp => fields[4].to_i / 100.0,
+                                  :Alic     => fields[5].to_i / 100.0,
+                                  :Importe  => fields[6].to_i / 100.0,
+                                  :Desc     => fields[7] }
+             when "6"
+               fields = line.strip.unpack("A1A8A8A2A100")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.opcionales << { :Id    => fields[3].to_i,
+                                    :Valor => fields[4] }
+             when "C"
+               fields = line.strip.unpack("A1A8A8A1A4A14A8")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.resultado     = fields[3]
+               cbte.tipo_cae      = fields[4]
+               cbte.cae           = fields[5]
+               cbte.fecha_vto_cae = fields[6]
+             when "O"
+               fields = line.strip.unpack("A1A8A8A6A512")
+
+               nro_cbte_desde = fields[1].to_i
+               nro_cbte_hasta = fields[2].to_i
+
+               cbte = lote.get(nro_cbte_desde, nro_cbte_hasta)
+
+               cbte.observaciones << { :Code => fields[3].to_i,
+                                       :Msg  => fields[4] }
+             end
+           end
+         end
        end
  
        def self.from_hash(hash)
-#         new.tap do |fex|
-#           fex.id_cbte          = hash[:Id]
-#           fex.tipo_cbte        = hash[:Tipo_cbte]
-#           fex.punto_vta        = hash[:Punto_vta]
-#           fex.nro_cbte         = hash[:Cbte_nro]
-#           fex.fecha_cbte       = hash[:Fecha_cbte]
-#           fex.tipo_expo        = hash[:Tipo_expo]
-#           fex.tiene_permiso    = hash[:Permiso_existente]
-#           fex.pais             = hash[:Dst_cmp]
-#           fex.cuit_pais        = hash[:Cuit_pais_cliente]
-#           fex.id_impositivo    = hash[:Id_impositivo]
-#           fex.cliente          = hash[:Cliente]
-#           fex.domicilio        = hash[:Domicilio_cliente]
-#           fex.moneda           = hash[:Moneda_Id]
-#           fex.cotizacion       = hash[:Moneda_ctz]
-#           fex.total            = hash[:Imp_total]
-#           fex.forma_pago       = hash[:Forma_pago]
-#           fex.idioma           = hash[:Idioma_cbte]
-#           fex.incoterms        = hash[:Incoterms]
-#           fex.incoterms_info   = hash[:Incoterms_Ds]
-#           fex.cae              = hash[:Cae]
-#           fex.fecha_vto_cae    = hash[:Fecha_venc_cae]
-#           fex.resultado        = hash[:Resultado]
-#           fex.obs              = hash[:Obs]
-#           fex.obs_comerciales  = hash[:Obs_comerciales]
-#           fex.permisos         = hash[:Permisos][:Permiso] if hash.has_key?(:Permisos)
-#           fex.comprobantes     = hash[:Cmps_asoc][:Cmp_asoc] if hash.has_key?(:Cmps_asoc)
-#           fex.items            = hash[:Items][:Item] if hash.has_key?(:Items)
-#         end
+         new.tap do |lote|
+           lote.tipo_cbte = hash[:FeCabReq][:Cbte_tipo]
+           lote.punto_vta = hash[:FeCabReq][:Pto_vta]
+           [hash[:FeDetReq][:FeCaeaDetRequest]].flatten.each do |hash_cbte|
+             lote.add(Cbte.from_hash(hash_cbte))
+           end
+         end
        end
-# 
+
        def save(filename)
          File.open(filename, "w") do |file|
            file.write to_s
          end
        end
  
-       def to_hash(include_cae = false)
-#         cbte_data = { :Id                => id_cbte,
-#                       :Tipo_cbte         => tipo_cbte,
-#                       :Punto_vta         => punto_vta,
-#                       :Cbte_nro          => nro_cbte,
-#                       :Fecha_cbte        => fecha_cbte,
-#                       :Tipo_expo         => tipo_expo,
-#                       :Permiso_existente => tiene_permiso,
-#                       :Dst_cmp           => pais,
-#                       :Cuit_pais_cliente => cuit_pais,
-#                       :Id_impositivo     => id_impositivo,
-#                       :Cliente           => cliente,
-#                       :Domicilio_cliente => domicilio,
-#                       :Moneda_Id         => moneda,
-#                       :Moneda_ctz        => cotizacion,
-#                       :Imp_total         => total,
-#                       :Forma_pago        => forma_pago,
-#                       :Idioma_cbte       => idioma,
-#                       :Incoterms         => incoterms,
-#                       :Incoterms_Ds      => incoterms_info,
-#                       :Obs               => obs,
-#                       :Obs_comerciales   => obs_comerciales
-#                     }
-# 
-#         cbte_data.merge!({ :Permisos     => { :Permiso  => permisos     }}) unless permisos.empty?
-#         cbte_data.merge!({ :Cmps_asoc    => { :Cmp_asoc => comprobantes }}) unless comprobantes.empty?
-#         cbte_data.merge!({ :Items        => { :Item     => items        }}) unless items.empty?
-# 
-#         cae_data =  { :Cae               => cae,
-#                       :Fecha_venc_cae    => fecha_vto_cae,
-#                       :Resultado         => resultado
-#                     }
-# 
-#         include_cae ? cbte_data.merge(cae_data) : cbte_data
+       def to_hash
+         cbte_data = {
+           :FeCabReq => {
+             :Cant_reg  => comprobantes.size,
+             :Tipo_cbte => tipo_cbte,
+             :Pto_vta   => punto_vta
+           },
+           :FeDetReq => {
+             :FeCaeaDetRequest => comprobantes.values.map(&:to_hash)
+           }
+         }
        end
  
        def to_s
          lines = []
-# 
-#         formato = "1%03d%04d%08d%015d%-8s%03d%1s%03d%011d%-50s%-200s%-300s%3s%012d%015d%-50s%03d%-3s%-20s%-1000s%-1000s"
-#         lines << (formato % [ tipo_cbte.to_s,
-#                               punto_vta.to_s,
-#                               nro_cbte.to_s,
-#                               id_cbte.to_s,
-#                               fecha_cbte.to_s,
-#                               tipo_expo.to_i,
-#                               tiene_permiso.to_s,
-#                               pais.to_i,
-#                               cuit_pais.to_s,
-#                               id_impositivo.to_s,
-#                               cliente.to_s,
-#                               domicilio.to_s,
-#                               moneda.to_s,
-#                               (cotizacion.to_f*1000000),
-#                               (total.to_f*100),
-#                               forma_pago.to_s,
-#                               idioma.to_i,
-#                               incoterms.to_s,
-#                               incoterms_info.to_s,
-#                               obs.to_s,
-#                               obs_comerciales.to_s ]).strip
-# 
-#         formato = "2%03d%04d%08d%-16s%03d"
-#         permisos.each do |permiso|
-#           lines << (formato % [ tipo_cbte.to_s,
-#                                 punto_vta.to_s,
-#                                 nro_cbte.to_s,
-#                                 permiso[:Id_permiso].to_s, 
-#                                 permiso[:Dst_merc].to_i ]).strip
-#         end
-# 
-#         formato = "3%03d%04d%08d%03d%04d%08d"
-#         comprobantes.each do |comprobante|
-#           lines << (formato % [ tipo_cbte.to_s,
-#                                 punto_vta.to_s,
-#                                 nro_cbte.to_s,
-#                                 comprobante[:CBte_tipo].to_i, 
-#                                 comprobante[:Cbte_punto_vta].to_i,
-#                                 comprobante[:Cbte_nro].to_i ]).strip
-#         end
-# 
-#         formato = "4%03d%04d%08d%012d%03d%012d%014d%-30s%-4000s"
-#         items.each do |item|
-#           lines << (formato % [ tipo_cbte.to_s,
-#                                 punto_vta.to_s,
-#                                 nro_cbte.to_s,
-#                                 (item[:Pro_qty].to_f * 100),
-#                                 item[:Pro_umed].to_i,
-#                                 (item[:Pro_precio_uni].to_f * 1000),
-#                                 (item[:Pro_total_item].to_f * 1000),
-#                                 item[:Pro_codigo].to_s,
-#                                 item[:Pro_ds].to_s ]).strip
-#         end
-# 
-#         unless cae.to_s.empty? 
-#           formato = "C%03d%04d%08d%1s%-14s%-8s"
-#           lines << (formato % [ tipo_cbte.to_s,
-#                                 punto_vta.to_s,
-#                                 nro_cbte.to_s,
-#                                 resultado.to_s,
-#                                 cae.to_s,
-#                                 fecha_vto_cae.to_s ]).strip
-#         end
-# 
+ 
+         formato = "1%04d%03d%04d%-14s%1s"
+         lines << (formato % [ comprobantes.size,
+                               tipo_cbte.to_s,
+                               punto_vta.to_s,
+                               fecha_proceso.to_s,
+                               resultado.to_s ]).strip
+
+         comprobantes.each do |key, cbte|
+           lines << cbte.to_s
+         end
+
          lines.join("\n")
        end
- 
-#       def tap
-#         yield self
-#         self
-#       end unless Fex.respond_to?(:tap)
      end
   end
 end
