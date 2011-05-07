@@ -83,6 +83,25 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10016
   end
 
+  it "Should be able of authorizing several invoices at once" do
+    lote = WSFErb::WSFE::Lote.from_hash(LOTE_MULTI, :fe_cab_req, :fe_det_req, :fecae_det_request)
+
+    cbte1, cbte2 = lote.comprobantes.values
+
+    cbte1.nro_cbte_desde = last_nro_cbte_used(lote.tipo_cbte, lote.punto_vta) + 1
+    cbte1.nro_cbte_hasta = cbte1.nro_cbte_desde
+
+    cbte2.nro_cbte_desde = cbte1.nro_cbte_desde + 1
+    cbte2.nro_cbte_hasta = cbte2.nro_cbte_desde
+
+    input_file = expand_path("tmp/FECAESolicitarInputMulti.txt")
+    lote.save(input_file)
+
+    execute :FECAESolicitar, input_file
+
+    assert_success :FECAESolicitar
+  end
+
   def last_nro_cbte_used(tipo_cbte, punto_vta)
     execute :FECompUltimoAutorizado, "#{tipo_cbte} #{punto_vta}"
     response = WSFErb::Response.load(expand_path("tmp/FECompUltimoAutorizado.txt"))
@@ -125,6 +144,70 @@ LOTE = {
       :resultado      => "S",
       :iva            => { :alic_iva => [ { :id => 05, :base_imp => 1000.0, :importe => 210.0 } ] },
       :tributos       => { :tributo => [ { :id => 01, :desc => "Impuesto Nacional", :base_imp => 1000.0, :alic => 5, :importe => 50.0 } ] },
+      :opcionales     => { :opcional => [ { :id => 02, :valor => 1234 } ] },
+      :observaciones  => { :obs => [ { :code => 000001, :msg => "Observaciones" } ] }
+    }]
+  }
+}
+
+LOTE_MULTI = {
+  :fe_cab_req => {
+    :cant_reg  => 2,
+    :cbte_tipo => 02,
+    :pto_vta   => 0001,
+  },
+  :fe_det_req => {
+    :fecae_det_request => [
+    { :cbte_desde     => 00000001,
+      :cbte_hasta     => 00000001,
+      :concepto       => 02,
+      :doc_tipo       => 80,
+      :doc_nro        => 23188883354,
+      :cbte_fch       => "20110501",
+      :imp_total      => 605.0,
+      :imp_tot_conc   => 0.0,
+      :imp_neto       => 500.0,
+      :imp_op_ex      => 0.0,
+      :imp_iva        => 105.0,
+      :imp_trib       => 0.0,
+      :fch_serv_desde => "20110401",
+      :fch_serv_hasta => "20110430",
+      :fch_vto_pago   => "20110531",
+      :mon_id         => "PES",
+      :mon_cotiz      => 1.0,
+      :caea           => "12345678901234",
+      :cae            => "12345678901234",
+      :cae_fch_vto    => "20110531",
+      :resultado      => "S",
+      :cbtes_asoc     => { :cbte_asoc => [ { :tipo => 01, :pto_vta => 0001, :nro => 10 },
+                                           { :tipo => 01, :pto_vta => 0001, :nro => 11 } ] },
+      :iva            => { :alic_iva => [ { :id => 05, :base_imp => 500.0, :importe => 105.0 } ] },
+      :opcionales     => { :opcional => [ { :id => 02, :valor => 1234 } ] },
+      :observaciones  => { :obs => [ { :code => 000001, :msg => "Observaciones" } ] }
+    },
+    { :cbte_desde     => 00000002,
+      :cbte_hasta     => 00000002,
+      :concepto       => 02,
+      :doc_tipo       => 80,
+      :doc_nro        => 23188883354,
+      :cbte_fch       => "20110501",
+      :imp_total      => 121.0,
+      :imp_tot_conc   => 0.0,
+      :imp_neto       => 100.0,
+      :imp_op_ex      => 0.0,
+      :imp_iva        => 21.0,
+      :imp_trib       => 0.0,
+      :fch_serv_desde => "20110401",
+      :fch_serv_hasta => "20110430",
+      :fch_vto_pago   => "20110531",
+      :mon_id         => "PES",
+      :mon_cotiz      => 1.0,
+      :caea           => "12345678901234",
+      :cae            => "12345678901234",
+      :cae_fch_vto    => "20110531",
+      :resultado      => "S",
+      :cbtes_asoc     => { :cbte_asoc => [ { :tipo => 01, :pto_vta => 0001, :nro => 10 } ] },
+      :iva            => { :alic_iva => [ { :id => 05, :base_imp => 100.0, :importe => 21.0 } ] },
       :opcionales     => { :opcional => [ { :id => 02, :valor => 1234 } ] },
       :observaciones  => { :obs => [ { :code => 000001, :msg => "Observaciones" } ] }
     }]
