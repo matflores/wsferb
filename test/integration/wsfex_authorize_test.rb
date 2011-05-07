@@ -5,8 +5,8 @@ Protest.describe "WSFEX Authorize" do
     @fact = WSFErb::WSFEX::Fex.from_hash(FACTURA)
     @fact.id_cbte = last_id_cbte_used + 1
     @fact.nro_cbte = last_nro_cbte_used(@fact.tipo_cbte, @fact.punto_vta) + 1
+
     @input_file = expand_path("tmp/FEXAuthorizeInput.txt")
-    @output_file = expand_path("tmp/FEXAuthorizeOutput.txt")
   end
 
   it "Success" do
@@ -40,7 +40,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.fecha_cbte = "20100101"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1500
   end
@@ -49,7 +49,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.fecha_cbte = (Date.today - 1).strftime("%Y%m%d")
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1535
   end
@@ -58,7 +58,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.punto_vta = "9999"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1510
   end
@@ -67,7 +67,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.tipo_cbte = "01"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1530
   end
@@ -76,7 +76,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.nro_cbte -= 1
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1535
   end
@@ -85,7 +85,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.tipo_expo = "9"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1540
   end
@@ -94,7 +94,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.tiene_permiso = "X"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1550
   end
@@ -103,7 +103,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.moneda = "XXX"
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1590
   end
@@ -112,7 +112,7 @@ Protest.describe "WSFEX Authorize" do
     @fact.total = 1000.0
     @fact.save(@input_file)
 
-    execute :FEXAuthorize, "#{@input_file} #{@output_file}"
+    execute :FEXAuthorize, @input_file
 
     assert_error_code :FEXAuthorize, 1610
   end

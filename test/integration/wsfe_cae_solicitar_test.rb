@@ -9,7 +9,6 @@ Protest.describe "FECAESolicitar" do
     @cbte.nro_cbte_hasta = @cbte.nro_cbte_desde
 
     @input_file = expand_path("tmp/FECAESolicitarInput.txt")
-    @output_file = expand_path("tmp/FECAESolicitarOutput.txt")
   end
 
   it "Success" do
