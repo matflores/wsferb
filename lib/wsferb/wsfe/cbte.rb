@@ -21,60 +21,63 @@ module WSFErb
  
        def self.from_hash(hash)
          new.tap do |cbte|
-           cbte.nro_cbte_desde   = hash[:Cbte_desde]
-           cbte.nro_cbte_hasta   = hash[:Cbte_hasta]
-           cbte.concepto         = hash[:Concepto]
-           cbte.tipo_doc         = hash[:Doc_tipo]
-           cbte.nro_doc          = hash[:Doc_nro]
-           cbte.fecha_cbte       = hash[:Cbte_fch]
-           cbte.imp_total        = hash[:Imp_total]
-           cbte.imp_tot_conc     = hash[:Imp_tot_conc]
-           cbte.imp_neto         = hash[:Imp_neto]
-           cbte.imp_op_ex        = hash[:Imp_op_ex]
-           cbte.imp_iva          = hash[:Imp_iva]
-           cbte.imp_trib         = hash[:Imp_trib]
-           cbte.fecha_serv_desde = hash[:Fch_serv_desde]
-           cbte.fecha_serv_hasta = hash[:Fch_serv_hasta]
-           cbte.fecha_vto        = hash[:Fch_vto_pago]
-           cbte.moneda           = hash[:Mon_id]
-           cbte.cotizacion       = hash[:Mon_cotiz]
-           cbte.caea             = hash[:Caea]
+           cbte.nro_cbte_desde   = hash[:cbte_desde]
+           cbte.nro_cbte_hasta   = hash[:cbte_hasta]
+           cbte.concepto         = hash[:concepto]
+           cbte.tipo_doc         = hash[:doc_tipo]
+           cbte.nro_doc          = hash[:doc_nro]
+           cbte.fecha_cbte       = hash[:cbte_fch]
+           cbte.imp_total        = hash[:imp_total]
+           cbte.imp_tot_conc     = hash[:imp_tot_conc]
+           cbte.imp_neto         = hash[:imp_neto]
+           cbte.imp_op_ex        = hash[:imp_op_ex]
+           cbte.imp_iva          = hash[:imp_iva]
+           cbte.imp_trib         = hash[:imp_trib]
+           cbte.fecha_serv_desde = hash[:fch_serv_desde]
+           cbte.fecha_serv_hasta = hash[:fch_serv_hasta]
+           cbte.fecha_vto        = hash[:fch_vto_pago]
+           cbte.moneda           = hash[:mon_id]
+           cbte.cotizacion       = hash[:mon_cotiz]
+           cbte.caea             = hash[:caea]
+           cbte.cae              = hash[:cae]
+           cbte.fecha_vto_cae    = hash[:cae_fch_vto]
+           cbte.resultado        = hash[:resultado]
 
-           cbte.comprobantes     = [hash[:Cbtes_asoc][:Cbte_asoc]].flatten if hash.has_key?(:Cbtes_asoc)
-           cbte.iva              = [hash[:Iva][:Alic_iva]].flatten if hash.has_key?(:Iva)
-           cbte.tributos         = [hash[:Tributos][:Tributo]].flatten if hash.has_key?(:Tributos)
-           cbte.opcionales       = [hash[:Opcionales][:Opcional]].flatten if hash.has_key?(:Opcionales)
-           cbte.observaciones    = [hash[:Obs][:Observaciones]].flatten if hash.has_key?(:Obs)
+           cbte.comprobantes     = [hash[:cbtes_asoc][:cbte_asoc]].flatten if hash.has_key?(:cbtes_asoc)
+           cbte.iva              = [hash[:iva][:alic_iva]].flatten if hash.has_key?(:iva)
+           cbte.tributos         = [hash[:tributos][:tributo]].flatten if hash.has_key?(:tributos)
+           cbte.opcionales       = [hash[:opcionales][:opcional]].flatten if hash.has_key?(:opcionales)
+           cbte.observaciones    = [hash[:observaciones][:obs]].flatten if hash.has_key?(:observaciones)
          end
        end
 
        def to_hash
-         cbte_data = { :Cbte_desde     => nro_cbte_desde,
-                       :Cbte_hasta     => nro_cbte_hasta,
-                       :Concepto       => concepto,
-                       :Doc_tipo       => tipo_doc,
-                       :Doc_nro        => nro_doc,
-                       :Cbte_fch       => fecha_cbte,
-                       :Imp_total      => imp_total,
-                       :Imp_tot_conc   => imp_tot_conc,
-                       :Imp_neto       => imp_neto,
-                       :Imp_op_ex      => imp_op_ex,
-                       :Imp_iva        => imp_iva,
-                       :Imp_trib       => imp_trib,
-                       :Fch_serv_desde => fecha_serv_desde,
-                       :Fch_serv_hasta => fecha_serv_hasta,
-                       :Fch_vto_pago   => fecha_vto,
-                       :Mon_id         => moneda,
-                       :Mon_cotiz      => cotizacion,
-                       :Caea           => caea
+         cbte_data = { :CbteDesde    => nro_cbte_desde,
+                       :CbteHasta    => nro_cbte_hasta,
+                       :Concepto     => concepto,
+                       :DocTipo      => tipo_doc,
+                       :DocNro       => nro_doc,
+                       :CbteFch      => fecha_cbte,
+                       :ImpTotal     => imp_total,
+                       :ImpTotConc   => imp_tot_conc,
+                       :ImpNeto      => imp_neto,
+                       :ImpOpEx      => imp_op_ex,
+                       :ImpIVA       => imp_iva,
+                       :ImpTrib      => imp_trib,
+                       :FchServDesde => fecha_serv_desde,
+                       :FchServHasta => fecha_serv_hasta,
+                       :FchVtoPago   => fecha_vto,
+                       :MonId        => moneda,
+                       :MonCotiz     => cotizacion,
+                       :Caea         => caea
                      }
 
-         cbte_data.merge!({ :Cae => cae, :Cae_fch_vto => fecha_vto_cae, :Resultado => resultado }) unless cae.to_s.empty?
-         cbte_data.merge!({ :Cbtes_asoc => { :Cbte_asoc => comprobantes }}) unless comprobantes.empty?
-         cbte_data.merge!({ :Iva        => { :Alic_iva => iva }}) unless iva.empty?
-         cbte_data.merge!({ :Tributos   => { :Tributo => tributos }}) unless tributos.empty?
-         cbte_data.merge!({ :Opcionales => { :Opcional => opcionales }}) unless opcionales.empty?
-         cbte_data.merge!({ :Obs        => { :Observaciones => observaciones }}) unless observaciones.empty?
+         cbte_data.merge!({ :Cae           => cae, :CaeFchVto => fecha_vto_cae, :Resultado => resultado }) unless cae.to_s.empty?
+         cbte_data.merge!({ :CbtesAsoc     => { :CbteAsoc => comprobantes }}) unless comprobantes.empty?
+         cbte_data.merge!({ :Iva           => { :AlicIva => iva }}) unless iva.empty?
+         cbte_data.merge!({ :Tributos      => { :Tributo => tributos }}) unless tributos.empty?
+         cbte_data.merge!({ :Opcionales    => { :Opcional => opcionales }}) unless opcionales.empty?
+         cbte_data.merge!({ :Observaciones => { :Obs => observaciones }}) unless observaciones.empty?
 
          cbte_data
        end
@@ -106,37 +109,37 @@ module WSFErb
          comprobantes.each do |comprobante|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 comprobante[:Tipo].to_i,
-                                 comprobante[:Pto_vta].to_i,
-                                 comprobante[:Nro].to_i ]).strip
+                                 comprobante[:tipo].to_i,
+                                 comprobante[:pto_vta].to_i,
+                                 comprobante[:nro].to_i ]).strip
          end
 
          formato = "4%08d%08d%02d%015d%015d"
          iva.each do |iva|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 iva[:Id].to_i,
-                                 (iva[:Base_imp].to_f * 100),
-                                 (iva[:Importe].to_f * 100) ]).strip
+                                 iva[:id].to_i,
+                                 (iva[:base_imp].to_f * 100),
+                                 (iva[:importe].to_f * 100) ]).strip
          end
 
          formato = "5%08d%08d%02d%015d%05d%015d%-80s"
          tributos.each do |tributo|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 tributo[:Id].to_i,
-                                 (tributo[:Base_imp].to_f * 100),
-                                 (tributo[:Alic].to_f * 100),
-                                 (tributo[:Importe].to_f * 100),
-                                 tributo[:Desc] ]).strip
+                                 tributo[:id].to_i,
+                                 (tributo[:base_imp].to_f * 100),
+                                 (tributo[:alic].to_f * 100),
+                                 (tributo[:importe].to_f * 100),
+                                 tributo[:desc] ]).strip
          end
 
          formato = "6%08d%08d%02d%-100s"
          opcionales.each do |opcional|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 opcional[:Id].to_i,
-                                 opcional[:Valor].to_s ]).strip
+                                 opcional[:id].to_i,
+                                 opcional[:valor].to_s ]).strip
          end
 
          unless cae.to_s.empty? 
@@ -153,8 +156,8 @@ module WSFErb
          observaciones.each do |obs|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 obs[:Code].to_i,
-                                 obs[:Msg].to_s ]).strip
+                                 obs[:code].to_i,
+                                 obs[:msg].to_s ]).strip
          end
  
          lines.join("\n")
