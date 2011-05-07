@@ -97,9 +97,9 @@ module WSFErb
           fex.resultado        = hash[:Resultado]
           fex.obs              = hash[:Obs]
           fex.obs_comerciales  = hash[:Obs_comerciales]
-          fex.permisos         = hash[:Permisos][:Permiso] if hash.has_key?(:Permisos)
-          fex.comprobantes     = hash[:Cmps_asoc][:Cmp_asoc] if hash.has_key?(:Cmps_asoc)
-          fex.items            = hash[:Items][:Item] if hash.has_key?(:Items)
+          fex.permisos         = [hash[:Permisos][:Permiso]].flatten if hash.has_key?(:Permisos)
+          fex.comprobantes     = [hash[:Cmps_asoc][:Cmp_asoc]].flatten if hash.has_key?(:Cmps_asoc)
+          fex.items            = [hash[:Items][:Item]].flatten if hash.has_key?(:Items)
         end
       end
 
