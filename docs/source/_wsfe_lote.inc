@@ -49,10 +49,10 @@ NroDoc               N(11)   Número de documento/CUIT (sin guiones)
 FchCbte              S(8)    Fecha de comprobante (AAAAMMDD)
 ImpTotal             N(15,2) Importe total del comprobante. Debe ser igual a
                              ImpTotConc + ImpNeto + ImpOpEx + ImpIVA + ImpTrib
-ImpTotConc           N(15,2) Importe neto no gravado
+ImpTotConc           N(15,2) Importe neto no gravado. Debe ser 0 para comprobantes de tipo "C".
 ImpNeto              N(15,2) Importe neto gravado
-ImpOpEx              N(15,2) Importe exento
-ImpIVA               N(15,2) Suma de los importes de los registros de tipo "4"
+ImpOpEx              N(15,2) Importe exento. Debe ser 0 para comprobantes de tipo "C".
+ImpIVA               N(15,2) Suma de los importes de los registros de tipo "4". Debe ser 0 para comprobantes de tipo "C".
 ImpTrib              N(15,2) Suma de los importes de los registros de tipo "5"
 FchServDesde         S(8)    Fecha de inicio del abono para el servicio a facturar
                              (AAAAMMDD). Obligatorio para conceptos 02 y 03
@@ -99,6 +99,8 @@ Id                   N(2)    Código de alícuota de IVA (ver :doc:`feParamGetTi
 BaseImp              N(15,2) Base imponible sobre la que se aplica el impuesto
 Importe              N(15,2) Importe del IVA
 ==================== ======= ==================================================
+
+.. note:: Para comprobantes de tipo **C** no se deben informar registros de tipo "**4**".
 
 Tipo de Registro 5 (tributos)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -168,3 +170,7 @@ ObsMessage           S(512)  Descripción de la observación
 
 .. include:: _errors.inc
 .. include:: _events.inc
+
+.. note:: El formato del lote de comprobantes fue diseñado de manera que sea útil para varios servicios a la vez.
+          Dependiendo del servicio, es posible que algunos campos detallados en esta sección no se utilicen por no ser relevantes
+          para la operación en curso.
