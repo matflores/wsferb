@@ -109,37 +109,37 @@ module WSFErb
          comprobantes.each do |comprobante|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 comprobante[:tipo].to_i,
-                                 comprobante[:pto_vta].to_i,
-                                 comprobante[:nro].to_i ]).strip
+                                 (comprobante[:Tipo] || comprobante[:tipo]).to_i,
+                                 (comprobante[:PtoVta] || comprobante[:pto_vta]).to_i,
+                                 (comprobante[:Nro] || comprobante[:nro]).to_i ]).strip
          end
 
          formato = "4%08d%08d%02d%015d%015d"
          iva.each do |iva|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 iva[:id].to_i,
-                                 (iva[:base_imp].to_f * 100),
-                                 (iva[:importe].to_f * 100) ]).strip
+                                 (iva[:Id] || iva[:id]).to_i,
+                                 ((iva[:BaseImp] || iva[:base_imp]).to_f * 100),
+                                 ((iva[:Importe] || iva[:importe]).to_f * 100) ]).strip
          end
 
          formato = "5%08d%08d%02d%015d%05d%015d%-80s"
          tributos.each do |tributo|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 tributo[:id].to_i,
-                                 (tributo[:base_imp].to_f * 100),
-                                 (tributo[:alic].to_f * 100),
-                                 (tributo[:importe].to_f * 100),
-                                 tributo[:desc] ]).strip
+                                 (tributo[:Id] || tributo[:id]).to_i,
+                                 ((tributo[:BaseImp] || tributo[:base_imp]).to_f * 100),
+                                 ((tributo[:Alic] || tributo[:alic]).to_f * 100),
+                                 ((tributo[:Importe] || tributo[:importe]).to_f * 100),
+                                 (tributo[:Desc] || tributo[:desc]).to_s ]).strip
          end
 
          formato = "6%08d%08d%02d%-100s"
          opcionales.each do |opcional|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 opcional[:id].to_i,
-                                 opcional[:valor].to_s ]).strip
+                                 (opcional[:Id] || opcional[:id]).to_i,
+                                 (opcional[:Valor] || opcional[:valor]).to_s ]).strip
          end
 
          unless cae.to_s.empty? 
@@ -156,8 +156,8 @@ module WSFErb
          observaciones.each do |obs|
            lines << (formato % [ nro_cbte_desde.to_i,
                                  nro_cbte_hasta.to_i,
-                                 obs[:code].to_i,
-                                 obs[:msg].to_s ]).strip
+                                 (obs[:Code] || obs[:code]).to_i,
+                                 (obs[:Msg] || obs[:msg]).to_s ]).strip
          end
  
          lines.join("\n")
