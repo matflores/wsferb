@@ -39,8 +39,9 @@ module WSFErb
            cbte.moneda           = hash[:mon_id]
            cbte.cotizacion       = hash[:mon_cotiz]
            cbte.caea             = hash[:caea]
-           cbte.cae              = hash[:cae]
-           cbte.fecha_vto_cae    = hash[:cae_fch_vto]
+           cbte.tipo_cae         = hash.has_key?(:cae) ? "CAE" : hash[:emision_tipo]
+           cbte.cae              = hash[:cae] || hash[:cod_autorizacion]
+           cbte.fecha_vto_cae    = hash[:cae_fch_vto] || hash[:fch_vto]
            cbte.resultado        = hash[:resultado]
 
            cbte.comprobantes     = [hash[:cbtes_asoc][:cbte_asoc]].flatten if hash.has_key?(:cbtes_asoc)
