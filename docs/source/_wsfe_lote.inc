@@ -159,7 +159,7 @@ Un comprobante puede ser aprobado o rechazado con observaciones. En estos casos 
 ==================== ======= ==================================================
 Campo                Tipo    Descripción
 ==================== ======= ==================================================
-TipoReg              S(1)    Tipo de Registro - "C"
+TipoReg              S(1)    Tipo de Registro - "O"
 NroCbteDesde         N(8)    Número de comprobante desde (00000001-99999999)
 NroCbteHasta         N(8)    Número de comprobante hasta (00000001-99999999)
 ObsCode              N(6)    Código de observación
