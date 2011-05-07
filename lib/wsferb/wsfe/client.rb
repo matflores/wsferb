@@ -65,7 +65,7 @@ module WSFErb
 
         lote = Lote.load(lote)
 
-        response = client.request(:n1, :fe_cae_solicitar) do
+        response = client.request(:n1, :fecae_solicitar) do
           soap.body = ticket.to_hash.merge({ "FeCAEReq" => lote.to_hash.stringify_keys })
         end
 
