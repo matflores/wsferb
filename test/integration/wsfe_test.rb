@@ -5,14 +5,29 @@ Protest.describe "WSFE" do
     test_method :FEDummy
   end
 
-  describe "FECAEAConsultar"
-  describe "FECAEARegInformativo"
-  describe "FECAEASinMovimientoConsultar"
-  describe "FECAEASinMovimientoInformar"
-  describe "FECAEASinMovimientoInformar"
-  describe "FECAEASolicitar"
-  describe "FECAESolicitar"
-  describe "FECompConsultar"
+  describe "FECAEAConsultar" do
+    test_common_errors(:FECAEAConsultar)
+  end
+
+  describe "FECAEARegInformativo" do
+    test_common_errors(:FECAEARegInformativo)
+  end
+
+  describe "FECAEASinMovimientoConsultar" do
+    test_common_errors(:FECAEASinMovimientoConsultar)
+  end
+
+  describe "FECAEASinMovimientoInformar" do
+    test_common_errors(:FECAEAConsultar)
+  end
+
+  describe "FECAEASolicitar" do
+    test_common_errors(:FECAEASolicitar)
+  end
+
+  describe "FECompConsultar" do
+    test_common_errors(:FECompConsultar)
+  end
 
   describe "FECompTotXRequest" do
     test "Success" do
