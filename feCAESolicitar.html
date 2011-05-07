@@ -271,9 +271,9 @@ que se recibe como respuesta conteniendo el <a class="reference internal" href="
 <p>Los lotes de entrada contienen un registro de tipo &#8220;2&#8221; por cada comprobante a autorizar o informar. Los lotes de salida contienen un registro de tipo &#8220;2&#8221; por cada comprobante procesado.</p>
 <table border="1" class="docutils">
 <colgroup>
-<col width="24%" />
-<col width="8%" />
-<col width="68%" />
+<col width="17%" />
+<col width="6%" />
+<col width="77%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head">Campo</th>
@@ -326,7 +326,7 @@ ImpTotConc + ImpNeto + ImpOpEx + ImpIVA + ImpTrib</td>
 </tr>
 <tr><td>ImpTotConc</td>
 <td>N(15,2)</td>
-<td>Importe neto no gravado</td>
+<td>Importe neto no gravado. Debe ser 0 para comprobantes de tipo &#8220;C&#8221;.</td>
 </tr>
 <tr><td>ImpNeto</td>
 <td>N(15,2)</td>
@@ -334,11 +334,11 @@ ImpTotConc + ImpNeto + ImpOpEx + ImpIVA + ImpTrib</td>
 </tr>
 <tr><td>ImpOpEx</td>
 <td>N(15,2)</td>
-<td>Importe exento</td>
+<td>Importe exento. Debe ser 0 para comprobantes de tipo &#8220;C&#8221;.</td>
 </tr>
 <tr><td>ImpIVA</td>
 <td>N(15,2)</td>
-<td>Suma de los importes de los registros de tipo &#8220;4&#8221;</td>
+<td>Suma de los importes de los registros de tipo &#8220;4&#8221;. Debe ser 0 para comprobantes de tipo &#8220;C&#8221;.</td>
 </tr>
 <tr><td>ImpTrib</td>
 <td>N(15,2)</td>
@@ -461,6 +461,10 @@ debe ser 1</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">Para comprobantes de tipo <strong>C</strong> no se deben informar registros de tipo &#8220;<strong>4</strong>&#8221;.</p>
+</div>
 </div>
 <div class="section" id="tipo-de-registro-5-tributos">
 <h3>Tipo de Registro 5 (tributos)<a class="headerlink" href="#tipo-de-registro-5-tributos" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -618,7 +622,7 @@ para códigos de autorización de tipo CAEA.</td>
 <tbody valign="top">
 <tr><td>TipoReg</td>
 <td>S(1)</td>
-<td>Tipo de Registro - &#8220;C&#8221;</td>
+<td>Tipo de Registro - &#8220;O&#8221;</td>
 </tr>
 <tr><td>NroCbteDesde</td>
 <td>N(8)</td>
@@ -700,6 +704,12 @@ para códigos de autorización de tipo CAEA.</td>
 </tr>
 </tbody>
 </table>
+<div class="admonition note">
+<p class="first admonition-title">Nota</p>
+<p class="last">El formato del lote de comprobantes fue diseñado de manera que sea útil para varios servicios a la vez.
+Dependiendo del servicio, es posible que algunos campos detallados en esta sección no se utilicen por no ser relevantes
+para la operación en curso.</p>
+</div>
 </div>
 <div class="section" id="errores-posibles">
 <h3>Errores Posibles<a class="headerlink" href="#errores-posibles" title="Enlazar permanentemente con este título">¶</a></h3>
@@ -971,7 +981,7 @@ para el servicio a facturar para conceptos 02 y 03</td>
     </div>
     <div class="footer">
         &copy; Copyright 2008-2011, Matías Alejandro Flores.
-      Actualizado por última vez en 04 May 2011.
+      Actualizado por última vez en 07 May 2011.
       Creado con <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.7.
     </div>
   </body>
