@@ -6,27 +6,27 @@ Protest.describe "WSFE" do
   end
 
   describe "FECAEAConsultar" do
-    test_common_errors(:FECAEAConsultar)
+    test_common_errors(:FECAEAConsultar, "201105 01")
   end
 
   describe "FECAEARegInformativo" do
-    test_common_errors(:FECAEARegInformativo)
+    test_common_errors(:FECAEARegInformativo, "lote.txt")
   end
 
   describe "FECAEASinMovimientoConsultar" do
-    test_common_errors(:FECAEASinMovimientoConsultar)
+    test_common_errors(:FECAEASinMovimientoConsultar, "12345678901234 0001")
   end
 
   describe "FECAEASinMovimientoInformar" do
-    test_common_errors(:FECAEAConsultar)
+    test_common_errors(:FECAEAConsultar, "12345678901234 0001")
   end
 
   describe "FECAEASolicitar" do
-    test_common_errors(:FECAEASolicitar)
+    test_common_errors(:FECAEASolicitar, "201105 01")
   end
 
   describe "FECompConsultar" do
-    test_common_errors(:FECompConsultar)
+    test_common_errors(:FECompConsultar, "01 0001 00000001")
   end
 
   describe "FECompTotXRequest" do
