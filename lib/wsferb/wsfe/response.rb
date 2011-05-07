@@ -8,7 +8,7 @@ module WSFErb
   module WSFE
     class Response < WSFErb::Response
       def errors
-        result[:errors] ? [ { :code => err_code, :message => err_msg } ] : []
+        [(result[:errors][:err] rescue [])].flatten.compact.map { |err| { :code => (err[:code].to_i rescue "n/d"), :message => (err[:msg] rescue "n/d") } }
       end
 
       def err_code
