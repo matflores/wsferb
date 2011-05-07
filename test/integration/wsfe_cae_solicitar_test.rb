@@ -12,7 +12,7 @@ Protest.describe "FECAESolicitar" do
     @output_file = expand_path("tmp/FECAESolicitarOutput.txt")
   end
 
-  it "success" do
+  it "Success" do
     @lote.save(@input_file)
 
     execute :FECAESolicitar, @input_file
@@ -20,7 +20,9 @@ Protest.describe "FECAESolicitar" do
     assert_success :FECAESolicitar
   end
 
-  it "should fail if the specified credentials are not valid" do
+  test_common_errors :FECAESolicitar, File.expand_path("FECAESolicitarInput.txt", File.join(File.dirname(__FILE__), "..", "tmp"))
+
+  it "Should fail if the specified credentials are not valid" do
     @lote.save(@input_file)
 
     execute :FECAESolicitar, @input_file, "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
@@ -28,7 +30,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 600
   end
  
-  it "should fail if there are no invoices in this set" do
+  it "Should fail if there are no invoices in this set" do
     @lote.comprobantes = {}
     @lote.save(@input_file)
  
@@ -37,7 +39,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10001
   end
  
-  it "should fail if punto_vta is invalid" do
+  it "Should fail if punto_vta is invalid" do
     @lote.punto_vta = "9999"
     @lote.save(@input_file)
 
@@ -46,7 +48,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10004
   end
 
-  it "should fail if tipo_cbte is invalid" do
+  it "Should fail if tipo_cbte is invalid" do
     @lote.tipo_cbte = 0
     @lote.save(@input_file)
 
@@ -55,7 +57,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10006
   end
 
-  it "should fail if tipo_cbte is unknown" do
+  it "Should fail if tipo_cbte is unknown" do
     @lote.tipo_cbte = 990
     @lote.save(@input_file)
 
@@ -64,7 +66,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10007
   end
 
-  it "should fail if nro_cbte_desde is invalid" do
+  it "Should fail if nro_cbte_desde is invalid" do
     @cbte.nro_cbte_desde = 0
     @lote.save(@input_file)
 
@@ -73,7 +75,7 @@ Protest.describe "FECAESolicitar" do
     assert_error_code :FECAESolicitar, 10008
   end
 
-  it "should fail if fecha_cbte is invalid" do
+  it "Should fail if fecha_cbte is invalid" do
     @cbte.fecha_cbte = "20100101"
     @lote.save(@input_file)
 

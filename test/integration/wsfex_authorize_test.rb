@@ -9,7 +9,7 @@ Protest.describe "WSFEX Authorize" do
     @output_file = expand_path("tmp/FEXAuthorizeOutput.txt")
   end
 
-  it "success" do
+  it "Success" do
     @fact.save(@input_file)
 
     execute :FEXAuthorize, @input_file
@@ -17,7 +17,9 @@ Protest.describe "WSFEX Authorize" do
     assert_success :FEXAuthorize
   end
 
-  it "should fail if the specified credentials are not valid" do
+  test_common_errors :FEXAuthorize, File.expand_path("FEXAuthorizeInput.txt", File.join(File.dirname(__FILE__), "..", "tmp"))
+
+  it "Should fail if the specified credentials are not valid" do
     @fact.save(@input_file)
  
     execute :FEXAuthorize, @input_file, "--cuit 12345678910 --cert #{CERT_FILE} --key #{KEY_FILE}"
@@ -25,7 +27,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1000
   end
  
-  it "should fail if a request id was not specified" do
+  it "Should fail if a request id was not specified" do
     @fact.id_cbte = 0
     @fact.save(@input_file)
 
@@ -34,7 +36,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1014
   end
 
-  it "should fail if fecha_cbte is invalid" do
+  it "Should fail if fecha_cbte is invalid" do
     @fact.fecha_cbte = "20100101"
     @fact.save(@input_file)
 
@@ -43,7 +45,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1500
   end
 
-  it "should fail if fecha_cbte does not follow the expected sequence" do
+  it "Should fail if fecha_cbte does not follow the expected sequence" do
     @fact.fecha_cbte = (Date.today - 1).strftime("%Y%m%d")
     @fact.save(@input_file)
 
@@ -52,7 +54,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1535
   end
 
-  it "should fail if punto_vta is invalid" do
+  it "Should fail if punto_vta is invalid" do
     @fact.punto_vta = "9999"
     @fact.save(@input_file)
 
@@ -61,7 +63,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1510
   end
 
-  it "should fail if tipo_cbte is invalid" do
+  it "Should fail if tipo_cbte is invalid" do
     @fact.tipo_cbte = "01"
     @fact.save(@input_file)
 
@@ -70,7 +72,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1530
   end
 
-  it "should fail if nro_cbte does not follow the expected sequence" do
+  it "Should fail if nro_cbte does not follow the expected sequence" do
     @fact.nro_cbte -= 1
     @fact.save(@input_file)
 
@@ -79,7 +81,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1535
   end
 
-  it "should fail if tipo_expo is invalid" do
+  it "Should fail if tipo_expo is invalid" do
     @fact.tipo_expo = "9"
     @fact.save(@input_file)
 
@@ -88,7 +90,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1540
   end
 
-  it "should fail if tiene_permiso is invalid" do
+  it "Should fail if tiene_permiso is invalid" do
     @fact.tiene_permiso = "X"
     @fact.save(@input_file)
 
@@ -97,7 +99,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1550
   end
 
-  it "should fail if moneda is invalid" do
+  it "Should fail if moneda is invalid" do
     @fact.moneda = "XXX"
     @fact.save(@input_file)
 
@@ -106,7 +108,7 @@ Protest.describe "WSFEX Authorize" do
     assert_error_code :FEXAuthorize, 1590
   end
 
-  it "should fail if total does not match the sum of all items" do
+  it "Should fail if total does not match the sum of all items" do
     @fact.total = 1000.0
     @fact.save(@input_file)
 
