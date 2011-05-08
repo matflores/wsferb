@@ -32,7 +32,7 @@ module WSFErb
     end
 
     def to_hash
-      { :Auth => { :Token => token.to_s, :Sign  => sign.to_s, :Cuit  => cuit.to_s } }
+      { "Auth" => { "Token" => token.to_s, "Sign" => sign.to_s, "Cuit" => cuit.to_s } }
     end
 
     def to_xml

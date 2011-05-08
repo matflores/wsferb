@@ -33,7 +33,7 @@ XML_response = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>\n"
               "  </credentials>\n" +
               "</loginTicketResponse>\n"
 
-AUTH_HASH = { :Auth => { :Token => "token", :Sign  => "sign", :Cuit  => CUIT } }
+AUTH_HASH = { "Auth" => { "Token" => "token", "Sign" => "sign", "Cuit" => CUIT } }
 
 Protest.describe "An access ticket" do
   describe "(validations)" do
