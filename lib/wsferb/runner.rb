@@ -18,7 +18,9 @@ module WSFErb
                    raise(InvalidDir, File.dirname(options.log)) if options.log && !File.exists?(File.dirname(options.log))
 
                    if options.log
-                     Savon.log, Savon.logger = true, Logger.new(options.log)
+                     logger = Logger.new(options.log)
+                     Savon.log, Savon.logger = true, logger
+                     HTTPI.log, HTTPI.logger = true, logger
                    end
 
                    run_service
