@@ -1,4 +1,3 @@
-# encoding: utf-8
 #
 # Web Services Facturacion Electronica AFIP
 # Copyright (C) 2008-2011 Matias Alejandro Flores <mflores@atlanware.com>
@@ -37,7 +36,7 @@ module WSFErb
     end
 
     def error_message
-      message = service.to_s.empty? ? "Servicio no informado" : "Servicio no válido: #{service}"
+      message = service.to_s.empty? ? "Servicio no informado" : "Servicio no valido: #{service}"
       "#{message}. Utilice la opcion --help para obtener una lista de los servicios soportados."
     end
   end
@@ -111,7 +110,7 @@ module WSFErb
     end
 
     def error_message
-      "Directorio no válido: #{dir}"
+      "Directorio no valido: #{dir}"
     end
   end
 

@@ -1,5 +1,3 @@
-# encoding: utf-8
-
 $: << File.expand_path(File.join(File.dirname(__FILE__), "..", "lib"))
 
 require "rubygems"
@@ -135,12 +133,12 @@ class Protest::TestCase
 
       test "Invalid output dir" do
         execute service, "#{args} --out unknown_dir/output.txt"
-        assert_error service, 900006, "Directorio no válido: #{File.expand_path('unknown_dir')}"
+        assert_error service, 900006, "Directorio no valido: #{File.expand_path('unknown_dir')}"
       end
 
       test "Invalid log dir" do
         execute service, "#{args} --log unknown_dir/output.log"
-        assert_error service, 900006, "Directorio no válido: #{File.expand_path('unknown_dir')}"
+        assert_error service, 900006, "Directorio no valido: #{File.expand_path('unknown_dir')}"
       end
     else
       describe "Common errors" do
@@ -151,7 +149,7 @@ class Protest::TestCase
 
         test "Invalid Service (unknown)" do
           execute :Unknown
-          assert_error :Unknown, 900001, "Servicio no válido: Unknown. Utilice la opcion --help para obtener una lista de los servicios soportados."
+          assert_error :Unknown, 900001, "Servicio no valido: Unknown. Utilice la opcion --help para obtener una lista de los servicios soportados."
         end
       end
     end
