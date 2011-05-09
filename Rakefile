@@ -48,7 +48,7 @@ end
 
 desc "Build docs"
 task :docs do
-  format = ENV['format'] || 'html'
+  format = ENV["format"] || "html"
   system "cd docs && make #{format}"
 end
 
@@ -63,7 +63,7 @@ namespace :zip do
     system("cd build && 7z u wsfe-sources.zip ../src/")
   end
 
-  desc 'Zip wsfe.exe and source files'
+  desc "Zip wsfe.exe and source files"
   task :all => [:exe, :source]
 end
 
