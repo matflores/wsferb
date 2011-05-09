@@ -15,37 +15,37 @@ module WSFErb
 <<__EOD__
 Modo de uso: wsfe <servicio> [argumentos] <opciones>
 
-     servicio                        Uno de los servicios provistos por el WSFE de AFIP.
-                                     Valores posibles:
+    servicio    Uno de los servicios provistos por el WSFE de AFIP.
+                Valores posibles:
 
-                                       - FECAEAConsultar
-                                       - FECAEARegInformativo
-                                       - FECAEASinMovimientoConsultar
-                                       - FECAEASinMovimientoInformar
-                                       - FECAEASolicitar
-                                       - FECAESolicitar
-                                       - FECompConsultar
-                                       - FECompTotXRequest
-                                       - FECompUltimoAutorizado
-                                       - FEDummy
-                                       - FEParamGetCotizacion
-                                       - FEParamGetPtosVenta
-                                       - FEParamGetTiposCbte
-                                       - FEParamGetTiposConcepto
-                                       - FEParamGetTiposDoc
-                                       - FEParamGetTiposIva
-                                       - FEParamGetTiposMonedas
-                                       - FEParamGetTiposOpcional
-                                       - FEParamGetTiposTributos
+                - FECAEAConsultar
+                - FECAEARegInformativo
+                - FECAEASinMovimientoConsultar
+                - FECAEASinMovimientoInformar
+                - FECAEASolicitar
+                - FECAESolicitar
+                - FECompConsultar
+                - FECompTotXRequest
+                - FECompUltimoAutorizado
+                - FEDummy
+                - FEParamGetCotizacion
+                - FEParamGetPtosVenta
+                - FEParamGetTiposCbte
+                - FEParamGetTiposConcepto
+                - FEParamGetTiposDoc
+                - FEParamGetTiposIva
+                - FEParamGetTiposMonedas
+                - FEParamGetTiposOpcional
+                - FEParamGetTiposTributos
 
-                                     La sintaxis de las opciones y argumentos requeridos 
-                                     dependen del servicio a utilizar.
-                                     Escriba wsfe <servicio> --help para obtener mayor
-                                     información acerca de un servicio en particular.
+                La sintaxis de las opciones y argumentos requeridos
+                dependen del servicio a utilizar.
+                Escriba wsfe <servicio> --help para obtener mayor
+                información acerca de un servicio en particular.
 
-                                     Visite http://docs.wsferb.com.ar para obtener
-                                     documentación actualizada y completa sobre cada
-                                     uno de los servicios soportados.
+                Visite http://docs.wsferb.com.ar para obtener
+                documentación actualizada y completa sobre cada
+                uno de los servicios soportados.
 __EOD__
     end
 

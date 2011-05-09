@@ -15,34 +15,34 @@ module WSFErb
 <<__EOD__
 Modo de uso: wsfex <servicio> [argumentos] <opciones>
 
-     servicio                        Uno de los servicios provistos por el WSFEX de AFIP.
-                                     Valores posibles:
+    servicio    Uno de los servicios provistos por el WSFEX de AFIP.
+                Valores posibles:
 
-                                       - FEXAuthorize
-                                       - FEXCheckPermiso
-                                       - FEXDummy
-                                       - FEXGetCmp
-                                       - FEXGetLastCmp
-                                       - FEXGetLastId
-                                       - FEXGetParamCtz
-                                       - FEXGetParamDstCuit
-                                       - FEXGetParamDstPais
-                                       - FEXGetParamIncoterms
-                                       - FEXGetParamIdiomas
-                                       - FEXGetParamMon
-                                       - FEXGetParamPtoVenta
-                                       - FEXGetParamTipoCbte
-                                       - FEXGetParamTipoExpo
-                                       - FEXGetParamUMed
+                - FEXAuthorize
+                - FEXCheckPermiso
+                - FEXDummy
+                - FEXGetCmp
+                - FEXGetLastCmp
+                - FEXGetLastId
+                - FEXGetParamCtz
+                - FEXGetParamDstCuit
+                - FEXGetParamDstPais
+                - FEXGetParamIncoterms
+                - FEXGetParamIdiomas
+                - FEXGetParamMon
+                - FEXGetParamPtoVenta
+                - FEXGetParamTipoCbte
+                - FEXGetParamTipoExpo
+                - FEXGetParamUMed
 
-                                     La sintaxis de las opciones y argumentos requeridos
-                                     dependen del servicio a utilizar.
-                                     Escriba wsfex <servicio> --help para obtener mayor
-                                     información acerca de un servicio en particular.
+                La sintaxis de las opciones y argumentos requeridos
+                dependen del servicio a utilizar.
+                Escriba wsfex <servicio> --help para obtener mayor
+                información acerca de un servicio en particular.
 
-                                     Visite http://docs.wsferb.com.ar para obtener
-                                     documentación actualizada y completa sobre cada
-                                     uno de los servicios soportados.
+                Visite http://docs.wsferb.com.ar para obtener
+                documentación actualizada y completa sobre cada
+                uno de los servicios soportados.
 __EOD__
     end
 
