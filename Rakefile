@@ -27,22 +27,22 @@ namespace :build do
 
   desc "Build wsfe.exe"
   task :wsfe do
-    system("ocra bin\wsfe.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --output .\\build\\wsfe.exe --console")
+    system("ocra bin\wsfe.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --console")
   end
 
   desc "Build wsfew.exe"
   task :wsfew do
-    system("ocra bin\wsfe.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --output .\\build\\wsfew.exe --windows")
+    system("ocra bin\wsfe.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --windows")
   end
 
   desc "Build wsfex.exe"
   task :wsfex do
-    system("ocra bin\wsfex.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --output .\\build\\wsfex.exe --console")
+    system("ocra bin\wsfex.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --console")
   end
 
   desc "Build wsfexw.exe"
   task :wsfexw do
-    system("ocra bin\wsfex.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --output .\\build\\wsfexw.exe --windows")
+    system("ocra bin\wsfex.rb lib\wsferb\wsaa\wsaa.wsdl lib\wsferb\wsfe\wsfev1.wsdl lib\wsferb\wsfex\wsfex.wsdl --windows")
   end
 end
 
