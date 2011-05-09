@@ -2,9 +2,7 @@
 *.key
 *.log
 *.xml
+build
 test/credentials
 test/tmp
-build/wsfe.rb
-build/wsfe.exe
-build/*.zip
 docs/build
