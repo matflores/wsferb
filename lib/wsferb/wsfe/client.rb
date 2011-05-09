@@ -24,7 +24,7 @@ module WSFErb
         lote = Lote.load(lote)
 
         response = client.request(:n1, :fecaea_reg_informativo) do
-          soap.body = ticket.to_hash.merge({ "FeCAEARegInfReq" => lote.to_hash.stringify_keys })
+          soap.body = ticket.to_hash.merge({ "FeCAEARegInfReq" => lote.to_hash(:FeCabReq, :FeDetReq, :FECAEADetRequest).stringify_keys })
         end
 
         Response::FECAEARegInformativo.new(response)
