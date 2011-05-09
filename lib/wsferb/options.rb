@@ -53,6 +53,8 @@ module WSFErb
     end
 
     def parse_options
+      parser.summary_width = 20
+
       parser.on(*OPTIONS[:cuit])         { |cuit|   self.cuit   = cuit unless cuit.empty? }
 
       parser.on(*OPTIONS[:cert])         { |cert|   self.cert   = File.expand_path(cert)   unless cert.empty?   }
