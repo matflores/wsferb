@@ -47,7 +47,7 @@ FchVigDesde          S(8)    Fecha de vigencia del CAEA (AAAAMMDD)
 FchVigHasta          S(8)    Fecha de vigencia del CAEA (AAAAMMDD)
 FchTopeInf           S(8)    Fecha tope para informar comprobantes vinculados a
                              este CAEA (AAAAMMDD)
-FchProceso           S(8)    Fecha de procesamiento del CAEA (AAAAMMDD)
+FchProceso           S(14)   Fecha de procesamiento del CAEA (AAAAMMDDHHMMSS)
 ==================== ======= ==================================================
 
 .. include:: _errors.inc
