@@ -14,7 +14,7 @@ module WSFErb
         fex = Fex.load(cbte)
 
         response = client.request(:n1, :fex_authorize) do
-          soap.body = ticket.to_hash.merge({ :Cmp => fex.to_hash.stringify_keys })
+          soap.body = ticket.to_hash.merge({ "Cmp" => fex.to_hash.stringify_keys })
         end
 
         response = Response::FEXAuthorize.new(response)
