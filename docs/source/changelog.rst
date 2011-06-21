@@ -6,6 +6,10 @@ Changelog
 ========== ======== =============================================================
 Fecha      Versión  Descripción
 ========== ======== =============================================================
+2011-06-21 v2.0     Windows EXEs
+
+                    Bug fixes
+
 2011-05-10 v2.0.rc2 Soporte WSFEv2
 
                     Soporte autoimpresores (CAEA)
