@@ -12,6 +12,7 @@ require "wsferb/version"
 require "wsferb/wsaa"
 require "wsferb/wsfe"
 require "wsferb/wsfex"
+require "wsferb/wsmtxca"
 
 module WSFErb
   @@test_mode_enabled = false
@@ -32,6 +33,8 @@ module WSFErb
     Savon::Client.new do |wsdl, http|
       wsdl.document = options[:wsdl]
       wsdl.endpoint = test_mode_enabled? ? options[:testing_url] : options[:production_url]
+      http.ssl = false
+      http.auth.ssl.verify_mode = :none
     end
   end
 end
