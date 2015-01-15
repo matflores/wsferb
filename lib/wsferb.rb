@@ -30,6 +30,7 @@ module WSFErb
 
   def self.client(options)
     Savon::Client.new do |wsdl, http|
+      http.auth.ssl.verify_mode = :none
       wsdl.document = options[:wsdl]
       wsdl.endpoint = test_mode_enabled? ? options[:testing_url] : options[:production_url]
     end
